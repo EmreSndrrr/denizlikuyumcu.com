@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gray-on-color",
+        "value": "*",
+        "files": [
+          "src/components/GuideArticle.tsx"
+        ],
+        "createdAt": "2026-08-31T13:18:06.147Z",
+        "reason": "measured contrast: text-stone-600 (#57534e) on bg-amber-50 (#fffbeb) = ~7.36:1, exceeds WCAG AAA 7:1; amber-50 is near-white so heuristic false-positive"
+      }
+    ]
+  }
+}

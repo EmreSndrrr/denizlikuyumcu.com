@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="mt-16 border-t border-amber-900/10 bg-neutral-50">
-      <div className="mx-auto max-w-6xl px-4 py-10 text-sm text-neutral-600">
+    <footer className="mt-16 border-t border-stone-200 bg-white">
+      <div className="mx-auto max-w-6xl px-4 py-10 text-sm text-stone-600">
         <div className="grid gap-8 sm:grid-cols-3">
           <div>
-            <p className="text-base font-bold text-neutral-900">
+            <p className="font-serif text-base font-bold text-stone-900">
               DenizliKuyumcu.com
             </p>
             <p className="mt-2 max-w-xs">
@@ -15,15 +15,15 @@ export default function Footer() {
             </p>
           </div>
           <div>
-            <p className="font-semibold text-neutral-900">Bağlantılar</p>
+            <p className="font-semibold text-stone-900">Bağlantılar</p>
             <ul className="mt-2 space-y-1">
-              <li><Link href="/kuyumcular" className="hover:text-amber-800">Kuyumcular</Link></li>
-              <li><Link href="/rehber" className="hover:text-amber-800">Rehber</Link></li>
-              <li><Link href="/reklam-ver" className="hover:text-amber-800">Reklam Ver</Link></li>
+              <li><Link href="/kuyumcular" className="hover:text-amber-700">Kuyumcular</Link></li>
+              <li><Link href="/rehber" className="hover:text-amber-700">Rehber</Link></li>
+              <li><Link href="/reklam-ver" className="hover:text-amber-700">Reklam Ver</Link></li>
             </ul>
           </div>
           <div>
-            <p className="font-semibold text-neutral-900">Yasal Uyarı</p>
+            <p className="font-semibold text-stone-900">Yasal Uyarı</p>
             <p className="mt-2">
               Sitede yer alan fiyatlar bilgilendirme amaçlıdır, yatırım
               tavsiyesi değildir ve gecikmeli olabilir. Kesin alım-satım
@@ -31,7 +31,7 @@ export default function Footer() {
             </p>
           </div>
         </div>
-        <p className="mt-8 border-t border-neutral-200 pt-6 text-xs text-neutral-400">
+        <p className="mt-8 border-t border-stone-200 pt-6 text-xs text-stone-400">
           © {new Date().getFullYear()} DenizliKuyumcu.com — Tüm hakları
           saklıdır.
         </p>

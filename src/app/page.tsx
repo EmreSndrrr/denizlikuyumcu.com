@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { getPrices } from "@/lib/prices";
 import { jewelers } from "@/lib/jewelers";
 import PriceTicker from "@/components/PriceTicker";
@@ -36,12 +37,12 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <section className="border-b border-amber-900/10 bg-gradient-to-b from-amber-50 to-neutral-50">
+      <section className="border-b border-stone-200 bg-gradient-to-b from-amber-50 to-stone-50">
         <div className="mx-auto max-w-6xl px-4 py-10 sm:py-14">
-          <h1 className="max-w-2xl text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">
+          <h1 className="max-w-2xl font-serif text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">
             Denizli&apos;de Güncel Altın ve Döviz Fiyatları
           </h1>
-          <p className="mt-3 max-w-2xl text-neutral-600">
+          <p className="mt-3 max-w-2xl text-stone-600">
             Gram altın, çeyrek altın, dolar ve euro kurlarını takip edin;
             Denizli&apos;nin güvenilir kuyumcularını keşfedin.
           </p>
@@ -58,14 +59,15 @@ export default async function HomePage() {
 
       <section className="mx-auto max-w-6xl px-4 py-8">
         <div className="flex items-end justify-between">
-          <h2 className="text-xl font-bold text-neutral-900">
+          <h2 className="font-serif text-xl font-bold text-stone-900">
             Öne Çıkan Kuyumcular
           </h2>
           <Link
             href="/kuyumcular"
-            className="text-sm font-medium text-amber-800 hover:underline"
+            className="flex items-center gap-1 rounded-sm py-2 text-sm font-medium text-amber-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-700"
           >
-            Tümünü gör →
+            Tümünü gör
+            <ArrowRight aria-hidden="true" size={14} />
           </Link>
         </div>
 
@@ -74,26 +76,26 @@ export default async function HomePage() {
             {featuredJewelers.map((j) => (
               <div
                 key={j.id}
-                className="rounded-xl border border-amber-900/10 bg-white p-4 shadow-sm"
+                className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm"
               >
                 <p className="text-xs font-semibold uppercase tracking-wide text-amber-700">
                   Öne Çıkan
                 </p>
-                <p className="mt-1 font-bold text-neutral-900">{j.name}</p>
-                <p className="text-sm text-neutral-500">{j.district}</p>
-                <p className="mt-2 text-sm text-neutral-600">
+                <p className="mt-1 font-bold text-stone-900">{j.name}</p>
+                <p className="text-sm text-stone-500">{j.district}</p>
+                <p className="mt-2 text-sm text-stone-600">
                   {j.description}
                 </p>
               </div>
             ))}
           </div>
         ) : (
-          <div className="mt-4 rounded-xl border border-dashed border-neutral-300 bg-white p-6 text-center">
-            <p className="text-neutral-600">
+          <div className="mt-4 rounded-xl border border-dashed border-stone-300 bg-white p-6 text-center">
+            <p className="text-stone-600">
               Henüz öne çıkan kuyumcu yok.{" "}
               <Link
                 href="/reklam-ver"
-                className="font-semibold text-amber-800 hover:underline"
+                className="font-semibold text-amber-700 hover:underline"
               >
                 İlk siz olun
               </Link>
@@ -108,8 +110,10 @@ export default async function HomePage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-8">
-        <h2 className="text-xl font-bold text-neutral-900">Rehber</h2>
-        <p className="mt-1 text-sm text-neutral-500">
+        <h2 className="font-serif text-xl font-bold text-stone-900">
+          Rehber
+        </h2>
+        <p className="mt-1 text-sm text-stone-500">
           Altın almadan/satmadan önce bilmeniz gerekenler.
         </p>
         <div className="mt-4 grid gap-4 sm:grid-cols-3">
@@ -150,10 +154,10 @@ function GuideCard({
   return (
     <Link
       href={href}
-      className="block rounded-xl border border-amber-900/10 bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
+      className="block rounded-xl border border-stone-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700"
     >
-      <p className="font-semibold text-neutral-900">{title}</p>
-      <p className="mt-1 text-sm text-neutral-600">{desc}</p>
+      <p className="font-semibold text-stone-900">{title}</p>
+      <p className="mt-1 text-sm text-stone-600">{desc}</p>
     </Link>
   );
 }

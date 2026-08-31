@@ -28,21 +28,21 @@ export default function GuideArticle({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <h1 className="text-3xl font-bold text-neutral-900">{title}</h1>
-      <p className="mt-3 text-lg text-neutral-600">{intro}</p>
+      <h1 className="font-serif text-3xl font-bold text-stone-900">{title}</h1>
+      <p className="mt-3 text-lg text-stone-600">{intro}</p>
 
       <div className="mt-8">
         <AdSlot position="in-content" />
       </div>
 
-      <article className="prose prose-neutral mt-8 max-w-none prose-headings:font-bold prose-a:text-amber-800">
+      <article className="prose prose-stone mt-8 max-w-none prose-headings:font-serif prose-headings:font-bold prose-a:text-amber-700">
         {children}
       </article>
 
-      <p className="mt-10 rounded-lg border border-amber-900/10 bg-amber-50 p-4 text-sm text-neutral-600">
+      <p className="mt-10 rounded-lg border border-stone-200 bg-amber-50 p-4 text-sm text-stone-600">
         Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.
         Güncel fiyatlar için{" "}
-        <a href="/" className="font-medium text-amber-800 hover:underline">
+        <a href="/" className="font-medium text-amber-700 hover:underline">
           anasayfadaki
         </a>{" "}
         fiyat tablosuna göz atabilirsiniz.

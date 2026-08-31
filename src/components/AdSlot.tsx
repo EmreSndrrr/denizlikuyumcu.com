@@ -22,14 +22,14 @@ export default function AdSlot({ position }: { position: AdPosition }) {
         href={ad.href}
         target="_blank"
         rel="noopener sponsored"
-        className={`flex ${sizeClasses[position]} w-full items-center justify-center rounded-xl border border-amber-900/10 bg-amber-50 px-4 text-center transition-colors hover:bg-amber-100`}
+        className={`flex ${sizeClasses[position]} w-full items-center justify-center rounded-xl border border-amber-200 bg-amber-50 px-4 text-center transition-colors hover:bg-amber-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700`}
       >
         <div>
           <p className="text-xs uppercase tracking-wide text-amber-700">
             Sponsorlu
           </p>
-          <p className="font-semibold text-neutral-900">{ad.headline}</p>
-          <p className="text-xs text-neutral-500">{ad.advertiserName}</p>
+          <p className="font-semibold text-stone-900">{ad.headline}</p>
+          <p className="text-xs text-stone-500">{ad.advertiserName}</p>
         </div>
       </Link>
     );
@@ -38,13 +38,13 @@ export default function AdSlot({ position }: { position: AdPosition }) {
   return (
     <Link
       href="/reklam-ver"
-      className={`flex ${sizeClasses[position]} w-full items-center justify-center rounded-xl border border-dashed border-neutral-300 bg-neutral-50 px-4 text-center transition-colors hover:border-amber-400 hover:bg-amber-50`}
+      className={`flex ${sizeClasses[position]} w-full items-center justify-center rounded-xl border border-dashed border-stone-300 bg-stone-50 px-4 text-center transition-colors hover:border-amber-400 hover:bg-amber-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700`}
     >
       <div>
-        <p className="text-sm font-semibold text-neutral-500">
+        <p className="text-sm font-semibold text-stone-500">
           Reklamınız burada olabilir
         </p>
-        <p className="text-xs text-neutral-400">Detaylar için tıklayın →</p>
+        <p className="text-xs text-stone-400">Detaylar için tıklayın →</p>
       </div>
     </Link>
   );
