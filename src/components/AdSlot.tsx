@@ -22,14 +22,14 @@ export default function AdSlot({ position }: { position: AdPosition }) {
         href={ad.href}
         target="_blank"
         rel="noopener sponsored"
-        className={`flex ${sizeClasses[position]} w-full items-center justify-center rounded-xl border border-amber-200 bg-amber-50 px-4 text-center transition-colors hover:bg-amber-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700`}
+        className={`flex ${sizeClasses[position]} w-full items-center justify-center rounded-xl border border-amber-200 bg-amber-50 px-4 text-center transition-colors hover:bg-amber-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 dark:border-amber-900/50 dark:bg-amber-950/30 dark:hover:bg-amber-950/50`}
       >
         <div>
-          <p className="text-xs uppercase tracking-wide text-amber-700">
+          <p className="text-xs uppercase tracking-wide text-amber-700 dark:text-amber-400">
             Sponsorlu
           </p>
-          <p className="font-semibold text-stone-900">{ad.headline}</p>
-          <p className="text-xs text-stone-500">{ad.advertiserName}</p>
+          <p className="font-semibold text-stone-900 dark:text-stone-50">{ad.headline}</p>
+          <p className="text-xs text-stone-500 dark:text-stone-400">{ad.advertiserName}</p>
         </div>
       </Link>
     );
@@ -38,13 +38,13 @@ export default function AdSlot({ position }: { position: AdPosition }) {
   return (
     <Link
       href="/reklam-ver"
-      className={`flex ${sizeClasses[position]} w-full items-center justify-center rounded-xl border border-dashed border-stone-300 bg-stone-50 px-4 text-center transition-colors hover:border-amber-400 hover:bg-amber-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700`}
+      className={`flex ${sizeClasses[position]} w-full items-center justify-center rounded-xl border border-dashed border-stone-300 bg-stone-50 px-4 text-center transition-colors hover:border-amber-400 hover:bg-amber-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 dark:border-stone-700 dark:bg-stone-900 dark:hover:border-amber-500 dark:hover:bg-stone-900`}
     >
       <div>
-        <p className="text-sm font-semibold text-stone-500">
+        <p className="text-sm font-semibold text-stone-500 dark:text-stone-400">
           Reklamınız burada olabilir
         </p>
-        <p className="text-xs text-stone-400">Detaylar için tıklayın →</p>
+        <p className="text-xs text-stone-400 dark:text-stone-500">Detaylar için tıklayın →</p>
       </div>
     </Link>
   );

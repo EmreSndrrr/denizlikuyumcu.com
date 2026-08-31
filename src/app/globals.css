@@ -1,7 +1,48 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* .dark sınıfı <html>'e elle (ThemeToggle ile) eklenir/çıkarılır — bu satır
+   olmadan Tailwind v4'ün dark: varyantı sadece işletim sistemi tercihini
+   dinler, elle geçiş yapılamaz. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --font-sans: var(--font-inter);
-  --font-serif: var(--font-playfair);
+}
+
+/* Üstteki kayan fiyat şeridi (PriceMarquee). İçerik iki kez art arda
+   yazılıp %50 kaydırılıyor — bu sayede döngü sırasında görünür bir sıçrama
+   olmuyor (kusursuz döngü). */
+@keyframes price-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-price-marquee {
+  animation: price-marquee 42s linear infinite;
+}
+
+/* Fare/klavye şeridin üzerindeyken dur (WCAG 2.2 — otomatik dönen içerik
+   odaklanma/hover'da durabilmeli), ya da kullanıcı duraklat düğmesine
+   bastıysa (data-paused) dur. */
+.marquee-row:hover .animate-price-marquee,
+.marquee-row:focus-within .animate-price-marquee,
+.marquee-row[data-paused="true"] .animate-price-marquee {
+  animation-play-state: paused;
+}
+
+/* Hareket azaltma tercihi olan kullanıcılar için animasyonu tamamen
+   kapatıp, şeridi yatayda elle kaydırılabilir bir listeye çeviriyoruz. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-price-marquee {
+    animation: none;
+    transform: none;
+  }
+  .marquee-row {
+    overflow-x: auto;
+  }
 }
