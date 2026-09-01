@@ -9,6 +9,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { MapPin, List, X } from "@phosphor-icons/react/dist/ssr";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
@@ -122,15 +123,55 @@ export default function Header() {
           (scrolled ? "py-2" : "py-4")
         }
       >
+        {/* Logo: mobilde (brief: "mobil uyumluluğa özellikle dikkat et")
+            dar header'da yer kaplamasın diye SADECE horoz sembolü;
+            sm+ genişlikte tam yatay logo (yazı + slogan gömülü).
+            Yatay logo iki temaya göre değişiyor (koyu zeminde beyaz
+            yazı gerekiyor) — JS'siz, saf CSS dark: varyantıyla.
+            next/image + unoptimized: SVG zaten vektör/optimize, Next'in
+            rasterize etmesine gerek yok (bkz. next.config.ts
+            dangerouslyAllowSVG notu) — ama yine de next/image kullanmak
+            @next/next/no-img-element kuralını ve olası ileride eklenecek
+            responsive/lazy-loading davranışını koru. */}
         <Link
           href="/"
-          className="flex items-baseline gap-1 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+          className="flex shrink-0 items-center rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
         >
-          <span className="text-xl font-extrabold tracking-tight text-brand">
-            Denizli
+          <Image
+            src="/brand/denizli-kuyumcu-sembol.svg"
+            alt="Denizli Kuyumcu"
+            width={40}
+            height={40}
+            unoptimized
+            priority
+            className="h-10 w-10 sm:hidden"
+          />
+          {/* Tema filtresi DIŞ elementte (span), genişlik filtresi İÇ
+              elementte (img) — her elementin "display"i TEK bir koşula
+              bağlı (ya tema ya breakpoint, asla ikisi birden aynı
+              elementte); bu yüzden hangi kuralın kazanacağı belirsizliği
+              (kaynak sırasına bağlı çakışma) hiç oluşmuyor. */}
+          <span className="dark:hidden">
+            <Image
+              src="/brand/denizli-kuyumcu-horizontal.svg"
+              alt="Denizli Kuyumcu"
+              width={640}
+              height={160}
+              unoptimized
+              priority
+              className="hidden h-10 w-auto sm:block"
+            />
           </span>
-          <span className="text-xl font-extrabold tracking-tight text-ink">
-            Kuyumcu
+          <span className="hidden dark:block">
+            <Image
+              src="/brand/denizli-kuyumcu-horizontal-koyu-zemin.svg"
+              alt="Denizli Kuyumcu"
+              width={640}
+              height={160}
+              unoptimized
+              priority
+              className="hidden h-10 w-auto sm:block"
+            />
           </span>
         </Link>
 

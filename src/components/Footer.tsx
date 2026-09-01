@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -6,9 +7,28 @@ export default function Footer() {
       <div className="mx-auto max-w-[1240px] px-4 py-12 text-sm text-muted">
         <div className="grid gap-8 sm:grid-cols-4">
           <div className="sm:col-span-1">
-            <p className="text-base font-extrabold tracking-tight text-ink">
-              DenizliKuyumcu.com
-            </p>
+            {/* h-7 (sm'de en dar sütun — 4 sütun aynı satırda) ve md+'de
+                h-8: dar aralıkta taşmayı önlemek için biraz daha küçük. */}
+            <span className="dark:hidden">
+              <Image
+                src="/brand/denizli-kuyumcu-horizontal.svg"
+                alt="Denizli Kuyumcu"
+                width={640}
+                height={160}
+                unoptimized
+                className="h-7 w-auto md:h-8"
+              />
+            </span>
+            <span className="hidden dark:block">
+              <Image
+                src="/brand/denizli-kuyumcu-horizontal-koyu-zemin.svg"
+                alt="Denizli Kuyumcu"
+                width={640}
+                height={160}
+                unoptimized
+                className="h-7 w-auto md:h-8"
+              />
+            </span>
             <p className="mt-2 max-w-xs">
               Denizli&apos;de güncel altın ve döviz fiyatları, kuyumcu rehberi
               ve alım-satım öncesi bilgilendirme içerikleri.
