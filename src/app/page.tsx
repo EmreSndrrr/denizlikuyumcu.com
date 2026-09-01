@@ -138,10 +138,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1240px] px-4 pb-20">
-        <AdSlot position="in-content" />
-      </section>
-
       <section id="grafik" className="mx-auto max-w-[1240px] px-4 pb-20">
         <SectionHeading title="Altın Fiyatları Grafiği" />
         <div className="mt-6">
