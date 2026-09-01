@@ -53,6 +53,10 @@ export default function PriceTicker({
   // kalıyordu. Tailwind JIT'in sınıfı üretebilmesi için olası değerler
   // burada literal olarak yazılmalı (dinamik string interpolasyonu
   // taranamaz).
+  // Brief: "Mobilde iki sütun, tablette iki veya üç sütun, masaüstünde
+  // dört sütun." Ana 8'li tabloda md (tablet) adımı eklendi; tek
+  // sıçramayla (2 -> 4) tablette gereksiz boş yer bırakmak yerine 2 -> 3
+  // -> 4 kademesi kullanılıyor.
   const itemCount = data.items.length;
   const gridClass =
     itemCount === 3
@@ -61,7 +65,7 @@ export default function PriceTicker({
         ? "grid-cols-2"
         : itemCount === 1
           ? "grid-cols-1"
-          : "grid-cols-2 sm:grid-cols-4";
+          : "grid-cols-2 md:grid-cols-3 lg:grid-cols-4";
 
   return (
     <div className="rounded-2xl border border-border bg-surface shadow-sm">

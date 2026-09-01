@@ -3,9 +3,11 @@
 // Hero'nun sağ sütunu: "sitenin amacı birkaç saniyede anlaşılsın" hedefiyle
 // tek bir büyük gram altın kartı — fiyat, alış/satış, günlük değişim, mini
 // grafik ve son güncelleme saati. Bilinçli olarak koyu yüzey (Midas'ın
-// telefon ekranındaki gibi) — açık hero zemininin üzerinde güçlü bir
-// odak noktası oluşturuyor ve sayfanın ilerisindeki grafik kartıyla aynı
-// "premium koyu panel" diline bağlıyor.
+// telefon ekranındaki gibi) — açık hero panelinin İÇİNE gömülü (bkz.
+// page.tsx'teki tek parça hero kompozisyonu) güçlü bir odak noktası
+// oluşturuyor ve sayfanın ilerisindeki grafik kartıyla aynı "premium
+// koyu panel" diline bağlıyor. Köşe yuvarlaklığı 24px — brief'in "hero
+// ve öne çıkan alanlar" katmanı.
 
 import { TrendUp, TrendDown } from "@phosphor-icons/react/dist/ssr";
 import { useLivePrices } from "@/lib/useLivePrices";
@@ -28,7 +30,7 @@ export default function HeroGramAltinCard({
   const isUp = gram.changePercent >= 0;
 
   return (
-    <div className="w-full max-w-md rounded-2xl border border-black/10 bg-surface-dark p-6 text-white shadow-xl">
+    <div className="w-full max-w-md rounded-[24px] border border-black/10 bg-surface-dark p-6 text-white shadow-xl">
       <div className="flex items-center justify-between">
         <p className="text-sm font-medium text-white/60">Gram Altın</p>
         {stale && <StaleBadge />}

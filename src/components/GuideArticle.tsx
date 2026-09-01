@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import AdSlot from "@/components/AdSlot";
+import { getAdForPosition } from "@/lib/ads";
 
 export default function GuideArticle({
   title,
@@ -32,9 +33,14 @@ export default function GuideArticle({
       <h1 className="text-3xl font-extrabold tracking-tight text-ink">{title}</h1>
       <p className="mt-3 text-lg text-muted">{intro}</p>
 
-      <div className="mt-8">
-        <AdSlot position="in-content" />
-      </div>
+      {/* Gerçek bir reklam yoksa (bkz. AdSlot.tsx) hiçbir şey render
+          edilmiyor — sarmalayıcı boş bir boşluk bırakmasın diye burada
+          da koşullu. */}
+      {getAdForPosition("in-content") && (
+        <div className="mt-8">
+          <AdSlot position="in-content" />
+        </div>
+      )}
 
       <article className="prose prose-stone dark:prose-invert mt-8 max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-brand">
         {children}

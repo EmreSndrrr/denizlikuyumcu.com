@@ -8,9 +8,10 @@ import OnsAltinCard from "@/components/OnsAltinCard";
 import GoldVarietiesTable from "@/components/GoldVarietiesTable";
 import GoldPriceChart from "@/components/GoldPriceChart";
 import DailyChangeTable from "@/components/DailyChangeTable";
+import DailyMarketSummary from "@/components/DailyMarketSummary";
 import HeroGramAltinCard from "@/components/HeroGramAltinCard";
+import JewelerProfileCard from "@/components/JewelerProfileCard";
 import Faq from "@/components/Faq";
-import AdSlot from "@/components/AdSlot";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 
@@ -26,11 +27,14 @@ import Reveal from "@/components/Reveal";
 // kendi polling'i sağlıyor.
 export const revalidate = 60;
 
-// Bölüm sırası (kullanıcı geri bildirimiyle güncellendi): fiyat şeridi ve
-// header zaten global; hero → popüler fiyatlar → döviz → tüm altın
-// çeşitleri → hesaplama → günlük değişim → grafik → kuyumcular → rehber
-// → SSS. Günlük değişim ve hesaplama, kullanıcı fiyatları gördükten hemen
-// sonra gelecek şekilde öne alındı.
+// Bölüm sırası (2026 tasarım yenileme briefi'ne göre): fiyat şeridi ve
+// header zaten global; hero (gram altın kartıyla TEK kompozisyon) →
+// "Bugün ne değişti?" kısa özeti → popüler fiyatlar → döviz → tüm altın
+// çeşitleri → Denizli'de kuyumculuk + öne çıkan kuyumcular (fiyatlardan
+// hemen sonra, doğal bir "keşif" adımı olarak) → hesaplama → grafik
+// (yanında günlük hareket detay listesiyle) → rehber (editoryal liste)
+// → SSS. Kuyumcu keşfi bilinçli olarak hesaplama/grafikten ÖNCE — brief:
+// "kullanıcı fiyatlardan kuyumcu keşfine doğal biçimde yönlendirilmeli".
 export default async function HomePage() {
   const prices = await getPrices();
   const goldHistory = await getGoldHistory();
@@ -53,56 +57,81 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* HERO — iki sütun: solda vaat + iki CTA, sağda tek bakışta gram
-          altın kartı. Amaç birkaç saniyede anlaşılsın diye tablo/liste
-          değil, tek bir güçlü rakam gösteriyoruz. */}
-      <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-gold/10 to-bg">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-gold/20 blur-3xl"
-        />
-        <div className="relative mx-auto grid max-w-[1240px] items-center gap-10 px-4 py-14 sm:py-20 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <h1 className="max-w-lg text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
-              Denizli altın piyasası, tek ekranda.
-            </h1>
-            <p className="mt-4 max-w-md text-lg text-muted">
-              Güncel fiyatları takip edin, güvenilir kuyumcuları keşfedin.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="#altin-fiyatlari"
-                className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98]"
-              >
-                Altın fiyatlarını incele
-                <ArrowRight aria-hidden="true" size={16} />
-              </a>
-              <Link
-                href="/kuyumcular"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-semibold text-ink transition-all hover:border-brand hover:text-brand active:scale-[0.98]"
-              >
-                <MapPin aria-hidden="true" size={16} weight="bold" />
-                Yakındaki kuyumcuları bul
-              </Link>
-            </div>
-          </div>
+      {/* HERO — brief: "hero ile gram altın kartı tek kompozisyon olsun".
+          Tek bir sınırlı/arka planlı panel içinde solda vaat + iki CTA,
+          sağda gram altın kartı iç içe duruyor; bu sayede ikisi ayrı
+          yüzen kutular gibi değil, TEK bir parça gibi okunuyor. */}
+      <section className="border-b border-border px-4 py-8 sm:py-12">
+        <div className="relative mx-auto max-w-[1240px] overflow-hidden rounded-[24px] border border-border bg-gradient-to-br from-gold-surface/60 via-bg to-surface">
+          {/* Brief'in önerdiği "hafif marka motifi": altın fiyat grafiğinden
+              esinlenen, çok düşük opaklıkta ince bir çizgi + yumuşak bir
+              ışıma. Dekoratif — ekran okuyucudan gizli, performans maliyeti
+              yok (statik inline SVG + CSS blur). */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full bg-gold/15 blur-3xl sm:-right-24 sm:-top-24 sm:h-96 sm:w-96"
+          />
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 400 120"
+            preserveAspectRatio="none"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-24 w-full text-brand opacity-[0.07]"
+          >
+            <polyline
+              points="0,90 40,80 80,95 120,60 160,70 200,40 240,55 280,20 320,35 360,10 400,25"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
 
-          <div className="flex justify-center lg:justify-end">
-            <HeroGramAltinCard initialData={prices} history={goldHistory.slice(-30)} />
+          <div className="relative grid gap-8 p-6 sm:p-10 lg:grid-cols-2 lg:items-center lg:gap-12 lg:p-14">
+            <div>
+              <h1 className="max-w-lg text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl">
+                Denizli altın piyasası, tek ekranda.
+              </h1>
+              <p className="mt-3 max-w-md text-base text-muted sm:mt-4 sm:text-lg">
+                Güncel fiyatları takip edin, güvenilir kuyumcuları keşfedin.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
+                <a
+                  href="#altin-fiyatlari"
+                  className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98]"
+                >
+                  Altın fiyatlarını incele
+                  <ArrowRight aria-hidden="true" size={16} />
+                </a>
+                <Link
+                  href="/kuyumcular"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-semibold text-ink transition-all hover:border-brand hover:text-brand active:scale-[0.98]"
+                >
+                  <MapPin aria-hidden="true" size={16} weight="bold" />
+                  Yakındaki kuyumcuları bul
+                </Link>
+              </div>
+            </div>
+
+            <div className="flex justify-center lg:justify-end">
+              <HeroGramAltinCard initialData={prices} history={goldHistory.slice(-30)} />
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1240px] px-4 pb-20">
-        <AdSlot position="hero-banner" />
+      {/* "Bugün ne değişti?" — kısa, taranabilir piyasa özeti. Hero'nun
+          hemen altında; kullanıcı ilk saniyede genel tabloyu görüyor. */}
+      <section className="mx-auto max-w-[1240px] px-4 pb-16">
+        <DailyMarketSummary initialData={prices} />
       </section>
 
-      {/* Popüler altın ve döviz fiyatları */}
-      <section id="altin-fiyatlari" className="mx-auto max-w-[1240px] px-4 pb-20">
+      {/* En çok takip edilen fiyatlar */}
+      <section id="altin-fiyatlari" className="mx-auto max-w-[1240px] px-4 pb-16">
         <PriceTicker initialData={prices} />
       </section>
 
-      <section id="doviz" className="mx-auto max-w-[1240px] px-4 pb-20">
+      <section id="doviz" className="mx-auto max-w-[1240px] px-4 pb-16">
         <PriceTicker
           initialData={prices}
           title="Yurtdışı Para Birimleri"
@@ -110,7 +139,7 @@ export default async function HomePage() {
         />
       </section>
 
-      <section id="tum-altin-cesitleri" className="mx-auto max-w-[1240px] px-4 pb-20">
+      <section id="tum-altin-cesitleri" className="mx-auto max-w-[1240px] px-4 pb-16">
         <SectionHeading
           title="Tüm Altın Çeşitleri"
           subtitle="Gram, çeyrek, yarım, tam, ata, reşat, gremse ve daha fazlası tek tabloda."
@@ -121,31 +150,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section id="hesaplama" className="mx-auto max-w-[1240px] px-4 pb-20">
-        <SectionHeading
-          title="Altın Hesaplama Aracı"
-          subtitle="Ürüne veya ayara göre, canlı fiyatlarla anında hesaplayın."
-        />
-        <div className="mt-6">
-          <GoldCalculator initialData={prices} />
-        </div>
-      </section>
-
-      <section id="gunluk-degisim" className="mx-auto max-w-[1240px] px-4 pb-20">
-        <SectionHeading title="Günlük Değişim" subtitle="Bugün en çok hareket edenler." />
-        <div className="mt-6">
-          <DailyChangeTable initialData={prices} />
-        </div>
-      </section>
-
-      <section id="grafik" className="mx-auto max-w-[1240px] px-4 pb-20">
-        <SectionHeading title="Altın Fiyatları Grafiği" />
-        <div className="mt-6">
-          <GoldPriceChart history={goldHistory} />
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-[1240px] px-4 pb-20">
+      {/* Kuyumcu keşfi buraya taşındı (brief): kullanıcı fiyatlara
+          baktıktan hemen sonra, hesaplama/grafiğe gelmeden ÖNCE doğal
+          biçimde kuyumcu keşfine yönlendirilsin. */}
+      <section className="mx-auto max-w-[1240px] px-4 pb-16">
         <SectionHeading title="Denizli'de Kuyumculuk" />
         <p className="mt-6 max-w-3xl text-muted">
           Denizli, çeyiz kültüründen düğün geleneklerine uzanan köklü bir
@@ -159,7 +167,7 @@ export default async function HomePage() {
         </p>
       </section>
 
-      <section className="mx-auto max-w-[1240px] px-4 pb-20">
+      <section className="mx-auto max-w-[1240px] px-4 pb-16">
         <SectionHeading
           title="Öne Çıkan Kuyumcular"
           action={{ label: "Tümünü gör", href: "/kuyumcular" }}
@@ -169,14 +177,14 @@ export default async function HomePage() {
           <div className="mt-6 grid gap-5 sm:grid-cols-3">
             {featuredJewelers.map((j, i) => (
               <Reveal key={j.id} delay={i * 0.05}>
-                <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/40">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-brand">
-                    Öne Çıkan
-                  </p>
-                  <p className="mt-1 font-bold text-ink">{j.name}</p>
-                  <p className="text-sm text-muted">{j.district}</p>
-                  <p className="mt-2 text-sm text-muted">{j.description}</p>
-                </div>
+                <JewelerProfileCard
+                  name={j.name}
+                  district={j.district}
+                  description={j.description}
+                  tag="Öne Çıkan"
+                  isDemo={j.isDemo}
+                  phone={j.phone}
+                />
               </Reveal>
             ))}
           </div>
@@ -193,64 +201,104 @@ export default async function HomePage() {
         )}
       </section>
 
-      <section className="mx-auto max-w-[1240px] px-4 pb-20">
+      <section id="hesaplama" className="mx-auto max-w-[1240px] px-4 pb-16">
+        <SectionHeading
+          title="Altın Hesaplama Aracı"
+          subtitle="Ürüne veya ayara göre, canlı fiyatlarla anında hesaplayın."
+        />
+        <div className="mt-6">
+          <GoldCalculator initialData={prices} />
+        </div>
+      </section>
+
+      <section id="grafik" className="mx-auto max-w-[1240px] px-4 pb-16">
+        <SectionHeading title="Altın Fiyatları Grafiği" />
+        <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_360px] lg:items-start">
+          <GoldPriceChart history={goldHistory} />
+          {/* Grafiğin yanında, "bugün kimler hareketlendi" detayının tam
+              listesi — DailyMarketSummary'nin (hero altı) kısa özetini
+              tamamlıyor, tekrarlamıyor. */}
+          <DailyChangeTable initialData={prices} />
+        </div>
+      </section>
+
+      <section id="rehber" className="mx-auto max-w-[1240px] px-4 pb-16">
         <SectionHeading
           title="Rehber"
           subtitle="Altın almadan/satmadan önce bilmeniz gerekenler."
           action={{ label: "Tüm rehberi gör", href: "/rehber" }}
         />
-        <div className="mt-6 grid gap-5 sm:grid-cols-3">
-          <Reveal>
-            <GuideCard
-              href="/rehber/altin-ayari-nedir"
-              title="Altın Ayarı Nedir? (24, 22, 18, 14 Ayar)"
-              desc="Ayar nedir, hangisi nerede kullanılır, has altınla farkı."
-            />
-          </Reveal>
-          <Reveal delay={0.05}>
-            <GuideCard
-              href="/rehber/gram-altin-hesaplama"
-              title="Gram Altın Fiyatı Nasıl Hesaplanır?"
-              desc="Has altın, işçilik ve kur ilişkisini basitçe anlatıyoruz."
-            />
-          </Reveal>
-          <Reveal delay={0.1}>
-            <GuideCard
-              href="/rehber/alyans-rehberi"
-              title="Alyans Alırken Nelere Dikkat Edilmeli?"
-              desc="Ayar, ölçü, gramaj ve kuyumcu seçimi rehberi."
-            />
-          </Reveal>
-        </div>
+        <GuideList
+          items={[
+            {
+              no: "01",
+              category: "Ayar",
+              href: "/rehber/altin-ayari-nedir",
+              title: "Altın Ayarı Nedir? (24, 22, 18, 14 Ayar)",
+              desc: "Ayar nedir, hangisi nerede kullanılır, has altınla farkı.",
+            },
+            {
+              no: "02",
+              category: "Hesaplama",
+              href: "/rehber/gram-altin-hesaplama",
+              title: "Gram Altın Fiyatı Nasıl Hesaplanır?",
+              desc: "Has altın, işçilik ve kur ilişkisini basitçe anlatıyoruz.",
+            },
+            {
+              no: "03",
+              category: "Alyans",
+              href: "/rehber/alyans-rehberi",
+              title: "Alyans Alırken Nelere Dikkat Edilmeli?",
+              desc: "Ayar, ölçü, gramaj ve kuyumcu seçimi rehberi.",
+            },
+          ]}
+        />
       </section>
 
-      <section id="sss" className="mx-auto max-w-[1240px] px-4 pb-20">
+      <section id="sss" className="mx-auto max-w-[1240px] px-4 pb-16">
         <Faq />
-      </section>
-
-      <section className="mx-auto max-w-[1240px] px-4 pb-20">
-        <AdSlot position="footer-banner" />
       </section>
     </>
   );
 }
 
-function GuideCard({
-  href,
-  title,
-  desc,
+// Rehber bölümü artık tekrar eden beyaz kartlar DEĞİL, editoryal bir
+// liste: numara + kategori etiketi + başlık (Fraunces serif, SADECE
+// burada) + kısa açıklama + oku — ince çizgilerle ayrılmış satırlar.
+// Finans tablolarından bilinçli olarak farklı bir görsel dil.
+function GuideList({
+  items,
 }: {
-  href: string;
-  title: string;
-  desc: string;
+  items: { no: string; category: string; href: string; title: string; desc: string }[];
 }) {
   return (
-    <Link
-      href={href}
-      className="block h-full rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-    >
-      <p className="font-semibold text-ink">{title}</p>
-      <p className="mt-1 text-sm text-muted">{desc}</p>
-    </Link>
+    <div className="mt-6 divide-y divide-border border-y border-border">
+      {items.map((item, i) => (
+        <Reveal key={item.href} delay={i * 0.04}>
+          <Link
+            href={item.href}
+            className="group flex items-start gap-4 py-5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand sm:items-center sm:gap-6"
+          >
+            <span className="hidden shrink-0 font-serif text-2xl text-muted/40 sm:block">
+              {item.no}
+            </span>
+            <div className="min-w-0 flex-1">
+              <span className="text-[11px] font-semibold uppercase tracking-wide text-brand">
+                {item.category}
+              </span>
+              <p className="mt-1 font-serif text-lg font-medium text-ink transition-colors group-hover:text-brand sm:text-xl">
+                {item.title}
+              </p>
+              <p className="mt-1 text-sm text-muted">{item.desc}</p>
+            </div>
+            <ArrowRight
+              aria-hidden="true"
+              size={18}
+              className="mt-1 shrink-0 text-muted transition-transform group-hover:translate-x-1 group-hover:text-brand sm:mt-0"
+            />
+          </Link>
+        </Reveal>
+      ))}
+    </div>
   );
 }

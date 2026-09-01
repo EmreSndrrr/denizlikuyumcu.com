@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { jewelers } from "@/lib/jewelers";
 import Reveal from "@/components/Reveal";
+import JewelerProfileCard from "@/components/JewelerProfileCard";
 
 export const metadata: Metadata = {
   title: "Denizli Kuyumcuları — Rehber ve Adresler",
@@ -36,29 +37,14 @@ export default function KuyumcularPage() {
         <div className="mt-8 grid gap-5 sm:grid-cols-2">
           {sorted.map((j, i) => (
             <Reveal key={j.id} delay={i * 0.04}>
-              <div
-                className={
-                  "h-full rounded-2xl border bg-surface p-5 shadow-sm " +
-                  (j.featured ? "border-brand ring-1 ring-brand/30" : "border-border")
-                }
-              >
-                {j.featured && (
-                  <p className="text-xs font-semibold uppercase tracking-wide text-brand">
-                    Öne Çıkan
-                  </p>
-                )}
-                {j.isDemo && (
-                  <p className="text-[10px] uppercase tracking-wide text-muted/70">
-                    Örnek kayıt
-                  </p>
-                )}
-                <p className="mt-1 text-lg font-bold text-ink">{j.name}</p>
-                <p className="text-sm text-muted">{j.district}, Denizli</p>
-                <p className="mt-2 text-sm text-muted">{j.description}</p>
-                {j.phone && (
-                  <p className="mt-2 text-sm font-medium text-ink">{j.phone}</p>
-                )}
-              </div>
+              <JewelerProfileCard
+                name={j.name}
+                district={j.district}
+                description={j.description}
+                tag={j.featured ? "Öne Çıkan" : undefined}
+                isDemo={j.isDemo}
+                phone={j.phone}
+              />
             </Reveal>
           ))}
         </div>
