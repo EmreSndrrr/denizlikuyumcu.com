@@ -30,7 +30,13 @@ export default function GuideArticle({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <h1 className="text-3xl font-extrabold tracking-tight text-ink">{title}</h1>
+      {/* Serif, brief'in "editoryal rehber başlıkları" için izin verdiği
+          SINIRLI kullanım — sadece bu H1'de; makale içi <article>
+          prose alt başlıkları (h2/h3) bilinçli olarak sans-serif kalıyor
+          (gövde metniyle karışmasın diye). */}
+      <h1 className="font-serif text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+        {title}
+      </h1>
       <p className="mt-3 text-lg text-muted">{intro}</p>
 
       {/* Gerçek bir reklam yoksa (bkz. AdSlot.tsx) hiçbir şey render

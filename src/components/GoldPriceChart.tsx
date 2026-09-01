@@ -30,7 +30,11 @@ const WIDTH = 800;
 const HEIGHT = 260;
 const TOP_PAD = 24;
 const BOTTOM_PAD = 28;
-const GOLD = "#d6a641";
+// Panel her zaman koyu (temadan bağımsız) olduğu için --color-gold'un
+// KOYU tema değeriyle eşleşen sabit bir hex kullanıyoruz — bu ikisinin
+// (bileşendeki sabit değer + globals.css'teki dark token) birbirinden
+// kaymamasına dikkat edilmeli.
+const GOLD = "#e3bd6e";
 
 function formatShortDate(iso: string, period: Period) {
   return new Date(iso).toLocaleDateString("tr-TR", {
@@ -269,12 +273,16 @@ export default function GoldPriceChart({
                   fill="#10b981"
                   vectorEffect="non-scaling-stroke"
                 />
+                {/* Brief: "mobilde etiketlerin üst üste gelmesini
+                    engelle" — dar ekranda sadece nokta işaretleri
+                    kalıyor, sayısal etiketler sm+ genişlikte görünüyor. */}
                 <text
                   x={scaleX(highIndex)}
                   y={scaleY(points[highIndex][side]) - 8}
                   textAnchor="middle"
                   fontSize={11}
                   fill="#10b981"
+                  className="hidden sm:inline"
                 >
                   {formatTL(points[highIndex][side])}
                 </text>
@@ -295,6 +303,7 @@ export default function GoldPriceChart({
                   textAnchor="middle"
                   fontSize={11}
                   fill="#f87171"
+                  className="hidden sm:inline"
                 >
                   {formatTL(points[lowIndex][side])}
                 </text>

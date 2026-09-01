@@ -125,7 +125,7 @@ export default function GoldCalculator({
                 id="calc-product"
                 value={selectedKey}
                 onChange={(e) => setSelectedKey(e.target.value)}
-                className="mt-1.5 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
+                className="mt-1.5 min-h-11 w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
               >
                 {data.items.map((item) => (
                   <option key={item.key} value={item.key}>
@@ -146,7 +146,7 @@ export default function GoldCalculator({
                 step="0.01"
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
-                className="mt-1.5 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm tabular-nums text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
+                className="mt-1.5 min-h-11 w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-sm tabular-nums text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
               />
             </div>
           </div>
@@ -164,7 +164,7 @@ export default function GoldCalculator({
                 step="0.01"
                 value={grams}
                 onChange={(e) => setGrams(e.target.value)}
-                className="mt-1.5 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm tabular-nums text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
+                className="mt-1.5 min-h-11 w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-sm tabular-nums text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
               />
             </div>
             <div>
@@ -177,7 +177,7 @@ export default function GoldCalculator({
                 onChange={(e) =>
                   setKarat(Number(e.target.value) as keyof typeof KARAT_MILYEM)
                 }
-                className="mt-1.5 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
+                className="mt-1.5 min-h-11 w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
               >
                 <option value={24}>24 Ayar (Has)</option>
                 <option value={22}>22 Ayar</option>
@@ -188,10 +188,11 @@ export default function GoldCalculator({
           </div>
         )}
 
-        {/* Sonuç */}
-        <div className="mt-5 rounded-xl bg-gold/10 p-4">
+        {/* Sonuç — aria-live="polite": kullanıcı adet/ayar değiştirdiğinde
+            ekran okuyucu yeni tutarı otomatik duyursun diye. */}
+        <div className="mt-5 rounded-2xl bg-gold-surface/60 p-4">
           <p className="text-xs text-muted">Tahmini tutar</p>
-          <p className="mt-1 text-2xl font-extrabold tabular-nums text-ink">
+          <p aria-live="polite" className="mt-1 text-2xl font-extrabold tabular-nums text-ink">
             {mode === "product"
               ? productResult !== null
                 ? `${formatTL(productResult)} TL`

@@ -77,13 +77,13 @@ export default function PriceItemCalculator({
             step="0.01"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
-            className="mt-1.5 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm tabular-nums text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
+            className="mt-1.5 min-h-11 w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-sm tabular-nums text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
           />
         </div>
 
-        <div className="mt-5 rounded-xl bg-gold/10 p-4">
+        <div className="mt-5 rounded-2xl bg-gold-surface/60 p-4">
           <p className="text-xs text-muted">Tahmini tutar</p>
-          <p className="mt-1 text-2xl font-extrabold tabular-nums text-ink">
+          <p aria-live="polite" className="mt-1 text-2xl font-extrabold tabular-nums text-ink">
             {result !== null ? `${format(result)} ${isUsd ? "USD" : item.unit}` : "—"}
           </p>
         </div>

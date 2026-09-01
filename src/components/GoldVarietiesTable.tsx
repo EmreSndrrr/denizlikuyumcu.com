@@ -149,7 +149,7 @@ export default function GoldVarietiesTable({
 
       {/* Arama + kategori filtreleri */}
       <div className="flex flex-wrap items-center gap-2 border-b border-border px-5 py-3">
-        <div className="flex min-w-[160px] flex-1 items-center gap-2 rounded-lg border border-border px-3 py-1.5">
+        <div className="flex min-w-[160px] flex-1 items-center gap-2 rounded-[10px] border border-border px-3 py-2">
           <MagnifyingGlass aria-hidden="true" size={14} className="text-muted" />
           <input
             type="search"
@@ -223,7 +223,7 @@ export default function GoldVarietiesTable({
         <table className="w-full text-sm sm:min-w-[480px]">
           <thead className="sticky top-0 z-10 bg-surface">
             <tr className="border-b border-border text-xs text-muted">
-              <th scope="col" className="w-9 px-3 py-2">
+              <th scope="col" className="w-11 px-2 py-2">
                 <span className="sr-only">Favori</span>
               </th>
               {columns.map((col) => {
@@ -334,7 +334,9 @@ function GoldRow({
           (flash === "up" ? "price-flash-up" : flash === "down" ? "price-flash-down" : "")
         }
       >
-        <td className="px-3 py-2.5">
+        <td className="px-1 py-1.5 sm:px-2">
+          {/* Tıklanabilir alan brief'e göre büyütüldü (önceden 24px) —
+              görsel yıldız küçük kalsa da buton kutusu artık daha geniş. */}
           <button
             type="button"
             onClick={(e) => {
@@ -343,12 +345,12 @@ function GoldRow({
             }}
             aria-pressed={isFavorite}
             aria-label={isFavorite ? `${item.label} favorilerden çıkar` : `${item.label} favorilere ekle`}
-            className="flex h-6 w-6 items-center justify-center text-muted hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            className="flex h-9 w-9 items-center justify-center rounded-[10px] text-muted hover:bg-bg hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
           >
-            <Star aria-hidden="true" size={15} weight={isFavorite ? "fill" : "regular"} className={isFavorite ? "text-gold" : ""} />
+            <Star aria-hidden="true" size={16} weight={isFavorite ? "fill" : "regular"} className={isFavorite ? "text-gold" : ""} />
           </button>
         </td>
-        <td className="whitespace-nowrap px-3 py-2.5 font-medium text-ink sm:px-5">
+        <td className="whitespace-nowrap px-3 py-3 font-medium text-ink sm:px-5">
           <div className="flex items-center gap-1.5">
             {/* Satırı genişletmenin GERÇEK, klavyeyle erişilebilir kontrolü
                 bu buton — <tr>'a onClick koymak fare dışı kullanıcıları
@@ -382,7 +384,7 @@ function GoldRow({
         </td>
         <td
           className={
-            "px-3 py-2.5 text-right tabular-nums text-muted sm:px-5 " +
+            "px-3 py-3 text-right tabular-nums text-muted sm:px-5 " +
             (mobilePriceView !== "buy" ? "hidden sm:table-cell" : "")
           }
         >
@@ -390,7 +392,7 @@ function GoldRow({
         </td>
         <td
           className={
-            "px-3 py-2.5 text-right tabular-nums font-semibold text-ink sm:px-5 " +
+            "px-3 py-3 text-right tabular-nums font-semibold text-ink sm:px-5 " +
             (mobilePriceView !== "sell" ? "hidden sm:table-cell" : "")
           }
         >
@@ -398,7 +400,7 @@ function GoldRow({
         </td>
         <td
           className={
-            "px-3 py-2.5 text-right tabular-nums font-medium sm:px-5 " +
+            "px-3 py-3 text-right tabular-nums font-medium sm:px-5 " +
             (isUp ? "text-positive" : "text-negative")
           }
         >

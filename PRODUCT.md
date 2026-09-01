@@ -53,8 +53,11 @@ güncel hissettiren fiyat gösterimi önemlidir.
   kod tabanı zaten mevcut, stack kararı geri açılmayacak.
 - Reklam sistemi (`src/lib/ads.ts`) şu an kod içi config; DB veya admin
   paneli yok. Kuyumcu dizini (`src/lib/jewelers.ts`) de aynı şekilde.
-- Boş reklam alanları, "reklamınız burada olabilir" satış çağrısına
-  dönüşecek şekilde tasarlanmalı (zaten uygulanmış bir prensip).
+- Reklam alanları (`AdSlot`) gerçek bir reklam yoksa **hiçbir şey
+  render etmez** (2026 tasarım yenileme briefi ile değişti — eskiden
+  "reklamınız burada olabilir" öz-tanıtım kartı gösteriyordu, brief bunu
+  açıkça yasakladı: "'Bu alanı alın' butonu kullanıcıya gösterilmemeli").
+  Reklamveren kazanma/satış çağrısı SADECE `/reklam-ver` sayfasında.
 - Fiyatların "bilgilendirme amaçlıdır, yatırım tavsiyesi değildir"
   uyarısıyla sunulması gerekiyor — hukuki/güven gerekliliği.
 - Kuyumcu haritası (interaktif/embed) **bilinçli olarak yapılmadı**:
@@ -97,7 +100,11 @@ sorumlusu" kimliği (şirket unvanı/vergi no) hâlâ placeholder/eksik —
    korunmalı.
 2. Yerel odak — ulusal/genel içerikle rekabet etmek yerine Denizli'ye
    özgü değer (yerel dizin, yerel arama niyeti) önceliklendirilir.
-3. Boş envanter asla boş görünmemeli — her reklam alanı ya bir reklamı
-   ya da bir satış çağrısını göstermeli.
+3. Reklam envanteri ziyaretçi deneyiminden ayrı tutulur — boş bir
+   reklam alanı hiçbir şey göstermez (kullanıcıya "buy this slot" tarzı
+   bir satış çağrısı asla gösterilmez); reklamveren kazanma çağrısı
+   sadece `/reklam-ver`de yaşar. (Önceki ilke "boş envanter asla boş
+   görünmemeli" idi — 2026 tasarım briefi ile bilinçli olarak
+   tersine çevrildi, bkz. Capabilities and Constraints.)
 4. Trafik önce, monetizasyon sonra — reklam satışı için önce gerçek,
    tekrar eden ziyaretçi trafiği kurulmalı.
