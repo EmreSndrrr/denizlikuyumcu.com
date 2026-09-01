@@ -10,7 +10,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MapPin } from "@phosphor-icons/react/dist/ssr";
+import { MapPin, List, X } from "@phosphor-icons/react/dist/ssr";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import ThemeToggle from "@/components/ThemeToggle";
 import HeaderSearch from "@/components/HeaderSearch";
 
@@ -33,6 +34,32 @@ export default function Header() {
   // linklerinin aktif göstergesini besliyor (gerçek rotalar zaten
   // pathname'den biliniyor, bu sadece homepage bölümleri için).
   const [activeAnchor, setActiveAnchor] = useState<string | null>(null);
+  // Mobil menü (hamburger) — lg altında nav tamamen gizliydi, alternatifi
+  // yoktu. Şimdi bir tam ekran panel açıyor; aynı navLinks listesini + alt
+  // kısımda ikincil/birincil CTA'ları içeriyor, böylece masaüstünde
+  // görebildiğin her şey mobilde de erişilebilir.
+  const [menuOpen, setMenuOpen] = useState(false);
+  const reduceMotion = useReducedMotion();
+
+  // Rota değiştiğinde menüyü otomatik kapat (bir linke tıklayınca).
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  // Menü açıkken arka planın kaymasını engelle + Escape ile kapat.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setMenuOpen(false);
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [menuOpen]);
 
   useEffect(() => {
     function onScroll() {
@@ -134,8 +161,90 @@ export default function Header() {
             <MapPin aria-hidden="true" size={15} weight="bold" />
             <span className="hidden sm:inline">Kuyumcu Bul</span>
           </Link>
+          <button
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav-panel"
+            aria-label={menuOpen ? "Menüyü kapat" : "Menüyü aç"}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-ink transition-colors hover:bg-border/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand lg:hidden"
+          >
+            {menuOpen ? (
+              <X aria-hidden="true" size={20} weight="bold" />
+            ) : (
+              <List aria-hidden="true" size={20} weight="bold" />
+            )}
+          </button>
         </div>
       </div>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <>
+            <motion.div
+              aria-hidden="true"
+              onClick={() => setMenuOpen(false)}
+              className="fixed inset-0 z-30 bg-ink/40 lg:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.18 }}
+            />
+            {/* Header zaten "sticky" (= konumlanmış) olduğu için mutlak
+                konumlanan bu panelin referans kutusu header'ın kendisi —
+                header yüksekliğini ayrı bir değişkende tutmaya gerek yok. */}
+            <motion.nav
+              id="mobile-nav-panel"
+              aria-label="Mobil menü"
+              className="absolute inset-x-0 top-full z-30 max-h-[80dvh] overflow-y-auto border-b border-border bg-surface p-4 shadow-lg lg:hidden"
+              initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+              animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+              exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+              transition={{ duration: reduceMotion ? 0 : 0.2, ease: "easeOut" }}
+            >
+              <ul className="flex flex-col divide-y divide-border">
+                {navLinks.map((link) => {
+                  const isAnchor = link.href.includes("#");
+                  const isActive = isAnchor
+                    ? activeAnchor === link.href.split("#")[1]
+                    : pathname.startsWith(link.href);
+                  return (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        onClick={() => setMenuOpen(false)}
+                        className={
+                          "flex items-center justify-between py-3 text-base font-medium transition-colors " +
+                          (isActive ? "text-brand" : "text-ink")
+                        }
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+              <div className="mt-4 flex flex-col gap-2.5 border-t border-border pt-4">
+                <Link
+                  href="/reklam-ver"
+                  onClick={() => setMenuOpen(false)}
+                  className="text-center text-sm font-medium text-muted transition-colors hover:text-ink"
+                >
+                  İşletmeni Ekle
+                </Link>
+                <Link
+                  href="/kuyumcular"
+                  onClick={() => setMenuOpen(false)}
+                  className="inline-flex items-center justify-center gap-1.5 rounded-full bg-ink px-4 py-3 text-sm font-semibold text-surface transition-colors hover:bg-brand"
+                >
+                  <MapPin aria-hidden="true" size={15} weight="bold" />
+                  Kuyumcu Bul
+                </Link>
+              </div>
+            </motion.nav>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
