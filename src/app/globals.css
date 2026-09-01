@@ -6,13 +6,50 @@
    dinler, elle geçiş yapılamaz. */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* --- Tasarım token sistemi ---
+   Tailwind v4'te @theme içindeki --color-* değişkenleri hem gerçek CSS
+   custom property'leri olarak :root'a yazılır HEM DE bg-brand, text-ink
+   gibi utility class'ları üretir; üretilen class'lar değeri değil,
+   `var(--color-*)` referansını kullanır. Bu sayede aşağıdaki .dark bloğu
+   sadece değişken değerlerini değiştiriyor — her bileşene ayrı ayrı
+   `dark:` varyantı eklemeye gerek kalmıyor (bg-surface tek başına her iki
+   temada doğru rengi verir). */
 @theme inline {
+  --color-bg: #f7f6f2;
+  --color-surface: #ffffff;
+  --color-surface-dark: #11110f;
+  --color-ink: #121210;
+  --color-muted: #706d66;
+  --color-border: #e6e3dc;
+  --color-brand: #c76508;
+  --color-gold: #d6a641;
+  --color-positive: #079a68;
+  --color-negative: #d64550;
+
   --font-sans: var(--font-inter);
+}
+
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+  --color-bg: #0b0b0a;
+  --color-surface: #171613;
+  --color-surface-dark: #030302;
+  --color-ink: #f5f3ee;
+  --color-muted: #a39e93;
+  --color-border: #2a2825;
+  --color-brand: #e0821f;
+  --color-gold: #e3bd6e;
+  --color-positive: #10b981;
+  --color-negative: #f87171;
 }
 
 /* Üstteki kayan fiyat şeridi (PriceMarquee). İçerik iki kez art arda
    yazılıp %50 kaydırılıyor — bu sayede döngü sırasında görünür bir sıçrama
-   olmuyor (kusursuz döngü). */
+   olmuyor (kusursuz döngü). Kenarlarda mask-image ile yumuşak fade. */
 @keyframes price-marquee {
   from {
     transform: translateX(0);
@@ -23,7 +60,24 @@
 }
 
 .animate-price-marquee {
-  animation: price-marquee 42s linear infinite;
+  animation: price-marquee 60s linear infinite;
+}
+
+.marquee-fade {
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 32px,
+    black calc(100% - 32px),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 32px,
+    black calc(100% - 32px),
+    transparent 100%
+  );
 }
 
 /* Fare/klavye şeridin üzerindeyken dur (WCAG 2.2 — otomatik dönen içerik
@@ -44,5 +98,36 @@
   }
   .marquee-row {
     overflow-x: auto;
+  }
+}
+
+/* Bir fiyat hücresi güncellendiğinde tüm tabloyu değil, sadece o hücreyi
+   kısaca (600ms) yeşil/kırmızı vurgulayıp zemine geri döndürüyoruz. */
+@keyframes price-flash-up {
+  from {
+    background-color: color-mix(in srgb, var(--color-positive) 22%, transparent);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+@keyframes price-flash-down {
+  from {
+    background-color: color-mix(in srgb, var(--color-negative) 22%, transparent);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+.price-flash-up {
+  animation: price-flash-up 600ms ease-out;
+}
+.price-flash-down {
+  animation: price-flash-down 600ms ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .price-flash-up,
+  .price-flash-down {
+    animation: none;
   }
 }
