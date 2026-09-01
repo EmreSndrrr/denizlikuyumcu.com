@@ -5,18 +5,12 @@
 // bir "istatistik" kartı olarak gösteriliyor (bir tabloya karıştırılırsa
 // birim karışıklığı olur).
 
+import Link from "next/link";
 import { Globe, TrendUp, TrendDown } from "@phosphor-icons/react/dist/ssr";
 import type { PriceSnapshot } from "@/lib/prices";
-import { formatTime } from "@/lib/format";
+import { formatTime, formatUSD } from "@/lib/format";
 import { useLivePrices } from "@/lib/useLivePrices";
 import StaleBadge from "@/components/StaleBadge";
-
-function formatUSD(value: number) {
-  return new Intl.NumberFormat("en-US", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(value);
-}
 
 export default function OnsAltinCard({
   initialData,
@@ -35,9 +29,12 @@ export default function OnsAltinCard({
           <Globe aria-hidden="true" size={22} weight="bold" />
         </span>
         <div>
-          <p className="text-sm font-medium text-muted">
+          <Link
+            href="/altin/ons-altin"
+            className="text-sm font-medium text-muted transition-colors hover:text-brand"
+          >
             Ons Altın <span className="text-muted/70">(uluslararası, USD)</span>
-          </p>
+          </Link>
           <p className="mt-0.5 text-2xl font-extrabold tabular-nums text-ink">
             ${formatUSD(ons.sell)}
           </p>
