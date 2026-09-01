@@ -68,9 +68,9 @@ güncel hissettiren fiyat gösterimi önemlidir.
   kaleme özel hesaplama aracı (`PriceItemCalculator`) + özgün SEO metni
   içeriyor. Yeni bir fiyat kalemi `lib/prices.ts`'e eklendiğinde otomatik
   sayfa OLUŞMAZ — `priceContent.ts`'e elle bir girdi eklenmesi gerekir.
-  **Açık madde:** Reklam Ver sayfasındaki "Banner Reklam" paketi bu fiyat
-  sayfalarında da görünürlük vaat ediyor ama şu an bu sayfalarda hiç
-  `AdSlot` yok — ya eklenmeli ya da paket metni düzeltilmeli.
+  Her sayfada `AdSlot position="sidebar"` var (canlı fiyat kartının hemen
+  altında) — Reklam Ver'in "fiyat sayfalarında görünürlük" vaadiyle
+  tutarlı.
 
 ## Brand Commitments
 
