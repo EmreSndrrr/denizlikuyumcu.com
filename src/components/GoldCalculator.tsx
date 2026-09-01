@@ -73,9 +73,11 @@ export default function GoldCalculator({
           weight="bold"
           className="text-amber-700 dark:text-amber-500"
         />
-        <h2 className="text-base font-semibold text-stone-900 dark:text-stone-50">
+        {/* Sayfa-seviyesi <SectionHeading> zaten bu bölümün h2'si — burada
+            tekrar bir başlık elementi açmıyoruz (yinelenen heading olmasın). */}
+        <p className="text-base font-semibold text-stone-900 dark:text-stone-50">
           Altın Hesaplama Aracı
-        </h2>
+        </p>
       </div>
 
       <div className="p-5">

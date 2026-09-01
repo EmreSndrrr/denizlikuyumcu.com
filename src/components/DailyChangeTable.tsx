@@ -41,9 +41,10 @@ export default function DailyChangeTable({
   return (
     <div className="rounded-2xl border border-stone-200 bg-white shadow-sm dark:border-stone-800 dark:bg-stone-900">
       <div className="flex items-center justify-between border-b border-stone-200 px-5 py-3 dark:border-stone-800">
-        <h3 className="text-sm font-semibold text-stone-900 dark:text-stone-50">
+        {/* Sayfa-seviyesi <SectionHeading> zaten bu bölümün h2'si. */}
+        <p className="text-sm font-semibold text-stone-900 dark:text-stone-50">
           Günlük Değişim
-        </h3>
+        </p>
         <span className="text-xs text-stone-400">
           {formatTime(data.updatedAt)} itibarıyla
         </span>

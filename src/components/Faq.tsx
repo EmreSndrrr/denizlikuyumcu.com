@@ -30,20 +30,18 @@ export default function Faq() {
         title="Sıkça Sorulan Sorular"
         subtitle="Şimdilik temel sorularla başlıyoruz; zamanla genişleteceğiz."
       />
-      <div className="mx-auto mt-8 max-w-3xl divide-y divide-stone-200 rounded-2xl border border-stone-200 bg-white dark:divide-stone-800 dark:border-stone-800 dark:bg-stone-900">
+      <div className="mt-6 max-w-3xl divide-y divide-border rounded-2xl border border-border bg-surface">
         {faqItems.map((item) => (
           <details key={item.question} className="group p-5">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-stone-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 dark:text-stone-50">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">
               {item.question}
               <CaretDown
                 aria-hidden="true"
                 size={16}
-                className="shrink-0 text-stone-400 transition-transform group-open:rotate-180"
+                className="shrink-0 text-muted transition-transform group-open:rotate-180"
               />
             </summary>
-            <p className="mt-3 text-sm text-stone-600 dark:text-stone-400">
-              {item.answer}
-            </p>
+            <p className="mt-3 text-sm text-muted">{item.answer}</p>
           </details>
         ))}
       </div>

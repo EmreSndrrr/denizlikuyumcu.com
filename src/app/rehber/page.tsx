@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Altın ve Kuyumculuk Rehberi",
@@ -32,27 +33,22 @@ const guides = [
 
 export default function RehberIndexPage() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10">
-      <div className="text-center">
-        <h1 className="text-3xl font-extrabold tracking-tight text-stone-900 dark:text-stone-50">Rehber</h1>
-        <span
-          aria-hidden="true"
-          className="mx-auto mt-3 block h-0.5 w-14 rounded-full bg-amber-600 dark:bg-amber-500"
-        />
-        <p className="mx-auto mt-3 max-w-xl text-stone-600 dark:text-stone-400">
-          Altın almadan veya satmadan önce bilmeniz gereken temel konular.
-        </p>
-      </div>
-      <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        {guides.map((g) => (
-          <Link
-            key={g.href}
-            href={g.href}
-            className="block rounded-xl border border-stone-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 dark:border-stone-800 dark:bg-stone-900"
-          >
-            <p className="font-bold text-stone-900 dark:text-stone-50">{g.title}</p>
-            <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">{g.desc}</p>
-          </Link>
+    <div className="mx-auto max-w-[1240px] px-4 py-14">
+      <h1 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">Rehber</h1>
+      <p className="mt-3 max-w-xl text-muted">
+        Altın almadan veya satmadan önce bilmeniz gereken temel konular.
+      </p>
+      <div className="mt-8 grid gap-5 sm:grid-cols-2">
+        {guides.map((g, i) => (
+          <Reveal key={g.href} delay={i * 0.04}>
+            <Link
+              href={g.href}
+              className="block h-full rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            >
+              <p className="font-bold text-ink">{g.title}</p>
+              <p className="mt-1 text-sm text-muted">{g.desc}</p>
+            </Link>
+          </Reveal>
         ))}
       </div>
     </div>
