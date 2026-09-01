@@ -16,6 +16,7 @@ const staticRoutes = [
   "/hakkimizda",
   "/iletisim",
   "/veri-kullanimi",
+  "/kullanim-kosullari",
   "/kvkk",
   "/cerez-politikasi",
 ];

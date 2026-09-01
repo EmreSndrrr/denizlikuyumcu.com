@@ -24,13 +24,16 @@ export const searchIndex: SearchEntry[] = [
   { label: "Altın Hesaplama Aracı", href: "/#hesaplama", group: "Anasayfa Bölümü" },
   { label: "Tüm Altın Çeşitleri", href: "/#tum-altin-cesitleri", group: "Anasayfa Bölümü" },
   { label: "Altın Fiyatları Grafiği", href: "/#grafik", group: "Anasayfa Bölümü" },
-  { label: "Günlük Değişim", href: "/#gunluk-degisim", group: "Anasayfa Bölümü" },
+  // Günlük Değişim artık ayrı bir bölüm değil, Grafik bölümünün yanında
+  // (bkz. page.tsx) — bu yüzden aynı çapaya yönlendiriyor.
+  { label: "Günlük Değişim", href: "/#grafik", group: "Anasayfa Bölümü" },
   { label: "Sıkça Sorulan Sorular", href: "/#sss", group: "Anasayfa Bölümü" },
   { label: "Kuyumcular", href: "/kuyumcular", group: "Sayfa" },
   { label: "Reklam Ver", href: "/reklam-ver", group: "Sayfa" },
   { label: "Hakkımızda", href: "/hakkimizda", group: "Sayfa" },
   { label: "İletişim", href: "/iletisim", group: "Sayfa" },
   { label: "Veri Kullanımı", href: "/veri-kullanimi", group: "Sayfa" },
+  { label: "Kullanım Koşulları", href: "/kullanim-kosullari", group: "Sayfa" },
   { label: "KVKK Aydınlatma Metni", href: "/kvkk", group: "Sayfa" },
   { label: "Çerez Politikası", href: "/cerez-politikasi", group: "Sayfa" },
   { label: "Altın Ayarı Nedir?", href: "/rehber/altin-ayari-nedir", group: "Rehber" },

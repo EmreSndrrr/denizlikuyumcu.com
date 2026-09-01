@@ -17,6 +17,7 @@ export default function Footer() {
           <div>
             <p className="font-semibold text-ink">Bağlantılar</p>
             <ul className="mt-2 space-y-1">
+              <li><Link href="/#altin-fiyatlari" className="hover:text-brand">Altın Fiyatları</Link></li>
               <li><Link href="/kuyumcular" className="hover:text-brand">Kuyumcular</Link></li>
               <li><Link href="/rehber" className="hover:text-brand">Rehber</Link></li>
               <li><Link href="/reklam-ver" className="hover:text-brand">Reklam Ver</Link></li>
@@ -28,6 +29,7 @@ export default function Footer() {
               <li><Link href="/hakkimizda" className="hover:text-brand">Hakkımızda</Link></li>
               <li><Link href="/iletisim" className="hover:text-brand">İletişim</Link></li>
               <li><Link href="/veri-kullanimi" className="hover:text-brand">Veri Kullanımı</Link></li>
+              <li><Link href="/kullanim-kosullari" className="hover:text-brand">Kullanım Koşulları</Link></li>
               <li><Link href="/kvkk" className="hover:text-brand">KVKK</Link></li>
               <li><Link href="/cerez-politikasi" className="hover:text-brand">Çerez Politikası</Link></li>
             </ul>
