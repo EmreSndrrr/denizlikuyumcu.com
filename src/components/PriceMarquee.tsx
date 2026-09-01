@@ -17,7 +17,7 @@
 import { useState, Fragment } from "react";
 import { Play, Pause, TrendUp, TrendDown } from "@phosphor-icons/react/dist/ssr";
 import { filterSnapshot, MAIN_PRICE_TYPES, type PriceSnapshot, type PriceItem } from "@/lib/prices";
-import { formatTL } from "@/lib/format";
+import { formatTL, formatTime } from "@/lib/format";
 import { useLivePrices } from "@/lib/useLivePrices";
 
 function MarqueeItem({ item, duplicate }: { item: PriceItem; duplicate?: boolean }) {
@@ -85,6 +85,19 @@ export default function PriceMarquee({
           <Pause aria-hidden="true" size={12} weight="fill" />
         )}
       </button>
+      {/* Güncelleme zamanı — brief'in "erişilebilir biçimde göster"
+          isteği. 360-390px mobilde yer sıkıntısı yaratmaması için sadece
+          sm+ genişlikte görünür; ekran okuyucular için her zaman
+          sr-only bir karşılığı var. */}
+      <span className="sr-only">
+        Fiyatlar son {formatTime(data.updatedAt)} itibarıyla güncellendi
+      </span>
+      <span
+        aria-hidden="true"
+        className="hidden shrink-0 items-center border-r border-white/10 px-3 text-[11px] tabular-nums text-white/40 sm:flex"
+      >
+        {formatTime(data.updatedAt)}
+      </span>
       <div className="overflow-hidden">
         <div className="flex w-max animate-price-marquee">
           {/* Aynı liste iki kez: track %50 kaydığında ikinci kopya tam

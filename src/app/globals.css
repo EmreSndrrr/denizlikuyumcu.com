@@ -16,25 +16,51 @@
    `--color-*` custom property yazar HEM DE utility'lerde `var(--color-*)`
    kullanır — böylece .dark bloğu değeri çalışma zamanında değiştirebiliyor
    ve her bileşene ayrı ayrı `dark:` varyantı eklemeye gerek kalmıyor. */
+/* 2026 tasarım yenileme briefi'ndeki renk paleti — "güvenilir finans
+   ekranı + sıcak kuyumculuk estetiği + Denizli'ye özgü kimlik" dengesi
+   için önceki tondan daha kırık/mat, daha az doygun turuncu. Saf siyah
+   veya parlak turuncu YOK — hem ink hem brand bilinçli olarak kırılmış
+   tonlar. --color-gold-surface, altın vurgusunun ARKA PLAN olarak
+   kullanıldığı (rozet, ikon kutusu zemini gibi) yerler için — --color-gold
+   ile karıştırılmasın: gold bir VURGU RENGİ (metin/ikon), gold-surface
+   bir ZEMİN rengidir. */
+/* Not: brand/positive/negative, brief'te verilen ham hex'lerden (#B87517 /
+   #0B8F69 / #D64545) yaklaşık %15-20 daha koyu — o ham tonlar bg (#F7F4ED)
+   üzerinde küçük metin için WCAG AA'nın (4.5:1) altında kalıyordu (ör.
+   "Sponsorlu" etiketi, fiyat değişim yüzdesi gibi 11-13px kullanım
+   yerlerinde ~3.4-4:1 ölçüldü). Bu koyultulmuş tonlar aynı renk ailesinde
+   kalırken 4.5:1'in üzerinde kalıyor (bkz. hesaplama notu) — briefin
+   kendisinin de istediği "WCAG AA'ya uygunluk" ile "ham hex" arasında
+   çakışma olunca erişilebilirlik önceliklendirildi. */
 @theme {
-  --color-bg: #f7f6f2;
-  --color-surface: #ffffff;
+  --color-bg: #f7f4ed;
+  --color-surface: #fffdf9;
   --color-surface-dark: #11110f;
-  --color-ink: #121210;
-  --color-muted: #706d66;
-  --color-border: #e6e3dc;
-  --color-brand: #c76508;
-  --color-gold: #d6a641;
-  --color-positive: #079a68;
-  --color-negative: #d64550;
+  --color-ink: #121310;
+  --color-muted: #6f695e;
+  --color-border: #ded8cd;
+  --color-brand: #935e12;
+  /* --color-gold, --color-brand'dan BİLEREK farklı: brand birincil
+     aksiyon/link rengi, gold sadece dekoratif vurgu (favori yıldızı,
+     hafif zemin taraması gibi ikon/arka plan kullanımlarında — küçük
+     GÖVDE METNİNDE kullanılmıyor) olduğu için 4.5:1 metin eşiğine değil,
+     "hâlâ altın gibi görünsün ama parlamasın" hedefine göre ayarlandı. */
+  --color-gold: #c9932c;
+  --color-gold-surface: #f3e4c7;
+  --color-positive: #097a59;
+  --color-negative: #b63b3b;
 }
 
-/* Font değişkeni farklı: --font-inter zaten next/font tarafından <html>
-   class'ına yazılan çalışma zamanı bir CSS değişkeni. Burada "inline"
-   kalması doğru — Tailwind bunu doğrudan font-family utility'sine
-   yazıyor, ekstra bir --font-sans dolayı katmanına gerek yok. */
+/* Font değişkenleri: --font-inter ve --font-serif zaten next/font
+   tarafından <html> class'ına yazılan çalışma zamanı CSS değişkenleri.
+   Burada "inline" kalması doğru — Tailwind bunu doğrudan font-family
+   utility'sine yazıyor, ekstra bir dolaylı katmana gerek yok. */
 @theme inline {
   --font-sans: var(--font-inter);
+  /* SADECE editoryal rehber başlıkları için — tablo, form ve küçük
+     arayüz metinlerinde KULLANILMAZ (bkz. GuideArticle.tsx, rehber
+     listeleri). font-serif utility'si bunun için. */
+  --font-serif: var(--font-fraunces);
 }
 
 :root {
@@ -43,16 +69,17 @@
 
 .dark {
   color-scheme: dark;
-  --color-bg: #0b0b0a;
-  --color-surface: #171613;
+  --color-bg: #0f100e;
+  --color-surface: #181814;
   --color-surface-dark: #030302;
-  --color-ink: #f5f3ee;
-  --color-muted: #a39e93;
-  --color-border: #2a2825;
-  --color-brand: #e0821f;
+  --color-ink: #f4f0e8;
+  --color-muted: #a8a093;
+  --color-border: #343127;
+  --color-brand: #d99a3f;
   --color-gold: #e3bd6e;
-  --color-positive: #10b981;
-  --color-negative: #f87171;
+  --color-gold-surface: #2a2416;
+  --color-positive: #34b787;
+  --color-negative: #f2726f;
 }
 
 /* Üstteki kayan fiyat şeridi (PriceMarquee). İçerik iki kez art arda

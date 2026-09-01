@@ -51,16 +51,22 @@ export default function HeaderSearch() {
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-label="Sitede ara"
-        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:bg-border/50 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+        // 44x44 dokunma alanı (brief) — görsel ikon küçük kalsa da
+        // tıklanabilir kutu en az 44px.
+        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-muted transition-colors hover:bg-border/50 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
       >
         <MagnifyingGlass aria-hidden="true" size={17} weight="bold" />
       </button>
 
       {open && (
-        <div className="absolute right-0 top-11 z-50 w-72 rounded-2xl border border-border bg-surface p-3 shadow-lg sm:w-80">
-          <div className="flex items-center gap-2 rounded-lg border border-border px-3 py-2">
-            <MagnifyingGlass aria-hidden="true" size={15} className="text-muted" />
+        <div className="absolute right-0 top-full z-50 mt-2 w-72 rounded-2xl border border-border bg-surface p-3 shadow-lg sm:w-80">
+          <label htmlFor="site-search-input" className="sr-only">
+            Sitede ara
+          </label>
+          <div className="flex items-center gap-2 rounded-[10px] border border-border px-3 py-2">
+            <MagnifyingGlass aria-hidden="true" size={15} weight="bold" className="text-muted" />
             <input
+              id="site-search-input"
               ref={inputRef}
               type="search"
               value={query}
@@ -75,7 +81,7 @@ export default function HeaderSearch() {
                 aria-label="Aramayı temizle"
                 className="text-muted hover:text-ink"
               >
-                <X aria-hidden="true" size={14} />
+                <X aria-hidden="true" size={14} weight="bold" />
               </button>
             )}
           </div>
@@ -90,7 +96,7 @@ export default function HeaderSearch() {
                     <Link
                       href={r.href}
                       onClick={() => setOpen(false)}
-                      className="flex items-center justify-between rounded-lg px-2 py-2 text-sm text-ink hover:bg-bg focus-visible:bg-bg focus-visible:outline-none"
+                      className="flex min-h-11 items-center justify-between rounded-[10px] px-2 py-2 text-sm text-ink hover:bg-bg focus-visible:bg-bg focus-visible:outline-none"
                     >
                       {r.label}
                       <span className="text-xs text-muted">{r.group}</span>

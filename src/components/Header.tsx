@@ -161,9 +161,15 @@ export default function Header() {
           })}
         </nav>
 
-        <div className="flex items-center gap-1.5 sm:gap-3">
+        {/* Mobil hiyerarşi (brief): logo (solda) → arama → Kuyumcu Bul
+            (konum) → menü. Tema seçimi buradan mobil menüye taşındı ki
+            küçük ekranda ikonlar birbiriyle yarışmasın — bkz. aşağıdaki
+            <ThemeToggle variant="row">. */}
+        <div className="flex items-center gap-1 sm:gap-2">
           <HeaderSearch />
-          <ThemeToggle />
+          <div className="hidden lg:block">
+            <ThemeToggle />
+          </div>
           <Link
             href="/reklam-ver"
             className="hidden text-sm font-medium text-muted transition-colors hover:text-ink active:scale-[0.98] md:inline-block"
@@ -172,7 +178,7 @@ export default function Header() {
           </Link>
           <Link
             href="/kuyumcular"
-            className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-ink px-4 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
           >
             <MapPin aria-hidden="true" size={15} weight="bold" />
             <span className="hidden sm:inline">Kuyumcu Bul</span>
@@ -183,7 +189,7 @@ export default function Header() {
             aria-expanded={menuOpen}
             aria-controls="mobile-nav-panel"
             aria-label={menuOpen ? "Menüyü kapat" : "Menüyü aç"}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-ink transition-colors hover:bg-border/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full text-ink transition-colors hover:bg-border/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand lg:hidden"
           >
             {menuOpen ? (
               <X aria-hidden="true" size={20} weight="bold" />
@@ -230,7 +236,7 @@ export default function Header() {
                         href={link.href}
                         onClick={() => setMenuOpen(false)}
                         className={
-                          "flex items-center justify-between py-3 text-base font-medium transition-colors " +
+                          "flex min-h-11 items-center justify-between py-3 text-base font-medium transition-colors " +
                           (isActive ? "text-brand" : "text-ink")
                         }
                       >
@@ -239,19 +245,24 @@ export default function Header() {
                     </li>
                   );
                 })}
+                {/* Tema seçimi header'dan buraya taşındı (bkz. yukarıdaki
+                    not) — mobilde sadece burada, tek bir yerde. */}
+                <li>
+                  <ThemeToggle variant="row" />
+                </li>
               </ul>
               <div className="mt-4 flex flex-col gap-2.5 border-t border-border pt-4">
                 <Link
                   href="/reklam-ver"
                   onClick={() => setMenuOpen(false)}
-                  className="text-center text-sm font-medium text-muted transition-colors hover:text-ink"
+                  className="flex min-h-11 items-center justify-center text-center text-sm font-medium text-muted transition-colors hover:text-ink"
                 >
                   İşletmeni Ekle
                 </Link>
                 <Link
                   href="/kuyumcular"
                   onClick={() => setMenuOpen(false)}
-                  className="inline-flex items-center justify-center gap-1.5 rounded-full bg-ink px-4 py-3 text-sm font-semibold text-surface transition-colors hover:bg-brand"
+                  className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full bg-ink px-4 py-3 text-sm font-semibold text-surface transition-colors hover:bg-brand"
                 >
                   <MapPin aria-hidden="true" size={15} weight="bold" />
                   Kuyumcu Bul

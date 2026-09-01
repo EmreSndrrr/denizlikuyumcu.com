@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -8,14 +8,25 @@ import PriceMarquee from "@/components/PriceMarquee";
 import PageTransition from "@/components/PageTransition";
 import { getPrices } from "@/lib/prices";
 
-// Tek font ailesi: Inter. Ekran okunabilirliği için tasarlanmış, "daha
-// modern ve okunabilir" istekle en iyi örtüşen seçim — hem başlıklarda
-// (700-800 ağırlık, sıkı harf aralığı) hem gövde/fiyat rakamlarında
-// (400-500 ağırlık, tabular rakam desteği) kullanılıyor. Tek aile
-// olduğu için "diğer fontla uyum" sorunu da baştan ortadan kalkıyor.
+// Ana arayüz fontu: Inter. Ekran okunabilirliği için tasarlanmış, tabular
+// rakam desteği olan bir sans-serif — arayüz, butonlar, fiyatlar ve
+// tablolarda kullanılıyor (brief: "mevcut font uygunsa koru"). Türkçe
+// karakter desteği eksiksiz olduğu için değiştirilmedi.
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+});
+
+// İkinci ve TEK ek font: Fraunces. Sadece editoryal rehber başlıklarında
+// (GuideArticle H1'i, rehber liste başlıkları) sınırlı/kontrollü şekilde
+// kullanılıyor — brief'in "sıcak ve rafine kuyumculuk estetiği" hedefi
+// için; tablo, form ve küçük arayüz metinlerine ASLA uygulanmıyor.
+// "latin-ext" alt kümesi Türkçe karakterler (ı, ğ, ş) için gerekli.
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin", "latin-ext"],
+  weight: ["500", "600"],
+  style: ["normal", "italic"],
 });
 
 const siteUrl = "https://denizlikuyumcu.com";
@@ -69,9 +80,9 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="tr"
       suppressHydrationWarning
-      className={`${inter.variable} h-full antialiased`}
+      className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-bg font-sans text-ink [font-variant-numeric:tabular-nums]">
+      <body className="min-h-full flex flex-col bg-bg font-sans text-ink [font-variant-numeric:tabular-nums_lining-nums]">
         <Script
           id="theme-init"
           strategy="beforeInteractive"
