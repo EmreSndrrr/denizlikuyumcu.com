@@ -7,14 +7,16 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* --- Tasarım token sistemi ---
-   Tailwind v4'te @theme içindeki --color-* değişkenleri hem gerçek CSS
-   custom property'leri olarak :root'a yazılır HEM DE bg-brand, text-ink
-   gibi utility class'ları üretir; üretilen class'lar değeri değil,
-   `var(--color-*)` referansını kullanır. Bu sayede aşağıdaki .dark bloğu
-   sadece değişken değerlerini değiştiriyor — her bileşene ayrı ayrı
-   `dark:` varyantı eklemeye gerek kalmıyor (bg-surface tek başına her iki
-   temada doğru rengi verir). */
-@theme inline {
+   ÖNEMLİ: renk token'ları için "@theme inline" DEĞİL, sade "@theme"
+   kullanıyoruz. "inline" işaretlendiğinde Tailwind v4 değeri derleme
+   anında her utility'nin İÇİNE gömer (örn. .text-brand{color:#c76508})
+   — çalışma zamanında hiçbir CSS değişkenine referans vermez, bu yüzden
+   aşağıdaki .dark bloğu hiçbir şeyi değiştiremezdi (bunu canlı test
+   ederken yakaladık). Sade "@theme" ise hem :root'a gerçek bir
+   `--color-*` custom property yazar HEM DE utility'lerde `var(--color-*)`
+   kullanır — böylece .dark bloğu değeri çalışma zamanında değiştirebiliyor
+   ve her bileşene ayrı ayrı `dark:` varyantı eklemeye gerek kalmıyor. */
+@theme {
   --color-bg: #f7f6f2;
   --color-surface: #ffffff;
   --color-surface-dark: #11110f;
@@ -25,7 +27,13 @@
   --color-gold: #d6a641;
   --color-positive: #079a68;
   --color-negative: #d64550;
+}
 
+/* Font değişkeni farklı: --font-inter zaten next/font tarafından <html>
+   class'ına yazılan çalışma zamanı bir CSS değişkeni. Burada "inline"
+   kalması doğru — Tailwind bunu doğrudan font-family utility'sine
+   yazıyor, ekstra bir --font-sans dolayı katmanına gerek yok. */
+@theme inline {
   --font-sans: var(--font-inter);
 }
 

@@ -7,13 +7,13 @@
 // çekilir (page.tsx -> getPrices), bu bileşene "initialData" olarak prop
 // geçilir; sayfa ilk açıldığında boş/yükleniyor durumu görünmez. Sonrasında
 // bu bileşen kendi başına /api/prices'ı periyodik olarak yoklayıp (polling)
-// "canlı" hissi verir.
+// "canlı" hissi verir (useLivePrices hook'u, bkz. lib/useLivePrices.ts).
 //
 // Aynı bileşen hem "Altın Fiyatları" hem "Döviz Kurları" tablosu için
 // kullanılıyor — `filterType` prop'u hangi kalemlerin gösterileceğini
 // belirliyor, `title` ise başlığı.
 
-import { useEffect, useState } from "react";
+import { useCallback } from "react";
 import { TrendUp, TrendDown } from "@phosphor-icons/react/dist/ssr";
 import {
   filterSnapshot,
@@ -22,8 +22,9 @@ import {
   type PriceSnapshot,
 } from "@/lib/prices";
 import { formatTL, formatTime } from "@/lib/format";
-
-const POLL_INTERVAL_MS = 60_000;
+import { useLivePrices } from "@/lib/useLivePrices";
+import { usePriceFlash } from "@/lib/usePriceFlash";
+import StaleBadge from "@/components/StaleBadge";
 
 export default function PriceTicker({
   initialData,
@@ -37,57 +38,56 @@ export default function PriceTicker({
   title?: string;
   filterType?: PriceItem["type"] | PriceItem["type"][];
 }) {
-  const [data, setData] = useState(() => filterSnapshot(initialData, filterType));
-
-  useEffect(() => {
-    const id = setInterval(async () => {
-      try {
-        const res = await fetch("/api/prices", { cache: "no-store" });
-        if (!res.ok) return;
-        const fresh: PriceSnapshot = await res.json();
-        setData(filterSnapshot(fresh, filterType));
-      } catch {
-        // Ağ hatasında sessizce eski veriyi göstermeye devam ediyoruz.
-      }
-    }, POLL_INTERVAL_MS);
-    return () => clearInterval(id);
-  }, [filterType]);
+  const select = useCallback(
+    (s: PriceSnapshot) => filterSnapshot(s, filterType),
+    [filterType]
+  );
+  const { data, stale } = useLivePrices(initialData, select);
+  const flashKeys = usePriceFlash(data.items);
 
   return (
-    <div className="rounded-2xl border border-stone-200 bg-white shadow-sm dark:border-stone-800 dark:bg-stone-900">
-      <div className="flex items-center justify-between border-b border-stone-200 px-5 py-3 dark:border-stone-800">
-        <h2 className="text-sm font-semibold text-stone-900 dark:text-stone-50">
-          {title}
-        </h2>
+    <div className="rounded-2xl border border-border bg-surface shadow-sm">
+      <div className="flex items-center justify-between gap-3 border-b border-border px-5 py-3">
+        <h2 className="text-sm font-semibold text-ink">{title}</h2>
         {/* Görsel olarak dekoratif bir zaman damgası; her 60 saniyede bir
             değiştiği için aria-live yapmıyoruz — aksi halde ekran okuyucu
             kullanıcıları dakikada bir gereksiz yere kesintiye uğrardı. */}
-        <span className="flex items-center gap-1.5 text-xs text-stone-400">
-          <span
-            aria-hidden="true"
-            className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse motion-reduce:animate-none"
-          />
-          {formatTime(data.updatedAt)} itibarıyla
+        <span className="flex items-center gap-2 text-xs text-muted">
+          {stale && <StaleBadge />}
+          <span className="flex items-center gap-1.5">
+            <span
+              aria-hidden="true"
+              className="h-1.5 w-1.5 rounded-full bg-positive animate-pulse motion-reduce:animate-none"
+            />
+            {formatTime(data.updatedAt)} itibarıyla
+          </span>
         </span>
       </div>
-      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-b-2xl bg-stone-100 sm:grid-cols-4 dark:bg-stone-800">
+      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-b-2xl bg-border sm:grid-cols-4">
         {data.items.map((item) => {
           const isUp = item.changePercent >= 0;
+          const flash = flashKeys[item.key];
           return (
-            <div key={item.key} className="bg-white px-4 py-3 dark:bg-stone-900">
-              <p className="text-xs text-stone-500 dark:text-stone-400">{item.label}</p>
-              <p className="mt-1 text-base font-bold tabular-nums text-stone-900 dark:text-stone-50">
+            <div
+              key={item.key}
+              className={
+                "bg-surface px-4 py-3 " +
+                (flash === "up"
+                  ? "price-flash-up"
+                  : flash === "down"
+                    ? "price-flash-down"
+                    : "")
+              }
+            >
+              <p className="text-xs text-muted">{item.label}</p>
+              <p className="mt-1 text-base font-bold tabular-nums text-ink">
                 {formatTL(item.sell)}
-                <span className="ml-1 text-xs font-normal text-stone-400">
-                  {item.unit}
-                </span>
+                <span className="ml-1 text-xs font-normal text-muted">{item.unit}</span>
               </p>
               <p
                 className={
                   "mt-0.5 flex items-center gap-1 text-xs font-medium tabular-nums " +
-                  (isUp
-                    ? "text-emerald-600 dark:text-emerald-400"
-                    : "text-red-600 dark:text-red-400")
+                  (isUp ? "text-positive" : "text-negative")
                 }
               >
                 {isUp ? (
@@ -101,7 +101,7 @@ export default function PriceTicker({
           );
         })}
       </div>
-      <p className="px-5 py-2 text-[11px] text-stone-400 dark:text-stone-600">
+      <p className="px-5 py-2 text-[11px] text-muted/70">
         Fiyatlar bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.
       </p>
     </div>

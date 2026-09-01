@@ -179,7 +179,12 @@ export const KARAT_MILYEM: Record<24 | 22 | 18 | 14, number> = {
 
 // --- Altın Fiyatları Grafiği için geçmiş veri ---
 
-export type GoldHistoryPoint = { date: string; price: number };
+// Alış VE satış birlikte tutuluyor ki grafikte "Alış/Satış seçimi" mümkün
+// olsun; ikisi arasındaki fark mockSnapshot'takiyle aynı yaklaşık %0,6
+// spread'i yansıtıyor.
+export type GoldHistoryPoint = { date: string; sell: number; buy: number };
+
+const HISTORY_SPREAD_RATIO = 0.006;
 
 // Bugünün gram altın fiyatından geriye doğru gerçekçi bir "random walk"
 // üretir. Gerçek veri sağlayıcısı bağlandığında bu fonksiyon geçmiş
@@ -196,24 +201,26 @@ function generateGoldHistory(endPrice: number, days: number): GoldHistoryPoint[]
   }
 
   const today = new Date();
-  return series.map((price, i) => {
+  return series.map((sell, i) => {
     const d = new Date(today);
     d.setDate(d.getDate() - (days - 1 - i));
     return {
       date: d.toISOString().slice(0, 10),
-      price: Number(price.toFixed(2)),
+      sell: Number(sell.toFixed(2)),
+      buy: Number((sell * (1 - HISTORY_SPREAD_RATIO)).toFixed(2)),
     };
   });
 }
 
-// 90 günlük geçmiş üretip döndürüyoruz; grafik bileşeni bunun son 7/30/90
-// gününü dilimleyerek zaman aralığı seçicisini besliyor — tek seferlik
-// üretim, tutarlı bir seri garantiliyor (her aralık geçişinde yeniden
-// rastgele üretmiyoruz).
+// 1 yıllık (365 gün) geçmiş üretip döndürüyoruz; grafik bileşeni bunun son
+// 7/30/90/365 gününü dilimleyerek zaman aralığı seçicisini besliyor — tek
+// seferlik üretim, tutarlı bir seri garantiliyor (her aralık geçişinde
+// yeniden rastgele üretmiyoruz). Saatlik veri olmadığı için "1 gün"
+// aralığı şimdilik sunulmuyor.
 export const getGoldHistory = cache(async function getGoldHistory(): Promise<
   GoldHistoryPoint[]
 > {
   const snapshot = await getPrices();
   const gramAltin = snapshot.items.find((i) => i.key === "gram-altin");
-  return generateGoldHistory(gramAltin?.sell ?? 4350, 90);
+  return generateGoldHistory(gramAltin?.sell ?? 4350, 365);
 });

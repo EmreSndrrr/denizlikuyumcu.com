@@ -2,7 +2,10 @@
 
 // Sitenin en üstünde, Goodreturns.in'deki gibi sürekli kayan bir fiyat
 // şeridi. Marka kimliği için her zaman koyu (site açık/koyu temada olsa
-// fark etmez) — finans şeritlerinde alışılmış bir yaklaşım.
+// fark etmez) — finans şeritlerinde alışılmış bir yaklaşım; surface-dark
+// token'ı kullanıyoruz (hem light hem dark modda koyu bir değere sahip),
+// böylece grafik kartı ve hero kartıyla aynı "premium panel" ailesinde
+// kalıyor.
 //
 // Erişilebilirlik: otomatik kayan içerik WCAG 2.2 gereği durdurulabilir
 // olmalı (bkz. ui-ux-pro-max --domain ux "auto rotation marquee pause").
@@ -11,12 +14,11 @@
 // tercihi varsa animasyon globals.css'te zaten tamamen kapatılıyor ve
 // şerit yatayda elle kaydırılabilir hale geliyor.
 
-import { useEffect, useState, Fragment } from "react";
+import { useCallback, useState, Fragment } from "react";
 import { Play, Pause, TrendUp, TrendDown } from "@phosphor-icons/react/dist/ssr";
 import { filterSnapshot, MAIN_PRICE_TYPES, type PriceSnapshot, type PriceItem } from "@/lib/prices";
 import { formatTL } from "@/lib/format";
-
-const POLL_INTERVAL_MS = 60_000;
+import { useLivePrices } from "@/lib/useLivePrices";
 
 function MarqueeItem({ item, duplicate }: { item: PriceItem; duplicate?: boolean }) {
   const isUp = item.changePercent >= 0;
@@ -27,14 +29,14 @@ function MarqueeItem({ item, duplicate }: { item: PriceItem; duplicate?: boolean
       // okuyucu için tekrar okunmasın diye gizleniyor.
       aria-hidden={duplicate ? "true" : undefined}
     >
-      <span className="font-medium text-stone-300">{item.label}</span>
+      <span className="font-medium text-white/60">{item.label}</span>
       <span className="tabular-nums font-semibold text-white">
-        {formatTL(item.sell)} <span className="text-stone-400">TL</span>
+        {formatTL(item.sell)} <span className="text-white/40">TL</span>
       </span>
       <span
         className={
           "flex items-center gap-0.5 tabular-nums font-medium " +
-          (isUp ? "text-emerald-400" : "text-red-400")
+          (isUp ? "text-positive" : "text-negative")
         }
       >
         {isUp ? (
@@ -48,6 +50,8 @@ function MarqueeItem({ item, duplicate }: { item: PriceItem; duplicate?: boolean
   );
 }
 
+const selectMain = (s: PriceSnapshot) => filterSnapshot(s, MAIN_PRICE_TYPES);
+
 export default function PriceMarquee({
   initialData,
 }: {
@@ -55,26 +59,12 @@ export default function PriceMarquee({
 }) {
   // Şerit de ana 8 kalemle (6 altın + Dolar + Euro) sınırlı — yurtdışı
   // para birimleri (Sterlin vb.) buraya değil, ayrı bölüme gidiyor.
-  const [data, setData] = useState(() => filterSnapshot(initialData, MAIN_PRICE_TYPES));
+  const { data } = useLivePrices(initialData, useCallback(selectMain, []));
   const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    const id = setInterval(async () => {
-      try {
-        const res = await fetch("/api/prices", { cache: "no-store" });
-        if (!res.ok) return;
-        const fresh: PriceSnapshot = await res.json();
-        setData(filterSnapshot(fresh, MAIN_PRICE_TYPES));
-      } catch {
-        // Sessizce eski veriyi göstermeye devam et.
-      }
-    }, POLL_INTERVAL_MS);
-    return () => clearInterval(id);
-  }, []);
 
   return (
     <div
-      className="marquee-row flex items-stretch overflow-hidden border-b border-stone-800 bg-stone-950"
+      className="marquee-row marquee-fade flex items-stretch overflow-hidden border-b border-white/10 bg-surface-dark"
       data-paused={paused}
     >
       <button
@@ -84,7 +74,7 @@ export default function PriceMarquee({
         aria-label={
           paused ? "Fiyat şeridini kaydırmayı başlat" : "Fiyat şeridini duraklat"
         }
-        className="z-10 flex shrink-0 items-center justify-center border-r border-stone-800 bg-stone-950 px-3 text-stone-400 transition-colors hover:text-amber-400 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-amber-500"
+        className="z-10 flex shrink-0 items-center justify-center border-r border-white/10 bg-surface-dark px-3 text-white/50 transition-colors hover:text-gold focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-gold"
       >
         {paused ? (
           <Play aria-hidden="true" size={12} weight="fill" />

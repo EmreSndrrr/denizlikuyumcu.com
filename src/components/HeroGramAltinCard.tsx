@@ -17,13 +17,13 @@ function MiniSparkline({ points }: { points: GoldHistoryPoint[] }) {
   if (points.length < 2) return null;
   const W = 280;
   const H = 64;
-  const prices = points.map((p) => p.price);
+  const prices = points.map((p) => p.sell);
   const min = Math.min(...prices);
   const max = Math.max(...prices);
   const range = max - min || 1;
   const coords = points.map((p, i) => {
     const x = (i / (points.length - 1)) * W;
-    const y = H - ((p.price - min) / range) * H;
+    const y = H - ((p.sell - min) / range) * H;
     return [x, y] as const;
   });
   const path = coords.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
