@@ -46,6 +46,21 @@ export default function PriceTicker({
   const { data, stale } = useLivePrices(initialData, select);
   const flashKeys = usePriceFlash(data.items);
 
+  // Izgara sütun sayısı öğe sayısına göre: sabit 4 sütun bırakılırsa 3
+  // öğelik listelerde (örn. Yurtdışı Para Birimleri) sağda boş bir hücre
+  // kalıyordu. Tailwind JIT'in sınıfı üretebilmesi için olası değerler
+  // burada literal olarak yazılmalı (dinamik string interpolasyonu
+  // taranamaz).
+  const itemCount = data.items.length;
+  const gridClass =
+    itemCount === 3
+      ? "grid-cols-3"
+      : itemCount === 2
+        ? "grid-cols-2"
+        : itemCount === 1
+          ? "grid-cols-1"
+          : "grid-cols-2 sm:grid-cols-4";
+
   return (
     <div className="rounded-2xl border border-border bg-surface shadow-sm">
       <div className="flex items-center justify-between gap-3 border-b border-border px-5 py-3">
@@ -64,7 +79,7 @@ export default function PriceTicker({
           </span>
         </span>
       </div>
-      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-b-2xl bg-border sm:grid-cols-4">
+      <div className={"grid gap-px overflow-hidden rounded-b-2xl bg-border " + gridClass}>
         {data.items.map((item) => {
           const isUp = item.changePercent >= 0;
           const flash = flashKeys[item.key];
