@@ -70,7 +70,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
       className={`${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-stone-50 font-sans text-stone-900 dark:bg-stone-950 dark:text-stone-100">
+      <body className="min-h-full flex flex-col bg-bg font-sans text-ink [font-variant-numeric:tabular-nums]">
         <Script
           id="theme-init"
           strategy="beforeInteractive"
