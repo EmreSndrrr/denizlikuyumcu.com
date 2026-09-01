@@ -37,6 +37,8 @@ export default function KuyumcularPage() {
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {sorted.map((j, i) => (
             <Reveal key={j.id} delay={i * 0.04}>
+              {/* Bu sayfada aradaki h2 yok (doğrudan h1 altında) — isim
+                  h1 -> h3 atlamasın diye h2 olarak veriliyor. */}
               <JewelerProfileCard
                 name={j.name}
                 district={j.district}
@@ -44,6 +46,7 @@ export default function KuyumcularPage() {
                 tag={j.featured ? "Öne Çıkan" : undefined}
                 isDemo={j.isDemo}
                 phone={j.phone}
+                headingLevel="h2"
               />
             </Reveal>
           ))}

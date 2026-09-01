@@ -10,8 +10,14 @@ import Reveal from "@/components/Reveal";
 // /rehber dizin sayfası bunu kullanıyor.
 export default function GuideList({
   items,
+  // Anasayfada bu liste bir <SectionHeading> (h2) altında oturuyor,
+  // öğe başlıkları h3 olmalı. /rehber dizin sayfasında ise doğrudan
+  // sayfanın h1'inin altında — orada h2 geçilirse (h1 -> h3) hiyerarşi
+  // atlanmış olur, bu yüzden çağıran taraf headingLevel="h2" geçebiliyor.
+  headingLevel: Heading = "h3",
 }: {
   items: { no: string; category: string; href: string; title: string; desc: string }[];
+  headingLevel?: "h2" | "h3";
 }) {
   return (
     <div className="mt-6 divide-y divide-border border-y border-border">
@@ -28,9 +34,13 @@ export default function GuideList({
               <span className="text-[11px] font-semibold uppercase tracking-wide text-brand">
                 {item.category}
               </span>
-              <p className="mt-1 font-serif text-lg font-medium text-ink transition-colors group-hover:text-brand sm:text-xl">
+              {/* Liste tekrar eden makale öğelerinden oluşuyor — başlık
+                  gezinmesi yapan ekran okuyucu kullanıcıları aralarında
+                  atlayabilsin diye gerçek bir heading (seviyesi çağıran
+                  sayfanın kendi hiyerarşisine göre değişir). */}
+              <Heading className="mt-1 font-serif text-lg font-medium text-ink transition-colors group-hover:text-brand sm:text-xl">
                 {item.title}
-              </p>
+              </Heading>
               <p className="mt-1 text-sm text-muted">{item.desc}</p>
             </div>
             <ArrowRight

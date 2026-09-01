@@ -45,7 +45,9 @@ export default function RehberIndexPage() {
       <p className="mt-3 max-w-xl text-muted">
         Altın almadan veya satmadan önce bilmeniz gereken temel konular.
       </p>
-      <GuideList items={guides} />
+      {/* Bu sayfada aradaki h2 yok (doğrudan h1 altında) — öğe
+          başlıkları h1 -> h3 atlamasın diye h2 olarak veriliyor. */}
+      <GuideList items={guides} headingLevel="h2" />
     </div>
   );
 }

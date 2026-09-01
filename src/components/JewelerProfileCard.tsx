@@ -16,6 +16,10 @@ export default function JewelerProfileCard({
   phone,
   openNow,
   profileHref,
+  // Anasayfada bu kart bir <SectionHeading> (h2) altında oturuyor, isim
+  // h3 olmalı. /kuyumcular sayfasında doğrudan h1'in altında — orada
+  // h2 verilmezse h1 -> h3 atlanmış olur.
+  headingLevel: Heading = "h3",
 }: {
   name: string;
   district: string;
@@ -28,6 +32,7 @@ export default function JewelerProfileCard({
   openNow?: boolean;
   // Kuyumcunun kendi sitesi/profili gibi harici bir bağlantı varsa.
   profileHref?: string;
+  headingLevel?: "h2" | "h3";
 }) {
   const monogram = name.trim().charAt(0).toUpperCase() || "K";
   const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
@@ -51,7 +56,11 @@ export default function JewelerProfileCard({
               {tag}
             </p>
           )}
-          <p className="mt-0.5 truncate font-bold text-ink">{name}</p>
+          {/* h3: kartlar tekrar eden bir liste oluşturuyor (öne çıkan
+              kuyumcular ızgarası, /kuyumcular dizini) — başlık gezinmesi
+              yapan ekran okuyucu kullanıcıları kartlar arasında
+              atlayabilsin diye gerçek bir heading. */}
+          <Heading className="mt-0.5 truncate font-bold text-ink">{name}</Heading>
           <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
             <span className="flex items-center gap-1">
               <MapPin aria-hidden="true" size={12} weight="bold" />
