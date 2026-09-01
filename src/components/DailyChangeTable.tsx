@@ -29,8 +29,11 @@ export default function DailyChangeTable({
   return (
     <div className="rounded-2xl border border-border bg-surface shadow-sm">
       <div className="flex items-center justify-between gap-2 border-b border-border px-5 py-3">
-        {/* Sayfa-seviyesi <SectionHeading> zaten bu bölümün h2'si. */}
-        <p className="text-sm font-semibold text-ink">Günlük Değişim</p>
+        {/* h3: bu bileşen artık kendi SectionHeading'i olmayan bir
+            konumda (Grafik bölümünün yanında) — GoldPriceChart'ın kendi
+            h3'üyle aynı hiyerarşi seviyesinde, başlık gezinmesinde
+            görünsün diye gerçek bir heading elementi. */}
+        <h3 className="text-sm font-semibold text-ink">Günlük Değişim</h3>
         <span className="flex items-center gap-2 text-xs text-muted">
           {stale && <StaleBadge />}
           {formatTime(data.updatedAt)} itibarıyla
