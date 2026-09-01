@@ -4,6 +4,7 @@ import type { GoldHistoryPoint, PriceSnapshot } from "@/lib/prices";
 import { priceContent, type PriceContentEntry } from "@/lib/priceContent";
 import PriceDetailCard from "@/components/PriceDetailCard";
 import PriceItemCalculator from "@/components/PriceItemCalculator";
+import AdSlot from "@/components/AdSlot";
 
 // /altin/[slug] ve /doviz/[slug] sayfalarının ORTAK şablonu — Server
 // Component (canlı fiyat kartı hariç her şey sunucuda render edilir, SEO
@@ -77,8 +78,9 @@ export default function PriceDetailPage({
           {/* Sadece mobilde/dar ekranda kart, başlığın hemen altında —
               sağ sütun lg'de görünmeye başladığında burada tekrar
               gösterilmiyor (bkz. aşağıdaki lg:hidden). */}
-          <div className="mt-6 max-w-md lg:hidden">
+          <div className="mt-6 max-w-md space-y-4 lg:hidden">
             <PriceDetailCard itemKey={entry.key} initialData={initialData} history={history} />
+            <AdSlot position="sidebar" />
           </div>
 
           <article className="prose prose-stone dark:prose-invert mt-8 max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-brand">
@@ -104,10 +106,14 @@ export default function PriceDetailPage({
           </p>
         </div>
 
-        {/* Masaüstünde sağ sütunda sabit, sticky bir kart — kullanıcı SEO
-            metnini okurken fiyat her zaman görünür kalır. */}
-        <div className="hidden lg:sticky lg:top-24 lg:block">
+        {/* Masaüstünde sağ sütunda sabit, sticky bir blok — kullanıcı SEO
+            metnini okurken fiyat her zaman görünür kalır. Reklam alanı,
+            fiyat sayfalarının hiç kullanmadığı (bkz. lib/ads.ts) "sidebar"
+            pozisyonunu kullanıyor; Reklam Ver'deki "fiyat sayfalarında
+            görünürlük" vaadiyle tutarlı hale getiriyor. */}
+        <div className="hidden space-y-4 lg:sticky lg:top-24 lg:block">
           <PriceDetailCard itemKey={entry.key} initialData={initialData} history={history} />
+          <AdSlot position="sidebar" />
         </div>
       </div>
 
