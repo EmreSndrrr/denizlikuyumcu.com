@@ -57,6 +57,11 @@ güncel hissettiren fiyat gösterimi önemlidir.
   dönüşecek şekilde tasarlanmalı (zaten uygulanmış bir prensip).
 - Fiyatların "bilgilendirme amaçlıdır, yatırım tavsiyesi değildir"
   uyarısıyla sunulması gerekiyor — hukuki/güven gerekliliği.
+- Kuyumcu haritası (interaktif/embed) **bilinçli olarak yapılmadı**:
+  `lib/jewelers.ts`'deki kayıtlarda adres/koordinat yok, hepsi demo veri.
+  Gerçek kuyumcu kayıtları (gerçek adres/koordinatlarla) eklendiğinde
+  tekrar gündeme gelecek bir açık madde — kullanıcı onayladı (bkz. konuşma
+  geçmişi).
 
 ## Brand Commitments
 
