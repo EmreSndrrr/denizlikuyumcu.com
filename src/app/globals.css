@@ -1,6 +1,24 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* --- Boşluk ve köşe yuvarlaklığı sistemi (2026 tasarım briefi) ---
+   Bunlar Tailwind @theme token'ı DEĞİL (Tailwind'in kendi p, gap vb.
+   ölçeği zaten bu değerleri karşılıyor) — burada sadece PROJE KURALI
+   olarak belgeleniyor, yeni kod yazarken referans alınsın diye:
+
+   Boşluk (margin/padding/gap) SADECE şu adımlardan seçilir:
+     4, 8, 12, 16, 24, 32, 48, 64, 96 (px)  ->  Tailwind: 1, 2, 3, 4, 6, 8, 12, 16, 24
+   İstisna: ikon+metin gibi çok ince hizalama nüansları için 2px (0.5
+   birim) kullanılabilir — bu "spacing sistemi" kapsamı dışında, saf
+   optik bir düzeltmedir.
+
+   Köşe yuvarlaklığı üç seviyeli:
+     - Küçük kontroller/inputlar: 10px  -> rounded-[10px]
+     - Veri kartları ve tablolar: 16px  -> rounded-2xl
+     - Hero ve öne çıkan alanlar: 24px  -> rounded-[24px] / rounded-3xl
+   Kapsül butonlar (rounded-full) bu sisteme dahil değil — segmented
+   control / chip / birincil CTA gibi kendine özgü bir örüntü. */
+
 /* .dark sınıfı <html>'e elle (ThemeToggle ile) eklenir/çıkarılır — bu satır
    olmadan Tailwind v4'ün dark: varyantı sadece işletim sistemi tercihini
    dinler, elle geçiş yapılamaz. */

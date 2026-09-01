@@ -71,14 +71,14 @@ export default function PriceTicker({
 
   return (
     <div className="rounded-2xl border border-border bg-surface shadow-sm">
-      <div className="flex items-center justify-between gap-3 border-b border-border px-5 py-3">
+      <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3">
         <h2 className="text-sm font-semibold text-ink">{title}</h2>
         {/* Görsel olarak dekoratif bir zaman damgası; her 60 saniyede bir
             değiştiği için aria-live yapmıyoruz — aksi halde ekran okuyucu
             kullanıcıları dakikada bir gereksiz yere kesintiye uğrardı. */}
         <span className="flex items-center gap-2 text-xs text-muted">
           {stale && <StaleBadge />}
-          <span className="flex items-center gap-1.5">
+          <span className="flex items-center gap-2">
             <span
               aria-hidden="true"
               className="h-1.5 w-1.5 rounded-full bg-positive animate-pulse motion-reduce:animate-none"
@@ -131,7 +131,7 @@ export default function PriceTicker({
           );
         })}
       </div>
-      <p className="px-5 py-2 text-[11px] text-muted/70">
+      <p className="px-4 py-2 text-[11px] text-muted/70">
         Fiyatlar bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.
       </p>
     </div>

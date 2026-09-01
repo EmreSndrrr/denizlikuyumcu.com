@@ -53,7 +53,7 @@ export default function GoldCalculator({
 
   return (
     <div className="rounded-2xl border border-border bg-surface shadow-sm">
-      <div className="flex items-center justify-between gap-2 border-b border-border px-5 py-4">
+      <div className="flex items-center justify-between gap-2 border-b border-border px-4 py-4">
         <div className="flex items-center gap-2">
           <Calculator aria-hidden="true" size={20} weight="bold" className="text-brand" />
           {/* Sayfa-seviyesi <SectionHeading> zaten bu bölümün h2'si — burada
@@ -63,7 +63,7 @@ export default function GoldCalculator({
         {stale && <StaleBadge />}
       </div>
 
-      <div className="p-5">
+      <div className="p-4">
         {/* Mod seçimi */}
         <div
           role="tablist"
@@ -76,7 +76,7 @@ export default function GoldCalculator({
             aria-selected={mode === "product"}
             onClick={() => setMode("product")}
             className={
-              "rounded-full px-4 py-1.5 text-sm font-medium transition-all active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand " +
+              "rounded-full px-4 py-2 text-sm font-medium transition-all active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand " +
               (mode === "product" ? "bg-ink text-surface" : "text-muted hover:text-ink")
             }
           >
@@ -88,7 +88,7 @@ export default function GoldCalculator({
             aria-selected={mode === "karat"}
             onClick={() => setMode("karat")}
             className={
-              "rounded-full px-4 py-1.5 text-sm font-medium transition-all active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand " +
+              "rounded-full px-4 py-2 text-sm font-medium transition-all active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand " +
               (mode === "karat" ? "bg-ink text-surface" : "text-muted hover:text-ink")
             }
           >
@@ -99,9 +99,9 @@ export default function GoldCalculator({
         {/* Alış / Satış seçimi — her iki modda da geçerli */}
         <fieldset className="mt-4">
           <legend className="text-xs font-medium text-muted">Fiyat türü</legend>
-          <div className="mt-1.5 flex gap-4 text-sm text-ink">
+          <div className="mt-2 flex gap-4 text-sm text-ink">
             {(["sell", "buy"] as const).map((side) => (
-              <label key={side} className="flex items-center gap-1.5">
+              <label key={side} className="flex items-center gap-2">
                 <input
                   type="radio"
                   name="price-side"
@@ -116,7 +116,7 @@ export default function GoldCalculator({
         </fieldset>
 
         {mode === "product" ? (
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <div>
               <label htmlFor="calc-product" className="text-xs font-medium text-muted">
                 Ürün / Kur
@@ -125,7 +125,7 @@ export default function GoldCalculator({
                 id="calc-product"
                 value={selectedKey}
                 onChange={(e) => setSelectedKey(e.target.value)}
-                className="mt-1.5 min-h-11 w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
+                className="mt-2 min-h-11 w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
               >
                 {data.items.map((item) => (
                   <option key={item.key} value={item.key}>
@@ -146,12 +146,12 @@ export default function GoldCalculator({
                 step="0.01"
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
-                className="mt-1.5 min-h-11 w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-sm tabular-nums text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
+                className="mt-2 min-h-11 w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-sm tabular-nums text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
               />
             </div>
           </div>
         ) : (
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <div>
               <label htmlFor="calc-grams" className="text-xs font-medium text-muted">
                 Gram
@@ -164,7 +164,7 @@ export default function GoldCalculator({
                 step="0.01"
                 value={grams}
                 onChange={(e) => setGrams(e.target.value)}
-                className="mt-1.5 min-h-11 w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-sm tabular-nums text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
+                className="mt-2 min-h-11 w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-sm tabular-nums text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
               />
             </div>
             <div>
@@ -177,7 +177,7 @@ export default function GoldCalculator({
                 onChange={(e) =>
                   setKarat(Number(e.target.value) as keyof typeof KARAT_MILYEM)
                 }
-                className="mt-1.5 min-h-11 w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
+                className="mt-2 min-h-11 w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
               >
                 <option value={24}>24 Ayar (Has)</option>
                 <option value={22}>22 Ayar</option>
@@ -190,7 +190,7 @@ export default function GoldCalculator({
 
         {/* Sonuç — aria-live="polite": kullanıcı adet/ayar değiştirdiğinde
             ekran okuyucu yeni tutarı otomatik duyursun diye. */}
-        <div className="mt-5 rounded-2xl bg-gold-surface/60 p-4">
+        <div className="mt-4 rounded-2xl bg-gold-surface/60 p-4">
           <p className="text-xs text-muted">Tahmini tutar</p>
           <p aria-live="polite" className="mt-1 text-2xl font-extrabold tabular-nums text-ink">
             {mode === "product"

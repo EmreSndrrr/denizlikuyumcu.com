@@ -88,7 +88,7 @@ export default async function HomePage() {
             />
           </svg>
 
-          <div className="relative grid gap-8 p-6 sm:p-10 lg:grid-cols-2 lg:items-center lg:gap-12 lg:p-14">
+          <div className="relative grid gap-8 p-6 sm:p-8 lg:grid-cols-2 lg:items-center lg:gap-12 lg:p-16">
             <div>
               <h1 className="max-w-lg text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl">
                 Denizli altın piyasası, tek ekranda.
@@ -99,14 +99,14 @@ export default async function HomePage() {
               <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
                 <a
                   href="#altin-fiyatlari"
-                  className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98]"
+                  className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-3 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98]"
                 >
                   Altın fiyatlarını incele
                   <ArrowRight aria-hidden="true" size={16} />
                 </a>
                 <Link
                   href="/kuyumcular"
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-semibold text-ink transition-all hover:border-brand hover:text-brand active:scale-[0.98]"
+                  className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-3 text-sm font-semibold text-ink transition-all hover:border-brand hover:text-brand active:scale-[0.98]"
                 >
                   <MapPin aria-hidden="true" size={16} weight="bold" />
                   Yakındaki kuyumcuları bul
@@ -175,7 +175,7 @@ export default async function HomePage() {
         />
 
         {featuredJewelers.length > 0 ? (
-          <div className="mt-6 grid gap-5 sm:grid-cols-3">
+          <div className="mt-6 grid gap-4 sm:grid-cols-3">
             {featuredJewelers.map((j, i) => (
               <Reveal key={j.id} delay={i * 0.05}>
                 <JewelerProfileCard
@@ -214,7 +214,7 @@ export default async function HomePage() {
 
       <section id="grafik" className="mx-auto max-w-[1240px] px-4 pb-16">
         <SectionHeading title="Altın Fiyatları Grafiği" />
-        <div className="mt-6 grid gap-5 lg:grid-cols-[1fr_360px] lg:items-start">
+        <div className="mt-6 grid gap-4 lg:grid-cols-[1fr_360px] lg:items-start">
           <GoldPriceChart history={goldHistory} />
           {/* Grafiğin yanında, "bugün kimler hareketlendi" detayının tam
               listesi — DailyMarketSummary'nin (hero altı) kısa özetini

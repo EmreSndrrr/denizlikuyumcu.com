@@ -25,7 +25,7 @@ export default function GuideArticle({
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10">
+    <div className="mx-auto max-w-3xl px-4 py-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -52,7 +52,7 @@ export default function GuideArticle({
         {children}
       </article>
 
-      <p className="mt-10 rounded-lg border border-border bg-gold/10 p-4 text-sm text-muted">
+      <p className="mt-8 rounded-2xl border border-border bg-gold-surface/60 p-4 text-sm text-muted">
         Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.
         Güncel fiyatlar için{" "}
         <Link href="/" className="font-medium text-brand hover:underline">

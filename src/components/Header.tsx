@@ -119,7 +119,7 @@ export default function Header() {
       <div
         className={
           "mx-auto flex max-w-[1240px] items-center justify-between gap-4 px-4 transition-[padding] duration-200 " +
-          (scrolled ? "py-2.5" : "py-4")
+          (scrolled ? "py-2" : "py-4")
         }
       >
         <Link
@@ -134,7 +134,7 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="hidden gap-5 text-sm font-medium text-muted lg:flex">
+        <nav className="hidden gap-4 text-sm font-medium text-muted lg:flex">
           {navLinks.map((link) => {
             const isAnchor = link.href.includes("#");
             const isActive = isAnchor
@@ -178,7 +178,7 @@ export default function Header() {
           </Link>
           <Link
             href="/kuyumcular"
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-ink px-4 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-4 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
           >
             <MapPin aria-hidden="true" size={15} weight="bold" />
             <span className="hidden sm:inline">Kuyumcu Bul</span>
@@ -251,7 +251,7 @@ export default function Header() {
                   <ThemeToggle variant="row" />
                 </li>
               </ul>
-              <div className="mt-4 flex flex-col gap-2.5 border-t border-border pt-4">
+              <div className="mt-4 flex flex-col gap-3 border-t border-border pt-4">
                 <Link
                   href="/reklam-ver"
                   onClick={() => setMenuOpen(false)}
@@ -262,7 +262,7 @@ export default function Header() {
                 <Link
                   href="/kuyumcular"
                   onClick={() => setMenuOpen(false)}
-                  className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full bg-ink px-4 py-3 text-sm font-semibold text-surface transition-colors hover:bg-brand"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-ink px-4 py-3 text-sm font-semibold text-surface transition-colors hover:bg-brand"
                 >
                   <MapPin aria-hidden="true" size={15} weight="bold" />
                   Kuyumcu Bul

@@ -23,9 +23,9 @@ export default function OnsAltinCard({
   const isUp = ons.changePercent >= 0;
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-border bg-surface p-5 shadow-sm">
+    <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-border bg-surface p-4 shadow-sm">
       <div className="flex items-center gap-3">
-        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold/15 text-brand">
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold-surface text-brand">
           <Globe aria-hidden="true" size={22} weight="bold" />
         </span>
         <div>

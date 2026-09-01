@@ -19,7 +19,7 @@ export default function GuideList({
         <Reveal key={item.href} delay={i * 0.04}>
           <Link
             href={item.href}
-            className="group flex items-start gap-4 py-5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand sm:items-center sm:gap-6"
+            className="group flex items-start gap-4 py-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand sm:items-center sm:gap-6"
           >
             <span className="hidden shrink-0 font-serif text-2xl text-muted/40 sm:block">
               {item.no}

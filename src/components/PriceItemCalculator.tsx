@@ -41,17 +41,17 @@ export default function PriceItemCalculator({
 
   return (
     <div className="rounded-2xl border border-border bg-surface shadow-sm">
-      <div className="flex items-center gap-2 border-b border-border px-5 py-4">
+      <div className="flex items-center gap-2 border-b border-border px-4 py-4">
         <Calculator aria-hidden="true" size={20} weight="bold" className="text-brand" />
         <p className="text-base font-semibold text-ink">{item.label} Hesaplama</p>
       </div>
 
-      <div className="p-5">
+      <div className="p-4">
         <fieldset>
           <legend className="text-xs font-medium text-muted">Fiyat türü</legend>
-          <div className="mt-1.5 flex gap-4 text-sm text-ink">
+          <div className="mt-2 flex gap-4 text-sm text-ink">
             {(["sell", "buy"] as const).map((side) => (
-              <label key={side} className="flex items-center gap-1.5">
+              <label key={side} className="flex items-center gap-2">
                 <input
                   type="radio"
                   name={`price-side-${item.key}`}
@@ -77,11 +77,11 @@ export default function PriceItemCalculator({
             step="0.01"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
-            className="mt-1.5 min-h-11 w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-sm tabular-nums text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
+            className="mt-2 min-h-11 w-full rounded-[10px] border border-border bg-surface px-3 py-2 text-sm tabular-nums text-ink focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand"
           />
         </div>
 
-        <div className="mt-5 rounded-2xl bg-gold-surface/60 p-4">
+        <div className="mt-4 rounded-2xl bg-gold-surface/60 p-4">
           <p className="text-xs text-muted">Tahmini tutar</p>
           <p aria-live="polite" className="mt-1 text-2xl font-extrabold tabular-nums text-ink">
             {result !== null ? `${format(result)} ${isUsd ? "USD" : item.unit}` : "—"}

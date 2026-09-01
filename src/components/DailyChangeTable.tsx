@@ -28,7 +28,7 @@ export default function DailyChangeTable({
 
   return (
     <div className="rounded-2xl border border-border bg-surface shadow-sm">
-      <div className="flex items-center justify-between gap-2 border-b border-border px-5 py-3">
+      <div className="flex items-center justify-between gap-2 border-b border-border px-4 py-3">
         {/* h3: bu bileşen artık kendi SectionHeading'i olmayan bir
             konumda (Grafik bölümünün yanında) — GoldPriceChart'ın kendi
             h3'üyle aynı hiyerarşi seviyesinde, başlık gezinmesinde
@@ -57,10 +57,10 @@ function ChangeList({
   tone: "up" | "down";
 }) {
   return (
-    <div className="p-5">
+    <div className="p-4">
       <p
         className={
-          "flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide " +
+          "flex items-center gap-2 text-xs font-semibold uppercase tracking-wide " +
           (tone === "up" ? "text-positive" : "text-negative")
         }
       >
@@ -71,7 +71,7 @@ function ChangeList({
         )}
         {title}
       </p>
-      <ol className="mt-3 space-y-2.5">
+      <ol className="mt-3 space-y-3">
         {items.map((item, i) => {
           const href = getPriceHref(item.key);
           return (

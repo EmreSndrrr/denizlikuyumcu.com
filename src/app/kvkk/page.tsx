@@ -15,9 +15,9 @@ export default function KvkkPage() {
         (&quot;KVKK&quot;) kapsamında ziyaretçileri bilgilendirmek amacıyla
         hazırlanmıştır.
       </p>
-      <div className="not-prose my-6 rounded-xl border border-border bg-gold/10 p-4 text-sm text-muted">
+      <div className="not-prose my-6 rounded-2xl border border-border bg-gold-surface/60 p-4 text-sm text-muted">
         <p className="font-semibold text-ink">Veri sorumlusu bilgisi — güncelleniyor</p>
-        <p className="mt-1.5">
+        <p className="mt-2">
           DenizliKuyumcu.com şu an bireysel bir proje olarak yürütülmektedir
           ve henüz tescilli bir şirket unvanı, adresi ve vergi kimlik
           numarası bu metne eklenmemiştir. Bu bilgiler netleştiğinde

@@ -24,7 +24,7 @@ function MarqueeItem({ item, duplicate }: { item: PriceItem; duplicate?: boolean
   const isUp = item.changePercent >= 0;
   return (
     <div
-      className="flex shrink-0 items-center gap-2 px-5 py-2 text-xs"
+      className="flex shrink-0 items-center gap-2 px-4 py-2 text-xs"
       // İçerik iki kez basılıyor (kusursuz döngü için); ikinci kopya ekran
       // okuyucu için tekrar okunmasın diye gizleniyor.
       aria-hidden={duplicate ? "true" : undefined}

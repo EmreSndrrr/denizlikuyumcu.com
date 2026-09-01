@@ -127,7 +127,7 @@ export default function GoldPriceChart({
 
   return (
     <div className="overflow-hidden rounded-2xl border border-white/10 bg-surface-dark shadow-sm">
-      <div className="flex flex-wrap items-start justify-between gap-4 px-5 pt-5">
+      <div className="flex flex-wrap items-start justify-between gap-4 px-4 pt-4">
         <div>
           <h3 className="text-sm font-semibold text-white/70">
             Gram Altın Fiyat Grafiği
@@ -337,7 +337,7 @@ export default function GoldPriceChart({
 
           {hovered && tooltipLeftPct !== null && (
             <div
-              className="pointer-events-none absolute top-2 -translate-x-1/2 rounded-lg border border-white/15 bg-black/80 px-3 py-1.5 text-xs shadow-lg backdrop-blur"
+              className="pointer-events-none absolute top-2 -translate-x-1/2 rounded-[10px] border border-white/15 bg-black/80 px-3 py-2 text-xs shadow-lg backdrop-blur"
               style={{ left: `${tooltipLeftPct}%` }}
             >
               <p className="font-medium text-white/60">
@@ -356,7 +356,7 @@ export default function GoldPriceChart({
         <span>{last && formatShortDate(last.date, period)}</span>
       </div>
 
-      <p className="border-t border-white/10 px-5 py-3 text-[11px] text-white/30">
+      <p className="border-t border-white/10 px-4 py-3 text-[11px] text-white/30">
         Geçmiş fiyat verisi bilgilendirme amaçlıdır; gerçek piyasa
         geçmişini birebir yansıtmayabilir.
       </p>

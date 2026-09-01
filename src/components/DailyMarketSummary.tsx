@@ -28,7 +28,7 @@ export default function DailyMarketSummary({
   if (!topGainer || !topLoser) return null;
 
   return (
-    <div className="rounded-2xl border border-border bg-surface px-5 py-4 shadow-sm">
+    <div className="rounded-2xl border border-border bg-surface px-4 py-4 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-sm font-semibold text-ink">Bugün ne değişti?</p>
         <span className="flex items-center gap-2 text-xs text-muted">

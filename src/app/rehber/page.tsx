@@ -40,7 +40,7 @@ const guides = [
 
 export default function RehberIndexPage() {
   return (
-    <div className="mx-auto max-w-[1240px] px-4 py-14">
+    <div className="mx-auto max-w-[1240px] px-4 py-12">
       <h1 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">Rehber</h1>
       <p className="mt-3 max-w-xl text-muted">
         Altın almadan veya satmadan önce bilmeniz gereken temel konular.

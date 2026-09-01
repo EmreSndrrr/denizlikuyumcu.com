@@ -16,7 +16,7 @@ export default function KuyumcularPage() {
   );
 
   return (
-    <div className="mx-auto max-w-[1240px] px-4 py-14">
+    <div className="mx-auto max-w-[1240px] px-4 py-12">
       <h1 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
         Denizli Kuyumcuları
       </h1>
@@ -34,7 +34,7 @@ export default function KuyumcularPage() {
           Henüz kayıtlı kuyumcu yok.
         </div>
       ) : (
-        <div className="mt-8 grid gap-5 sm:grid-cols-2">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {sorted.map((j, i) => (
             <Reveal key={j.id} delay={i * 0.04}>
               <JewelerProfileCard

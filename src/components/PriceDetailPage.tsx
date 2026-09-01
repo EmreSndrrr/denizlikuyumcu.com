@@ -49,14 +49,14 @@ export default function PriceDetailPage({
   };
 
   return (
-    <div className="mx-auto max-w-[1240px] px-4 py-10">
+    <div className="mx-auto max-w-[1240px] px-4 py-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       {/* Breadcrumb — hem kullanıcı yönelimi hem de arama motorları için. */}
-      <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-xs text-muted">
+      <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-muted">
         <Link href="/" className="hover:text-brand">
           Anasayfa
         </Link>
@@ -96,7 +96,7 @@ export default function PriceDetailPage({
             <PriceItemCalculator itemKey={entry.key} initialData={initialData} />
           </div>
 
-          <p className="mt-8 rounded-lg border border-border bg-gold/10 p-4 text-sm text-muted">
+          <p className="mt-8 rounded-2xl border border-border bg-gold-surface/60 p-4 text-sm text-muted">
             Fiyatlar bilgilendirme amaçlıdır, yatırım tavsiyesi değildir ve
             gecikmeli olabilir. Kesin alım-satım fiyatı için{" "}
             <Link href="/kuyumcular" className="font-medium text-brand hover:underline">
@@ -127,7 +127,7 @@ export default function PriceDetailPage({
               <Link
                 key={r.key}
                 href={`/${r.category}/${r.slug}`}
-                className="rounded-full border border-border bg-surface px-3.5 py-1.5 text-sm text-ink transition-colors hover:border-brand hover:text-brand"
+                className="rounded-full border border-border bg-surface px-3 py-2 text-sm text-ink transition-colors hover:border-brand hover:text-brand"
               >
                 {r.h1.replace(/^Denizli /, "").replace(/ Fiyatı.*$/, "").replace(/ Kuru.*$/, "")}
               </Link>

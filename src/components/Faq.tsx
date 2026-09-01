@@ -35,7 +35,7 @@ export default function Faq() {
       {/* Brief'te istenen "veri güvenilirliği" notu — SSS'nin hemen
           yanında, fiyatların kaynağı/gecikmesi hakkında kısa bir
           şeffaflık bloğu. */}
-      <div className="mt-6 flex max-w-3xl gap-3 rounded-2xl border border-border bg-surface p-5">
+      <div className="mt-6 flex max-w-3xl gap-3 rounded-2xl border border-border bg-surface p-4">
         <ShieldCheck
           aria-hidden="true"
           size={20}

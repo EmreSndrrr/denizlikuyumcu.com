@@ -40,7 +40,7 @@ export default function SectionHeading({
         <h2 className="text-2xl font-extrabold tracking-tight text-ink sm:text-[28px]">
           {title}
         </h2>
-        {subtitle && <p className="mt-1.5 text-sm text-muted">{subtitle}</p>}
+        {subtitle && <p className="mt-2 text-sm text-muted">{subtitle}</p>}
       </div>
       {action && (
         <Link

@@ -35,7 +35,7 @@ export default function JewelerProfileCard({
   )}`;
 
   return (
-    <div className="flex h-full flex-col rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/40">
+    <div className="flex h-full flex-col rounded-2xl border border-border bg-surface p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/40">
       <div className="flex items-start gap-4">
         {/* Gerçek görsel yoksa monogram/marka yüzeyi — rastgele stok
             kuyumcu fotoğrafı KULLANILMIYOR (brief). */}
@@ -90,7 +90,7 @@ export default function JewelerProfileCard({
             href={profileHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-[10px] bg-ink px-3 py-1.5 text-xs font-semibold text-surface transition-colors hover:bg-brand"
+            className="inline-flex items-center gap-2 rounded-[10px] bg-ink px-3 py-2 text-xs font-semibold text-surface transition-colors hover:bg-brand"
           >
             Profili İncele
             <ArrowUpRight aria-hidden="true" size={13} weight="bold" />
@@ -100,7 +100,7 @@ export default function JewelerProfileCard({
           href={mapsHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 rounded-[10px] border border-border px-3 py-1.5 text-xs font-semibold text-ink transition-colors hover:border-brand hover:text-brand"
+          className="inline-flex items-center gap-2 rounded-[10px] border border-border px-3 py-2 text-xs font-semibold text-ink transition-colors hover:border-brand hover:text-brand"
         >
           <NavigationArrow aria-hidden="true" size={13} weight="bold" />
           Yol Tarifi
@@ -108,7 +108,7 @@ export default function JewelerProfileCard({
         {phone && (
           <a
             href={`tel:${phone.replace(/\s+/g, "")}`}
-            className="inline-flex items-center gap-1.5 rounded-[10px] border border-border px-3 py-1.5 text-xs font-semibold text-ink transition-colors hover:border-brand hover:text-brand"
+            className="inline-flex items-center gap-2 rounded-[10px] border border-border px-3 py-2 text-xs font-semibold text-ink transition-colors hover:border-brand hover:text-brand"
           >
             <Phone aria-hidden="true" size={13} weight="bold" />
             Ara

@@ -138,7 +138,7 @@ export default function GoldVarietiesTable({
 
   return (
     <div className="rounded-2xl border border-border bg-surface shadow-sm">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-3">
         {/* Sayfa-seviyesi <SectionHeading> zaten bu bölümün h2'si. */}
         <p className="text-sm font-semibold text-ink">Tüm Altın Çeşitleri</p>
         <span className="flex items-center gap-2 text-xs text-muted">
@@ -148,7 +148,7 @@ export default function GoldVarietiesTable({
       </div>
 
       {/* Arama + kategori filtreleri */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-border px-5 py-3">
+      <div className="flex flex-wrap items-center gap-2 border-b border-border px-4 py-3">
         <div className="flex min-w-[160px] flex-1 items-center gap-2 rounded-[10px] border border-border px-3 py-2">
           <MagnifyingGlass aria-hidden="true" size={14} className="text-muted" />
           <input
@@ -159,7 +159,7 @@ export default function GoldVarietiesTable({
             className="w-full bg-transparent text-sm text-ink outline-none placeholder:text-muted"
           />
         </div>
-        <div className="flex gap-1.5">
+        <div className="flex gap-2">
           {([
             { key: "all", label: "Tümü" },
             { key: "gram", label: "Gram" },
@@ -241,7 +241,7 @@ export default function GoldVarietiesTable({
                       sortKey === col.key ? (sortDesc ? "descending" : "ascending") : "none"
                     }
                     className={
-                      "px-3 py-2 font-medium sm:px-5 " +
+                      "px-3 py-2 font-medium sm:px-4 " +
                       (hiddenOnMobile ? "hidden sm:table-cell" : "")
                     }
                   >
@@ -269,7 +269,7 @@ export default function GoldVarietiesTable({
           <tbody className="divide-y divide-border">
             {sorted.length === 0 ? (
               <tr>
-                <td colSpan={5} className="px-5 py-8 text-center text-sm text-muted">
+                <td colSpan={5} className="px-4 py-8 text-center text-sm text-muted">
                   Sonuç bulunamadı.
                 </td>
               </tr>
@@ -293,7 +293,7 @@ export default function GoldVarietiesTable({
           </tbody>
         </table>
       </div>
-      <p className="px-5 py-3 text-[11px] text-muted/70">
+      <p className="px-4 py-3 text-[11px] text-muted/70">
         Fiyatlar bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Bir
         satıra tıklayarak 7 günlük mini grafiğini görebilir, sütun
         başlıklarına tıklayarak sıralayabilirsiniz.
@@ -334,7 +334,7 @@ function GoldRow({
           (flash === "up" ? "price-flash-up" : flash === "down" ? "price-flash-down" : "")
         }
       >
-        <td className="px-1 py-1.5 sm:px-2">
+        <td className="px-1 py-2 sm:px-2">
           {/* Tıklanabilir alan brief'e göre büyütüldü (önceden 24px) —
               görsel yıldız küçük kalsa da buton kutusu artık daha geniş. */}
           <button
@@ -350,8 +350,8 @@ function GoldRow({
             <Star aria-hidden="true" size={16} weight={isFavorite ? "fill" : "regular"} className={isFavorite ? "text-gold" : ""} />
           </button>
         </td>
-        <td className="whitespace-nowrap px-3 py-3 font-medium text-ink sm:px-5">
-          <div className="flex items-center gap-1.5">
+        <td className="whitespace-nowrap px-3 py-3 font-medium text-ink sm:px-4">
+          <div className="flex items-center gap-2">
             {/* Satırı genişletmenin GERÇEK, klavyeyle erişilebilir kontrolü
                 bu buton — <tr>'a onClick koymak fare dışı kullanıcıları
                 dışlardı. 7 günlük mini grafiği burada, ürün adı ise ayrı
@@ -384,7 +384,7 @@ function GoldRow({
         </td>
         <td
           className={
-            "px-3 py-3 text-right tabular-nums text-muted sm:px-5 " +
+            "px-3 py-3 text-right tabular-nums text-muted sm:px-4 " +
             (mobilePriceView !== "buy" ? "hidden sm:table-cell" : "")
           }
         >
@@ -392,7 +392,7 @@ function GoldRow({
         </td>
         <td
           className={
-            "px-3 py-3 text-right tabular-nums font-semibold text-ink sm:px-5 " +
+            "px-3 py-3 text-right tabular-nums font-semibold text-ink sm:px-4 " +
             (mobilePriceView !== "sell" ? "hidden sm:table-cell" : "")
           }
         >
@@ -400,7 +400,7 @@ function GoldRow({
         </td>
         <td
           className={
-            "px-3 py-3 text-right tabular-nums font-medium sm:px-5 " +
+            "px-3 py-3 text-right tabular-nums font-medium sm:px-4 " +
             (isUp ? "text-positive" : "text-negative")
           }
         >
@@ -426,7 +426,7 @@ function GoldRow({
             className="overflow-hidden bg-bg"
           >
             {history && history.length > 1 && (
-              <div className="flex flex-wrap items-center gap-4 px-5 py-4">
+              <div className="flex flex-wrap items-center gap-4 px-4 py-4">
                 <div className="h-14 w-full max-w-[200px] shrink-0">
                   <Sparkline points={history} id={`row-${item.key}`} />
                 </div>

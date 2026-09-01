@@ -40,7 +40,7 @@ const packages = [
 
 export default function ReklamVerPage() {
   return (
-    <div className="mx-auto max-w-[1240px] px-4 py-14">
+    <div className="mx-auto max-w-[1240px] px-4 py-12">
       <h1 className="max-w-2xl text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
         Kuyumcunuzu Denizli&apos;de Öne Çıkarın
       </h1>
@@ -51,18 +51,18 @@ export default function ReklamVerPage() {
         birini değerlendirebilirsiniz.
       </p>
 
-      <div className="mt-10 grid gap-5 sm:grid-cols-3">
+      <div className="mt-8 grid gap-4 sm:grid-cols-3">
         {packages.map((pkg) => (
           <div
             key={pkg.name}
             className={
-              "flex flex-col rounded-2xl border bg-surface p-5 shadow-sm " +
+              "flex flex-col rounded-2xl border bg-surface p-4 shadow-sm " +
               (pkg.highlight ? "border-brand ring-1 ring-brand/30" : "border-border")
             }
           >
             <p className="font-bold text-ink">{pkg.name}</p>
             <p className="mt-1 text-sm font-semibold text-brand">{pkg.price}</p>
-            <ul className="mt-3 flex-1 space-y-1.5 text-sm text-muted">
+            <ul className="mt-3 flex-1 space-y-2 text-sm text-muted">
               {pkg.features.map((f) => (
                 <li key={f} className="flex gap-2">
                   <CheckCircle
@@ -79,7 +79,7 @@ export default function ReklamVerPage() {
         ))}
       </div>
 
-      <div className="mt-10 rounded-2xl border border-border bg-surface p-6">
+      <div className="mt-8 rounded-2xl border border-border bg-surface p-6">
         <h2 className="text-lg font-bold text-ink">İletişime Geçin</h2>
         <p className="mt-2 text-sm text-muted">
           Reklam paketleri ve fiyatlandırma hakkında bilgi almak için bize

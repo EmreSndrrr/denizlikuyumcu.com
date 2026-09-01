@@ -21,7 +21,7 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
         const isOpen = openIndex === i;
         const panelId = `faq-panel-${i}`;
         return (
-          <div key={item.question} className="p-5">
+          <div key={item.question} className="p-4">
             <button
               type="button"
               onClick={() => setOpenIndex(isOpen ? null : i)}
