@@ -29,6 +29,7 @@ import { useLivePrices } from "@/lib/useLivePrices";
 import { usePriceFlash } from "@/lib/usePriceFlash";
 import StaleBadge from "@/components/StaleBadge";
 import Sparkline from "@/components/Sparkline";
+import AnimatedNumber from "@/components/AnimatedNumber";
 
 type SortKey = "label" | "buy" | "sell" | "changePercent";
 type Category = "all" | "gram" | "ziynet";
@@ -369,7 +370,7 @@ function GoldRow({
             (mobilePriceView !== "buy" ? "hidden sm:table-cell" : "")
           }
         >
-          {formatTL(item.buy)}
+          <AnimatedNumber value={item.buy} format={formatTL} />
         </td>
         <td
           className={
@@ -377,7 +378,7 @@ function GoldRow({
             (mobilePriceView !== "sell" ? "hidden sm:table-cell" : "")
           }
         >
-          {formatTL(item.sell)}
+          <AnimatedNumber value={item.sell} format={formatTL} />
         </td>
         <td
           className={

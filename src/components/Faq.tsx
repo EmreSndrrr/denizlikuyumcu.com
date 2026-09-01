@@ -1,3 +1,4 @@
+import { ShieldCheck } from "@phosphor-icons/react/dist/ssr";
 import { faqItems } from "@/lib/faq";
 import SectionHeading from "@/components/SectionHeading";
 import FaqAccordion from "@/components/FaqAccordion";
@@ -30,6 +31,29 @@ export default function Faq() {
         subtitle="Şimdilik temel sorularla başlıyoruz; zamanla genişleteceğiz."
       />
       <FaqAccordion items={faqItems} />
+
+      {/* Brief'te istenen "veri güvenilirliği" notu — SSS'nin hemen
+          yanında, fiyatların kaynağı/gecikmesi hakkında kısa bir
+          şeffaflık bloğu. */}
+      <div className="mt-6 flex max-w-3xl gap-3 rounded-2xl border border-border bg-surface p-5">
+        <ShieldCheck
+          aria-hidden="true"
+          size={20}
+          weight="bold"
+          className="mt-0.5 shrink-0 text-positive"
+        />
+        <div>
+          <p className="text-sm font-semibold text-ink">Veri güvenilirliği</p>
+          <p className="mt-1 text-sm text-muted">
+            Fiyatlar periyodik olarak (yaklaşık her 60 saniyede bir)
+            tazelenir ve her bölümde &quot;… itibarıyla&quot; etiketiyle son
+            güncelleme zamanı gösterilir. Bağlantı kesilirse veya bir
+            yenileme başarısız olursa bunu &quot;Veri gecikmeli&quot;
+            rozetiyle açıkça belirtiriz — eski veriyi güncelmiş gibi
+            göstermeyiz.
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

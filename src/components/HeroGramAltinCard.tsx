@@ -12,6 +12,7 @@ import { useLivePrices } from "@/lib/useLivePrices";
 import { formatTL, formatTime } from "@/lib/format";
 import StaleBadge from "@/components/StaleBadge";
 import Sparkline from "@/components/Sparkline";
+import AnimatedNumber from "@/components/AnimatedNumber";
 import type { GoldHistoryPoint, PriceSnapshot } from "@/lib/prices";
 
 export default function HeroGramAltinCard({
@@ -34,7 +35,8 @@ export default function HeroGramAltinCard({
       </div>
 
       <p className="mt-2 text-4xl font-extrabold tabular-nums">
-        {formatTL(gram.sell)} <span className="text-lg font-medium text-white/50">TL</span>
+        <AnimatedNumber value={gram.sell} format={formatTL} />{" "}
+        <span className="text-lg font-medium text-white/50">TL</span>
       </p>
       <p
         className={
@@ -54,11 +56,15 @@ export default function HeroGramAltinCard({
       <div className="mt-4 grid grid-cols-2 gap-3 border-t border-white/10 pt-4">
         <div>
           <p className="text-xs text-white/50">Alış</p>
-          <p className="mt-0.5 font-semibold tabular-nums">{formatTL(gram.buy)} TL</p>
+          <p className="mt-0.5 font-semibold tabular-nums">
+            <AnimatedNumber value={gram.buy} format={formatTL} /> TL
+          </p>
         </div>
         <div>
           <p className="text-xs text-white/50">Satış</p>
-          <p className="mt-0.5 font-semibold tabular-nums">{formatTL(gram.sell)} TL</p>
+          <p className="mt-0.5 font-semibold tabular-nums">
+            <AnimatedNumber value={gram.sell} format={formatTL} /> TL
+          </p>
         </div>
       </div>
 

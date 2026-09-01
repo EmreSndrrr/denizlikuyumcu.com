@@ -11,7 +11,7 @@
 // crosshair + tooltip varsayılan olsun; ekran okuyucu için görünmez bir
 // metin özeti (başlangıç/bitiş/değişim) sağlanmalı.
 
-import { useMemo, useState, useRef } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import type { GoldHistoryPoint } from "@/lib/prices";
 import { formatTL } from "@/lib/format";
@@ -50,6 +50,16 @@ export default function GoldPriceChart({
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const reduceMotion = useReducedMotion();
+  // Çizgi sadece bileşenin İLK açılışında 600ms'de "çizilsin"; aralık/
+  // alış-satış değişimlerinde yalnızca 180ms crossfade oynasın (brief'te
+  // bu ikisi ayrı davranışlar olarak isteniyor). AnimatePresence key'i
+  // değiştikçe bu <path> yeniden mount oluyor, o yüzden "ilk kez mi"
+  // bilgisini bileşen kökünde, remount'tan etkilenmeyecek şekilde tutuyoruz.
+  const [hasDrawnOnce, setHasDrawnOnce] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setHasDrawnOnce(true), 650);
+    return () => clearTimeout(t);
+  }, []);
 
   const points = useMemo(() => history.slice(-period), [history, period]);
 
@@ -201,7 +211,7 @@ export default function GoldPriceChart({
           animate={{ opacity: 1 }}
           exit={reduceMotion ? undefined : { opacity: 0 }}
           transition={{ duration: reduceMotion ? 0 : 0.18 }}
-          className="relative mt-2 h-[240px] px-1 sm:h-[300px]"
+          className="relative mt-2 h-[290px] px-1 sm:h-[320px]"
         >
           <svg
             ref={svgRef}
@@ -236,7 +246,7 @@ export default function GoldPriceChart({
             ))}
 
             <path d={areaPath} fill="url(#gold-area-fill)" stroke="none" />
-            <path
+            <motion.path
               d={path}
               fill="none"
               stroke={GOLD}
@@ -244,6 +254,9 @@ export default function GoldPriceChart({
               strokeLinejoin="round"
               strokeLinecap="round"
               vectorEffect="non-scaling-stroke"
+              initial={!hasDrawnOnce && !reduceMotion ? { pathLength: 0 } : false}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: hasDrawnOnce ? 0 : 0.6, ease: "easeOut" }}
             />
 
             {/* En yüksek / en düşük değer işaretleri */}

@@ -43,7 +43,7 @@ export default function RehberIndexPage() {
           <Reveal key={g.href} delay={i * 0.04}>
             <Link
               href={g.href}
-              className="block h-full rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              className="block h-full rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
             >
               <p className="font-bold text-ink">{g.title}</p>
               <p className="mt-1 text-sm text-muted">{g.desc}</p>

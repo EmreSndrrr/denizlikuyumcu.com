@@ -93,12 +93,12 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1240px] px-4 py-8">
+      <section className="mx-auto max-w-[1240px] px-4 pb-20">
         <AdSlot position="hero-banner" />
       </section>
 
       {/* Popüler altın ve döviz fiyatları */}
-      <section id="altin-fiyatlari" className="mx-auto max-w-[1240px] px-4 py-20">
+      <section id="altin-fiyatlari" className="mx-auto max-w-[1240px] px-4 pb-20">
         <PriceTicker initialData={prices} />
       </section>
 
@@ -173,7 +173,7 @@ export default async function HomePage() {
           <div className="mt-6 grid gap-5 sm:grid-cols-3">
             {featuredJewelers.map((j, i) => (
               <Reveal key={j.id} delay={i * 0.05}>
-                <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm transition-transform hover:-translate-y-0.5">
+                <div className="rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/40">
                   <p className="text-xs font-semibold uppercase tracking-wide text-brand">
                     Öne Çıkan
                   </p>
@@ -251,7 +251,7 @@ function GuideCard({
   return (
     <Link
       href={href}
-      className="block h-full rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+      className="block h-full rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
     >
       <p className="font-semibold text-ink">{title}</p>
       <p className="mt-1 text-sm text-muted">{desc}</p>

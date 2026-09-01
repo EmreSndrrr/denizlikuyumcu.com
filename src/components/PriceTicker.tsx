@@ -25,6 +25,7 @@ import { formatTL, formatTime } from "@/lib/format";
 import { useLivePrices } from "@/lib/useLivePrices";
 import { usePriceFlash } from "@/lib/usePriceFlash";
 import StaleBadge from "@/components/StaleBadge";
+import AnimatedNumber from "@/components/AnimatedNumber";
 
 export default function PriceTicker({
   initialData,
@@ -81,7 +82,7 @@ export default function PriceTicker({
             >
               <p className="text-xs text-muted">{item.label}</p>
               <p className="mt-1 text-base font-bold tabular-nums text-ink">
-                {formatTL(item.sell)}
+                <AnimatedNumber value={item.sell} format={formatTL} />
                 <span className="ml-1 text-xs font-normal text-muted">{item.unit}</span>
               </p>
               <p
