@@ -22,11 +22,15 @@ export default function AdSlot({ position }: { position: AdPosition }) {
     : undefined;
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
+    <div className="overflow-hidden rounded-2xl border border-border bg-surface shadow-sm">
       {!ad && (
-        <span className="absolute right-3 top-3 z-10 rounded-full bg-ink px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-surface">
+        // Önceden köşede mutlak konumlanan bir rozetti; dar ekranlarda kart
+        // içeriğiyle (Sponsorlu etiketi/işletme adı) çakışıyordu. Artık
+        // kartın normal akışında, kendi satırında duran bir üst şerit —
+        // hiçbir genişlikte içerikle üst üste binmiyor.
+        <div className="border-b border-border bg-ink px-4 py-1.5 text-center text-[10px] font-semibold uppercase tracking-wide text-surface">
           Örnek — bu alan sizin olabilir
-        </span>
+        </div>
       )}
       <div className="flex items-stretch gap-4 p-4">
         <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl bg-gold/15 text-brand">
