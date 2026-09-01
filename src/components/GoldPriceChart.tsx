@@ -154,7 +154,7 @@ export default function GoldPriceChart({
                   setHoverIndex(null);
                 }}
                 className={
-                  "rounded-full px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold " +
+                  "rounded-full px-3 py-1 text-xs font-medium transition-all active:scale-[0.94] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold " +
                   (period === p.value ? "bg-brand text-white" : "text-white/50 hover:text-white")
                 }
               >
@@ -175,7 +175,7 @@ export default function GoldPriceChart({
                 aria-selected={side === s}
                 onClick={() => setSide(s)}
                 className={
-                  "rounded-full px-3 py-1 text-xs font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold " +
+                  "rounded-full px-3 py-1 text-xs font-medium transition-all active:scale-[0.94] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold " +
                   (side === s ? "bg-white/15 text-white" : "text-white/50 hover:text-white")
                 }
               >

@@ -76,7 +76,7 @@ export default function GoldCalculator({
             aria-selected={mode === "product"}
             onClick={() => setMode("product")}
             className={
-              "rounded-full px-4 py-1.5 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand " +
+              "rounded-full px-4 py-1.5 text-sm font-medium transition-all active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand " +
               (mode === "product" ? "bg-ink text-surface" : "text-muted hover:text-ink")
             }
           >
@@ -88,7 +88,7 @@ export default function GoldCalculator({
             aria-selected={mode === "karat"}
             onClick={() => setMode("karat")}
             className={
-              "rounded-full px-4 py-1.5 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand " +
+              "rounded-full px-4 py-1.5 text-sm font-medium transition-all active:scale-[0.96] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand " +
               (mode === "karat" ? "bg-ink text-surface" : "text-muted hover:text-ink")
             }
           >

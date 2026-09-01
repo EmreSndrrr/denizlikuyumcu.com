@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PriceMarquee from "@/components/PriceMarquee";
+import PageTransition from "@/components/PageTransition";
 import { getPrices } from "@/lib/prices";
 
 // Tek font ailesi: Inter. Ekran okunabilirliği için tasarlanmış, "daha
@@ -78,7 +79,9 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         />
         <PriceMarquee initialData={prices} />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">
+          <PageTransition>{children}</PageTransition>
+        </main>
         <Footer />
       </body>
     </html>

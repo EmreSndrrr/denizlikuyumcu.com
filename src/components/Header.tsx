@@ -1,9 +1,10 @@
 "use client";
 
-// Header artık scroll durumunu (küçülme) ve aktif rotayı (alt çizgi
-// göstergesi) izlemesi gerektiği için client component. Ana aksiyon
-// "Reklam Ver"den "Kuyumcu Bul"a taşındı — ziyaretçinin asıl amacı bu;
-// gelir modeli için önemli olan "İşletmeni Ekle" daha küçük, ikincil bir
+// Header artık scroll durumunu (küçülme), aktif rotayı (alt çizgi
+// göstergesi) ve — anasayfadayken — scroll-spy ile hangi bölümün görünümde
+// olduğunu izlemesi gerektiği için client component. Ana aksiyon "Reklam
+// Ver"den "Kuyumcu Bul"a taşındı — ziyaretçinin asıl amacı bu; gelir
+// modeli için önemli olan "İşletmeni Ekle" daha küçük, ikincil bir
 // bağlantı olarak duruyor.
 
 import { useEffect, useState } from "react";
@@ -21,9 +22,17 @@ const navLinks = [
   { href: "/rehber", label: "Rehber" },
 ];
 
+const anchorIds = navLinks
+  .filter((l) => l.href.includes("#"))
+  .map((l) => l.href.split("#")[1]);
+
 export default function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  // Anasayfadaki hangi #id bölümünün şu an görünümde olduğu — çapa
+  // linklerinin aktif göstergesini besliyor (gerçek rotalar zaten
+  // pathname'den biliniyor, bu sadece homepage bölümleri için).
+  const [activeAnchor, setActiveAnchor] = useState<string | null>(null);
 
   useEffect(() => {
     function onScroll() {
@@ -33,6 +42,34 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      setActiveAnchor(null);
+      return;
+    }
+    const elements = anchorIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    if (elements.length === 0) return;
+
+    // Viewport'un üst ~%25'lik şeridinde kesişen bölümlerden en üstteki
+    // "aktif" kabul ediliyor — header'ın altında kalan gerçek okuma
+    // alanına yakın bir eşik.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (visible.length === 0) return;
+        const top = visible.reduce((a, b) =>
+          a.boundingClientRect.top < b.boundingClientRect.top ? a : b
+        );
+        setActiveAnchor(top.target.id);
+      },
+      { rootMargin: "-96px 0px -70% 0px", threshold: 0 }
+    );
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [pathname]);
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-surface/90 backdrop-blur transition-[padding] duration-200">
@@ -56,11 +93,10 @@ export default function Header() {
 
         <nav className="hidden gap-5 text-sm font-medium text-muted lg:flex">
           {navLinks.map((link) => {
-            // Sadece gerçek rotalar (Kuyumcular/Rehber) için aktif
-            // göstergesi hesaplanıyor; anasayfa içi çapa (#) linkleri için
-            // scroll-spy henüz eklenmedi (bilinen kapsam dışı bırakma).
-            const isActive =
-              !link.href.includes("#") && pathname.startsWith(link.href);
+            const isAnchor = link.href.includes("#");
+            const isActive = isAnchor
+              ? activeAnchor === link.href.split("#")[1]
+              : pathname.startsWith(link.href);
             return (
               <Link
                 key={link.href}
@@ -87,13 +123,13 @@ export default function Header() {
           <ThemeToggle />
           <Link
             href="/reklam-ver"
-            className="hidden text-sm font-medium text-muted hover:text-ink md:inline-block"
+            className="hidden text-sm font-medium text-muted transition-colors hover:text-ink active:scale-[0.98] md:inline-block"
           >
             İşletmeni Ekle
           </Link>
           <Link
             href="/kuyumcular"
-            className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-surface transition-colors hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
           >
             <MapPin aria-hidden="true" size={15} weight="bold" />
             <span className="hidden sm:inline">Kuyumcu Bul</span>

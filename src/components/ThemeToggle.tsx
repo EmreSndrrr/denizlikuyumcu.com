@@ -37,7 +37,7 @@ export default function ThemeToggle() {
       aria-label={
         isDark ? "Açık temaya geç" : "Koyu temaya geç"
       }
-      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-brand hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-muted transition-all hover:border-brand hover:text-brand active:scale-[0.92] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
     >
       {/* Mount öncesi (isDark === null) sabit bir ikon göster ki sunucu ve
           istemci ilk render'da aynı HTML'i üretsin (hydration uyuşmazlığı

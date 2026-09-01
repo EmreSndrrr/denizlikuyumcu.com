@@ -4,16 +4,14 @@
 // gremse, 18/14 ayar) tek bir aranabilir/filtrelenebilir/sıralanabilir
 // tabloda. Kart ızgarası yerine gerçek bir <table> kullanıyoruz — 15
 // kalemlik bir listede tablo, kart ızgarasından çok daha taranabilir.
-//
-// Not: satır tıklandığında detay paneli ve satır başına 7 günlük mini
-// grafik bu geçişte kapsam dışı bırakıldı (bilinen, sonraki bir pass'e
-// bırakılan iş) — arama, kategori filtresi, sabit başlık, mobilde
-// alış/satış sekmesi ve favoriler eklendi.
+// Satıra tıklayınca 7 günlük mini grafikli bir detay paneli açılıyor.
 
 import { useEffect, useMemo, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import {
   CaretUp,
   CaretDown,
+  CaretRight,
   TrendUp,
   TrendDown,
   MagnifyingGlass,
@@ -24,11 +22,13 @@ import {
   ALL_GOLD_TYPES,
   type PriceItem,
   type PriceSnapshot,
+  type GoldHistoryPoint,
 } from "@/lib/prices";
 import { formatTL, formatTime } from "@/lib/format";
 import { useLivePrices } from "@/lib/useLivePrices";
 import { usePriceFlash } from "@/lib/usePriceFlash";
 import StaleBadge from "@/components/StaleBadge";
+import Sparkline from "@/components/Sparkline";
 
 type SortKey = "label" | "buy" | "sell" | "changePercent";
 type Category = "all" | "gram" | "ziynet";
@@ -59,8 +59,10 @@ const selectAllGold = (s: PriceSnapshot) => filterSnapshot(s, ALL_GOLD_TYPES);
 
 export default function GoldVarietiesTable({
   initialData,
+  sparklines,
 }: {
   initialData: PriceSnapshot;
+  sparklines: Record<string, GoldHistoryPoint[]>;
 }) {
   const { data, stale } = useLivePrices(initialData, selectAllGold);
   const flashKeys = usePriceFlash(data.items);
@@ -70,6 +72,7 @@ export default function GoldVarietiesTable({
   const [category, setCategory] = useState<Category>("all");
   const [favoritesOnly, setFavoritesOnly] = useState(false);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [expandedKey, setExpandedKey] = useState<string | null>(null);
   // Mobilde iki fiyat sütunu (Alış/Satış) yer kaplıyor — küçük ekranda tek
   // seferde birini gösterip sekmeyle değiştiriyoruz.
   const [mobilePriceView, setMobilePriceView] = useState<"buy" | "sell">("sell");
@@ -165,7 +168,7 @@ export default function GoldVarietiesTable({
               onClick={() => setCategory(c.key)}
               aria-pressed={category === c.key}
               className={
-                "rounded-full border px-3 py-1 text-xs font-medium transition-colors " +
+                "rounded-full border px-3 py-1 text-xs font-medium transition-all active:scale-[0.94] " +
                 (category === c.key
                   ? "border-ink bg-ink text-surface"
                   : "border-border text-muted hover:text-ink")
@@ -179,7 +182,7 @@ export default function GoldVarietiesTable({
             onClick={() => setFavoritesOnly((v) => !v)}
             aria-pressed={favoritesOnly}
             className={
-              "flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-medium transition-colors " +
+              "flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-medium transition-all active:scale-[0.94] " +
               (favoritesOnly
                 ? "border-brand bg-brand/10 text-brand"
                 : "border-border text-muted hover:text-ink")
@@ -198,7 +201,7 @@ export default function GoldVarietiesTable({
               onClick={() => setMobilePriceView(side)}
               aria-pressed={mobilePriceView === side}
               className={
-                "rounded-full border px-3 py-1 text-xs font-medium transition-colors " +
+                "rounded-full border px-3 py-1 text-xs font-medium transition-all active:scale-[0.94] " +
                 (mobilePriceView === side
                   ? "border-ink bg-ink text-surface"
                   : "border-border text-muted")
@@ -210,7 +213,7 @@ export default function GoldVarietiesTable({
         </div>
       </div>
 
-      <div className="max-h-[440px] overflow-auto">
+      <div className="max-h-[520px] overflow-auto">
         {/* min-w sadece sm+ ekranlarda: mobilde zaten tek fiyat sütunu
             gösteriliyor (Alış/Satış sekmesi), 480px zorlamak gereksiz
             yatay taşmaya yol açıyordu. */}
@@ -273,6 +276,11 @@ export default function GoldVarietiesTable({
                   mobilePriceView={mobilePriceView}
                   isFavorite={favorites.has(item.key)}
                   onToggleFavorite={() => toggleFavorite(item.key)}
+                  isExpanded={expandedKey === item.key}
+                  onToggleExpand={() =>
+                    setExpandedKey((k) => (k === item.key ? null : item.key))
+                  }
+                  history={sparklines[item.key]}
                 />
               ))
             )}
@@ -280,7 +288,8 @@ export default function GoldVarietiesTable({
         </table>
       </div>
       <p className="px-5 py-3 text-[11px] text-muted/70">
-        Fiyatlar bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Sütun
+        Fiyatlar bilgilendirme amaçlıdır, yatırım tavsiyesi değildir. Bir
+        satıra tıklayarak 7 günlük mini grafiğini görebilir, sütun
         başlıklarına tıklayarak sıralayabilirsiniz.
       </p>
     </div>
@@ -293,66 +302,140 @@ function GoldRow({
   mobilePriceView,
   isFavorite,
   onToggleFavorite,
+  isExpanded,
+  onToggleExpand,
+  history,
 }: {
   item: PriceItem;
   flash?: "up" | "down";
   mobilePriceView: "buy" | "sell";
   isFavorite: boolean;
   onToggleFavorite: () => void;
+  isExpanded: boolean;
+  onToggleExpand: () => void;
+  history?: GoldHistoryPoint[];
 }) {
   const isUp = item.changePercent >= 0;
+  const reduceMotion = useReducedMotion();
+  const detailId = `gold-row-detail-${item.key}`;
+
   return (
-    <tr
-      className={
-        "hover:bg-bg " +
-        (flash === "up" ? "price-flash-up" : flash === "down" ? "price-flash-down" : "")
-      }
-    >
-      <td className="px-3 py-2.5">
-        <button
-          type="button"
-          onClick={onToggleFavorite}
-          aria-pressed={isFavorite}
-          aria-label={isFavorite ? `${item.label} favorilerden çıkar` : `${item.label} favorilere ekle`}
-          className="flex h-6 w-6 items-center justify-center text-muted hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+    <>
+      <tr
+        className={
+          "hover:bg-bg " +
+          (flash === "up" ? "price-flash-up" : flash === "down" ? "price-flash-down" : "")
+        }
+      >
+        <td className="px-3 py-2.5">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleFavorite();
+            }}
+            aria-pressed={isFavorite}
+            aria-label={isFavorite ? `${item.label} favorilerden çıkar` : `${item.label} favorilere ekle`}
+            className="flex h-6 w-6 items-center justify-center text-muted hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          >
+            <Star aria-hidden="true" size={15} weight={isFavorite ? "fill" : "regular"} className={isFavorite ? "text-gold" : ""} />
+          </button>
+        </td>
+        <td className="whitespace-nowrap px-3 py-2.5 font-medium text-ink sm:px-5">
+          {/* Satırı genişletmenin GERÇEK, klavyeyle erişilebilir kontrolü
+              bu buton — <tr>'a onClick koymak fare dışı kullanıcıları
+              dışlardı. */}
+          <button
+            type="button"
+            onClick={onToggleExpand}
+            aria-expanded={isExpanded}
+            aria-controls={detailId}
+            className="flex items-center gap-1.5 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          >
+            <CaretRight
+              aria-hidden="true"
+              size={11}
+              className={
+                "shrink-0 text-muted transition-transform duration-200 " +
+                (isExpanded ? "rotate-90" : "")
+              }
+            />
+            {item.label}
+          </button>
+        </td>
+        <td
+          className={
+            "px-3 py-2.5 text-right tabular-nums text-muted sm:px-5 " +
+            (mobilePriceView !== "buy" ? "hidden sm:table-cell" : "")
+          }
         >
-          <Star aria-hidden="true" size={15} weight={isFavorite ? "fill" : "regular"} className={isFavorite ? "text-gold" : ""} />
-        </button>
-      </td>
-      <td className="whitespace-nowrap px-3 py-2.5 font-medium text-ink sm:px-5">
-        {item.label}
-      </td>
-      <td
-        className={
-          "px-3 py-2.5 text-right tabular-nums text-muted sm:px-5 " +
-          (mobilePriceView !== "buy" ? "hidden sm:table-cell" : "")
-        }
-      >
-        {formatTL(item.buy)}
-      </td>
-      <td
-        className={
-          "px-3 py-2.5 text-right tabular-nums font-semibold text-ink sm:px-5 " +
-          (mobilePriceView !== "sell" ? "hidden sm:table-cell" : "")
-        }
-      >
-        {formatTL(item.sell)}
-      </td>
-      <td
-        className={
-          "px-3 py-2.5 text-right tabular-nums font-medium sm:px-5 " +
-          (isUp ? "text-positive" : "text-negative")
-        }
-      >
-        <span className="inline-flex items-center gap-1">
-          {isUp ? (
-            <TrendUp aria-hidden="true" size={12} weight="bold" />
-          ) : (
-            <TrendDown aria-hidden="true" size={12} weight="bold" />
-          )}
-          {Math.abs(item.changePercent).toFixed(2)}%
-        </span>
-      </td>
-    </tr>
+          {formatTL(item.buy)}
+        </td>
+        <td
+          className={
+            "px-3 py-2.5 text-right tabular-nums font-semibold text-ink sm:px-5 " +
+            (mobilePriceView !== "sell" ? "hidden sm:table-cell" : "")
+          }
+        >
+          {formatTL(item.sell)}
+        </td>
+        <td
+          className={
+            "px-3 py-2.5 text-right tabular-nums font-medium sm:px-5 " +
+            (isUp ? "text-positive" : "text-negative")
+          }
+        >
+          <span className="inline-flex items-center gap-1">
+            {isUp ? (
+              <TrendUp aria-hidden="true" size={12} weight="bold" />
+            ) : (
+              <TrendDown aria-hidden="true" size={12} weight="bold" />
+            )}
+            {Math.abs(item.changePercent).toFixed(2)}%
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td colSpan={5} className="p-0">
+          <motion.div
+            id={detailId}
+            role="region"
+            aria-label={`${item.label} 7 günlük detay`}
+            initial={false}
+            animate={{ height: isExpanded ? "auto" : 0, opacity: isExpanded ? 1 : 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.22, ease: "easeInOut" }}
+            className="overflow-hidden bg-bg"
+          >
+            {history && history.length > 1 && (
+              <div className="flex flex-wrap items-center gap-4 px-5 py-4">
+                <div className="h-14 w-full max-w-[200px] shrink-0">
+                  <Sparkline points={history} id={`row-${item.key}`} />
+                </div>
+                <div className="flex gap-6 text-xs">
+                  <div>
+                    <p className="text-muted">7 gün önce</p>
+                    <p className="mt-0.5 font-semibold tabular-nums text-ink">
+                      {formatTL(history[0].sell)} TL
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-muted">Alış</p>
+                    <p className="mt-0.5 font-semibold tabular-nums text-ink">
+                      {formatTL(item.buy)} TL
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-muted">Satış</p>
+                    <p className="mt-0.5 font-semibold tabular-nums text-ink">
+                      {formatTL(item.sell)} TL
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </motion.div>
+        </td>
+      </tr>
+    </>
   );
 }

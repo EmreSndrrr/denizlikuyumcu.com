@@ -11,41 +11,8 @@ import { TrendUp, TrendDown } from "@phosphor-icons/react/dist/ssr";
 import { useLivePrices } from "@/lib/useLivePrices";
 import { formatTL, formatTime } from "@/lib/format";
 import StaleBadge from "@/components/StaleBadge";
+import Sparkline from "@/components/Sparkline";
 import type { GoldHistoryPoint, PriceSnapshot } from "@/lib/prices";
-
-function MiniSparkline({ points }: { points: GoldHistoryPoint[] }) {
-  if (points.length < 2) return null;
-  const W = 280;
-  const H = 64;
-  const prices = points.map((p) => p.sell);
-  const min = Math.min(...prices);
-  const max = Math.max(...prices);
-  const range = max - min || 1;
-  const coords = points.map((p, i) => {
-    const x = (i / (points.length - 1)) * W;
-    const y = H - ((p.sell - min) / range) * H;
-    return [x, y] as const;
-  });
-  const path = coords.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
-  const baseline = H;
-  const areaPath =
-    `M${coords[0][0].toFixed(1)},${baseline} ` +
-    coords.map(([x, y]) => `L${x.toFixed(1)},${y.toFixed(1)}`).join(" ") +
-    ` L${coords[coords.length - 1][0].toFixed(1)},${baseline} Z`;
-
-  return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="h-16 w-full" aria-hidden="true">
-      <defs>
-        <linearGradient id="hero-spark-fill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#d6a641" stopOpacity="0.35" />
-          <stop offset="100%" stopColor="#d6a641" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <path d={areaPath} fill="url(#hero-spark-fill)" stroke="none" />
-      <path d={path} fill="none" stroke="#d6a641" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
-    </svg>
-  );
-}
 
 export default function HeroGramAltinCard({
   initialData,
@@ -95,8 +62,8 @@ export default function HeroGramAltinCard({
         </div>
       </div>
 
-      <div className="mt-4">
-        <MiniSparkline points={history} />
+      <div className="mt-4 h-16">
+        <Sparkline points={history} id="hero" />
       </div>
 
       <p className="mt-3 text-xs text-white/40">

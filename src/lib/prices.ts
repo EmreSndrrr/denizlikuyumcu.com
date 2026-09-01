@@ -224,3 +224,20 @@ export const getGoldHistory = cache(async function getGoldHistory(): Promise<
   const gramAltin = snapshot.items.find((i) => i.key === "gram-altin");
   return generateGoldHistory(gramAltin?.sell ?? 4350, 365);
 });
+
+// "Tüm Altın Çeşitleri" tablosunda satır genişletildiğinde gösterilen
+// 7 günlük mini grafik için — HER kalem için ayrı, kısa bir geçmiş.
+// Ana grafiğin 365 günlük serisinden bağımsız, hafif bir üretim.
+export const getGoldItemSparklines = cache(async function getGoldItemSparklines(): Promise<
+  Record<string, GoldHistoryPoint[]>
+> {
+  const snapshot = await getPrices();
+  const goldItems = snapshot.items.filter(
+    (i) => i.type === "gold" || i.type === "gold-extra"
+  );
+  const result: Record<string, GoldHistoryPoint[]> = {};
+  for (const item of goldItems) {
+    result[item.key] = generateGoldHistory(item.sell, 7);
+  }
+  return result;
+});

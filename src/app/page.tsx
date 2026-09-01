@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, MapPin } from "@phosphor-icons/react/dist/ssr";
-import { getPrices, getGoldHistory } from "@/lib/prices";
+import { getPrices, getGoldHistory, getGoldItemSparklines } from "@/lib/prices";
 import { jewelers } from "@/lib/jewelers";
 import PriceTicker from "@/components/PriceTicker";
 import GoldCalculator from "@/components/GoldCalculator";
@@ -34,6 +34,7 @@ export const revalidate = 60;
 export default async function HomePage() {
   const prices = await getPrices();
   const goldHistory = await getGoldHistory();
+  const goldSparklines = await getGoldItemSparklines();
   const featuredJewelers = jewelers.filter((j) => j.featured).slice(0, 3);
 
   const jsonLd = {
@@ -71,14 +72,14 @@ export default async function HomePage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#altin-fiyatlari"
-                className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-surface transition-colors hover:bg-brand"
+                className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98]"
               >
                 Altın fiyatlarını incele
                 <ArrowRight aria-hidden="true" size={16} />
               </a>
               <Link
                 href="/kuyumcular"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-semibold text-ink transition-colors hover:border-brand hover:text-brand"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-semibold text-ink transition-all hover:border-brand hover:text-brand active:scale-[0.98]"
               >
                 <MapPin aria-hidden="true" size={16} weight="bold" />
                 Yakındaki kuyumcuları bul
@@ -116,7 +117,7 @@ export default async function HomePage() {
         />
         <div className="mt-6 space-y-4">
           <OnsAltinCard initialData={prices} />
-          <GoldVarietiesTable initialData={prices} />
+          <GoldVarietiesTable initialData={prices} sparklines={goldSparklines} />
         </div>
       </section>
 
