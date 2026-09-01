@@ -3,6 +3,7 @@ import { CaretRight } from "@phosphor-icons/react/dist/ssr";
 import type { GoldHistoryPoint, PriceSnapshot } from "@/lib/prices";
 import { priceContent, type PriceContentEntry } from "@/lib/priceContent";
 import PriceDetailCard from "@/components/PriceDetailCard";
+import PriceItemCalculator from "@/components/PriceItemCalculator";
 
 // /altin/[slug] ve /doviz/[slug] sayfalarının ORTAK şablonu — Server
 // Component (canlı fiyat kartı hariç her şey sunucuda render edilir, SEO
@@ -88,6 +89,10 @@ export default function PriceDetailPage({
               </section>
             ))}
           </article>
+
+          <div className="mt-8 max-w-md">
+            <PriceItemCalculator itemKey={entry.key} initialData={initialData} />
+          </div>
 
           <p className="mt-8 rounded-lg border border-border bg-gold/10 p-4 text-sm text-muted">
             Fiyatlar bilgilendirme amaçlıdır, yatırım tavsiyesi değildir ve
