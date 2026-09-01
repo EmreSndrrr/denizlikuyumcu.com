@@ -9,27 +9,31 @@ export const metadata: Metadata = {
 
 const packages = [
   {
-    name: "Dizin Kaydı",
-    price: "Ücretsiz",
-    features: ["Kuyumcular listesinde temel kayıt", "İşletme adı ve konum"],
-  },
-  {
-    name: "Öne Çıkan Kuyumcu",
-    price: "Aylık — teklif için iletişime geçin",
+    name: "Site İçi Reklam",
+    price: "Aylık veya haftalık — teklif için iletişime geçin",
     features: [
       "Anasayfada 'Öne Çıkan Kuyumcular' bölümünde yer alma",
       "Kuyumcular sayfasında üst sırada, vurgulu kart",
-      "Kısa tanıtım metni",
+      "Kısa tanıtım metni ve iletişim bilgileri",
     ],
     highlight: true,
   },
   {
     name: "Banner Reklam",
-    price: "Aylık — teklif için iletişime geçin",
+    price: "Aylık veya haftalık — teklif için iletişime geçin",
     features: [
       "Anasayfa üst banner (hero-banner)",
-      "İçerik arası ve alt banner alanları",
-      "Rehber sayfalarında görünürlük",
+      "Alt banner alanı (footer-banner)",
+      "Rehber ve fiyat sayfalarında görünürlük",
+    ],
+  },
+  {
+    name: "Size Özel Web Sitesi",
+    price: "Teklif için iletişime geçin",
+    features: [
+      "Kuyumcunuza özel, bağımsız bir web sitesi",
+      "Kendi alan adınız ve tasarımınız",
+      "İsteğe bağlı olarak DenizliKuyumcu.com'a bağlantı",
     ],
   },
 ];
@@ -83,7 +87,10 @@ export default function ReklamVerPage() {
         </p>
         <p className="mt-3 text-sm text-muted">
           E-posta: <span className="font-medium text-ink">info@denizlikuyumcu.com</span>
-          {" · "}Telefon: <span className="font-medium text-ink">(yakında eklenecek)</span>
+          {" · "}Telefon:{" "}
+          <a href="tel:05445965622" className="font-medium text-ink hover:text-brand">
+            0544 596 56 22
+          </a>
         </p>
       </div>
     </div>

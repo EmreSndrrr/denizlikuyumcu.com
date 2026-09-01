@@ -19,7 +19,9 @@ export default function IletisimPage() {
           E-posta:{" "}
           <a href="mailto:info@denizlikuyumcu.com">info@denizlikuyumcu.com</a>
         </li>
-        <li>Telefon: yakında eklenecek</li>
+        <li>
+          Telefon: <a href="tel:05445965622">0544 596 56 22</a>
+        </li>
       </ul>
       <p>
         Kuyumcunuzu sitede tanıtmak veya reklam alanı satın almak
@@ -28,8 +30,8 @@ export default function IletisimPage() {
       </p>
       <p className="text-sm text-muted">
         Not: Site henüz yeni kurulduğu için iletişim kanallarımız
-        genişlemektedir; telefon hattı ve fiziksel adres bilgisi
-        netleştiğinde bu sayfa güncellenecektir.
+        genişlemektedir; fiziksel adres bilgisi netleştiğinde bu sayfa
+        güncellenecektir.
       </p>
     </LegalPage>
   );
