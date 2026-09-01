@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import AdSlot from "@/components/AdSlot";
 
 export default function GuideArticle({
@@ -42,9 +43,9 @@ export default function GuideArticle({
       <p className="mt-10 rounded-lg border border-border bg-gold/10 p-4 text-sm text-muted">
         Bu içerik genel bilgilendirme amaçlıdır, yatırım tavsiyesi değildir.
         Güncel fiyatlar için{" "}
-        <a href="/" className="font-medium text-brand hover:underline">
+        <Link href="/" className="font-medium text-brand hover:underline">
           anasayfadaki
-        </a>{" "}
+        </Link>{" "}
         fiyat tablosuna göz atabilirsiniz.
       </p>
     </div>

@@ -22,7 +22,15 @@ export function useLivePrices<T = PriceSnapshot>(
   const [lastSuccessAt, setLastSuccessAt] = useState(initialData.updatedAt);
   const [stale, setStale] = useState(false);
   const selectRef = useRef(select);
-  selectRef.current = select;
+  // Render sırasında ref'e YAZMIYORUZ (React'in eşzamanlı render
+  // modelinde güvenli değil) — bunun yerine her render sonrasında çalışan,
+  // bağımlılık dizisi olmayan bir effect'te güncelliyoruz. Amaç: aşağıdaki
+  // setInterval kapanışı her zaman EN GÜNCEL select fonksiyonunu
+  // çağırsın, ama interval'ı select referansı değiştikçe yeniden
+  // kurmayalım (60 saniyelik döngü kesintisiz devam etsin).
+  useEffect(() => {
+    selectRef.current = select;
+  });
 
   useEffect(() => {
     let cancelled = false;

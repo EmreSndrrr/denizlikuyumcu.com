@@ -72,30 +72,29 @@ function ChangeList({
         {items.map((item, i) => {
           const href = getPriceHref(item.key);
           return (
-          <li key={item.key} className="flex items-center justify-between gap-3 text-sm">
-
-            <span className="flex min-w-0 items-center gap-2">
-              <span className="w-4 shrink-0 text-xs tabular-nums text-muted">{i + 1}</span>
-              {href ? (
-                <Link href={href} className="truncate text-ink hover:text-brand hover:underline">
-                  {item.label}
-                </Link>
-              ) : (
-                <span className="truncate text-ink">{item.label}</span>
-              )}
-            </span>
-            <span className="flex shrink-0 items-baseline gap-2 tabular-nums">
-              <span className="text-muted">{formatTL(item.sell)}</span>
-              <span
-                className={
-                  "font-semibold " + (item.changePercent >= 0 ? "text-positive" : "text-negative")
-                }
-              >
-                {item.changePercent >= 0 ? "+" : ""}
-                {item.changePercent.toFixed(2)}%
+            <li key={item.key} className="flex items-center justify-between gap-3 text-sm">
+              <span className="flex min-w-0 items-center gap-2">
+                <span className="w-4 shrink-0 text-xs tabular-nums text-muted">{i + 1}</span>
+                {href ? (
+                  <Link href={href} className="truncate text-ink hover:text-brand hover:underline">
+                    {item.label}
+                  </Link>
+                ) : (
+                  <span className="truncate text-ink">{item.label}</span>
+                )}
               </span>
-            </span>
-          </li>
+              <span className="flex shrink-0 items-baseline gap-2 tabular-nums">
+                <span className="text-muted">{formatTL(item.sell)}</span>
+                <span
+                  className={
+                    "font-semibold " + (item.changePercent >= 0 ? "text-positive" : "text-negative")
+                  }
+                >
+                  {item.changePercent >= 0 ? "+" : ""}
+                  {item.changePercent.toFixed(2)}%
+                </span>
+              </span>
+            </li>
           );
         })}
       </ol>

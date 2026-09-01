@@ -14,7 +14,7 @@
 // tercihi varsa animasyon globals.css'te zaten tamamen kapatılıyor ve
 // şerit yatayda elle kaydırılabilir hale geliyor.
 
-import { useCallback, useState, Fragment } from "react";
+import { useState, Fragment } from "react";
 import { Play, Pause, TrendUp, TrendDown } from "@phosphor-icons/react/dist/ssr";
 import { filterSnapshot, MAIN_PRICE_TYPES, type PriceSnapshot, type PriceItem } from "@/lib/prices";
 import { formatTL } from "@/lib/format";
@@ -59,7 +59,10 @@ export default function PriceMarquee({
 }) {
   // Şerit de ana 8 kalemle (6 altın + Dolar + Euro) sınırlı — yurtdışı
   // para birimleri (Sterlin vb.) buraya değil, ayrı bölüme gidiyor.
-  const { data } = useLivePrices(initialData, useCallback(selectMain, []));
+  // selectMain zaten modül seviyesinde sabit bir referans olduğu için
+  // useCallback'e SARMAYA gerek yok — bu sadece gereksiz bir tekrar
+  // sarmalamaydı, davranışı değiştirmez.
+  const { data } = useLivePrices(initialData, selectMain);
   const [paused, setPaused] = useState(false);
 
   return (

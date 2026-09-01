@@ -41,10 +41,18 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const reduceMotion = useReducedMotion();
 
-  // Rota değiştiğinde menüyü otomatik kapat (bir linke tıklayınca).
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
+  // Rota değiştiğinde menüyü otomatik kapat (bir linke tıklayınca). Bunu
+  // bir effect yerine render sırasında yapıyoruz — React'in "prop
+  // değiştiğinde state'i sıfırla" için önerdiği desen (bkz. "You Might
+  // Not Need An Effect"). Not: burada bilerek useRef DEĞİL useState
+  // kullanılıyor — render sırasında ref okuyup/yazmak React'in eşzamanlı
+  // render modelinde güvenli değil (bir render birden fazla kez
+  // denenebilir); state karşılaştırması bu yüzden doğru araç.
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    if (menuOpen) setMenuOpen(false);
+  }
 
   // Menü açıkken arka planın kaymasını engelle + Escape ile kapat.
   useEffect(() => {
@@ -71,10 +79,13 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    if (pathname !== "/") {
-      setActiveAnchor(null);
-      return;
-    }
+    // "/" dışındaki sayfalarda gözlemleyecek bir çapa elementi olmadığı
+    // için hiç kurulmuyor; "aktif" görünmemesi gerektiğini effect içinde
+    // setState ile SIFIRLAMAK yerine aşağıdaki render'da pathname'e göre
+    // türetiyoruz (bkz. effectiveActiveAnchor) — bu hem bir lint kuralını
+    // (react-hooks/set-state-in-effect) hem de gereksiz bir render turunu
+    // önlüyor.
+    if (pathname !== "/") return;
     const elements = anchorIds
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
@@ -97,6 +108,11 @@ export default function Header() {
     elements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, [pathname]);
+
+  // "/" dışındaki sayfalarda gözlemci hiç kurulmadığı için activeAnchor
+  // eski bir değerde takılı kalabilir — kullanım noktasında pathname'e
+  // göre türeterek bunu geçersiz kılıyoruz (bkz. yukarıdaki not).
+  const effectiveActiveAnchor = pathname === "/" ? activeAnchor : null;
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-surface/90 backdrop-blur transition-[padding] duration-200">
@@ -122,7 +138,7 @@ export default function Header() {
           {navLinks.map((link) => {
             const isAnchor = link.href.includes("#");
             const isActive = isAnchor
-              ? activeAnchor === link.href.split("#")[1]
+              ? effectiveActiveAnchor === link.href.split("#")[1]
               : pathname.startsWith(link.href);
             return (
               <Link
@@ -206,7 +222,7 @@ export default function Header() {
                 {navLinks.map((link) => {
                   const isAnchor = link.href.includes("#");
                   const isActive = isAnchor
-                    ? activeAnchor === link.href.split("#")[1]
+                    ? effectiveActiveAnchor === link.href.split("#")[1]
                     : pathname.startsWith(link.href);
                   return (
                     <li key={link.href}>

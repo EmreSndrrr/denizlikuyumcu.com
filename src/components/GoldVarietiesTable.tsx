@@ -234,6 +234,12 @@ export default function GoldVarietiesTable({
                   <th
                     key={col.key}
                     scope="col"
+                    aria-sort={
+                      // aria-sort, sıralanabilir <th>'nin kendi özelliğidir —
+                      // içindeki <button>'a değil (button rolü bunu
+                      // desteklemiyor).
+                      sortKey === col.key ? (sortDesc ? "descending" : "ascending") : "none"
+                    }
                     className={
                       "px-3 py-2 font-medium sm:px-5 " +
                       (hiddenOnMobile ? "hidden sm:table-cell" : "")
@@ -242,9 +248,6 @@ export default function GoldVarietiesTable({
                     <button
                       type="button"
                       onClick={() => toggleSort(col.key)}
-                      aria-sort={
-                        sortKey === col.key ? (sortDesc ? "descending" : "ascending") : "none"
-                      }
                       className={
                         "flex items-center gap-1 rounded-sm py-1 transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand " +
                         (col.align === "right" ? "ml-auto flex-row-reverse" : "")
