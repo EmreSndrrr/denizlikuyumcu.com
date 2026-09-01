@@ -71,7 +71,10 @@ export default function HeroGramAltinCard({
       </div>
 
       <div className="mt-4 h-16">
-        <Sparkline points={history} id="hero" />
+        {/* Kart her zaman koyu yüzeyli olduğu için (temadan bağımsız)
+            koyu temanın altın tonu sabit geçiliyor — var(--color-gold)
+            burada açık temada donuk kalırdı. */}
+        <Sparkline points={history} id="hero" color="#e3bd6e" />
       </div>
 
       <p className="mt-3 text-xs text-white/40">

@@ -83,7 +83,8 @@ export default function PriceDetailCard({
 
       {history && history.length > 1 && (
         <div className="mt-4 h-16">
-          <Sparkline points={history} id={`detail-${item.key}`} />
+          {/* Kart her zaman koyu yüzeyli — bkz. HeroGramAltinCard'daki aynı not. */}
+          <Sparkline points={history} id={`detail-${item.key}`} color="#e3bd6e" />
         </div>
       )}
 

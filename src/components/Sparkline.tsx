@@ -8,7 +8,11 @@ export default function Sparkline({
   points,
   width = 280,
   height = 64,
-  color = "#d6a641",
+  // Varsayılan: CSS token'ı — açık/koyu temaya göre otomatik uyarlanır
+  // (bkz. globals.css --color-gold). Sabit koyu yüzeyli kartlar (hero,
+  // fiyat detay kartı) kendi context'lerinde koyu temanın altın tonunu
+  // (#e3bd6e) sabit geçiyor, çünkü o kartlar temadan bağımsız hep koyu.
+  color = "var(--color-gold)",
   id,
 }: {
   points: GoldHistoryPoint[];
