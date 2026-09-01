@@ -111,6 +111,15 @@ function mockSnapshot(): PriceSnapshot {
   };
 }
 
+// Hangi veri kaynağının kullanılacağını .env.local'daki PRICE_PROVIDER
+// belirliyor (bkz. .env.example). Değer boşsa veya "mock" ise sahte veri
+// kullanılır — yerel geliştirme ve önizlemenin varsayılanı budur. Gerçek
+// bir sağlayıcı bağlandığında burada yeni bir "else if" dalı açıp kendi
+// fetch() mantığını (PRICE_API_KEY / PRICE_API_BASE_URL kullanarak)
+// eklemek yeterli; getPrices()'ı çağıran hiçbir bileşenin değişmesi
+// gerekmiyor.
+const PRICE_PROVIDER = process.env.PRICE_PROVIDER || "mock";
+
 // cache() ile sarmalıyoruz: aynı istek (request) içinde hem layout.tsx
 // (üstteki kayan şerit) hem page.tsx (fiyat tabloları + hesaplama aracı)
 // getPrices() çağırıyor. cache() olmadan mock fonksiyon her çağrıda
@@ -118,8 +127,21 @@ function mockSnapshot(): PriceSnapshot {
 // gösterir; cache() aynı istek içindeki tekrar çağrıları tek sonuca
 // indirger.
 export const getPrices = cache(async function getPrices(): Promise<PriceSnapshot> {
-  // İleride: process.env.PRICE_PROVIDER değerine göre gerçek sağlayıcıya
-  // yönlendirilecek. Şimdilik tek kaynak: mock.
+  if (PRICE_PROVIDER === "mock") {
+    return mockSnapshot();
+  }
+
+  // TODO: Gerçek sağlayıcı seçildiğinde buraya eklenecek, örn.:
+  //   if (PRICE_PROVIDER === "collectapi") {
+  //     const res = await fetch(`${process.env.PRICE_API_BASE_URL}/...`, {
+  //       headers: { Authorization: `apikey ${process.env.PRICE_API_KEY}` },
+  //       next: { revalidate: 60 },
+  //     });
+  //     return mapProviderResponseToSnapshot(await res.json());
+  //   }
+  console.warn(
+    `[lib/prices] Bilinmeyen PRICE_PROVIDER="${PRICE_PROVIDER}", mock veriye dönülüyor.`
+  );
   return mockSnapshot();
 });
 

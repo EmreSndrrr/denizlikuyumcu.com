@@ -58,10 +58,26 @@ src/
    sonucu 60 saniye cache'liyor (`export const revalidate = 60`) — böylece
    gerçek veri kaynağına saniyede değil, dakikada bir gidiyoruz.
 
+## Ortam değişkenleri
+
+Gerçek anahtar/gizli bilgi içermeyen bir şablon dosya olan `.env.example`'ı
+kopyalayarak başlayın:
+
+```bash
+cp .env.example .env.local
+```
+
+`.env.local` asla commit edilmez (`.gitignore`'da). Şu an tek amacı, ileride
+bağlanacak gerçek fiyat sağlayıcısının anahtarlarını tutmak — detaylar
+`.env.example` içindeki yorumlarda ve aşağıdaki maddede.
+
 ## Yapılacaklar / eksikler (canlıya almadan önce)
 
 - [ ] **Gerçek fiyat API'si**: `lib/prices.ts` içindeki mock veri gerçek bir
-      altın/döviz veri sağlayıcısıyla değiştirilmeli.
+      altın/döviz veri sağlayıcısıyla değiştirilmeli. Sağlayıcı seçildiğinde:
+      `.env.local`'da `PRICE_PROVIDER`/`PRICE_API_KEY`/`PRICE_API_BASE_URL`
+      doldurulur, `getPrices()` içine o sağlayıcı için bir `fetch()` dalı
+      eklenir — başka hiçbir dosyaya dokunmaya gerek kalmaz.
 - [ ] **Gerçek kuyumcu verisi**: `lib/jewelers.ts` içindeki demo kayıtlar
       silinip gerçek (izinli) kuyumcu bilgileriyle değiştirilmeli.
 - [ ] **İletişim bilgileri**: `reklam-ver/page.tsx` içindeki placeholder
