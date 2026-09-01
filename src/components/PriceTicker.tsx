@@ -14,6 +14,7 @@
 // belirliyor, `title` ise başlığı.
 
 import { useCallback } from "react";
+import Link from "next/link";
 import { TrendUp, TrendDown } from "@phosphor-icons/react/dist/ssr";
 import {
   filterSnapshot,
@@ -24,6 +25,7 @@ import {
 import { formatTL, formatTime } from "@/lib/format";
 import { useLivePrices } from "@/lib/useLivePrices";
 import { usePriceFlash } from "@/lib/usePriceFlash";
+import { getPriceHref } from "@/lib/priceContent";
 import StaleBadge from "@/components/StaleBadge";
 import AnimatedNumber from "@/components/AnimatedNumber";
 
@@ -83,18 +85,13 @@ export default function PriceTicker({
         {data.items.map((item) => {
           const isUp = item.changePercent >= 0;
           const flash = flashKeys[item.key];
-          return (
-            <div
-              key={item.key}
-              className={
-                "bg-surface px-4 py-3 " +
-                (flash === "up"
-                  ? "price-flash-up"
-                  : flash === "down"
-                    ? "price-flash-down"
-                    : "")
-              }
-            >
+          const href = getPriceHref(item.key);
+          const cellClassName =
+            "bg-surface px-4 py-3 " +
+            (href ? "block transition-colors hover:bg-bg " : "") +
+            (flash === "up" ? "price-flash-up" : flash === "down" ? "price-flash-down" : "");
+          const content = (
+            <>
               <p className="text-xs text-muted">{item.label}</p>
               <p className="mt-1 text-base font-bold tabular-nums text-ink">
                 <AnimatedNumber value={item.sell} format={formatTL} />
@@ -113,6 +110,17 @@ export default function PriceTicker({
                 )}
                 {Math.abs(item.changePercent).toFixed(2)}%
               </p>
+            </>
+          );
+          // Kalemin ayrı bir detay sayfası varsa (bkz. lib/priceContent.ts)
+          // hücrenin tamamı o sayfaya bağlanıyor; yoksa düz <div> kalıyor.
+          return href ? (
+            <Link key={item.key} href={href} className={cellClassName}>
+              {content}
+            </Link>
+          ) : (
+            <div key={item.key} className={cellClassName}>
+              {content}
             </div>
           );
         })}

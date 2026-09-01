@@ -7,6 +7,7 @@
 // Satıra tıklayınca 7 günlük mini grafikli bir detay paneli açılıyor.
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import {
   CaretUp,
@@ -27,6 +28,7 @@ import {
 import { formatTL, formatTime } from "@/lib/format";
 import { useLivePrices } from "@/lib/useLivePrices";
 import { usePriceFlash } from "@/lib/usePriceFlash";
+import { getPriceHref } from "@/lib/priceContent";
 import StaleBadge from "@/components/StaleBadge";
 import Sparkline from "@/components/Sparkline";
 import AnimatedNumber from "@/components/AnimatedNumber";
@@ -319,6 +321,7 @@ function GoldRow({
   const isUp = item.changePercent >= 0;
   const reduceMotion = useReducedMotion();
   const detailId = `gold-row-detail-${item.key}`;
+  const detailHref = getPriceHref(item.key);
 
   return (
     <>
@@ -343,26 +346,36 @@ function GoldRow({
           </button>
         </td>
         <td className="whitespace-nowrap px-3 py-2.5 font-medium text-ink sm:px-5">
-          {/* Satırı genişletmenin GERÇEK, klavyeyle erişilebilir kontrolü
-              bu buton — <tr>'a onClick koymak fare dışı kullanıcıları
-              dışlardı. */}
-          <button
-            type="button"
-            onClick={onToggleExpand}
-            aria-expanded={isExpanded}
-            aria-controls={detailId}
-            className="flex items-center gap-1.5 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-          >
-            <CaretRight
-              aria-hidden="true"
-              size={11}
-              className={
-                "shrink-0 text-muted transition-transform duration-200 " +
-                (isExpanded ? "rotate-90" : "")
-              }
-            />
-            {item.label}
-          </button>
+          <div className="flex items-center gap-1.5">
+            {/* Satırı genişletmenin GERÇEK, klavyeyle erişilebilir kontrolü
+                bu buton — <tr>'a onClick koymak fare dışı kullanıcıları
+                dışlardı. 7 günlük mini grafiği burada, ürün adı ise ayrı
+                bir sayfaya (bkz. lib/priceContent.ts) yönlendiriyor. */}
+            <button
+              type="button"
+              onClick={onToggleExpand}
+              aria-expanded={isExpanded}
+              aria-controls={detailId}
+              aria-label={`${item.label} 7 günlük grafiği ${isExpanded ? "kapat" : "aç"}`}
+              className="flex h-5 w-5 shrink-0 items-center justify-center rounded-sm text-muted hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            >
+              <CaretRight
+                aria-hidden="true"
+                size={11}
+                className={"transition-transform duration-200 " + (isExpanded ? "rotate-90" : "")}
+              />
+            </button>
+            {detailHref ? (
+              <Link
+                href={detailHref}
+                className="rounded-sm hover:text-brand hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              >
+                {item.label}
+              </Link>
+            ) : (
+              item.label
+            )}
+          </div>
         </td>
         <td
           className={

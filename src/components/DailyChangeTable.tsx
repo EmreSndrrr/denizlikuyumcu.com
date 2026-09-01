@@ -5,10 +5,12 @@
 // çok hareket edenleri öne çıkarıyor. Amaç: kullanıcının "bugün ne oldu?"
 // sorusuna tek bakışta cevap bulup sayfada biraz daha vakit geçirmesi.
 
+import Link from "next/link";
 import { TrendUp, TrendDown } from "@phosphor-icons/react/dist/ssr";
 import type { PriceItem, PriceSnapshot } from "@/lib/prices";
 import { formatTL, formatTime } from "@/lib/format";
 import { useLivePrices } from "@/lib/useLivePrices";
+import { getPriceHref } from "@/lib/priceContent";
 import StaleBadge from "@/components/StaleBadge";
 
 const LIST_SIZE = 5;
@@ -67,11 +69,20 @@ function ChangeList({
         {title}
       </p>
       <ol className="mt-3 space-y-2.5">
-        {items.map((item, i) => (
+        {items.map((item, i) => {
+          const href = getPriceHref(item.key);
+          return (
           <li key={item.key} className="flex items-center justify-between gap-3 text-sm">
+
             <span className="flex min-w-0 items-center gap-2">
               <span className="w-4 shrink-0 text-xs tabular-nums text-muted">{i + 1}</span>
-              <span className="truncate text-ink">{item.label}</span>
+              {href ? (
+                <Link href={href} className="truncate text-ink hover:text-brand hover:underline">
+                  {item.label}
+                </Link>
+              ) : (
+                <span className="truncate text-ink">{item.label}</span>
+              )}
             </span>
             <span className="flex shrink-0 items-baseline gap-2 tabular-nums">
               <span className="text-muted">{formatTL(item.sell)}</span>
@@ -85,7 +96,8 @@ function ChangeList({
               </span>
             </span>
           </li>
-        ))}
+          );
+        })}
       </ol>
     </div>
   );
