@@ -62,6 +62,15 @@ güncel hissettiren fiyat gösterimi önemlidir.
   Gerçek kuyumcu kayıtları (gerçek adres/koordinatlarla) eklendiğinde
   tekrar gündeme gelecek bir açık madde — kullanıcı onayladı (bkz. konuşma
   geçmişi).
+- Her altın/döviz kalemi (21 kalem) için programatik SEO sayfası var:
+  `/altin/[slug]` ve `/doviz/[slug]` (bkz. `lib/priceContent.ts`,
+  `components/PriceDetailPage.tsx`). Her sayfa canlı fiyat kartı + o
+  kaleme özel hesaplama aracı (`PriceItemCalculator`) + özgün SEO metni
+  içeriyor. Yeni bir fiyat kalemi `lib/prices.ts`'e eklendiğinde otomatik
+  sayfa OLUŞMAZ — `priceContent.ts`'e elle bir girdi eklenmesi gerekir.
+  **Açık madde:** Reklam Ver sayfasındaki "Banner Reklam" paketi bu fiyat
+  sayfalarında da görünürlük vaat ediyor ama şu an bu sayfalarda hiç
+  `AdSlot` yok — ya eklenmeli ya da paket metni düzeltilmeli.
 
 ## Brand Commitments
 
@@ -70,12 +79,16 @@ henüz belirlenmedi.
 
 ## Evidence on Hand
 
-Şu an elde gerçek/somut hiçbir varlık yok: anlaşmalı kuyumcu yok, logo
-yok, marka rengi tercihi yok. `src/lib/jewelers.ts` içindeki kuyumcu
-kayıtları ve `reklam-ver` sayfasındaki iletişim bilgileri **açıkça
-işaretlenmiş demo/placeholder** verilerdir — gerçek işletme olarak
-sunulmamalı, gelecekteki çalışmalar bunları gerçekmiş gibi
-genişletmemeli veya yeni sahte kayıtlar uydurmamalı.
+Anlaşmalı kuyumcu yok, logo yok, marka rengi tercihi yok. `src/lib/jewelers.ts`
+içindeki kuyumcu kayıtları **açıkça işaretlenmiş demo/placeholder**
+verilerdir — gerçek işletme olarak sunulmamalı, gelecekteki çalışmalar
+bunları gerçekmiş gibi genişletmemeli veya yeni sahte kayıtlar uydurmamalı.
+
+Tek gerçek/somut iletişim bilgisi: telefon **0544 596 56 22** (kullanıcı
+tarafından verildi, `reklam-ver` ve `iletişim` sayfalarında kullanılıyor).
+E-posta (`info@denizlikuyumcu.com`), fiziksel adres ve KVKK "veri
+sorumlusu" kimliği (şirket unvanı/vergi no) hâlâ placeholder/eksik —
+`kvkk` sayfasında bu açıkça belirtiliyor.
 
 ## Product Principles
 

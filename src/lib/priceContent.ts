@@ -423,7 +423,7 @@ export const priceContent: PriceContentEntry[] = [
     metaTitle: "Denizli Ons Altın Fiyatı (USD)",
     metaDescription:
       "Ons altın (XAU/USD) fiyatı canlı olarak güncellenir. Ons altının Denizli'deki gram altın fiyatına etkisini burada öğrenin.",
-    h1: "Ons Altın Fiyatı (Uluslararası, USD)",
+    h1: "Denizli Ons Altın Fiyatı (Uluslararası, USD)",
     keyword: "ons altın fiyatı",
     intro:
       "Ons altın, dünya genelinde altının referans alındığı uluslararası fiyattır ve dolar bazında işlem görür. Türkiye'deki gram altın fiyatının temelini oluşturur.",
