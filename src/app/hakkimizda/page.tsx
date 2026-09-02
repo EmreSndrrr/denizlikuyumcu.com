@@ -4,7 +4,7 @@ import LegalPage from "@/components/LegalPage";
 export const metadata: Metadata = {
   title: "Hakkımızda",
   description:
-    "DenizliKuyumcu.com kimdir, ne sunar? Amacımız ve çalışma şeklimiz hakkında bilgi alın.",
+    "DenizliKuyumcu.com kimdir, ne sunar, nasıl gelir elde eder? Amacımız, şeffaflık ilkelerimiz ve çalışma şeklimiz hakkında bilgi alın.",
   alternates: { canonical: "/hakkimizda" },
 };
 

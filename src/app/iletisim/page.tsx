@@ -4,7 +4,7 @@ import LegalPage from "@/components/LegalPage";
 export const metadata: Metadata = {
   title: "İletişim",
   description:
-    "DenizliKuyumcu.com ile iletişime geçin — sorularınız, reklam talepleriniz ve geri bildirimleriniz için.",
+    "DenizliKuyumcu.com ile iletişime geçin — sorularınız, reklam talepleriniz, hata bildirimleriniz ve iş birliği önerileriniz için e-posta ve telefon.",
   alternates: { canonical: "/iletisim" },
 };
 

@@ -4,7 +4,7 @@ import LegalPage from "@/components/LegalPage";
 export const metadata: Metadata = {
   title: "Kullanım Koşulları",
   description:
-    "DenizliKuyumcu.com'u kullanırken geçerli olan kullanım koşulları.",
+    "DenizliKuyumcu.com'u kullanırken geçerli olan kullanım koşulları: sitenin amacı, sorumluluk sınırları ve yetkili mahkeme bilgisi.",
   alternates: { canonical: "/kullanim-kosullari" },
 };
 

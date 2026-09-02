@@ -4,7 +4,7 @@ import LegalPage from "@/components/LegalPage";
 export const metadata: Metadata = {
   title: "Yasal Uyarı",
   description:
-    "DenizliKuyumcu.com'daki fiyat ve içeriklerin sorumluluk sınırlarına dair yasal uyarı.",
+    "DenizliKuyumcu.com'daki fiyat, hesaplama ve içeriklerin sorumluluk sınırlarına dair yasal uyarı — yatırım tavsiyesi değildir, gecikmeli olabilir.",
   alternates: { canonical: "/yasal-uyari" },
 };
 

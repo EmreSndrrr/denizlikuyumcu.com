@@ -84,6 +84,9 @@ export default function PriceDetailPage({
           </div>
 
           <article className="prose prose-stone dark:prose-invert mt-8 max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-brand">
+            {/* Tek bloklu özet — AI Overviews/ChatGPT gibi araçların
+                bağlamdan bağımsız alıntılayabileceği bir pasaj (GEO). */}
+            <p className="lead">{entry.summary}</p>
             {entry.sections.map((section) => (
               <section key={section.heading}>
                 <h2>{section.heading}</h2>
@@ -91,6 +94,18 @@ export default function PriceDetailPage({
               </section>
             ))}
           </article>
+
+          {entry.relatedGuide && (
+            <p className="mt-4 text-sm text-muted">
+              İlgili rehber:{" "}
+              <Link
+                href={entry.relatedGuide.href}
+                className="font-medium text-brand hover:underline"
+              >
+                {entry.relatedGuide.label}
+              </Link>
+            </p>
+          )}
 
           <div className="mt-8 max-w-md">
             <PriceItemCalculator itemKey={entry.key} initialData={initialData} />

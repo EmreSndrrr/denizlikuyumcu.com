@@ -4,7 +4,7 @@ import LegalPage from "@/components/LegalPage";
 export const metadata: Metadata = {
   title: "KVKK Aydınlatma Metni",
   description:
-    "6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında DenizliKuyumcu.com aydınlatma metni.",
+    "6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında DenizliKuyumcu.com aydınlatma metni: veri sorumlusu, işlenen veri ve haklarınız.",
   alternates: { canonical: "/kvkk" },
 };
 

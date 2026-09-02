@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { CheckCircle } from "@phosphor-icons/react/dist/ssr";
 
 export const metadata: Metadata = {
-  title: "Reklam Ver — Kuyumcunuzu Denizli'de Öne Çıkarın",
+  title: "Reklam Ver: Kuyumcunuzu Öne Çıkarın",
   description:
-    "DenizliKuyumcu.com üzerinde reklam vererek kuyumcunuzu binlerce potansiyel müşteriye ulaştırın.",
+    "DenizliKuyumcu.com üzerinde reklam vererek kuyumcunuzu Denizli'de altın/döviz fiyatı arayan binlerce potansiyel müşteriye ulaştırın. Paketler ve fiyat teklifi için iletişime geçin.",
   alternates: { canonical: "/reklam-ver" },
 };
 
@@ -43,7 +43,7 @@ export default function ReklamVerPage() {
   return (
     <div className="mx-auto max-w-[1240px] px-4 py-12">
       <h1 className="max-w-2xl text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
-        Kuyumcunuzu Denizli&apos;de Öne Çıkarın
+        Reklam Ver: Kuyumcunuzu Denizli&apos;de Öne Çıkarın
       </h1>
       <p className="mt-3 max-w-xl text-muted">
         DenizliKuyumcu.com; güncel altın fiyatı, döviz kuru ve kuyumculukla

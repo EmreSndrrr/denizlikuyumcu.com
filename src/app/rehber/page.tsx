@@ -4,7 +4,7 @@ import GuideList from "@/components/GuideList";
 export const metadata: Metadata = {
   title: "Altın ve Kuyumculuk Rehberi",
   description:
-    "Altın ayarı, gram altın hesaplama, alyans seçimi ve daha fazlası hakkında rehber içerikleri.",
+    "Altın ayarı, gram altın hesaplama, alyans seçimi ve altın bakımı üzerine Denizli'ye özel, pratik ve güncel rehber içerikleri.",
   alternates: { canonical: "/rehber" },
 };
 
@@ -13,7 +13,7 @@ const guides = [
     no: "01",
     category: "Ayar",
     href: "/rehber/altin-ayari-nedir",
-    title: "Altın Ayarı Nedir? (24, 22, 18, 14 Ayar)",
+    title: "Altın Ayarı Nedir? 24, 22, 18, 14 Ayar",
     desc: "Ayar nedir, hangisi nerede kullanılır, has altınla farkı nedir?",
   },
   {
@@ -34,7 +34,7 @@ const guides = [
     no: "04",
     category: "Bakım",
     href: "/rehber/altin-nasil-saklanir",
-    title: "Altın Takılar Evde Nasıl Saklanmalı ve Temizlenmeli?",
+    title: "Altın Takı Nasıl Saklanır ve Temizlenir?",
     desc: "Takılarınızın parlaklığını korumak için pratik bakım önerileri.",
   },
 ];
@@ -42,9 +42,12 @@ const guides = [
 export default function RehberIndexPage() {
   return (
     <div className="mx-auto max-w-[1240px] px-4 py-12">
-      <h1 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">Rehber</h1>
+      <h1 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+        Altın ve Kuyumculuk Rehberi
+      </h1>
       <p className="mt-3 max-w-xl text-muted">
-        Altın almadan veya satmadan önce bilmeniz gereken temel konular.
+        Denizli&apos;de altın almadan veya satmadan önce bilmeniz gereken
+        temel konular: ayar, hesaplama, alyans seçimi ve bakım.
       </p>
       {/* Bu sayfada aradaki h2 yok (doğrudan h1 altında) — öğe
           başlıkları h1 -> h3 atlamasın diye h2 olarak veriliyor. */}

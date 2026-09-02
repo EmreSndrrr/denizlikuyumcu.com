@@ -2,17 +2,18 @@ import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
 
 export const metadata: Metadata = {
-  title: "Altın Takılar Evde Nasıl Saklanmalı ve Temizlenmeli?",
+  title: "Altın Takı Nasıl Saklanır ve Temizlenir?",
   description:
-    "Altın takılarınızın parlaklığını korumak için saklama ve temizlik konusunda pratik öneriler.",
+    "Altın takılarınızın parlaklığını korumak için saklama, evde temizlik ve ne zaman kuyumcuya götürülmesi gerektiğine dair pratik öneriler.",
   alternates: { canonical: "/rehber/altin-nasil-saklanir" },
 };
 
 export default function Page() {
   return (
     <GuideArticle
-      title="Altın Takılar Evde Nasıl Saklanmalı ve Temizlenmeli?"
+      title="Altın Takı Nasıl Saklanır ve Temizlenir?"
       intro="Doğru saklama ve düzenli bakım, altın takılarınızın yıllarca ilk günkü gibi kalmasını sağlar."
+      updated="Eylül 2026"
     >
       <h2>Saklama önerileri</h2>
       <ul>

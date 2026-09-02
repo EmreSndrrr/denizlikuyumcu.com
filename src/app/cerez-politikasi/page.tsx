@@ -4,7 +4,7 @@ import LegalPage from "@/components/LegalPage";
 export const metadata: Metadata = {
   title: "Çerez Politikası",
   description:
-    "DenizliKuyumcu.com çerez (cookie) kullanımı hakkında bilgilendirme.",
+    "DenizliKuyumcu.com çerez (cookie) kullanımı hakkında bilgilendirme: hangi veriler localStorage'da tutulur, tercih bildirimi nasıl çalışır?",
   alternates: { canonical: "/cerez-politikasi" },
 };
 

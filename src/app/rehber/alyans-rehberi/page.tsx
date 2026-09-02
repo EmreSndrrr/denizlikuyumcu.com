@@ -4,7 +4,7 @@ import GuideArticle from "@/components/GuideArticle";
 export const metadata: Metadata = {
   title: "Alyans Alırken Nelere Dikkat Edilmeli?",
   description:
-    "Alyans seçerken ayar, ölçü, gramaj ve kuyumcu seçimi konusunda dikkat edilmesi gereken noktalar.",
+    "Alyans seçerken ayar (14 mi 18 mi?), doğru ölçü, gramaj-bütçe dengesi ve güvenilir kuyumcu seçimi konusunda dikkat edilmesi gereken noktalar.",
   alternates: { canonical: "/rehber/alyans-rehberi" },
 };
 
@@ -13,13 +13,17 @@ export default function Page() {
     <GuideArticle
       title="Alyans Alırken Nelere Dikkat Edilmeli?"
       intro="Alyans, günlük hayatta neredeyse hiç çıkarılmayan bir takı olduğu için dayanıklılık ve konfor, tasarım kadar önemlidir."
+      updated="Eylül 2026"
     >
       <h2>1. Ayar seçimi</h2>
       <p>
         Alyanslarda en yaygın tercih 14 ve 18 ayardır. 14 ayar daha
         dayanıklı ve daha ekonomiktir; 18 ayar ise daha parlak bir renk
         tonuna sahiptir ama günlük kullanımda çizilmeye biraz daha
-        yatkındır.
+        yatkındır. Güncel{" "}
+        <a href="/altin/14-ayar-altin">14 ayar</a> ve{" "}
+        <a href="/altin/18-ayar-altin">18 ayar altın fiyatlarını</a> canlı
+        olarak karşılaştırabilirsiniz.
       </p>
 
       <h2>2. Doğru ölçü</h2>

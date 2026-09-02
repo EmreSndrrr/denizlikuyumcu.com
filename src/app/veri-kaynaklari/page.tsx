@@ -4,7 +4,7 @@ import LegalPage from "@/components/LegalPage";
 export const metadata: Metadata = {
   title: "Veri Kaynakları",
   description:
-    "DenizliKuyumcu.com'daki altın/döviz fiyatları ve kuyumcu bilgileri hangi kaynaklardan geliyor?",
+    "DenizliKuyumcu.com'daki altın/döviz fiyatları ve kuyumcu bilgileri hangi kaynaklardan geliyor, ne sıklıkla güncelleniyor? Şeffaf kaynak listesi.",
   alternates: { canonical: "/veri-kaynaklari" },
 };
 

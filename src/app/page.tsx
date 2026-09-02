@@ -121,7 +121,7 @@ export default async function HomePage() {
           <div className="relative grid gap-8 p-6 sm:p-8 lg:grid-cols-2 lg:items-center lg:gap-12 lg:p-16">
             <div>
               <h1 className="max-w-lg text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl">
-                Denizli altın piyasası, tek ekranda.
+                Denizli altın fiyatları ve kuyumcu rehberi, tek ekranda.
               </h1>
               <p className="mt-3 max-w-md text-base text-muted sm:mt-4 sm:text-lg">
                 Güncel fiyatları takip edin, güvenilir kuyumcuları keşfedin.
@@ -265,7 +265,7 @@ export default async function HomePage() {
               no: "01",
               category: "Ayar",
               href: "/rehber/altin-ayari-nedir",
-              title: "Altın Ayarı Nedir? (24, 22, 18, 14 Ayar)",
+              title: "Altın Ayarı Nedir? 24, 22, 18, 14 Ayar",
               desc: "Ayar nedir, hangisi nerede kullanılır, has altınla farkı.",
             },
             {

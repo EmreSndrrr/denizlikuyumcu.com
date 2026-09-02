@@ -4,7 +4,7 @@ import GuideArticle from "@/components/GuideArticle";
 export const metadata: Metadata = {
   title: "Gram Altın Fiyatı Nasıl Hesaplanır?",
   description:
-    "Gram altın fiyatının dolar kuru ve ons altınla ilişkisi, işçilik farkının fiyata etkisi nasıl hesaplanır?",
+    "Gram altın fiyatının dolar kuru ve ons altınla ilişkisi, alış-satış farkı (spread) nereden gelir, işçilik fiyata nasıl eklenir — basit formülle anlatıyoruz.",
   alternates: { canonical: "/rehber/gram-altin-hesaplama" },
 };
 
@@ -13,6 +13,7 @@ export default function Page() {
     <GuideArticle
       title="Gram Altın Fiyatı Nasıl Hesaplanır?"
       intro="Gram altın fiyatı, dünya piyasalarındaki ons altın fiyatı ile dolar/TL kurunun birleşiminden oluşur. İşte bu hesaplamanın basit mantığı."
+      updated="Eylül 2026"
     >
       <h2>Temel formül</h2>
       <p>
@@ -29,7 +30,10 @@ export default function Page() {
         Bu nedenle gram altın fiyatı iki ana etkenle hareket eder: dünya
         piyasasında ons altının dolar cinsinden değeri ve dolar/TL kurunun
         seviyesi. Ons altın sabit kalsa bile dolar TL karşısında değer
-        kazanırsa gram altın fiyatı da yükselir.
+        kazanırsa gram altın fiyatı da yükselir. Güncel{" "}
+        <a href="/altin/gram-altin">gram altın fiyatını</a> ve{" "}
+        <a href="/altin/ons-altin">ons altın fiyatını</a> canlı olarak takip
+        edebilirsiniz.
       </p>
 
       <h2>Alış-satış farkı (spread) nereden geliyor?</h2>

@@ -6,10 +6,16 @@ import { getAdForPosition } from "@/lib/ads";
 export default function GuideArticle({
   title,
   intro,
+  updated,
   children,
 }: {
   title: string;
   intro: string;
+  // E-E-A-T sinyali: yazar/editöryal kimlik + güncelleme tarihi. Tek bir
+  // gerçek yazar ismi yerine kurumsal bir ibare kullanıyoruz — site
+  // sahibinin altın/kuyumculuk konusunda kişisel bir uzmanlık iddiası
+  // yok, bu yüzden kişisel isim yanıltıcı olur.
+  updated?: string;
   children: ReactNode;
 }) {
   const jsonLd = {
@@ -37,6 +43,10 @@ export default function GuideArticle({
         {title}
       </h1>
       <p className="mt-3 text-lg text-muted">{intro}</p>
+      <p className="mt-2 text-xs text-muted">
+        Yazan: DenizliKuyumcu.com Editöryal Ekibi
+        {updated && <> · Güncelleme: {updated}</>}
+      </p>
 
       {/* Gerçek bir reklam yoksa (bkz. AdSlot.tsx) hiçbir şey render
           edilmiyor — sarmalayıcı boş bir boşluk bırakmasın diye burada

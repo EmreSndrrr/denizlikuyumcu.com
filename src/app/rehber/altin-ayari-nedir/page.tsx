@@ -2,17 +2,18 @@ import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
 
 export const metadata: Metadata = {
-  title: "Altın Ayarı Nedir? 24, 22, 18, 14 Ayar Farkları",
+  title: "Altın Ayarı Nedir? 24, 22, 18, 14 Ayar",
   description:
-    "Altın ayarı ne demektir, 24, 22, 18 ve 14 ayar altın arasındaki farklar ve hangi ayarın nerede kullanıldığı.",
+    "Altın ayarı ne demektir, 24, 22, 18 ve 14 ayar altın arasındaki farklar, has değerleri ve hangi ayarın nerede kullanıldığı — güncel fiyatlarla birlikte.",
   alternates: { canonical: "/rehber/altin-ayari-nedir" },
 };
 
 export default function Page() {
   return (
     <GuideArticle
-      title="Altın Ayarı Nedir? 24, 22, 18, 14 Ayar Farkları"
+      title="Altın Ayarı Nedir? 24, 22, 18, 14 Ayar"
       intro="Kuyumcuda duyduğunuz 'ayar' kelimesi, takının içindeki saf altın oranını ifade eder. Bu rehberde ayar kavramını ve yaygın ayarlar arasındaki farkları anlatıyoruz."
+      updated="Eylül 2026"
     >
       <h2>Ayar ne anlama gelir?</h2>
       <p>
@@ -34,17 +35,23 @@ export default function Page() {
         <li>
           <strong>22 Ayar:</strong> ~%91,6 saf. Türkiye&apos;de bilezik ve
           geleneksel takılarda sık kullanılır; 24 ayara göre daha
-          dayanıklıdır.
+          dayanıklıdır. Güncel{" "}
+          <a href="/altin/22-ayar-bilezik">22 ayar bilezik fiyatını</a> canlı
+          takip edebilirsiniz.
         </li>
         <li>
           <strong>18 Ayar:</strong> %75 saf. Günlük kullanım yüzük, kolye ve
           küpelerde en yaygın tercihlerden biridir; dayanıklılık ve görünüm
-          arasında iyi bir denge sunar.
+          arasında iyi bir denge sunar. Güncel{" "}
+          <a href="/altin/18-ayar-altin">18 ayar altın fiyatını</a> buradan
+          görebilirsiniz.
         </li>
         <li>
           <strong>14 Ayar:</strong> ~%58,5 saf. Daha ekonomik ve daha
           dayanıklıdır; özellikle günlük yoğun kullanılan takılarda tercih
-          edilebilir.
+          edilebilir. Güncel{" "}
+          <a href="/altin/14-ayar-altin">14 ayar altın fiyatını</a> buradan
+          görebilirsiniz.
         </li>
       </ul>
 
