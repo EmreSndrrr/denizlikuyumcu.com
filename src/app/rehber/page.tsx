@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Altın ve Kuyumculuk Rehberi",
   description:
     "Altın ayarı, gram altın hesaplama, alyans seçimi ve daha fazlası hakkında rehber içerikleri.",
+  alternates: { canonical: "/rehber" },
 };
 
 const guides = [

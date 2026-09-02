@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Altın Ayarı Nedir? 24, 22, 18, 14 Ayar Farkları",
   description:
     "Altın ayarı ne demektir, 24, 22, 18 ve 14 ayar altın arasındaki farklar ve hangi ayarın nerede kullanıldığı.",
+  alternates: { canonical: "/rehber/altin-ayari-nedir" },
 };
 
 export default function Page() {

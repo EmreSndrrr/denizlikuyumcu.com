@@ -1,0 +1,30 @@
+# DenizliKuyumcu.com
+
+> Denizli'ye özel, bilgi/vitrin amaçlı bir portal: güncel altın ve döviz
+> fiyatlarını (yaklaşık her 60 saniyede bir tazelenen canlı veri),
+> altın/kuyumculuk konulu rehber içeriklerini ve bir Denizli kuyumcu
+> dizinini bir arada sunar. Site kendisi bir kuyumcu değildir, ürün
+> satmaz; e-ticaret veya online satış yoktur.
+
+Fiyatlar bilgilendirme amaçlıdır, yatırım tavsiyesi değildir ve
+gecikmeli olabilir. Kesin alım-satım fiyatı için ilgili kuyumcuyla
+doğrudan iletişime geçilmesi önerilir.
+
+## Fiyatlar
+
+- [Anasayfa — güncel altın ve döviz fiyatları](https://denizlikuyumcu.com/): gram, çeyrek, yarım, tam altın, Cumhuriyet altını, 22 ayar bilezik, dolar, euro ve daha fazlası tek tabloda.
+- Her altın/döviz kalemi için ayrı, canlı veri içeren sayfa: `/altin/{kalem}` ve `/doviz/{kalem}` (ör. `/altin/gram-altin`, `/doviz/dolar`).
+
+## Rehber
+
+- [Rehber](https://denizlikuyumcu.com/rehber): altın ayarı, gram altın hesaplama, alyans seçimi ve altın bakımı üzerine içerikler.
+
+## Kuyumcular
+
+- [Kuyumcular](https://denizlikuyumcu.com/kuyumcular): Denizli'deki kuyumcuların dizini.
+
+## Kurumsal
+
+- [Hakkımızda](https://denizlikuyumcu.com/hakkimizda)
+- [İletişim](https://denizlikuyumcu.com/iletisim)
+- [KVKK Aydınlatma Metni](https://denizlikuyumcu.com/kvkk)

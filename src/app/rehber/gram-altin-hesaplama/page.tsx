@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Gram Altın Fiyatı Nasıl Hesaplanır?",
   description:
     "Gram altın fiyatının dolar kuru ve ons altınla ilişkisi, işçilik farkının fiyata etkisi nasıl hesaplanır?",
+  alternates: { canonical: "/rehber/gram-altin-hesaplama" },
 };
 
 export default function Page() {

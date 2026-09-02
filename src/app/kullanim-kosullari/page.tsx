@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Kullanım Koşulları",
   description:
     "DenizliKuyumcu.com'u kullanırken geçerli olan kullanım koşulları.",
+  alternates: { canonical: "/kullanim-kosullari" },
 };
 
 export default function KullanimKosullariPage() {

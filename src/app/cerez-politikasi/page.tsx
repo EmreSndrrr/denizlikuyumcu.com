@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Çerez Politikası",
   description:
     "DenizliKuyumcu.com çerez (cookie) kullanımı hakkında bilgilendirme.",
+  alternates: { canonical: "/cerez-politikasi" },
 };
 
 export default function CerezPolitikasiPage() {

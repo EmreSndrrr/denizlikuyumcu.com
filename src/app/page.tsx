@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, MapPin } from "@phosphor-icons/react/dist/ssr";
 import { getPrices, getGoldHistory, getGoldItemSparklines } from "@/lib/prices";
@@ -28,6 +29,15 @@ import Reveal from "@/components/Reveal";
 // kendi polling'i sağlıyor.
 export const revalidate = 60;
 
+// Diğer tüm sayfalar kendi metadata'sını export ediyor (bkz. her
+// sayfadaki `alternates.canonical`); anasayfa title/description'ı
+// layout.tsx'ten miras alıyor (Next.js metadata alan-bazında birleşiyor,
+// burada sadece canonical'ı override ediyoruz — title/description'a
+// dokunmuyor).
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
+
 // Bölüm sırası (2026 tasarım yenileme briefi'ne göre): fiyat şeridi ve
 // header zaten global; hero (gram altın kartıyla TEK kompozisyon) →
 // "Bugün ne değişti?" kısa özeti → popüler fiyatlar → döviz → tüm altın
@@ -42,13 +52,33 @@ export default async function HomePage() {
   const goldSparklines = await getGoldItemSparklines();
   const featuredJewelers = jewelers.filter((j) => j.featured).slice(0, 3);
 
+  // Organization + WebSite tek bir @graph'ta birbirine bağlı — arama
+  // motorunun "bu site kime ait" varlık grafiğini kurabilmesi için.
+  // sameAs (sosyal medya profilleri) bilinçli olarak YOK: gerçek,
+  // doğrulanmış bir hesap yok, uydurma bağlantı eklenmiyor (PRODUCT.md
+  // ilkesi — bkz. "Evidence on Hand"). Gerçek hesaplar açıldığında
+  // buraya eklenmeli.
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "DenizliKuyumcu.com",
-    url: "https://denizlikuyumcu.com",
-    description:
-      "Denizli'de güncel altın ve döviz fiyatları, kuyumcu rehberi.",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://denizlikuyumcu.com/#organization",
+        name: "DenizliKuyumcu.com",
+        url: "https://denizlikuyumcu.com",
+        logo: "https://denizlikuyumcu.com/brand/denizli-kuyumcu-sembol.svg",
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://denizlikuyumcu.com/#website",
+        name: "DenizliKuyumcu.com",
+        url: "https://denizlikuyumcu.com",
+        description:
+          "Denizli'de güncel altın ve döviz fiyatları, kuyumcu rehberi.",
+        publisher: { "@id": "https://denizlikuyumcu.com/#organization" },
+        inLanguage: "tr-TR",
+      },
+    ],
   };
 
   return (

@@ -4,8 +4,16 @@ import { priceContent } from "@/lib/priceContent";
 // app/sitemap.ts -> Next.js bunu otomatik olarak /sitemap.xml olarak sunar.
 const siteUrl = "https://denizlikuyumcu.com";
 
-const staticRoutes = [
-  "",
+// seo-audit bulgusu T3: önceden BÜTÜN URL'ler için lastModified = new
+// Date() (yani her build'de "şu an") kullanılıyordu. Bu, gerçekte
+// değişmeyen sayfalar (rehber makaleleri, yasal sayfalar) için yanıltıcı
+// — Google zamanla hep "bugün" diyen lastModified değerlerini güvenilmez
+// bulup yok sayabiliyor. Statik içerik sayfaları artık SABİT bir tarih
+// kullanıyor; bu tarih SADECE o sayfanın içeriği gerçekten değiştiğinde
+// elle güncellenmeli (otomatik değil, bilinçli bir karar).
+const STATIC_CONTENT_LAST_MODIFIED = new Date("2026-09-02");
+
+const staticContentRoutes = [
   "/kuyumcular",
   "/rehber",
   "/reklam-ver",
@@ -23,7 +31,8 @@ const staticRoutes = [
 
 // Her altın/döviz kalemi için ayrı fiyat sayfası — bkz. lib/priceContent.ts
 // ve app/altin/[slug], app/doviz/[slug]. Fiyatlar sık güncellendiği için
-// bu sayfalar da anasayfa gibi "hourly" değişim sıklığıyla işaretleniyor.
+// bu sayfalar da anasayfa gibi "hourly" değişim sıklığıyla işaretleniyor
+// (lastModified=now burada DOĞRU — içerik gerçekten sürekli değişiyor).
 const priceRoutes = priceContent.map((entry) => `/${entry.category}/${entry.slug}`);
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -34,12 +43,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((path) => ({
+  // Anasayfa da canlı fiyat verisi gösteriyor, priceRoutes ile aynı
+  // gerekçeyle "hourly" + "şu an" doğru.
+  const homeEntry: MetadataRoute.Sitemap = [
+    { url: siteUrl, lastModified: new Date(), changeFrequency: "hourly", priority: 1 },
+  ];
+
+  const staticEntries: MetadataRoute.Sitemap = staticContentRoutes.map((path) => ({
     url: `${siteUrl}${path}`,
-    lastModified: new Date(),
-    changeFrequency: path === "" ? "hourly" : "weekly",
-    priority: path === "" ? 1 : 0.7,
+    lastModified: STATIC_CONTENT_LAST_MODIFIED,
+    changeFrequency: "weekly",
+    priority: 0.7,
   }));
 
-  return [...staticEntries, ...priceEntries];
+  return [...homeEntry, ...staticEntries, ...priceEntries];
 }

@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "KVKK Aydınlatma Metni",
   description:
     "6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında DenizliKuyumcu.com aydınlatma metni.",
+  alternates: { canonical: "/kvkk" },
 };
 
 export default function KvkkPage() {

@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Alyans Alırken Nelere Dikkat Edilmeli?",
   description:
     "Alyans seçerken ayar, ölçü, gramaj ve kuyumcu seçimi konusunda dikkat edilmesi gereken noktalar.",
+  alternates: { canonical: "/rehber/alyans-rehberi" },
 };
 
 export default function Page() {

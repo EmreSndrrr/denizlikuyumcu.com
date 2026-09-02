@@ -52,3 +52,7 @@ next-env.d.ts
 # python bytecode cache (vendored skill scripts)
 __pycache__/
 *.pyc
+
+# claude-seo eklentisi buraya (proje köküne) klonlanmış — kendi git
+# geçmişi olan ayrı bir araç deposu, proje kaynak kodunun parçası değil.
+claude-seo/

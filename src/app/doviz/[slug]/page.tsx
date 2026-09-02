@@ -26,6 +26,7 @@ export async function generateMetadata({
   return {
     title: entry.metaTitle,
     description: entry.metaDescription,
+    alternates: { canonical: `/doviz/${entry.slug}` },
   };
 }
 

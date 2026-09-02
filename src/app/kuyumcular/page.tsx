@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Denizli Kuyumcuları — Rehber ve Adresler",
   description:
     "Denizli'deki kuyumcuları keşfedin. Öne çıkan ve güvenilir kuyumcuların listesi.",
+  alternates: { canonical: "/kuyumcular" },
 };
 
 export default function KuyumcularPage() {

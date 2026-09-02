@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "İletişim",
   description:
     "DenizliKuyumcu.com ile iletişime geçin — sorularınız, reklam talepleriniz ve geri bildirimleriniz için.",
+  alternates: { canonical: "/iletisim" },
 };
 
 export default function IletisimPage() {

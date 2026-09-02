@@ -18,10 +18,9 @@ export default function GuideArticle({
     headline: title,
     description: intro,
     inLanguage: "tr-TR",
-    publisher: {
-      "@type": "Organization",
-      name: "DenizliKuyumcu.com",
-    },
+    // Anasayfadaki (page.tsx) Organization @id'sine referans — aynı
+    // varlığı tekrar tanımlamak yerine tek bir entity grafiğine bağlıyor.
+    publisher: { "@id": "https://denizlikuyumcu.com/#organization" },
   };
 
   return (

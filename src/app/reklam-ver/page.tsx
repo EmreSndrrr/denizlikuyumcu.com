@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Reklam Ver — Kuyumcunuzu Denizli'de Öne Çıkarın",
   description:
     "DenizliKuyumcu.com üzerinde reklam vererek kuyumcunuzu binlerce potansiyel müşteriye ulaştırın.",
+  alternates: { canonical: "/reklam-ver" },
 };
 
 const packages = [

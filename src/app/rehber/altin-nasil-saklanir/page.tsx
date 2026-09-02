@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Altın Takılar Evde Nasıl Saklanmalı ve Temizlenmeli?",
   description:
     "Altın takılarınızın parlaklığını korumak için saklama ve temizlik konusunda pratik öneriler.",
+  alternates: { canonical: "/rehber/altin-nasil-saklanir" },
 };
 
 export default function Page() {

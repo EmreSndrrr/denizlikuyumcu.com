@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Veri Kullanımı",
   description:
     "DenizliKuyumcu.com hangi verileri, nasıl kullanır? Tarayıcı depolama (localStorage) kullanımı hakkında bilgi.",
+  alternates: { canonical: "/veri-kullanimi" },
 };
 
 export default function VeriKullanimiPage() {
