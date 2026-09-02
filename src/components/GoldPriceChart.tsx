@@ -37,10 +37,13 @@ const BOTTOM_PAD = 28;
 const GOLD = "#e3bd6e";
 
 function formatShortDate(iso: string, period: Period) {
+  // timeZone SABİT: bkz. lib/format.ts formatTime() üzerindeki not — aynı
+  // hydration uyuşmazlığı riski burada da geçerli.
   return new Date(iso).toLocaleDateString("tr-TR", {
     day: "2-digit",
     month: "short",
     year: period === 365 ? "2-digit" : undefined,
+    timeZone: "Europe/Istanbul",
   });
 }
 

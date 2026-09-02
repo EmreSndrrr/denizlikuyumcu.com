@@ -18,9 +18,14 @@ export function formatUSD(value: number) {
 }
 
 export function formatTime(iso: string) {
+  // timeZone SABİT verilmeli: sunucu (Vercel, UTC) ve tarayıcı (ziyaretçinin
+  // yerel saat dilimi) farklı olduğunda, timeZone belirtilmezse ikisi farklı
+  // metin üretir ve React hydration hatasına (#418) yol açar — "tr-TR"
+  // yalnızca dil/biçim kuralını belirler, saat dilimini DEĞİL.
   return new Date(iso).toLocaleTimeString("tr-TR", {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
+    timeZone: "Europe/Istanbul",
   });
 }
