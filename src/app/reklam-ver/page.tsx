@@ -87,7 +87,7 @@ export default function ReklamVerPage() {
           ulaşın.
         </p>
         <p className="mt-3 text-sm text-muted">
-          E-posta: <span className="font-medium text-ink">info@denizlikuyumcu.com</span>
+          E-posta: <span className="font-medium text-ink">info@ventiajans.com</span>
           {" · "}Telefon:{" "}
           <a href="tel:05445965622" className="font-medium text-ink hover:text-brand">
             0544 596 56 22

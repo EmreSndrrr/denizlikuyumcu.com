@@ -48,18 +48,24 @@ export default function Footer() {
             <ul className="mt-2 space-y-1">
               <li><Link href="/hakkimizda" className="hover:text-brand">Hakkımızda</Link></li>
               <li><Link href="/iletisim" className="hover:text-brand">İletişim</Link></li>
-              <li><Link href="/veri-kullanimi" className="hover:text-brand">Veri Kullanımı</Link></li>
+              <li><Link href="/veri-kaynaklari" className="hover:text-brand">Veri Kaynakları</Link></li>
+              <li><Link href="/gizlilik-politikasi" className="hover:text-brand">Gizlilik Politikası</Link></li>
               <li><Link href="/kullanim-kosullari" className="hover:text-brand">Kullanım Koşulları</Link></li>
               <li><Link href="/kvkk" className="hover:text-brand">KVKK</Link></li>
               <li><Link href="/cerez-politikasi" className="hover:text-brand">Çerez Politikası</Link></li>
             </ul>
           </div>
           <div>
-            <p className="font-semibold text-ink">Yasal Uyarı</p>
+            <p className="font-semibold text-ink">
+              <Link href="/yasal-uyari" className="hover:text-brand">Yasal Uyarı</Link>
+            </p>
             <p className="mt-2">
               Sitede yer alan fiyatlar bilgilendirme amaçlıdır, yatırım
               tavsiyesi değildir ve gecikmeli olabilir. Kesin alım-satım
-              fiyatı için ilgili kuyumcuyla iletişime geçiniz.
+              fiyatı için ilgili kuyumcuyla iletişime geçiniz.{" "}
+              <Link href="/yasal-uyari" className="text-brand hover:underline">
+                Devamını oku
+              </Link>
             </p>
           </div>
         </div>

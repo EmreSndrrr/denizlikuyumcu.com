@@ -33,7 +33,8 @@ export default function KullanimKosullariPage() {
         olabilir. Bu fiyatlara dayanarak alınan alım-satım kararlarından
         doğabilecek zararlardan site sorumlu tutulamaz. Kesin fiyat için
         her zaman ilgili kuyumcuyla doğrudan iletişime geçilmesi
-        önerilir.
+        önerilir. Ayrıntılı bilgi için{" "}
+        <a href="/yasal-uyari">Yasal Uyarı</a> sayfasına bakabilirsiniz.
       </p>
 
       <h2>Kuyumcu Dizini ve Sponsorlu İçerik</h2>
@@ -54,13 +55,21 @@ export default function KullanimKosullariPage() {
         veya ticari amaçla yeniden yayınlanması talep edilmez.
       </p>
 
+      <h2>Uygulanacak Hukuk ve Yetkili Mahkeme</h2>
+      <p>
+        Bu koşullar Türkiye Cumhuriyeti kanunlarına tabidir. Bu koşullardan
+        veya sitenin kullanımından doğabilecek uyuşmazlıklarda Denizli
+        Mahkemeleri ve İcra Daireleri yetkilidir.
+      </p>
+
       <h2>Değişiklikler</h2>
       <p>
         Bu koşullar, site geliştikçe güncellenebilir. Önemli
         değişikliklerde bu sayfadaki &quot;son güncelleme&quot; tarihi
         değişir. İlgili diğer sayfalar için{" "}
-        <a href="/veri-kullanimi">Veri Kullanımı</a>,{" "}
-        <a href="/kvkk">KVKK Aydınlatma Metni</a> ve{" "}
+        <a href="/gizlilik-politikasi">Gizlilik Politikası</a>,{" "}
+        <a href="/kvkk">KVKK Aydınlatma Metni</a>,{" "}
+        <a href="/yasal-uyari">Yasal Uyarı</a> ve{" "}
         <a href="/cerez-politikasi">Çerez Politikası</a>&apos;nı
         inceleyebilirsiniz.
       </p>

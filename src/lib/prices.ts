@@ -111,14 +111,101 @@ function mockSnapshot(): PriceSnapshot {
   };
 }
 
+// Truncgil (finans.truncgil.com) yanıtındaki sayılar Türkçe biçimde gelir:
+// "." binlik ayracı, "," ondalık ayracı ("6.798,72" -> 6798.72). Ons altın
+// gibi bazı alanlarda ayrıca "$" öneki bulunur ("$4.378,92").
+function parseTRNumber(raw: string): number {
+  const cleaned = raw.replace(/[^0-9,.-]/g, "");
+  return parseFloat(cleaned.replace(/\./g, "").replace(",", "."));
+}
+
+type TruncgilEntry = { Alış: string; Satış: string; Değişim: string; Tür: string };
+
+// Truncgil anahtar gerektirmeyen, ücretsiz bir uç nokta — tüm altın/döviz
+// kalemlerini tek bir JSON'da döndürüyor. next.revalidate: 60 ile Next.js
+// bu isteği en fazla dakikada bir tekrarlıyor (bkz. README "Fiyat verisi
+// nasıl akıyor?").
+async function fetchTruncgilSnapshot(): Promise<PriceSnapshot> {
+  const res = await fetch("https://finans.truncgil.com/today.json", {
+    next: { revalidate: 60 },
+  });
+  if (!res.ok) {
+    throw new Error(`Truncgil API hata: HTTP ${res.status}`);
+  }
+  const data = (await res.json()) as Record<string, unknown>;
+
+  const entry = (sourceKey: string): TruncgilEntry => {
+    const raw = data[sourceKey];
+    if (!raw || typeof raw !== "object") {
+      throw new Error(`Truncgil API beklenmeyen yanıt: "${sourceKey}" bulunamadı`);
+    }
+    return raw as TruncgilEntry;
+  };
+
+  // scale: Truncgil, Ata ve Reşat sikke ailelerini yalnızca TAM boy olarak
+  // veriyor (Cumhuriyet altınında da durum aynı — orada zaten tek "tam"
+  // kalemimiz var). Çeyrek/yarım için kendi has-altın gramaj oranını
+  // (1,75g / 3,5g / 7g) uyguluyoruz; priceContent.ts'teki metinler de bu
+  // oranın piyasada geçerli olduğunu zaten anlatıyor.
+  const toItem = (
+    key: string,
+    label: string,
+    unit: PriceItem["unit"],
+    type: PriceItem["type"],
+    sourceKey: string,
+    scale = 1
+  ): PriceItem => {
+    const e = entry(sourceKey);
+    return {
+      key,
+      label,
+      unit,
+      type,
+      buy: Number((parseTRNumber(e.Alış) * scale).toFixed(2)),
+      sell: Number((parseTRNumber(e.Satış) * scale).toFixed(2)),
+      changePercent: parseTRNumber(e.Değişim),
+    };
+  };
+
+  const items: PriceItem[] = [
+    toItem("gram-altin", "Gram Altın", "TL", "gold", "gram-altin"),
+    toItem("ceyrek-altin", "Çeyrek Altın", "TL", "gold", "ceyrek-altin"),
+    toItem("yarim-altin", "Yarım Altın", "TL", "gold", "yarim-altin"),
+    toItem("tam-altin", "Tam Altın", "TL", "gold", "tam-altin"),
+    toItem("cumhuriyet-altini", "Cumhuriyet Altını", "TL", "gold", "cumhuriyet-altini"),
+    toItem("22-ayar-bilezik", "22 Ayar Bilezik", "TL", "gold", "22-ayar-bilezik"),
+    toItem("usd-try", "Dolar", "TL", "currency", "USD"),
+    toItem("eur-try", "Euro", "TL", "currency", "EUR"),
+    toItem("gbp-try", "Sterlin", "TL", "currency-extra", "GBP"),
+    toItem("chf-try", "İsviçre Frangı", "TL", "currency-extra", "CHF"),
+    toItem("sar-try", "Suudi Riyali", "TL", "currency-extra", "SAR"),
+    toItem("18-ayar-altin", "18 Ayar Altın (gr)", "TL", "gold-extra", "18-ayar-altin"),
+    toItem("14-ayar-altin", "14 Ayar Altın (gr)", "TL", "gold-extra", "14-ayar-altin"),
+    toItem("ceyrek-ata", "Çeyrek Ata Altın", "TL", "gold-extra", "ata-altin", 1.75 / 7),
+    toItem("yarim-ata", "Yarım Ata Altın", "TL", "gold-extra", "ata-altin", 3.5 / 7),
+    toItem("tam-ata", "Tam Ata Altın", "TL", "gold-extra", "ata-altin"),
+    toItem("ceyrek-resat", "Çeyrek Reşat Altın", "TL", "gold-extra", "resat-altin", 1.75 / 7),
+    toItem("yarim-resat", "Yarım Reşat Altın", "TL", "gold-extra", "resat-altin", 3.5 / 7),
+    toItem("tam-resat", "Tam Reşat Altın", "TL", "gold-extra", "resat-altin"),
+    toItem("gremse-altin", "Gremse Altın", "TL", "gold-extra", "gremse-altin"),
+    toItem("ons-altin", "Ons Altın", "USD", "ons", "ons"),
+  ];
+
+  return {
+    items,
+    updatedAt: new Date().toISOString(),
+    source: "live",
+  };
+}
+
 // Hangi veri kaynağının kullanılacağını .env.local'daki PRICE_PROVIDER
 // belirliyor (bkz. .env.example). Değer boşsa veya "mock" ise sahte veri
-// kullanılır — yerel geliştirme ve önizlemenin varsayılanı budur. Gerçek
-// bir sağlayıcı bağlandığında burada yeni bir "else if" dalı açıp kendi
-// fetch() mantığını (PRICE_API_KEY / PRICE_API_BASE_URL kullanarak)
-// eklemek yeterli; getPrices()'ı çağıran hiçbir bileşenin değişmesi
-// gerekmiyor.
-const PRICE_PROVIDER = process.env.PRICE_PROVIDER || "mock";
+// kullanılır — yerel geliştirme ve önizlemenin varsayılanı budur.
+// "truncgil" ise finans.truncgil.com'dan canlı veri çekilir (bkz.
+// fetchTruncgilSnapshot). Yeni bir sağlayıcı eklendiğinde getPrices()
+// içine yeni bir "else if" dalı açmak yeterli; getPrices()'ı çağıran
+// hiçbir bileşenin değişmesi gerekmiyor.
+const PRICE_PROVIDER = process.env.PRICE_PROVIDER || "truncgil";
 
 // cache() ile sarmalıyoruz: aynı istek (request) içinde hem layout.tsx
 // (üstteki kayan şerit) hem page.tsx (fiyat tabloları + hesaplama aracı)
@@ -131,14 +218,18 @@ export const getPrices = cache(async function getPrices(): Promise<PriceSnapshot
     return mockSnapshot();
   }
 
-  // TODO: Gerçek sağlayıcı seçildiğinde buraya eklenecek, örn.:
-  //   if (PRICE_PROVIDER === "collectapi") {
-  //     const res = await fetch(`${process.env.PRICE_API_BASE_URL}/...`, {
-  //       headers: { Authorization: `apikey ${process.env.PRICE_API_KEY}` },
-  //       next: { revalidate: 60 },
-  //     });
-  //     return mapProviderResponseToSnapshot(await res.json());
-  //   }
+  if (PRICE_PROVIDER === "truncgil") {
+    try {
+      return await fetchTruncgilSnapshot();
+    } catch (err) {
+      // Site fiyat gösteren bir portal — API çökerse sayfa da çökmemeli.
+      // Mock veriye düşüp hatayı logluyoruz; kullanıcı boş sayfa yerine
+      // (bariz şekilde farklı olmayan) makul rakamlar görür.
+      console.error("[lib/prices] Truncgil API hatası, mock veriye dönülüyor:", err);
+      return mockSnapshot();
+    }
+  }
+
   console.warn(
     `[lib/prices] Bilinmeyen PRICE_PROVIDER="${PRICE_PROVIDER}", mock veriye dönülüyor.`
   );

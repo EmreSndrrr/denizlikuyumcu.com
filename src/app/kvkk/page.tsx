@@ -17,14 +17,14 @@ export default function KvkkPage() {
         hazırlanmıştır.
       </p>
       <div className="not-prose my-6 rounded-2xl border border-border bg-gold-surface/60 p-4 text-sm text-muted">
-        <p className="font-semibold text-ink">Veri sorumlusu bilgisi — güncelleniyor</p>
+        <p className="font-semibold text-ink">Veri Sorumlusu</p>
         <p className="mt-2">
-          DenizliKuyumcu.com şu an bireysel bir proje olarak yürütülmektedir
-          ve henüz tescilli bir şirket unvanı, adresi ve vergi kimlik
-          numarası bu metne eklenmemiştir. Bu bilgiler netleştiğinde
-          (işletme resmen kurulduğunda) veri sorumlusu kimliği burada tam
-          olarak paylaşılacaktır. O ana kadar bu sayfayı, hangi verinin
-          işlendiğine dair genel bir bilgilendirme olarak değerlendiriniz.
+          DenizliKuyumcu.com, tescilli bir şirket değil; <strong>Emre
+          Şandır</strong> tarafından yürütülen bireysel, ticari olmayan bir
+          bilgilendirme/tanıtım projesidir. KVKK kapsamında veri sorumlusu
+          sıfatıyla hareket eden taraf gerçek kişi olarak Emre Şandır&apos;dır
+          — arkasında bir şirket unvanı, tüzel kişilik veya vergi mükellefiyeti
+          bulunmamaktadır.
         </p>
       </div>
       <h2>İşlenen kişisel veri</h2>
@@ -54,8 +54,15 @@ export default function KvkkPage() {
       <p>
         Bu haklarınızı kullanmak için{" "}
         <a href="/iletisim">İletişim</a> sayfasındaki e-posta adresi
-        üzerinden bize ulaşabilirsiniz. Veri sorumlusu kimlik bilgileri
-        netleştiğinde başvuru usulü de bu sayfada ayrıntılandırılacaktır.
+        üzerinden veri sorumlusuna (Emre Şandır) ulaşabilirsiniz.
+      </p>
+      <h2>Uyuşmazlıkların Çözümü</h2>
+      <p>
+        Bu aydınlatma metninden doğabilecek uyuşmazlıklarda, öncelikle{" "}
+        <a href="/iletisim">İletişim</a> sayfasındaki kanallardan çözüm
+        aranması rica olunur. Çözülemeyen uyuşmazlıklarda Denizli
+        Mahkemeleri ve İcra Daireleri yetkilidir (bkz.{" "}
+        <a href="/kullanim-kosullari">Kullanım Koşulları</a>).
       </p>
     </LegalPage>
   );

@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PriceMarquee from "@/components/PriceMarquee";
 import PageTransition from "@/components/PageTransition";
+import CookieConsentBanner from "@/components/CookieConsentBanner";
 import { getPrices } from "@/lib/prices";
 
 // Ana arayüz fontu: Inter. Ekran okunabilirliği için tasarlanmış, tabular
@@ -94,6 +95,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
+        <CookieConsentBanner />
       </body>
     </html>
   );

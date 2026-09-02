@@ -47,8 +47,13 @@ güncel hissettiren fiyat gösterimi önemlidir.
 ## Capabilities and Constraints
 
 - E-ticaret yok: sepet, ödeme, kargo, stok yönetimi kapsam dışı.
-- Canlı fiyat verisi şu an **mock/sahte veri** (`src/lib/prices.ts`);
-  gerçek bir veri sağlayıcısı henüz seçilmedi — açık/karara bağlanmamış.
+- Canlı fiyat verisi **finans.truncgil.com**'dan geliyor (`src/lib/prices.ts`,
+  `fetchTruncgilSnapshot`) — ücretsiz, anahtar gerektirmeyen bir uç nokta,
+  60 saniyede bir yenileniyor. Truncgil, Ata ve Reşat altın serilerini
+  yalnızca tam boy verdiği için çeyrek/yarım kalemler gramaj oranıyla
+  (1,75g / 3,5g / 7g) türetiliyor — ayrı canlı veri değil, hesaplanmış
+  değer. API çökerse mock veriye otomatik düşülüyor (`PRICE_PROVIDER=mock`
+  ile yerel geliştirmede de elle seçilebilir).
 - Next.js (App Router) + TypeScript + Tailwind CSS üzerine kurulu; bu
   kod tabanı zaten mevcut, stack kararı geri açılmayacak.
 - Reklam sistemi (`src/lib/ads.ts`) şu an kod içi config; DB veya admin
@@ -77,21 +82,32 @@ güncel hissettiren fiyat gösterimi önemlidir.
 
 ## Brand Commitments
 
-İsim sabit: **DenizliKuyumcu.com**. Logo, marka rengi veya görsel kimlik
-henüz belirlenmedi.
+İsim sabit: **DenizliKuyumcu.com**. Gerçek marka logosu (`public/brand/`)
+header/footer/favicon'a yerleştirildi — "henüz belirlenmedi" artık geçerli
+değil.
+
+## Legal / Business Identity
+
+DenizliKuyumcu.com tescilli bir şirket **değildir** ve öyle olması
+planlanmıyor — kullanıcı bunu açıkça netleştirdi: bu bir kuyumcu
+tanıtım/vitrin sitesi, kendi işletmesi değil. KVKK kapsamında veri
+sorumlusu, gerçek kişi olarak **Emre Şandır**'dır (bkz. `kvkk` sayfası).
+Bu yüzden şirket unvanı/vergi no gibi alanlar bilinçli olarak yok —
+"eksik" değil, ürün gerçeği bu.
 
 ## Evidence on Hand
 
-Anlaşmalı kuyumcu yok, logo yok, marka rengi tercihi yok. `src/lib/jewelers.ts`
+Anlaşmalı kuyumcu yok, marka rengi tercihi netleşmedi. `src/lib/jewelers.ts`
 içindeki kuyumcu kayıtları **açıkça işaretlenmiş demo/placeholder**
 verilerdir — gerçek işletme olarak sunulmamalı, gelecekteki çalışmalar
 bunları gerçekmiş gibi genişletmemeli veya yeni sahte kayıtlar uydurmamalı.
 
-Tek gerçek/somut iletişim bilgisi: telefon **0544 596 56 22** (kullanıcı
-tarafından verildi, `reklam-ver` ve `iletişim` sayfalarında kullanılıyor).
-E-posta (`info@denizlikuyumcu.com`), fiziksel adres ve KVKK "veri
-sorumlusu" kimliği (şirket unvanı/vergi no) hâlâ placeholder/eksik —
-`kvkk` sayfasında bu açıkça belirtiliyor.
+Gerçek/somut iletişim bilgisi: telefon **0544 596 56 22** ve veri sorumlusu
+kimliği **Emre Şandır** (kullanıcı tarafından verildi, `reklam-ver`,
+`iletişim` ve `kvkk` sayfalarında kullanılıyor). E-posta
+(`info@denizlikuyumcu.com`) ve fiziksel adres hâlâ placeholder/eksik.
+Uyuşmazlıklarda Denizli Mahkemeleri/İcra Daireleri yetkilidir (bkz.
+`kullanim-kosullari` ve `kvkk` sayfaları).
 
 ## Product Principles
 

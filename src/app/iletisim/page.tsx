@@ -18,7 +18,7 @@ export default function IletisimPage() {
       <ul>
         <li>
           E-posta:{" "}
-          <a href="mailto:info@denizlikuyumcu.com">info@denizlikuyumcu.com</a>
+          <a href="mailto:info@ventiajans.com">info@ventiajans.com</a>
         </li>
         <li>
           Telefon: <a href="tel:05445965622">0544 596 56 22</a>

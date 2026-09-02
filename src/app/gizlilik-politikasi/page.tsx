@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
 
 export const metadata: Metadata = {
-  title: "Veri Kullanımı",
+  title: "Gizlilik Politikası",
   description:
-    "DenizliKuyumcu.com hangi verileri, nasıl kullanır? Tarayıcı depolama (localStorage) kullanımı hakkında bilgi.",
-  alternates: { canonical: "/veri-kullanimi" },
+    "DenizliKuyumcu.com gizlilik politikası — hangi veriler, nasıl işlenir? Tarayıcı depolama (localStorage) kullanımı hakkında bilgi.",
+  alternates: { canonical: "/gizlilik-politikasi" },
 };
 
-export default function VeriKullanimiPage() {
+export default function GizlilikPolitikasiPage() {
   return (
-    <LegalPage title="Veri Kullanımı" updated="Eylül 2026">
+    <LegalPage title="Gizlilik Politikası" updated="Eylül 2026">
       <p>
         Bu sayfa, DenizliKuyumcu.com&apos;u kullanırken hangi verilerin nasıl
         işlendiğini basit bir dille açıklar. Site şu an bir kullanıcı hesabı
@@ -35,6 +35,7 @@ export default function VeriKullanimiPage() {
         <li>
           Altın çeşitleri tablosunda işaretlediğiniz favori ürünler
         </li>
+        <li>Çerez tercihi bildirimine verdiğiniz yanıt</li>
       </ul>
       <p>
         Bu veriler tamamen cihazınızda kalır; tarayıcı geçmişinizi
@@ -45,9 +46,13 @@ export default function VeriKullanimiPage() {
       <h2>Üçüncü taraf servisler</h2>
       <p>
         Şu an sitede reklam gösterimi veya ziyaretçi analitiği yapan bir
-        üçüncü taraf servis aktif değildir. İleride bu tür bir servis (ör.
-        reklam ağı veya analitik araç) eklenirse bu sayfa güncellenerek hangi
-        verinin, hangi amaçla paylaşıldığı açıkça belirtilecektir.
+        üçüncü taraf servis aktif değildir. Altın/döviz fiyatları
+        finans.truncgil.com üzerinden çekilir; bu istek yalnızca sunucumuz
+        ile Truncgil arasında gerçekleşir, ziyaretçinin herhangi bir kişisel
+        verisi bu isteğe dahil edilmez (bkz.{" "}
+        <a href="/veri-kaynaklari">Veri Kaynakları</a>). İleride reklam ağı
+        veya analitik araç gibi bir servis eklenirse bu sayfa güncellenerek
+        hangi verinin, hangi amaçla paylaşıldığı açıkça belirtilecektir.
       </p>
       <p>
         Kişisel verilerin işlenmesine ilişkin yasal çerçeve için{" "}

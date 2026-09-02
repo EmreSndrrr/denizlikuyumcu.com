@@ -73,11 +73,10 @@ bağlanacak gerçek fiyat sağlayıcısının anahtarlarını tutmak — detayla
 
 ## Yapılacaklar / eksikler (canlıya almadan önce)
 
-- [ ] **Gerçek fiyat API'si**: `lib/prices.ts` içindeki mock veri gerçek bir
-      altın/döviz veri sağlayıcısıyla değiştirilmeli. Sağlayıcı seçildiğinde:
-      `.env.local`'da `PRICE_PROVIDER`/`PRICE_API_KEY`/`PRICE_API_BASE_URL`
-      doldurulur, `getPrices()` içine o sağlayıcı için bir `fetch()` dalı
-      eklenir — başka hiçbir dosyaya dokunmaya gerek kalmaz.
+- [x] **Gerçek fiyat API'si**: `lib/prices.ts`, `PRICE_PROVIDER=truncgil`
+      ile finans.truncgil.com'dan canlı veri çekiyor (anahtar gerekmiyor).
+      Başka bir sağlayıcıya geçmek gerekirse `getPrices()` içine yeni bir
+      dal eklenir — başka hiçbir dosyaya dokunmaya gerek kalmaz.
 - [ ] **Gerçek kuyumcu verisi**: `lib/jewelers.ts` içindeki demo kayıtlar
       silinip gerçek (izinli) kuyumcu bilgileriyle değiştirilmeli.
 - [ ] **İletişim bilgileri**: `reklam-ver/page.tsx` içindeki placeholder
