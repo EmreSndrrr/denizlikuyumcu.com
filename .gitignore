@@ -56,3 +56,7 @@ __pycache__/
 # claude-seo eklentisi buraya (proje köküne) klonlanmış — kendi git
 # geçmişi olan ayrı bir araç deposu, proje kaynak kodunun parçası değil.
 claude-seo/
+
+# SEO denetim raporları — sadece yerel/kişisel kullanım için, deploy
+# edilen siteye veya git geçmişine dahil edilmesi gerekmiyor.
+seo-audit/
