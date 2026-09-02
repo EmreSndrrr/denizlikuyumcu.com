@@ -61,6 +61,10 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // Google Search Console'a mülk doğrulaması — HTML tag yöntemi.
+  verification: {
+    google: "6lH1m23JXQ4o5C84Ffg381vRFRKnaw5En4zG1aTm7UY",
+  },
 };
 
 // Tema tercihini (localStorage -> yoksa işletim sistemi) React hydrate
