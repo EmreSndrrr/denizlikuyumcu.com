@@ -12,7 +12,7 @@ Bulgular `FULL-AUDIT-REPORT.md`'de. Öncelik: kritik → hemen, yüksek → bu h
 
 ## Faz 2 — Orta (bu ay, kod dışı/veri gerektiren)
 
-- [ ] **T2 — Güvenlik başlıkları**: `next.config.ts`'e `headers()` ile X-Frame-Options, Referrer-Policy, Permissions-Policy, (canlıya alınca) HSTS eklenmeli. Kod değişikliği küçük, ancak canlı ortamda test edilmesi daha sağlıklı — deploy planına not edildi.
+- [x] **T2 — Güvenlik başlıkları**: `next.config.ts`'e `headers()` ile X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, Strict-Transport-Security eklendi (canlıya alma öncesi güvenlik denetimi sırasında tamamlandı). Tam CSP bilinçli olarak eklenmedi — canlıda test edilmeden yanlış yapılandırılmış bir CSP siteyi sessizce kırabilir.
 - [ ] **C1 — Yazar/uzmanlık sinyali**: Rehber makalelerine bir yazar/editöryal ekip ibaresi eklenmeli. **Karar kullanıcıya ait** — gerçek bir isim/unvan mı, yoksa "DenizliKuyumcu.com Editöryal Ekibi" gibi genel bir ibare mi kullanılacak?
 - [ ] **S2 — LocalBusiness şeması**: Gerçek kuyumcu verisi (`lib/jewelers.ts`) geldiğinde `/kuyumcular` sayfasına eklenmeli. Demo veri üzerine kurulmamalı (PRODUCT.md ilkesi).
 
