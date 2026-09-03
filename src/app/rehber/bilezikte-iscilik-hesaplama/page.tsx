@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
+import bilezikImg from "@/images/rehber/bilezik.jpg";
 
 export const metadata: Metadata = {
   title: "Bilezikte İşçilik Nasıl Hesaplanır?",
   description:
     "Bilezik işçiliği yüzde mi, gram başına sabit tutar mı? El işi ve makine işi modellerde işçilik farkı, işçiliğin fiyata etkisi ve kuyumcuda işçilik pazarlığı ipuçları.",
   alternates: { canonical: "/rehber/bilezikte-iscilik-hesaplama" },
+  openGraph: { images: [{ url: bilezikImg.src, width: 1600, height: 900 }] },
 };
 
 export default function Page() {
@@ -15,6 +17,7 @@ export default function Page() {
       intro="İşçilik, bir bileziğin fiyatını iki aynı gramajlı üründe bile farklı kılan kalemdir. Nasıl hesaplandığını bilmek, kuyumcuda daha net konuşmanızı sağlar."
       updated="Eylül 2026"
       slug="bilezikte-iscilik-hesaplama"
+      image={{ src: bilezikImg, alt: "Koyu zemin üzerinde işlemeli altın bilezikler", credit: "Fotoğraf: Pexels" }}
       faq={[
         {
           question: "Bilezik işçiliği ne kadardır?",

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
+import alyansImg from "@/images/rehber/alyans.jpg";
 
 export const metadata: Metadata = {
   title: "Düğünde Hangi Altınlar Takılır? (Denizli)",
   description:
     "Düğün ve nişanda geline, damada ve çocuklara hangi altınlar takılır? Çeyrek, yarım, tam altın, gram altın, bilezik ve set seçenekleri, yakınlık derecesine göre öneriler ve bütçe ipuçları.",
   alternates: { canonical: "/rehber/dugunde-hangi-altinlar-takilir" },
+  openGraph: { images: [{ url: alyansImg.src, width: 1600, height: 900 }] },
 };
 
 export default function Page() {
@@ -15,6 +17,7 @@ export default function Page() {
       intro="Düğün altını seçimi hem geleneğe hem bütçeye bağlıdır. Bu rehber, yakınlık derecesine göre yaygın tercihleri ve Denizli'deki adetleri özetler."
       updated="Eylül 2026"
       slug="dugunde-hangi-altinlar-takilir"
+      image={{ src: alyansImg, alt: "Mermer yüzey üzerinde iki altın alyans", credit: "Fotoğraf: Pexels" }}
       faq={[
         {
           question: "Düğünde en çok hangi altın takılıyor?",

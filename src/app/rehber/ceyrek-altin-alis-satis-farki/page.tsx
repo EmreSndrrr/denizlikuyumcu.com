@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
+import ceyrekAltinImg from "@/images/rehber/ceyrek-altin.jpg";
 
 export const metadata: Metadata = {
   title: "Çeyrek Altında Alış ve Satış Farkı (Makas)",
   description:
     "Çeyrek altın alış ve satış fiyatı neden farklı? Makas (spread) nasıl oluşur, neden gram altından geniştir ve alım-satımda bu farkı nasıl azaltırsınız — Denizli için pratik rehber.",
   alternates: { canonical: "/rehber/ceyrek-altin-alis-satis-farki" },
+  openGraph: { images: [{ url: ceyrekAltinImg.src, width: 1600, height: 900 }] },
 };
 
 export default function Page() {
@@ -15,6 +17,7 @@ export default function Page() {
       intro="Kuyumcunun çeyrek altını aldığı fiyatla sattığı fiyat aynı değildir. Aradaki farka 'makas' (spread) denir ve bu fark, alım-satımdan ne kadar kâr/zarar edeceğinizi doğrudan belirler."
       updated="Eylül 2026"
       slug="ceyrek-altin-alis-satis-farki"
+      image={{ src: ceyrekAltinImg, alt: "Bir arada duran çeşitli altın sikkeler", credit: "Fotoğraf: Pexels" }}
       faq={[
         {
           question: "Çeyrek altında alış-satış farkı ne kadardır?",

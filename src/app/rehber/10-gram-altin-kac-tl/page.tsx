@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
+import gramAltinImg from "@/images/rehber/gram-altin.jpg";
 
 export const metadata: Metadata = {
   title: "10 Gram Altın Kaç TL Eder? Hesaplama",
   description:
     "10 gram altın kaç TL? Gram altın fiyatı üzerinden 10 gram, 5 gram ve 100 gram altının güncel karşılığını nasıl hesaplayacağınızı ve külçe ile bilezik farkını açıklıyoruz.",
   alternates: { canonical: "/rehber/10-gram-altin-kac-tl" },
+  openGraph: { images: [{ url: gramAltinImg.src, width: 1600, height: 900 }] },
 };
 
 export default function Page() {
@@ -15,6 +17,7 @@ export default function Page() {
       intro="10 gram altının değeri, o anki gram altın fiyatının 10 katıdır — ama aldığınız ürün külçe mi yoksa işlenmiş takı mı olduğuna göre ödeyeceğiniz tutar değişir."
       updated="Eylül 2026"
       slug="10-gram-altin-kac-tl"
+      image={{ src: gramAltinImg, alt: "İstiflenmiş külçe altın çubukları", credit: "Fotoğraf: Pexels" }}
       faq={[
         {
           question: "10 gram altın kaç TL?",

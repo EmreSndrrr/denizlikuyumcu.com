@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
+import bilezikImg from "@/images/rehber/bilezik.jpg";
 
 export const metadata: Metadata = {
   title: "22 Ayar Bilezik Hesaplama: Formül ve Örnek",
   description:
     "22 ayar bilezik fiyatı nasıl hesaplanır? Has altın oranı (0,916), gramaj ve işçilik ile adım adım formül, örnek hesap ve kuyumcuda nelere dikkat edeceğiniz.",
   alternates: { canonical: "/rehber/22-ayar-bilezik-hesaplama" },
+  openGraph: { images: [{ url: bilezikImg.src, width: 1600, height: 900 }] },
 };
 
 export default function Page() {
@@ -15,6 +17,7 @@ export default function Page() {
       intro="22 ayar bir bileziğin fiyatı, içindeki has altının değeri ile işçiliğin toplamıdır. Bu rehberde formülü, katsayıları ve örnek bir hesabı bulacaksınız."
       updated="Eylül 2026"
       slug="22-ayar-bilezik-hesaplama"
+      image={{ src: bilezikImg, alt: "Koyu zemin üzerinde işlemeli altın bilezikler", credit: "Fotoğraf: Pexels" }}
       faq={[
         {
           question: "22 ayar altının has oranı nedir?",

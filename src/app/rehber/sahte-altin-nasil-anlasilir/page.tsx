@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
+import kuyumcuImg from "@/images/rehber/kuyumcu.jpg";
 
 export const metadata: Metadata = {
   title: "Sahte Altın Nasıl Anlaşılır? 7 Kontrol",
   description:
     "Sahte altın nasıl anlaşılır? Ayar damgası, mıknatıs testi, renk ve gramaj kontrolü, ses ve asit testi — evde yapılabilecek kontroller ve kuyumcuda kesin test yöntemleri.",
   alternates: { canonical: "/rehber/sahte-altin-nasil-anlasilir" },
+  openGraph: { images: [{ url: kuyumcuImg.src, width: 1600, height: 900 }] },
 };
 
 export default function Page() {
@@ -15,6 +17,7 @@ export default function Page() {
       intro="Bazı belirtiler evde fark edilebilir, ama kesin sonuç yalnızca kuyumcuda yapılan testlerle alınır. İşte adım adım bir kontrol listesi."
       updated="Eylül 2026"
       slug="sahte-altin-nasil-anlasilir"
+      image={{ src: kuyumcuImg, alt: "Kuyumcuda altın takıları inceleyen eller", credit: "Fotoğraf: Pexels" }}
       faq={[
         {
           question: "Altın mıknatısı çeker mi?",

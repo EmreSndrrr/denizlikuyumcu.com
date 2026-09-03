@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
+import kuyumcuImg from "@/images/rehber/kuyumcu.jpg";
 
 export const metadata: Metadata = {
   title: "Kuyumcuda Altın Bozdururken Nelere Dikkat Edilmeli?",
   description:
     "Altın bozdururken kayıp yaşamamak için: has altın alış fiyatını sorma, ayar okuması, tartım, fire/işlem kesintisi, fatura ve zamanlama — kuyumcuda adım adım kontrol listesi.",
   alternates: { canonical: "/rehber/kuyumcuda-altin-bozdururken-dikkat" },
+  openGraph: { images: [{ url: kuyumcuImg.src, width: 1600, height: 900 }] },
 };
 
 export default function Page() {
@@ -15,6 +17,7 @@ export default function Page() {
       intro="Bozdurma, alışın tersidir: burada kuyumcunun 'alış' fiyatı ve uyguladığı kesintiler belirleyicidir. Birkaç basit kontrol, elinize geçen tutarı gözle görülür şekilde değiştirebilir."
       updated="Eylül 2026"
       slug="kuyumcuda-altin-bozdururken-dikkat"
+      image={{ src: kuyumcuImg, alt: "Kuyumcuda tezgâha altın bilezikler yerleştiren eller", credit: "Fotoğraf: Pexels" }}
       faq={[
         {
           question: "Altın bozdururken hangi fiyat geçerli?",

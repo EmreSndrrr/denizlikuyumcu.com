@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
+import kuyumcuImg from "@/images/rehber/kuyumcu.jpg";
 
 export const metadata: Metadata = {
   title: "Altın Alırken Fatura Alınmalı mı?",
   description:
     "Altın alırken fatura veya fiş neden önemli? Faturada hangi bilgiler bulunmalı, faturasız satışın riskleri ve bozdurma/iade süreçlerinde belgenin rolü.",
   alternates: { canonical: "/rehber/altin-alirken-fatura" },
+  openGraph: { images: [{ url: kuyumcuImg.src, width: 1600, height: 900 }] },
 };
 
 export default function Page() {
@@ -15,6 +17,7 @@ export default function Page() {
       intro="Kısa cevap: evet. Fatura ya da fiş, aldığınız altının ayarını, gramını ve satıcısını belgeleyen tek resmî kanıttır ve ileride birçok durumda işinize yarar."
       updated="Eylül 2026"
       slug="altin-alirken-fatura"
+      image={{ src: kuyumcuImg, alt: "Kuyumcuda tezgâha altın bilezikler yerleştiren eller", credit: "Fotoğraf: Pexels" }}
       faq={[
         {
           question: "Altın alırken fatura zorunlu mu?",

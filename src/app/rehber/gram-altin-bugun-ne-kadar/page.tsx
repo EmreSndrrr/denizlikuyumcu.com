@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
+import gramAltinImg from "@/images/rehber/gram-altin.jpg";
 
 export const metadata: Metadata = {
   title: "Gram Altın Bugün Ne Kadar? Güncel Alış-Satış",
   description:
     "Gram altın bugün ne kadar? Denizli'de güncel gram altın alış ve satış fiyatını canlı görün, fiyatın gün içinde neden değiştiğini ve doğru okumanın yolunu öğrenin.",
   alternates: { canonical: "/rehber/gram-altin-bugun-ne-kadar" },
+  openGraph: { images: [{ url: gramAltinImg.src, width: 1600, height: 900 }] },
 };
 
 export default function Page() {
@@ -15,6 +17,7 @@ export default function Page() {
       intro="Gram altının bugünkü fiyatı sabit bir rakam değildir; gün içinde dakikalar içinde değişir. Bu rehber, güncel fiyatı nereden takip edeceğinizi ve rakamı doğru yorumlamayı anlatır."
       updated="Eylül 2026"
       slug="gram-altin-bugun-ne-kadar"
+      image={{ src: gramAltinImg, alt: "İstiflenmiş külçe altın çubukları", credit: "Fotoğraf: Pexels" }}
       faq={[
         {
           question: "Gram altının bugünkü fiyatını nereden görebilirim?",

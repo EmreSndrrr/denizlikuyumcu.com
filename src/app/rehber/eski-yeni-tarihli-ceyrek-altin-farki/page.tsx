@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
+import ceyrekAltinImg from "@/images/rehber/ceyrek-altin.jpg";
 
 export const metadata: Metadata = {
   title: "Eski ve Yeni Tarihli Çeyrek Altın Farkı",
   description:
     "Eski tarihli çeyrek altın ile yeni tarihli çeyrek altın arasında değer farkı var mı? Has altın içeriği, yıpranma, darphane dışı (ziynet) baskılar ve primli/iskontolu işlem durumları.",
   alternates: { canonical: "/rehber/eski-yeni-tarihli-ceyrek-altin-farki" },
+  openGraph: { images: [{ url: ceyrekAltinImg.src, width: 1600, height: 900 }] },
 };
 
 export default function Page() {
@@ -15,6 +17,7 @@ export default function Page() {
       intro="Çeyrek altınların üzerindeki tarih, çoğu zaman değeri değiştirmez — çünkü altın içeriği aynıdır. Ama bazı durumlarda eski çeyrek daha düşük, bazı yıllar ise primli işlem görebilir."
       updated="Eylül 2026"
       slug="eski-yeni-tarihli-ceyrek-altin-farki"
+      image={{ src: ceyrekAltinImg, alt: "Bir arada duran çeşitli altın sikkeler", credit: "Fotoğraf: Pexels" }}
       faq={[
         {
           question: "Eski tarihli çeyrek altın daha mı değersiz?",

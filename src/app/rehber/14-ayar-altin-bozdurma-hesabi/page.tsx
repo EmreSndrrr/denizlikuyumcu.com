@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
+import kuyumcuImg from "@/images/rehber/kuyumcu.jpg";
 
 export const metadata: Metadata = {
   title: "14 Ayar Altın Bozdurma Hesabı Nasıl Yapılır?",
   description:
     "14 ayar altın bozdurunca ne kadar para alınır? Has oran (0,585), bozdurma formülü, fire/işlem kesintisi ve 14 ayar ile 22 ayar bozdurma farkı — örnek hesapla.",
   alternates: { canonical: "/rehber/14-ayar-altin-bozdurma-hesabi" },
+  openGraph: { images: [{ url: kuyumcuImg.src, width: 1600, height: 900 }] },
 };
 
 export default function Page() {
@@ -15,6 +17,7 @@ export default function Page() {
       intro="14 ayar altını bozdururken kuyumcu, ürünün içindeki saf altın miktarını baz alır. İşçilik geri ödenmez. Bu rehber, alacağınız yaklaşık tutarı kendiniz hesaplamanızı sağlar."
       updated="Eylül 2026"
       slug="14-ayar-altin-bozdurma-hesabi"
+      image={{ src: kuyumcuImg, alt: "Kuyumcuda tezgâha altın bilezikler yerleştiren eller", credit: "Fotoğraf: Pexels" }}
       faq={[
         {
           question: "14 ayar altının saflık oranı nedir?",

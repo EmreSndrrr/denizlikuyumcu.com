@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
+import alyansImg from "@/images/rehber/alyans.jpg";
 
 export const metadata: Metadata = {
   title: "Alyans Ölçüsü Nasıl Belirlenir? Yüzük Ölçü Tablosu",
   description:
     "Alyans (yüzük) ölçüsü nasıl bulunur? Parmak çevresi ölçme yöntemi, milimetre-numara dönüşüm tablosu, evde ölçüm ipuçları ve sık yapılan hatalar.",
   alternates: { canonical: "/rehber/alyans-olcusu-nasil-belirlenir" },
+  openGraph: { images: [{ url: alyansImg.src, width: 1600, height: 900 }] },
 };
 
 export default function Page() {
@@ -15,6 +17,7 @@ export default function Page() {
       intro="Alyans ölçüsü, parmağın iç çevresinin milimetre cinsinden uzunluğudur. En doğru sonuç kuyumcuda ölçü halkalarıyla alınır; evde yapılan ölçüm ise iyi bir başlangıç noktasıdır."
       updated="Eylül 2026"
       slug="alyans-olcusu-nasil-belirlenir"
+      image={{ src: alyansImg, alt: "Mermer yüzey üzerinde iki altın alyans", credit: "Fotoğraf: Pexels" }}
       faq={[
         {
           question: "Yüzük numarası ne anlama geliyor?",
