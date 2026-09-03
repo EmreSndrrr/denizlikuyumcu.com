@@ -28,7 +28,7 @@ export default function Faq() {
       />
       <SectionHeading
         title="Sıkça Sorulan Sorular"
-        subtitle="Şimdilik temel sorularla başlıyoruz; zamanla genişleteceğiz."
+        subtitle="Altın alırken, satarken ve bozdururken en çok merak edilenler — kısa cevaplar, ayrıntı için rehber bağlantıları."
       />
       <FaqAccordion items={faqItems} />
 

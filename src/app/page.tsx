@@ -124,7 +124,8 @@ export default async function HomePage() {
                 Denizli altın fiyatları ve kuyumcu rehberi, tek ekranda.
               </h1>
               <p className="mt-3 max-w-md text-base text-muted sm:mt-4 sm:text-lg">
-                Güncel fiyatları takip edin, güvenilir kuyumcuları keşfedin.
+                Güncel fiyatları takip edin, Denizli&apos;deki kuyumcu ve
+                mücevher mağazalarını keşfedin.
               </p>
               <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
                 <a
@@ -263,24 +264,24 @@ export default async function HomePage() {
           items={[
             {
               no: "01",
-              category: "Ayar",
-              href: "/rehber/altin-ayari-nedir",
-              title: "Altın Ayarı Nedir? 24, 22, 18, 14 Ayar",
-              desc: "Ayar nedir, hangisi nerede kullanılır, has altınla farkı.",
+              category: "Fiyat",
+              href: "/rehber/gram-altin-bugun-ne-kadar",
+              title: "Gram Altın Bugün Ne Kadar?",
+              desc: "Güncel fiyatı nereden takip edersiniz, gün içinde neden değişir.",
             },
             {
               no: "02",
-              category: "Hesaplama",
-              href: "/rehber/gram-altin-hesaplama",
-              title: "Gram Altın Fiyatı Nasıl Hesaplanır?",
-              desc: "Has altın, işçilik ve kur ilişkisini basitçe anlatıyoruz.",
+              category: "Bilezik",
+              href: "/rehber/22-ayar-bilezik-hesaplama",
+              title: "22 Ayar Bilezik Hesaplama",
+              desc: "Has oran, gramaj ve işçilikle adım adım formül ve örnek.",
             },
             {
               no: "03",
-              category: "Alyans",
-              href: "/rehber/alyans-rehberi",
-              title: "Alyans Alırken Nelere Dikkat Edilmeli?",
-              desc: "Ayar, ölçü, gramaj ve kuyumcu seçimi rehberi.",
+              category: "Makas",
+              href: "/rehber/ceyrek-altin-alis-satis-farki",
+              title: "Çeyrek Altında Alış ve Satış Farkı",
+              desc: "Makas nasıl oluşur, alım-satımda ne kadar kayıp yaratır.",
             },
           ]}
         />

@@ -11,7 +11,7 @@ const siteUrl = "https://denizlikuyumcu.com";
 // bulup yok sayabiliyor. Statik içerik sayfaları artık SABİT bir tarih
 // kullanıyor; bu tarih SADECE o sayfanın içeriği gerçekten değiştiğinde
 // elle güncellenmeli (otomatik değil, bilinçli bir karar).
-const STATIC_CONTENT_LAST_MODIFIED = new Date("2026-09-02");
+const STATIC_CONTENT_LAST_MODIFIED = new Date("2026-09-03");
 
 const staticContentRoutes = [
   "/kuyumcular",
@@ -21,6 +21,18 @@ const staticContentRoutes = [
   "/rehber/gram-altin-hesaplama",
   "/rehber/alyans-rehberi",
   "/rehber/altin-nasil-saklanir",
+  "/rehber/gram-altin-bugun-ne-kadar",
+  "/rehber/10-gram-altin-kac-tl",
+  "/rehber/ceyrek-altin-alis-satis-farki",
+  "/rehber/22-ayar-bilezik-hesaplama",
+  "/rehber/14-ayar-altin-bozdurma-hesabi",
+  "/rehber/bilezikte-iscilik-hesaplama",
+  "/rehber/dugunde-hangi-altinlar-takilir",
+  "/rehber/altin-alirken-fatura",
+  "/rehber/sahte-altin-nasil-anlasilir",
+  "/rehber/eski-yeni-tarihli-ceyrek-altin-farki",
+  "/rehber/kuyumcuda-altin-bozdururken-dikkat",
+  "/rehber/alyans-olcusu-nasil-belirlenir",
   "/hakkimizda",
   "/iletisim",
   "/gizlilik-politikasi",

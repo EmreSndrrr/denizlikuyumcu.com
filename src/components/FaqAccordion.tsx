@@ -7,8 +7,9 @@
 // animasyonu ölçüp kendisi hesaplıyor.
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
-import { CaretDown } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRight, CaretDown } from "@phosphor-icons/react/dist/ssr";
 import type { FaqItem } from "@/lib/faq";
 
 export default function FaqAccordion({ items }: { items: FaqItem[] }) {
@@ -48,6 +49,15 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
               className="overflow-hidden"
             >
               <p className="mt-3 text-sm text-muted">{item.answer}</p>
+              {item.href && (
+                <Link
+                  href={item.href}
+                  className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand hover:underline"
+                >
+                  Detaylı rehber
+                  <ArrowRight aria-hidden="true" size={14} />
+                </Link>
+              )}
             </motion.div>
           </div>
         );
