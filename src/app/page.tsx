@@ -205,7 +205,7 @@ export default async function HomePage() {
           bulabilirsiniz.
         </p>
 
-        {featuredJewelers.length > 0 && (
+        {featuredJewelers.length > 0 ? (
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             {featuredJewelers.map((j, i) => (
               <Reveal key={j.id} delay={i * 0.05}>
@@ -219,6 +219,20 @@ export default async function HomePage() {
                 />
               </Reveal>
             ))}
+          </div>
+        ) : (
+          <div className="mt-8 flex flex-col gap-3 rounded-2xl border border-dashed border-border bg-surface p-6 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-muted">
+              Bu bölümde öne çıkan Denizli kuyumcuları listelenecek. İşletmenizi
+              ilk ekleyen siz olun.
+            </p>
+            <Link
+              href="/reklam-ver"
+              className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-ink px-4 py-2 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98] sm:self-auto"
+            >
+              İlk siz olun
+              <ArrowRight aria-hidden="true" size={15} />
+            </Link>
           </div>
         )}
       </section>
