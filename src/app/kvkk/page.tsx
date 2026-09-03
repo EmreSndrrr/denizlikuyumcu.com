@@ -29,18 +29,51 @@ export default function KvkkPage() {
       </div>
       <h2>İşlenen kişisel veri</h2>
       <p>
-        Site üzerinde bir üyelik/hesap sistemi, form veya çerez tabanlı
-        takip bulunmamaktadır. Bu nedenle site, ziyaretçilerden doğrudan ve
-        aktif olarak kişisel veri toplamaz. Bize e-posta yoluyla ulaştığınızda
-        (ör. reklam talebi), paylaştığınız ad ve e-posta gibi bilgiler
-        yalnızca talebinizi yanıtlamak amacıyla kullanılır.
+        Site üzerinde bir üyelik/hesap sistemi veya çerez tabanlı takip
+        bulunmamaktadır. Site, ziyaretçilerden yalnızca aşağıdaki iki durumda
+        ve verdiğiniz kadarıyla kişisel veri işler:
+      </p>
+      <ul>
+        <li>
+          <strong>Bilgi Talebi formu (<a href="/bilgi-talebi">/bilgi-talebi</a>):</strong>{" "}
+          Formu doldurduğunuzda paylaştığınız <em>ad</em>, <em>telefon
+          numarası</em>, (verdiyseniz) <em>e-posta adresi</em>, seçtiğiniz{" "}
+          <em>konu</em> ve <em>mesaj metni</em>. Bu veriler bir veri tabanında
+          saklanmaz; yalnızca e-posta olarak veri sorumlusuna iletilir.
+        </li>
+        <li>
+          <strong>Doğrudan e-posta/telefon iletişimi:</strong> Bize kendiniz
+          ulaştığınızda paylaştığınız iletişim bilgileri ve mesaj içeriği.
+        </li>
+      </ul>
+      <p>
+        Standart web sunucusu günlükleri (istek zamanı, IP, hata kayıtları)
+        barındırma ve e-posta altyapısı sağlayıcılarımız tarafından teknik ve
+        güvenlik amaçlarıyla tutulabilir.
       </p>
       <h2>İşleme amacı ve hukuki sebep</h2>
       <p>
-        Tarafımıza e-posta yoluyla ilettiğiniz bilgiler, KVKK madde 5/2-(c)
-        (bir sözleşmenin kurulması veya ifasıyla doğrudan ilgili olması) ve
-        ilgili kişinin açık rızası (iletişime geçme eylemi) kapsamında,
-        yalnızca talebinizi cevaplamak amacıyla işlenir.
+        Form veya e-posta yoluyla ilettiğiniz bilgiler <strong>yalnızca
+        talebinizi değerlendirmek ve size dönüş yapmak</strong> amacıyla
+        işlenir; pazarlama/reklam amacıyla kullanılmaz, satılmaz. Hukuki sebep:
+        formu gönderirken verdiğiniz <strong>açık rıza</strong> (KVKK m. 5/1)
+        ve talebin bir sözleşme ilişkisine dönüşmesi hâlinde KVKK m. 5/2-(c).
+        Rızanızı her zaman geri çekebilirsiniz.
+      </p>
+      <h2>Saklama süresi</h2>
+      <p>
+        Talebinize ilişkin yazışmalar, talep sonuçlandıktan sonra makul bir
+        süre içinde (en geç 1 yıl) silinir; bir hukuki yükümlülük veya
+        uyuşmazlık söz konusuysa ilgili süre boyunca saklanabilir.
+      </p>
+      <h2>Aktarım ve hizmet sağlayıcılar</h2>
+      <p>
+        Form gönderimleri, e-posta iletimi için <strong>Resend</strong>{" "}
+        (e-posta altyapı sağlayıcısı) aracılığıyla iletilir ve site{" "}
+        <strong>Vercel</strong> altyapısında barındırılır. Bu sağlayıcıların
+        sunucuları yurt dışında bulunabilir; verileriniz yalnızca hizmetin
+        teknik olarak sağlanabilmesi için ve bu amaçla sınırlı olarak işlenir.
+        Bunun dışında kişisel verileriniz üçüncü kişilerle paylaşılmaz.
       </p>
       <h2>Haklarınız</h2>
       <p>

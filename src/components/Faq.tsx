@@ -1,4 +1,5 @@
-import { ShieldCheck } from "@phosphor-icons/react/dist/ssr";
+import Link from "next/link";
+import { ArrowRight, ShieldCheck } from "@phosphor-icons/react/dist/ssr";
 import { faqItems } from "@/lib/faq";
 import SectionHeading from "@/components/SectionHeading";
 import FaqAccordion from "@/components/FaqAccordion";
@@ -31,6 +32,21 @@ export default function Faq() {
         subtitle="Altın alırken, satarken ve bozdururken en çok merak edilenler — kısa cevaplar, ayrıntı için rehber bağlantıları."
       />
       <FaqAccordion items={faqItems} />
+
+      {/* Sorusu listede olmayan ziyaretçi için bilgi talep formuna
+          yönlendirme. */}
+      <div className="mt-6 flex max-w-3xl flex-col gap-3 rounded-2xl border border-border bg-gold-surface/50 p-4 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-sm text-muted">
+          Sorunuzu burada bulamadınız mı? Bize iletin, size dönüş yapalım.
+        </p>
+        <Link
+          href="/bilgi-talebi"
+          className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98]"
+        >
+          Bilgi talep et
+          <ArrowRight aria-hidden="true" size={15} />
+        </Link>
+      </div>
 
       {/* Brief'te istenen "veri güvenilirliği" notu — SSS'nin hemen
           yanında, fiyatların kaynağı/gecikmesi hakkında kısa bir

@@ -15,6 +15,11 @@ export default function IletisimPage() {
         Sorularınız, reklam vermek istediğiniz veya sitede bir hata/eksik
         gördüğünüzde bize aşağıdaki kanaldan ulaşabilirsiniz.
       </p>
+      <p>
+        Altın/döviz fiyatları veya kuyumcu seçimi hakkında bir sorunuz varsa{" "}
+        <a href="/bilgi-talebi">Bilgi Talebi formunu</a> doldurarak da bize
+        iletebilirsiniz; en kısa sürede dönüş yaparız.
+      </p>
       <ul>
         <li>
           E-posta:{" "}

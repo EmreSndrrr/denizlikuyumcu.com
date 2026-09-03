@@ -17,6 +17,7 @@ const staticContentRoutes = [
   "/kuyumcular",
   "/rehber",
   "/reklam-ver",
+  "/bilgi-talebi",
   "/rehber/altin-ayari-nedir",
   "/rehber/gram-altin-hesaplama",
   "/rehber/alyans-rehberi",

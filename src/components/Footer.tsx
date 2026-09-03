@@ -40,6 +40,7 @@ export default function Footer() {
               <li><Link href="/#altin-fiyatlari" className="hover:text-brand">Altın Fiyatları</Link></li>
               <li><Link href="/kuyumcular" className="hover:text-brand">Kuyumcular</Link></li>
               <li><Link href="/rehber" className="hover:text-brand">Rehber</Link></li>
+              <li><Link href="/bilgi-talebi" className="hover:text-brand">Bilgi Talebi</Link></li>
               <li><Link href="/reklam-ver" className="hover:text-brand">Reklam Ver</Link></li>
             </ul>
           </div>

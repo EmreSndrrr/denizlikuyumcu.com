@@ -13,16 +13,28 @@ export default function GizlilikPolitikasiPage() {
     <LegalPage title="Gizlilik Politikası" updated="Eylül 2026">
       <p>
         Bu sayfa, DenizliKuyumcu.com&apos;u kullanırken hangi verilerin nasıl
-        işlendiğini basit bir dille açıklar. Site şu an bir kullanıcı hesabı
-        sistemi veya form üzerinden kişisel veri toplama içermez.
+        işlendiğini basit bir dille açıklar. Sitede bir kullanıcı hesabı
+        sistemi veya çerez tabanlı takip yoktur; kişisel veri yalnızca{" "}
+        <a href="/bilgi-talebi">Bilgi Talebi formunu</a> doldurursanız ya da
+        bize doğrudan yazarsanız işlenir.
       </p>
-      <h2>Sunucuya gönderilen veri</h2>
+      <h2>Bilgi Talebi formu</h2>
       <p>
-        Sitede fiyat verilerini görüntülemek ve arama yapmak gibi temel
-        işlevler için sunucumuza herhangi bir kişisel bilginizi (ad, e-posta,
-        telefon vb.) göndermeniz gerekmez. Standart web sunucu günlükleri
-        (ör. istek zamanı, hatalı sayfa istekleri) barındırma altyapımız
-        tarafından teknik amaçlarla tutulabilir.
+        <a href="/bilgi-talebi">/bilgi-talebi</a> sayfasındaki formu
+        gönderdiğinizde ilettiğiniz ad, telefon, (varsa) e-posta, konu ve
+        mesaj; yalnızca talebinize dönüş yapmak amacıyla{" "}
+        <strong>e-posta olarak</strong> bize ulaşır. Bu bilgiler bir veri
+        tabanında saklanmaz. E-posta iletimi <strong>Resend</strong>{" "}
+        altyapısıyla yapılır. Ayrıntı ve haklarınız için{" "}
+        <a href="/kvkk">KVKK Aydınlatma Metni</a>&apos;ne bakın.
+      </p>
+      <h2>Sunucuya gönderilen diğer veri</h2>
+      <p>
+        Fiyat görüntüleme ve site içi arama gibi işlevler için sunucumuza
+        herhangi bir kişisel bilginizi göndermeniz gerekmez. Standart web
+        sunucu günlükleri (ör. istek zamanı, IP, hatalı sayfa istekleri)
+        barındırma altyapımız (<strong>Vercel</strong>) tarafından teknik ve
+        güvenlik amaçlarıyla tutulabilir.
       </p>
       <h2>Tarayıcınızda saklanan veri</h2>
       <p>
