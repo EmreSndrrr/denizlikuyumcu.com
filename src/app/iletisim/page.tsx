@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import LegalPage from "@/components/LegalPage";
 
 export const metadata: Metadata = {
@@ -15,11 +17,21 @@ export default function IletisimPage() {
         Sorularınız, reklam vermek istediğiniz veya sitede bir hata/eksik
         gördüğünüzde bize aşağıdaki kanaldan ulaşabilirsiniz.
       </p>
-      <p>
-        Altın/döviz fiyatları veya kuyumcu seçimi hakkında bir sorunuz varsa{" "}
-        <a href="/bilgi-talebi">Bilgi Talebi formunu</a> doldurarak da bize
-        iletebilirsiniz; en kısa sürede dönüş yaparız.
-      </p>
+
+      <div className="not-prose my-6 flex flex-col gap-3 rounded-2xl border border-border bg-gold-surface/50 p-5 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-sm text-muted">
+          En hızlı yol: <strong className="text-ink">Bilgi Talebi formu</strong>.
+          Doldurun, en kısa sürede size dönüş yapalım.
+        </p>
+        <Link
+          href="/bilgi-talebi"
+          className="inline-flex shrink-0 items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98]"
+        >
+          Bilgi talep et
+          <ArrowRight aria-hidden="true" size={15} />
+        </Link>
+      </div>
+
       <ul>
         <li>
           E-posta:{" "}

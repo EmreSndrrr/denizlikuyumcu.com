@@ -34,3 +34,9 @@ export const jewelers: Jeweler[] = [
     isDemo: true,
   },
 ];
+
+// Kullanıcıya (anasayfa + /kuyumcular) yalnızca GERÇEK kayıtlar gösterilir.
+// Demo kayıtlar kart tasarımını korumak için dizide duruyor ama ziyaretçiye
+// "örnek kayıt" göstermek terk edilmiş site izlenimi verdiği için
+// filtreleniyor. Gerçek kuyumcu eklendiğinde otomatik görünür olur.
+export const visibleJewelers: Jeweler[] = jewelers.filter((j) => !j.isDemo);

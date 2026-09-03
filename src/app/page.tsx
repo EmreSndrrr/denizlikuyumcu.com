@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, MapPin } from "@phosphor-icons/react/dist/ssr";
 import { getPrices, getGoldHistory, getGoldItemSparklines } from "@/lib/prices";
-import { jewelers } from "@/lib/jewelers";
+import { visibleJewelers } from "@/lib/jewelers";
 import PriceTicker from "@/components/PriceTicker";
 import GoldCalculator from "@/components/GoldCalculator";
 import OnsAltinCard from "@/components/OnsAltinCard";
@@ -50,7 +50,7 @@ export default async function HomePage() {
   const prices = await getPrices();
   const goldHistory = await getGoldHistory();
   const goldSparklines = await getGoldItemSparklines();
-  const featuredJewelers = jewelers.filter((j) => j.featured).slice(0, 3);
+  const featuredJewelers = visibleJewelers.filter((j) => j.featured).slice(0, 3);
 
   // Organization + WebSite tek bir @graph'ta birbirine bağlı — arama
   // motorunun "bu site kime ait" varlık grafiğini kurabilmesi için.
@@ -186,27 +186,27 @@ export default async function HomePage() {
           baktıktan hemen sonra, hesaplama/grafiğe gelmeden ÖNCE doğal
           biçimde kuyumcu keşfine yönlendirilsin. */}
       <section className="mx-auto max-w-[1240px] px-4 pb-16">
-        <SectionHeading title="Denizli'de Kuyumculuk" />
+        <SectionHeading
+          title="Denizli'de Kuyumculuk"
+          action={{ label: "Kuyumcu rehberi", href: "/kuyumcular" }}
+        />
         <p className="mt-6 max-w-3xl text-muted">
           Denizli, çeyiz kültüründen düğün geleneklerine uzanan köklü bir
           kuyumculuk birikimine sahiptir. Şehir merkezinde, özellikle{" "}
-          <strong className="font-semibold text-ink">Bayramyeri</strong>{" "}
+          <strong className="font-semibold text-ink">Bayramyeri</strong> ve{" "}
+          <strong className="font-semibold text-ink">Delikliçınar</strong>{" "}
           çevresinde kümelenen çok sayıda kuyumcu işletmesi; gram altından
           tasarım takıya, alyanstan gümüş ürünlere kadar geniş bir yelpazede
-          hizmet sunar. Bu yoğun kuyumcu kümelenmesi, alışveriş öncesi fiyat
-          ve model karşılaştırması yapmak isteyen müşteriler için de önemli
-          bir avantaj sağlar.
+          hizmet sunar. Alışveriş öncesi nelere dikkat edileceğini ve
+          bölgeleri{" "}
+          <Link href="/kuyumcular" className="font-medium text-brand hover:underline">
+            Denizli kuyumcu rehberimizde
+          </Link>{" "}
+          bulabilirsiniz.
         </p>
-      </section>
 
-      <section className="mx-auto max-w-[1240px] px-4 pb-16">
-        <SectionHeading
-          title="Öne Çıkan Kuyumcular"
-          action={{ label: "Tümünü gör", href: "/kuyumcular" }}
-        />
-
-        {featuredJewelers.length > 0 ? (
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
+        {featuredJewelers.length > 0 && (
+          <div className="mt-8 grid gap-4 sm:grid-cols-3">
             {featuredJewelers.map((j, i) => (
               <Reveal key={j.id} delay={i * 0.05}>
                 <JewelerProfileCard
@@ -219,16 +219,6 @@ export default async function HomePage() {
                 />
               </Reveal>
             ))}
-          </div>
-        ) : (
-          <div className="mt-6 rounded-2xl border border-dashed border-border bg-surface p-6 text-center">
-            <p className="text-muted">
-              Henüz öne çıkan kuyumcu yok.{" "}
-              <Link href="/reklam-ver" className="font-semibold text-brand hover:underline">
-                İlk siz olun
-              </Link>
-              .
-            </p>
           </div>
         )}
       </section>

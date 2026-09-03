@@ -29,11 +29,11 @@ export type PriceContentEntry = {
   // aramalarda doğal anahtar kelime kapsamı sağlamak.
   summary: string;
   sections: { heading: string; body: string }[];
-  // İlgili bir rehber makalesine iç bağlantı (yalnızca doğrudan konu
-  // örtüşmesi olan kalemlerde dolu — ör. ayar sayfaları <-> altın ayarı
-  // rehberi). Çift yönlü: karşı taraftaki rehber sayfası da buraya geri
-  // bağlantı verir (bkz. rehber/*/page.tsx).
-  relatedGuide?: { href: string; label: string };
+  // İlgili rehber makalelerine iç bağlantılar (yalnızca doğrudan konu
+  // örtüşmesi olan kalemlerde dolu — ör. bilezik sayfası <-> bilezik
+  // hesaplama/işçilik rehberleri). Çift yönlü: karşı taraftaki rehber
+  // sayfası da buraya geri bağlantı verir (bkz. rehber/*/page.tsx).
+  relatedGuides?: { href: string; label: string }[];
 };
 
 export const priceContent: PriceContentEntry[] = [
@@ -64,10 +64,11 @@ export const priceContent: PriceContentEntry[] = [
         body: "Gram altın alırken kuyumcunun ayar damgasını ve faturasını mutlaka isteyin; bu hem ürünün gerçekliğini hem de ileride geri satarken sorun yaşamamanızı garanti eder. Fiyat, kuyumcudan kuyumcuya küçük farklılıklar gösterebilir — bu farkın büyük kısmı işletme kâr marjından gelir. Alım öncesi bu sayfadaki güncel fiyatla kuyumcunun teklifini karşılaştırmak, makul bir aralıkta olup olmadığını görmenize yardımcı olur.",
       },
     ],
-    relatedGuide: {
-      href: "/rehber/gram-altin-hesaplama",
-      label: "Gram Altın Fiyatı Nasıl Hesaplanır?",
-    },
+    relatedGuides: [
+      { href: "/rehber/gram-altin-bugun-ne-kadar", label: "Gram Altın Bugün Ne Kadar?" },
+      { href: "/rehber/10-gram-altin-kac-tl", label: "10 Gram Altın Kaç TL Eder?" },
+      { href: "/rehber/gram-altin-hesaplama", label: "Gram Altın Fiyatı Nasıl Hesaplanır?" },
+    ],
   },
   {
     key: "ceyrek-altin",
@@ -95,6 +96,11 @@ export const priceContent: PriceContentEntry[] = [
         heading: "Fiyatı Gram Altından Nasıl Farklılaşır?",
         body: "Çeyrek altının fiyatı gram altınla aynı has altın değerine dayansa da, basılı sikke olması nedeniyle bazı dönemlerde küçük bir 'darphane farkı' (arz kıtlığı, eski yıl basımı gibi nedenlerle) oluşabilir. Bu fark genelde birkaç TL ile sınırlıdır ve büyük resimde çeyrek altın fiyatı, gram altın fiyatına sıkı sıkıya bağlı kalır.",
       },
+    ],
+    relatedGuides: [
+      { href: "/rehber/ceyrek-altin-alis-satis-farki", label: "Çeyrek Altında Alış ve Satış Farkı" },
+      { href: "/rehber/eski-yeni-tarihli-ceyrek-altin-farki", label: "Eski ve Yeni Tarihli Çeyrek Altın Farkı" },
+      { href: "/rehber/dugunde-hangi-altinlar-takilir", label: "Düğünde Hangi Altınlar Takılır?" },
     ],
   },
   {
@@ -124,6 +130,10 @@ export const priceContent: PriceContentEntry[] = [
         body: "Yarım altın fiyatı, sayfamızda gram altınla birlikte ve aynı kaynaktan (piyasa fiyatı + kur) türetilerek anlık güncellenir. Kuyumcudan kuyumcuya küçük fiyat farkları normaldir; alım öncesi güncel referans fiyatla karşılaştırma yapmanızı öneririz.",
       },
     ],
+    relatedGuides: [
+      { href: "/rehber/dugunde-hangi-altinlar-takilir", label: "Düğünde Hangi Altınlar Takılır?" },
+      { href: "/rehber/ceyrek-altin-alis-satis-farki", label: "Çeyrek Altında Alış ve Satış Farkı" },
+    ],
   },
   {
     key: "tam-altin",
@@ -151,6 +161,10 @@ export const priceContent: PriceContentEntry[] = [
         heading: "Denizli'de Tam Altın Alım-Satımı",
         body: "Tam altın, yüksek gramajı nedeniyle alım-satımda dikkatli olunması gereken bir kalemdir; kuyumcudan mutlaka fatura ve ayar damgası talep edin. Bu sayfadaki fiyat, gram altın fiyatının güncel piyasa değerine göre türetilir ve yaklaşık dakikada bir yenilenir.",
       },
+    ],
+    relatedGuides: [
+      { href: "/rehber/dugunde-hangi-altinlar-takilir", label: "Düğünde Hangi Altınlar Takılır?" },
+      { href: "/rehber/altin-alirken-fatura", label: "Altın Alırken Fatura Alınmalı mı?" },
     ],
   },
   {
@@ -180,6 +194,10 @@ export const priceContent: PriceContentEntry[] = [
         body: "Cumhuriyet Altını, hem düğün/hediye amaçlı hem de uzun vadeli yatırım amaçlı olarak Denizli'deki kuyumcularda sürekli talep gören bir kalemdir. Güncel fiyatı bu sayfada gram altınla birlikte canlı olarak takip edebilirsiniz.",
       },
     ],
+    relatedGuides: [
+      { href: "/rehber/dugunde-hangi-altinlar-takilir", label: "Düğünde Hangi Altınlar Takılır?" },
+      { href: "/rehber/eski-yeni-tarihli-ceyrek-altin-farki", label: "Eski ve Yeni Tarihli Çeyrek Altın Farkı" },
+    ],
   },
   {
     key: "22-ayar-bilezik",
@@ -208,10 +226,11 @@ export const priceContent: PriceContentEntry[] = [
         body: "Bilezik alırken ayar damgasını (916 veya 22K ibaresi) mutlaka kontrol edin ve fatura isteyin. İşçilik bedeli kuyumcudan kuyumcuya değişebileceğinden, güncel gram fiyatını bilmek pazarlık gücünüzü artırır.",
       },
     ],
-    relatedGuide: {
-      href: "/rehber/altin-ayari-nedir",
-      label: "Altın Ayarı Nedir? 24, 22, 18, 14 Ayar",
-    },
+    relatedGuides: [
+      { href: "/rehber/22-ayar-bilezik-hesaplama", label: "22 Ayar Bilezik Hesaplama" },
+      { href: "/rehber/bilezikte-iscilik-hesaplama", label: "Bilezikte İşçilik Nasıl Hesaplanır?" },
+      { href: "/rehber/altin-ayari-nedir", label: "Altın Ayarı Nedir? 24, 22, 18, 14 Ayar" },
+    ],
   },
   {
     key: "18-ayar-altin",
@@ -240,10 +259,10 @@ export const priceContent: PriceContentEntry[] = [
         body: "18 ayar altının gram fiyatı, 24 ayar (has) altın fiyatının yaklaşık %75'ine karşılık gelir; kuyumcudaki son fiyata bu değerin üzerine işçilik ve tasarım bedeli eklenir. Sayfamızdaki fiyat, işçiliksiz ham piyasa değeridir.",
       },
     ],
-    relatedGuide: {
-      href: "/rehber/altin-ayari-nedir",
-      label: "Altın Ayarı Nedir? 24, 22, 18, 14 Ayar",
-    },
+    relatedGuides: [
+      { href: "/rehber/altin-ayari-nedir", label: "Altın Ayarı Nedir? 24, 22, 18, 14 Ayar" },
+      { href: "/rehber/alyans-rehberi", label: "Alyans Alırken Nelere Dikkat Edilmeli?" },
+    ],
   },
   {
     key: "14-ayar-altin",
@@ -272,10 +291,11 @@ export const priceContent: PriceContentEntry[] = [
         body: "Bütçe dostu ve dayanıklı olması nedeniyle özellikle günlük takı ve alyans arayan müşteriler tarafından tercih edilir. Güncel gram fiyatını bu sayfadan takip ederek kuyumcu tekliflerini karşılaştırabilirsiniz.",
       },
     ],
-    relatedGuide: {
-      href: "/rehber/altin-ayari-nedir",
-      label: "Altın Ayarı Nedir? 24, 22, 18, 14 Ayar",
-    },
+    relatedGuides: [
+      { href: "/rehber/14-ayar-altin-bozdurma-hesabi", label: "14 Ayar Altın Bozdurma Hesabı" },
+      { href: "/rehber/altin-ayari-nedir", label: "Altın Ayarı Nedir? 24, 22, 18, 14 Ayar" },
+      { href: "/rehber/alyans-olcusu-nasil-belirlenir", label: "Alyans Ölçüsü Nasıl Belirlenir?" },
+    ],
   },
   {
     key: "ceyrek-ata",
@@ -303,6 +323,10 @@ export const priceContent: PriceContentEntry[] = [
         heading: "Kimler Tercih Eder?",
         body: "Hem geleneksel hediye alışverişinde hem de tarihi sikke koleksiyonu yapmak isteyenler arasında Ata Lirası popülerdir. Denizli'deki kuyumcularda diğer ziynet altınları kadar sık bulunmasa da talep gördüğünde kolayca temin edilebilir.",
       },
+    ],
+    relatedGuides: [
+      { href: "/rehber/eski-yeni-tarihli-ceyrek-altin-farki", label: "Eski ve Yeni Tarihli Çeyrek Altın Farkı" },
+      { href: "/rehber/ceyrek-altin-alis-satis-farki", label: "Çeyrek Altında Alış ve Satış Farkı" },
     ],
   },
   {
@@ -387,6 +411,10 @@ export const priceContent: PriceContentEntry[] = [
         heading: "Denizli'de Çeyrek Reşat Bulmak",
         body: "Reşat serisi de Ata gibi her kuyumcuda standart stokta olmayabilir; almadan önce kuyumcunuzla temin süresini ve fiyatını teyit etmenizi öneririz.",
       },
+    ],
+    relatedGuides: [
+      { href: "/rehber/eski-yeni-tarihli-ceyrek-altin-farki", label: "Eski ve Yeni Tarihli Çeyrek Altın Farkı" },
+      { href: "/rehber/ceyrek-altin-alis-satis-farki", label: "Çeyrek Altında Alış ve Satış Farkı" },
     ],
   },
   {
@@ -500,6 +528,10 @@ export const priceContent: PriceContentEntry[] = [
         body: "Merkez bankaları, kurumsal yatırımcılar ve bireysel altın yatırımcıları ons altın fiyatını küresel ekonomik gelişmelerin (faiz kararları, enflasyon, jeopolitik riskler) bir göstergesi olarak yakından izler.",
       },
     ],
+    relatedGuides: [
+      { href: "/rehber/gram-altin-hesaplama", label: "Gram Altın Fiyatı Nasıl Hesaplanır?" },
+      { href: "/rehber/gram-altin-bugun-ne-kadar", label: "Gram Altın Bugün Ne Kadar?" },
+    ],
   },
   {
     key: "usd-try",
@@ -527,6 +559,10 @@ export const priceContent: PriceContentEntry[] = [
         heading: "Denizli'de Dolar Kuru Takibi",
         body: "Kuyumcular, ithalat yapan işletmeler ve bireysel yatırımcılar dolar kurunu günlük olarak takip eder. Bu sayfadaki kur, yaklaşık her 60 saniyede bir tazelenir.",
       },
+    ],
+    relatedGuides: [
+      { href: "/rehber/gram-altin-bugun-ne-kadar", label: "Gram Altın Bugün Ne Kadar?" },
+      { href: "/rehber/gram-altin-hesaplama", label: "Gram Altın Fiyatı Nasıl Hesaplanır?" },
     ],
   },
   {

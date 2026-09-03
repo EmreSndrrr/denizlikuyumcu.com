@@ -1,17 +1,22 @@
 import Link from "next/link";
 import { ArrowRight, ShieldCheck } from "@phosphor-icons/react/dist/ssr";
-import { faqItems } from "@/lib/faq";
+import { homeFaqItems } from "@/lib/faq";
 import SectionHeading from "@/components/SectionHeading";
 import FaqAccordion from "@/components/FaqAccordion";
 
 // Bu bileşen Server Component olarak kalıyor (JSON-LD + başlık sunucuda
 // render edilir); asıl açılır/kapanır etkileşim <FaqAccordion> içinde,
 // ayrı bir client component'te.
+//
+// Anasayfa yalnızca en çok aranan ~7 soruyu gösterir (homeFaqItems);
+// tam liste + tam FAQPage şeması /sikca-sorulan-sorular sayfasında.
+// Şema burada da yalnızca GÖRÜNEN sorularla sınırlı (Google: FAQ
+// markup sayfada görünür içerikle birebir örtüşmeli).
 export default function Faq() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqItems.map((item) => ({
+    mainEntity: homeFaqItems.map((item) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: {
@@ -31,7 +36,15 @@ export default function Faq() {
         title="Sıkça Sorulan Sorular"
         subtitle="Altın alırken, satarken ve bozdururken en çok merak edilenler — kısa cevaplar, ayrıntı için rehber bağlantıları."
       />
-      <FaqAccordion items={faqItems} />
+      <FaqAccordion items={homeFaqItems} />
+
+      <Link
+        href="/sikca-sorulan-sorular"
+        className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:underline"
+      >
+        Tüm sorular
+        <ArrowRight aria-hidden="true" size={15} />
+      </Link>
 
       {/* Sorusu listede olmayan ziyaretçi için bilgi talep formuna
           yönlendirme. */}

@@ -9,6 +9,10 @@ export type FaqItem = {
   // "Detaylı rehber →" bağlantısı olarak gösterilir; FAQPage şemasına
   // dahil edilmez (şema yalnızca soru + metin cevap içerir).
   href?: string;
+  // true ise anasayfadaki kısa SSS bölümünde de gösterilir. Tam liste
+  // /sikca-sorulan-sorular sayfasında; anasayfa yalnızca en çok aranan
+  // birkaç soruyu gösterir (aksi halde 17 satırlık uzun bir akordeon).
+  home?: boolean;
 };
 
 export const faqItems: FaqItem[] = [
@@ -17,24 +21,28 @@ export const faqItems: FaqItem[] = [
     answer:
       "Gram altının güncel alış ve satış fiyatını sayfanın üst kısmındaki fiyat şeridinden ve anasayfadaki fiyat tablosundan canlı olarak görebilirsiniz; veriler yaklaşık her 60 saniyede bir tazelenir. Gösterilen rakam bilgilendirme amaçlıdır, kesin işlem fiyatı için kuyumcunuzla teyitleşin.",
     href: "/rehber/gram-altin-bugun-ne-kadar",
+    home: true,
   },
   {
     question: "10 gram altın kaç TL eder?",
     answer:
       "10 gram altının değeri, güncel gram altın fiyatının 10 ile çarpılmasıyla bulunur. Külçe/gram altında işçilik payı çok düşüktür; bilezik gibi işlenmiş üründe ise ayrıca işçilik eklenir. Anasayfadaki hesaplama aracına gramajı girerek anlık tutarı görebilirsiniz.",
     href: "/rehber/10-gram-altin-kac-tl",
+    home: true,
   },
   {
     question: "Çeyrek altında alış ve satış fiyatı neden farklı?",
     answer:
       "Bu fark (makas/spread) kuyumcunun işletme maliyetini, kur riskini ve kâr marjını yansıtır. Çeyrek altında makas genellikle gram altına göre biraz daha geniştir çünkü basım (darphane) payı ve talep esnekliği devreye girer. Piyasa oynak olduğunda makas açılır.",
     href: "/rehber/ceyrek-altin-alis-satis-farki",
+    home: true,
   },
   {
     question: "22 ayar bilezik hesabı nasıl yapılır?",
     answer:
       "22 ayar bilezik değeri kabaca şöyle bulunur: (gram altın fiyatı × 0,916 × bileziğin gramı) + işçilik. 0,916 katsayısı 22 ayarın saflık oranıdır (916/1000). İşçilik, kuyumcuya ve modele göre yüzde olarak eklenir. Anasayfadaki hesaplama aracında ayar ve gram girerek sonucu görebilirsiniz.",
     href: "/rehber/22-ayar-bilezik-hesaplama",
+    home: true,
   },
   {
     question: "14 ayar altın bozdurunca ne kadar para alırım?",
@@ -59,12 +67,14 @@ export const faqItems: FaqItem[] = [
     answer:
       "Evet. Fatura veya fiş; ürünün ayarını, gramını, işçiliğini ve satıcıyı belgeleyen tek resmî kanıttır. İleride bozdururken, iade/değişimde veya bir anlaşmazlıkta işinize yarar. Faturasız satıştan kaçının; kuyumcu belge vermekten çekiniyorsa bu bir uyarı işaretidir.",
     href: "/rehber/altin-alirken-fatura",
+    home: true,
   },
   {
     question: "Sahte altın nasıl anlaşılır?",
     answer:
       "İlk kontrol ayar damgası ve darphane/marka kaşesidir. Mıknatısa yapışan altın sahtedir (altın manyetik değildir). Renk kaçıkları, terle yeşillenme, beklenenden hafif gelen gramaj şüphe uyandırmalı. Kesin sonuç için kuyumcuda mihenk taşı, asit testi veya XRF (spektrometre) ölçümü yaptırın.",
     href: "/rehber/sahte-altin-nasil-anlasilir",
+    home: true,
   },
   {
     question: "Eski tarihli çeyrek altın ile yeni tarihli arasında fark var mı?",
@@ -105,5 +115,9 @@ export const faqItems: FaqItem[] = [
     answer:
       "Kuyumcular sayfamızdan Denizli'deki işletmeleri inceleyebilir, ayar damgası net olan ve faturalı satış yapan kuyumcuları tercih edebilirsiniz.",
     href: "/kuyumcular",
+    home: true,
   },
 ];
+
+// Anasayfadaki kısa SSS bölümü — yalnızca en çok aranan sorular.
+export const homeFaqItems: FaqItem[] = faqItems.filter((f) => f.home);

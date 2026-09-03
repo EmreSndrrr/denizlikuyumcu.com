@@ -22,9 +22,17 @@ export default function DailyChangeTable({
 }) {
   const { data, stale } = useLivePrices(initialData);
 
+  // Sadece GERÇEKTEN yükselen/düşen kalemler listelenir. Önceden bütün
+  // kalemler değişime göre sıralanıp en alttaki 5'i "Düşenler" diye
+  // gösteriliyordu; her şeyin artıda olduğu günlerde bu, "+0,07% ile en
+  // çok düşen" gibi çelişkili (yeşil değer + kırmızı/aşağı ton) bir kutu
+  // üretiyordu. Artık 0 veya pozitif kalem "Düşenler"e hiç girmiyor.
   const sorted = [...data.items].sort((a, b) => b.changePercent - a.changePercent);
-  const gainers = sorted.slice(0, LIST_SIZE);
-  const losers = sorted.slice(-LIST_SIZE).reverse();
+  const gainers = sorted.filter((i) => i.changePercent > 0).slice(0, LIST_SIZE);
+  const losers = sorted
+    .filter((i) => i.changePercent < 0)
+    .slice(-LIST_SIZE)
+    .reverse();
 
   return (
     <div className="rounded-2xl border border-border bg-surface shadow-sm">
@@ -40,8 +48,18 @@ export default function DailyChangeTable({
         </span>
       </div>
       <div className="grid divide-y divide-border sm:grid-cols-2 sm:divide-x sm:divide-y-0">
-        <ChangeList title="En Çok Yükselenler" items={gainers} tone="up" />
-        <ChangeList title="En Çok Düşenler" items={losers} tone="down" />
+        <ChangeList
+          title="En Çok Yükselenler"
+          items={gainers}
+          tone="up"
+          emptyText="Bugün yükselen kalem yok."
+        />
+        <ChangeList
+          title="En Çok Düşenler"
+          items={losers}
+          tone="down"
+          emptyText="Bugün düşen kalem yok."
+        />
       </div>
     </div>
   );
@@ -51,10 +69,12 @@ function ChangeList({
   title,
   items,
   tone,
+  emptyText,
 }: {
   title: string;
   items: PriceItem[];
   tone: "up" | "down";
+  emptyText: string;
 }) {
   return (
     <div className="p-4">
@@ -71,6 +91,9 @@ function ChangeList({
         )}
         {title}
       </p>
+      {items.length === 0 && (
+        <p className="mt-3 text-sm text-muted">{emptyText}</p>
+      )}
       <ol className="mt-3 space-y-3">
         {items.map((item, i) => {
           const href = getPriceHref(item.key);

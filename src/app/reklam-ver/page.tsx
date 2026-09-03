@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { CheckCircle } from "@phosphor-icons/react/dist/ssr";
+import Link from "next/link";
+import { ArrowRight, CheckCircle } from "@phosphor-icons/react/dist/ssr";
 
 export const metadata: Metadata = {
   title: "Reklam Ver: Kuyumcunuzu Öne Çıkarın",
@@ -83,11 +84,27 @@ export default function ReklamVerPage() {
       <div className="mt-8 rounded-2xl border border-border bg-surface p-6">
         <h2 className="text-lg font-bold text-ink">İletişime Geçin</h2>
         <p className="mt-2 text-sm text-muted">
-          Reklam paketleri ve fiyatlandırma hakkında bilgi almak için bize
-          ulaşın.
+          Reklam paketleri ve fiyatlandırma hakkında bilgi almak için formu
+          doldurun; en kısa sürede size dönüş yapalım. Dilerseniz doğrudan
+          e-posta veya telefonla da ulaşabilirsiniz.
         </p>
-        <p className="mt-3 text-sm text-muted">
-          E-posta: <span className="font-medium text-ink">info@ventiajans.com</span>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <Link
+            href="/bilgi-talebi"
+            className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98]"
+          >
+            Bilgi / teklif talep et
+            <ArrowRight aria-hidden="true" size={15} />
+          </Link>
+        </div>
+        <p className="mt-4 text-sm text-muted">
+          E-posta:{" "}
+          <a
+            href="mailto:info@ventiajans.com"
+            className="font-medium text-ink hover:text-brand"
+          >
+            info@ventiajans.com
+          </a>
           {" · "}Telefon:{" "}
           <a href="tel:05445965622" className="font-medium text-ink hover:text-brand">
             0544 596 56 22

@@ -22,10 +22,15 @@ export default function DailyMarketSummary({
   const { data, stale } = useLivePrices(initialData);
   const sorted = [...data.items].sort((a, b) => b.changePercent - a.changePercent);
   const topGainer = sorted[0];
-  const topLoser = sorted[sorted.length - 1];
+  // Gerçekten düşen kalem varsa onu göster; yoksa (her şey artıda/sabit
+  // olduğu günlerde) "en çok düşen: +0,07%" gibi çelişkili bir kutu
+  // üretmemek için "en az yükselen"e düşüyoruz.
+  const decliners = sorted.filter((i) => i.changePercent < 0);
+  const topLoser = decliners.length > 0 ? decliners[decliners.length - 1] : null;
+  const weakest = sorted[sorted.length - 1];
   const gramAltin = data.items.find((i) => i.key === "gram-altin");
 
-  if (!topGainer || !topLoser) return null;
+  if (!topGainer || !weakest) return null;
 
   return (
     <div className="rounded-2xl border border-border bg-surface px-4 py-4 shadow-sm">
@@ -43,12 +48,21 @@ export default function DailyMarketSummary({
           value={`${topGainer.changePercent >= 0 ? "+" : ""}${topGainer.changePercent.toFixed(2)}%`}
           tone="up"
         />
-        <SummaryItem
-          label="En çok düşen"
-          name={topLoser.label}
-          value={`${topLoser.changePercent.toFixed(2)}%`}
-          tone="down"
-        />
+        {topLoser ? (
+          <SummaryItem
+            label="En çok düşen"
+            name={topLoser.label}
+            value={`${topLoser.changePercent.toFixed(2)}%`}
+            tone="down"
+          />
+        ) : (
+          <SummaryItem
+            label="En az yükselen"
+            name={weakest.label}
+            value={`${weakest.changePercent >= 0 ? "+" : ""}${weakest.changePercent.toFixed(2)}%`}
+            tone="up"
+          />
+        )}
         {gramAltin && (
           <SummaryItem
             label="Gram altın (günlük)"

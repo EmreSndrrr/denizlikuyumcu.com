@@ -27,7 +27,7 @@ export const searchIndex: SearchEntry[] = [
   // Günlük Değişim artık ayrı bir bölüm değil, Grafik bölümünün yanında
   // (bkz. page.tsx) — bu yüzden aynı çapaya yönlendiriyor.
   { label: "Günlük Değişim", href: "/#grafik", group: "Anasayfa Bölümü" },
-  { label: "Sıkça Sorulan Sorular", href: "/#sss", group: "Anasayfa Bölümü" },
+  { label: "Sıkça Sorulan Sorular", href: "/sikca-sorulan-sorular", group: "Sayfa" },
   { label: "Kuyumcular", href: "/kuyumcular", group: "Sayfa" },
   { label: "Bilgi Talebi", href: "/bilgi-talebi", group: "Sayfa" },
   { label: "Reklam Ver", href: "/reklam-ver", group: "Sayfa" },

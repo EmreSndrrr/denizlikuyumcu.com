@@ -95,16 +95,27 @@ export default function PriceDetailPage({
             ))}
           </article>
 
-          {entry.relatedGuide && (
-            <p className="mt-4 text-sm text-muted">
-              İlgili rehber:{" "}
-              <Link
-                href={entry.relatedGuide.href}
-                className="font-medium text-brand hover:underline"
-              >
-                {entry.relatedGuide.label}
-              </Link>
-            </p>
+          {entry.relatedGuides && entry.relatedGuides.length > 0 && (
+            <section className="mt-8 rounded-2xl border border-border bg-surface p-4">
+              <p className="text-sm font-semibold text-ink">İlgili rehberler</p>
+              <ul className="mt-2 divide-y divide-border">
+                {entry.relatedGuides.map((g) => (
+                  <li key={g.href}>
+                    <Link
+                      href={g.href}
+                      className="group flex items-center justify-between gap-3 py-2.5 text-sm font-medium text-ink transition-colors hover:text-brand"
+                    >
+                      {g.label}
+                      <CaretRight
+                        aria-hidden="true"
+                        size={12}
+                        className="shrink-0 text-muted transition-transform group-hover:translate-x-0.5 group-hover:text-brand"
+                      />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
           )}
 
           <div className="mt-8 max-w-md">

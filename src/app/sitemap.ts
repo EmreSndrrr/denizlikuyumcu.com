@@ -18,6 +18,7 @@ const staticContentRoutes = [
   "/rehber",
   "/reklam-ver",
   "/bilgi-talebi",
+  "/sikca-sorulan-sorular",
   "/rehber/altin-ayari-nedir",
   "/rehber/gram-altin-hesaplama",
   "/rehber/alyans-rehberi",
