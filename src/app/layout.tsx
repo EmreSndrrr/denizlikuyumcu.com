@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Fraunces } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -70,13 +69,15 @@ export const metadata: Metadata = {
 // Tema tercihini (localStorage -> yoksa işletim sistemi) React hydrate
 // olmadan ÖNCE, senkron olarak uyguluyoruz; aksi halde önce açık temayla
 // boyanıp bir an sonra koyuya geçen bir "flash" (FOUC) görülür.
-// next/script'in "beforeInteractive" stratejisi tam olarak bunun için
-// var: <body>'nin normal bir çocuğu olarak yazılsa bile Next.js bu
-// script'i otomatik olarak belgenin <head>'ine taşıyıp hydrate'ten önce
-// çalıştırıyor. (Ham bir <script>'i <html>'in doğrudan çocuğu — yani
-// <body>'nin kardeşi — yapmak Next.js App Router'da hydration hatasına
-// yol açtığı için bu resmi API kullanılıyor.)
-const THEME_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem('theme');var d=s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.style.colorScheme=d?'dark':'light';}catch(e){}})();`;
+//
+// ÖNEMLİ: Bu, DÜZ bir <script> etiketi olarak <body>'nin İLK çocuğudur —
+// `next/script` DEĞİL. `next/script strategy="beforeInteractive"` App
+// Router'da script'i `self.__next_s` kuyruğuna atıp framework JS'i
+// yüklendikten sonra çalıştırıyor; bu da her tam sayfa yüklemesinde
+// gözle görülür bir tema sıçraması (light -> dark) yaratıyordu. Düz,
+// src'siz, async/defer'siz bir <script> ise HTML ayrıştırılırken, gövde
+// içeriği boyanmadan ÖNCE senkron çalışır — istenen davranış budur.
+const THEME_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem('theme');var d=s==='dark'||(!s&&window.matchMedia('(prefers-color-scheme: dark)').matches);var e=document.documentElement;e.classList.toggle('dark',d);e.style.colorScheme=d?'dark':'light';}catch(e){}})();`;
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   const prices = await getPrices();
@@ -88,11 +89,9 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bg font-sans text-ink [font-variant-numeric:tabular-nums_lining-nums]">
-        <Script
-          id="theme-init"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }}
-        />
+        {/* Düz inline <script> — <body>'nin ilk çocuğu, senkron çalışır
+            (bkz. THEME_INIT_SCRIPT yorumu). */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <PriceMarquee initialData={prices} />
         <Header />
         <main className="flex-1">

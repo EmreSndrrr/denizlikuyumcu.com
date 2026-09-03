@@ -22,6 +22,7 @@ const navLinks = [
   { href: "/kuyumcular", label: "Kuyumcular" },
   { href: "/#hesaplama", label: "Hesaplama" },
   { href: "/rehber", label: "Rehber" },
+  { href: "/iletisim", label: "İletişim" },
 ];
 
 const anchorIds = navLinks

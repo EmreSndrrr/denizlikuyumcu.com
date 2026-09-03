@@ -133,11 +133,18 @@
   );
 }
 
-/* Fare/klavye şeridin üzerindeyken dur (WCAG 2.2 — otomatik dönen içerik
-   odaklanma/hover'da durabilmeli), ya da kullanıcı duraklat düğmesine
-   bastıysa (data-paused) dur. */
+/* Fare şeridin üzerindeyken dur, ya da kullanıcı duraklat düğmesine
+   bastıysa (data-paused) dur. WCAG 2.2 SC 2.2.2 (Duraklat/Durdur/Gizle)
+   gereksinimi duraklat düğmesiyle karşılanıyor.
+
+   NOT: Eskiden burada `:focus-within` de vardı. Ama şeritteki tek
+   odaklanabilir öğe duraklat düğmesinin KENDİSİ; düğmeye basınca odak
+   düğmede kalıyor, `data-paused` tekrar false olsa bile `:focus-within`
+   animasyonu durdurmaya devam ediyordu — kullanıcı "oynat"a basıp da
+   şerit hareket etmiyordu (başka yere tıklayınca düzeliyordu). Şerit
+   öğeleri link olmadığı için `:focus-within` zaten sadece bu hataya
+   yol açıyordu, kaldırıldı. */
 .marquee-row:hover .animate-price-marquee,
-.marquee-row:focus-within .animate-price-marquee,
 .marquee-row[data-paused="true"] .animate-price-marquee {
   animation-play-state: paused;
 }
