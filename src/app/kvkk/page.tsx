@@ -49,7 +49,10 @@ export default function KvkkPage() {
       <p>
         Standart web sunucusu günlükleri (istek zamanı, IP, hata kayıtları)
         barındırma ve e-posta altyapısı sağlayıcılarımız tarafından teknik ve
-        güvenlik amaçlarıyla tutulabilir.
+        güvenlik amaçlarıyla tutulabilir. Ayrıca <strong>Vercel Web
+        Analytics</strong> ile çerezsiz, anonim ziyaretçi istatistiği
+        (sayfa görüntüleme, ülke, cihaz türü) toplanır — bu veriden kimliği
+        belirli bir kişiye ulaşılamaz.
       </p>
       <h2>İşleme amacı ve hukuki sebep</h2>
       <p>
@@ -69,11 +72,13 @@ export default function KvkkPage() {
       <h2>Aktarım ve hizmet sağlayıcılar</h2>
       <p>
         Form gönderimleri, e-posta iletimi için <strong>Resend</strong>{" "}
-        (e-posta altyapı sağlayıcısı) aracılığıyla iletilir ve site{" "}
-        <strong>Vercel</strong> altyapısında barındırılır. Bu sağlayıcıların
-        sunucuları yurt dışında bulunabilir; verileriniz yalnızca hizmetin
-        teknik olarak sağlanabilmesi için ve bu amaçla sınırlı olarak işlenir.
-        Bunun dışında kişisel verileriniz üçüncü kişilerle paylaşılmaz.
+        (e-posta altyapı sağlayıcısı) aracılığıyla iletilir; site{" "}
+        <strong>Vercel</strong> altyapısında barındırılır ve ziyaretçi
+        istatistiği <strong>Vercel Web Analytics</strong> ile (çerezsiz,
+        anonim) tutulur. Bu sağlayıcıların sunucuları yurt dışında
+        bulunabilir; verileriniz yalnızca hizmetin teknik olarak
+        sağlanabilmesi için ve bu amaçla sınırlı olarak işlenir. Bunun
+        dışında kişisel verileriniz üçüncü kişilerle paylaşılmaz, satılmaz.
       </p>
       <h2>Haklarınız</h2>
       <p>

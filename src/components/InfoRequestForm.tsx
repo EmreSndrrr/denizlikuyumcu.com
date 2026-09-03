@@ -24,7 +24,13 @@ function SubmitButton() {
   );
 }
 
-export default function InfoRequestForm() {
+export default function InfoRequestForm({
+  defaultKonu,
+}: {
+  // Formun belirli bir sayfaya gömüldüğü durumlarda "Konu" alanının
+  // ön seçili değeri (ör. /reklam-ver'de "Reklam / işletme tanıtımı").
+  defaultKonu?: (typeof KONULAR)[number];
+} = {}) {
   const [state, formAction] = useActionState(sendInfoRequest, initialState);
   const uid = useId();
 
@@ -130,7 +136,12 @@ export default function InfoRequestForm() {
           <label htmlFor={`${uid}-konu`} className="text-sm font-medium text-ink">
             Konu
           </label>
-          <select id={`${uid}-konu`} name="konu" defaultValue={KONULAR[0]} className={fieldClass}>
+          <select
+            id={`${uid}-konu`}
+            name="konu"
+            defaultValue={defaultKonu ?? KONULAR[0]}
+            className={fieldClass}
+          >
             {KONULAR.map((k) => (
               <option key={k} value={k}>
                 {k}

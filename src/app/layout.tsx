@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Fraunces } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -99,6 +100,13 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <CookieConsentBanner />
+        {/* Vercel Web Analytics — çerezsiz, kişisel veri toplamayan
+            ziyaretçi istatistiği (sayfa görüntüleme, ülke/cihaz kırılımı).
+            IP adresi kalıcı saklanmaz, parmak izi çıkarılmaz. Reklam
+            envanterini gerçek trafik verisiyle sunabilmek için gerekli
+            (bkz. /gizlilik-politikasi). Vercel panelinden Analytics'in
+            ayrıca etkinleştirilmesi gerekir. */}
+        <Analytics />
       </body>
     </html>
   );

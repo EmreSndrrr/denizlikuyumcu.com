@@ -55,16 +55,33 @@ export default function GizlilikPolitikasiPage() {
         sıfırlanır. İstediğiniz zaman tarayıcı ayarlarınızdan bu verileri
         silebilirsiniz.
       </p>
-      <h2>Üçüncü taraf servisler</h2>
+      <h2>Ziyaretçi istatistiği</h2>
       <p>
-        Şu an sitede reklam gösterimi veya ziyaretçi analitiği yapan bir
-        üçüncü taraf servis aktif değildir. Altın/döviz fiyatları
-        finans.truncgil.com üzerinden çekilir; bu istek yalnızca sunucumuz
-        ile Truncgil arasında gerçekleşir, ziyaretçinin herhangi bir kişisel
-        verisi bu isteğe dahil edilmez (bkz.{" "}
-        <a href="/veri-kaynaklari">Veri Kaynakları</a>). İleride reklam ağı
-        veya analitik araç gibi bir servis eklenirse bu sayfa güncellenerek
-        hangi verinin, hangi amaçla paylaşıldığı açıkça belirtilecektir.
+        Hangi sayfaların ne kadar ilgi gördüğünü ölçmek için{" "}
+        <strong>Vercel Web Analytics</strong> kullanıyoruz. Bu araç{" "}
+        <strong>çerez kullanmaz</strong>, ziyaretçilere kalıcı bir kimlik
+        atamaz ve IP adresinizi ham haliyle saklamaz; veriyi anonimleştirerek
+        yalnızca toplu sayımlar (sayfa görüntüleme sayısı, yaklaşık konum
+        olarak ülke, cihaz/tarayıcı türü) üretir. Bu veriler reklam
+        alanlarımızın erişimini olası reklamverenlere gösterebilmek için
+        kullanılır ve üçüncü kişilere satılmaz.
+      </p>
+      <h2>Reklam gösterimi</h2>
+      <p>
+        Sitede yer alan &quot;Sponsorlu&quot; kuyumcu kartları ve reklam
+        alanları doğrudan bizim tarafımızdan yönetilir; üçüncü taraf bir
+        reklam ağı (ör. Google Ads) veya davranışsal hedefleme{" "}
+        <strong>kullanılmamaktadır</strong>. Boş bir reklam alanı, o alanın
+        satın alınabileceğini belirten bir bilgilendirme kartı gösterebilir.
+      </p>
+      <h2>Diğer üçüncü taraf servisler</h2>
+      <p>
+        Altın/döviz fiyatları finans.truncgil.com üzerinden çekilir; bu
+        istek yalnızca sunucumuz ile Truncgil arasında gerçekleşir,
+        ziyaretçinin herhangi bir kişisel verisi bu isteğe dahil edilmez
+        (bkz. <a href="/veri-kaynaklari">Veri Kaynakları</a>). Bilgi Talebi
+        formu gönderimleri e-posta olarak Resend altyapısıyla iletilir. Site{" "}
+        <strong>Vercel</strong> üzerinde barındırılır.
       </p>
       <p>
         Kişisel verilerin işlenmesine ilişkin yasal çerçeve için{" "}

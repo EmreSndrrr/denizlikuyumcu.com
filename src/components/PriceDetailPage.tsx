@@ -80,7 +80,7 @@ export default function PriceDetailPage({
               gösterilmiyor (bkz. aşağıdaki lg:hidden). */}
           <div className="mt-6 max-w-md space-y-4 lg:hidden">
             <PriceDetailCard itemKey={entry.key} initialData={initialData} history={history} />
-            <AdSlot position="sidebar" />
+            <AdSlot position="sidebar" fallback="promo" />
           </div>
 
           <article className="prose prose-stone dark:prose-invert mt-8 max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-brand">
@@ -139,7 +139,7 @@ export default function PriceDetailPage({
             görünürlük" vaadiyle tutarlı hale getiriyor. */}
         <div className="hidden space-y-4 lg:sticky lg:top-24 lg:block">
           <PriceDetailCard itemKey={entry.key} initialData={initialData} history={history} />
-          <AdSlot position="sidebar" />
+          <AdSlot position="sidebar" fallback="promo" />
         </div>
       </div>
 

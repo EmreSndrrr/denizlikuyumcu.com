@@ -71,10 +71,18 @@ export default function Footer() {
             </p>
           </div>
         </div>
-        <p className="mt-8 border-t border-border pt-6 text-xs text-muted/70">
-          © {new Date().getFullYear()} DenizliKuyumcu.com — Tüm hakları
-          saklıdır.
-        </p>
+        <div className="mt-8 flex flex-col gap-2 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-muted/70">
+            © {new Date().getFullYear()} DenizliKuyumcu.com — Tüm hakları
+            saklıdır.
+          </p>
+          <p className="text-xs text-muted">
+            Kuyumcu musunuz?{" "}
+            <Link href="/reklam-ver" className="font-medium text-brand hover:underline">
+              İşletmenizi Denizli&apos;de öne çıkarın
+            </Link>
+          </p>
+        </div>
       </div>
     </footer>
   );

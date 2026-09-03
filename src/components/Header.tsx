@@ -216,7 +216,7 @@ export default function Header() {
             href="/reklam-ver"
             className="hidden text-sm font-medium text-muted transition-colors hover:text-ink active:scale-[0.98] md:inline-block"
           >
-            İşletmeni Ekle
+            Kuyumcu musunuz?
           </Link>
           <Link
             href="/kuyumcular"
@@ -299,7 +299,7 @@ export default function Header() {
                   onClick={() => setMenuOpen(false)}
                   className="flex min-h-11 items-center justify-center text-center text-sm font-medium text-muted transition-colors hover:text-ink"
                 >
-                  İşletmeni Ekle
+                  Kuyumcu musunuz? İşletmenizi ekleyin
                 </Link>
                 <Link
                   href="/kuyumcular"

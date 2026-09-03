@@ -58,11 +58,17 @@ güncel hissettiren fiyat gösterimi önemlidir.
   kod tabanı zaten mevcut, stack kararı geri açılmayacak.
 - Reklam sistemi (`src/lib/ads.ts`) şu an kod içi config; DB veya admin
   paneli yok. Kuyumcu dizini (`src/lib/jewelers.ts`) de aynı şekilde.
-- Reklam alanları (`AdSlot`) gerçek bir reklam yoksa **hiçbir şey
-  render etmez** (2026 tasarım yenileme briefi ile değişti — eskiden
-  "reklamınız burada olabilir" öz-tanıtım kartı gösteriyordu, brief bunu
-  açıkça yasakladı: "'Bu alanı alın' butonu kullanıcıya gösterilmemeli").
-  Reklamveren kazanma/satış çağrısı SADECE `/reklam-ver` sayfasında.
+- Reklam alanları (`AdSlot`): gerçek bir reklam yoksa **varsayılan olarak
+  hiçbir şey render etmez**. İSTİSNA (2026, kullanıcı kararı): yalnızca
+  fiyat detay sayfalarının (`/altin/[slug]`, `/doviz/[slug]`) kenar
+  sütununda `fallback="promo"` ile, açıkça "Reklam alanı" olarak etiketli,
+  sahte işletme içermeyen bir bilgilendirme kartı gösterilir ("Bu alan
+  Denizli'deki bir kuyumcuya ayrılabilir" → /reklam-ver). Anasayfa ve
+  rehber makaleleri temiz kalır. Anasayfadaki "Öne Çıkan Kuyumcular"
+  bölümü de reklam yokken "İlk siz olun" boş durumu gösterir.
+  (Not: 2026 tasarım briefi başta bu çağrıyı tamamen yasaklıyordu —
+  "'Bu alanı alın' butonu kullanıcıya gösterilmemeli"; kullanıcı ilk
+  reklamvereni kazanmak için bu kararı sınırlı biçimde geri aldı.)
 - Fiyatların "bilgilendirme amaçlıdır, yatırım tavsiyesi değildir"
   uyarısıyla sunulması gerekiyor — hukuki/güven gerekliliği.
 - Kuyumcu haritası (interaktif/embed) **bilinçli olarak yapılmadı**:
@@ -116,11 +122,12 @@ Uyuşmazlıklarda Denizli Mahkemeleri/İcra Daireleri yetkilidir (bkz.
    korunmalı.
 2. Yerel odak — ulusal/genel içerikle rekabet etmek yerine Denizli'ye
    özgü değer (yerel dizin, yerel arama niyeti) önceliklendirilir.
-3. Reklam envanteri ziyaretçi deneyiminden ayrı tutulur — boş bir
-   reklam alanı hiçbir şey göstermez (kullanıcıya "buy this slot" tarzı
-   bir satış çağrısı asla gösterilmez); reklamveren kazanma çağrısı
-   sadece `/reklam-ver`de yaşar. (Önceki ilke "boş envanter asla boş
-   görünmemeli" idi — 2026 tasarım briefi ile bilinçli olarak
-   tersine çevrildi, bkz. Capabilities and Constraints.)
+3. Reklam envanteri ziyaretçi deneyiminden büyük ölçüde ayrı tutulur —
+   asıl reklamveren kazanma çağrısı `/reklam-ver`de yaşar. İçerik
+   alanlarında sahte "örnek işletme" kartı gösterilmez. Tek istisna:
+   fiyat sayfalarının kenar sütununda ve anasayfa "Öne Çıkan Kuyumcular"
+   bölümünde, açıkça etiketli ve sade bir "reklam alanı" bilgilendirmesi
+   (bkz. Capabilities and Constraints). Bu, briefin ilk halindeki tam
+   yasağın kullanıcı kararıyla sınırlı biçimde gevşetilmiş halidir.
 4. Trafik önce, monetizasyon sonra — reklam satışı için önce gerçek,
    tekrar eden ziyaretçi trafiği kurulmalı.

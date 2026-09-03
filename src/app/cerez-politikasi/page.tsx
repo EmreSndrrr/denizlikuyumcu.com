@@ -12,8 +12,21 @@ export default function CerezPolitikasiPage() {
   return (
     <LegalPage title="Çerez Politikası" updated="Eylül 2026">
       <p>
-        DenizliKuyumcu.com şu an ziyaretçi takibi veya reklam hedeflemesi
-        amacıyla çerez (cookie) kullanmamaktadır.
+        DenizliKuyumcu.com <strong>izleme veya reklam hedefleme çerezi
+        kullanmaz</strong>. Ziyaretçi istatistiği için kullandığımız
+        Vercel Web Analytics de <strong>çerezsiz</strong> çalışır: cihazınıza
+        çerez yazmaz, sizi siteler arası takip etmez (bkz. aşağıdaki
+        &quot;Ziyaretçi istatistiği&quot; başlığı).
+      </p>
+      <h2>Ziyaretçi istatistiği (çerezsiz)</h2>
+      <p>
+        Hangi sayfaların ne kadar ziyaret edildiğini görmek için{" "}
+        <strong>Vercel Web Analytics</strong> kullanıyoruz. Bu araç çerez
+        kullanmaz, kalıcı bir tanımlayıcı oluşturmaz ve IP adresinizi ham
+        haliyle saklamaz; yalnızca toplu/anonim sayımlar (sayfa görüntüleme,
+        ülke, cihaz türü) üretir. Ayrıntı için{" "}
+        <a href="/gizlilik-politikasi">Gizlilik Politikası</a>&apos;na
+        bakabilirsiniz.
       </p>
       <h2>Peki tema tercihim nasıl hatırlanıyor?</h2>
       <p>
@@ -29,17 +42,17 @@ export default function CerezPolitikasiPage() {
       <h2>Neden bir çerez tercihi bildirimi görüyorum?</h2>
       <p>
         Sitede ilk ziyaretinizde ekranın altında bir tercih bildirimi
-        belirir. Bugün itibarıyla onaylayacağınız veya reddedeceğiniz
-        gerçek bir izleme çerezi bulunmuyor; bu tercih, yalnızca
-        localStorage&apos;da saklanır ve ileride bir analitik/reklam servisi
+        belirir. Bugün itibarıyla onaylayacağınız veya reddedeceğiniz gerçek
+        bir izleme çerezi bulunmuyor; bu tercih yalnızca
+        localStorage&apos;da saklanır ve ileride çerez kullanan bir servis
         eklenirse sizi önceden bilgilendirmemizi sağlar.
       </p>
       <h2>İleride değişirse?</h2>
       <p>
-        Site büyüdükçe reklam gösterimi veya ziyaretçi analitiği için çerez
-        kullanan bir servis eklemeyi değerlendirebiliriz. Böyle bir değişiklik
-        olması durumunda bu sayfa güncellenecek ve tercih bildirimi buna göre
-        yeniden gösterilecektir.
+        Site büyüdükçe çerez kullanan bir reklam veya analitik servisi
+        eklemeyi değerlendirebiliriz. Böyle bir değişiklik olması durumunda
+        bu sayfa güncellenecek ve tercih bildirimi buna göre yeniden
+        gösterilecektir.
       </p>
     </LegalPage>
   );
