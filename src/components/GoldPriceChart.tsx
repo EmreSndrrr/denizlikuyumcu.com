@@ -5,6 +5,13 @@
 // zaman koyu (site açık/koyu temada olsa fark etmez) — bu hem "premium
 // fintech" hissi veriyor hem de kontrastı tek yüzeyde garantiliyor.
 //
+// Veri: `data` prop'u lib/priceHistory.ts'teki GERÇEK price_snapshots
+// kayıtlarından üretilir (bkz. lib/prices.server.ts -> getGoldChart).
+// Hiçbir sentetik/rastgele seri YOKTUR. Zamanlanmış görev henüz yeterli
+// geçmiş biriktirmemişse (yeni deploy) seçili aralık için 2'den az nokta
+// olabilir — bu durumda çizgi yerine "veri toplanıyor" durumu gösterilir,
+// asla uydurma bir çizgi çizilmez.
+//
 // dataviz skill'ine göre: form = zaman içinde değişim -> çizgi/alan grafik;
 // tek seri -> ayrı bir legend gerekmiyor (başlık zaten seriyi adlandırıyor);
 // ince (2px) çizgi, taban çizgisine dayalı degrade dolgu; hover'da
@@ -13,10 +20,10 @@
 
 import { useMemo, useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-import type { GoldHistoryPoint } from "@/lib/prices";
+import { ChartLine } from "@phosphor-icons/react/dist/ssr";
+import type { GoldChartData, Period } from "@/lib/prices";
 import { formatTL } from "@/lib/format";
 
-type Period = 7 | 30 | 90 | 365;
 type PriceSide = "sell" | "buy";
 
 const PERIODS: { value: Period; label: string }[] = [
@@ -36,6 +43,9 @@ const BOTTOM_PAD = 28;
 // kaymamasına dikkat edilmeli.
 const GOLD = "#e3bd6e";
 
+// Bir aralık için "kullanılabilir" grafik çizmeye yeter sayıda gerçek nokta.
+const MIN_POINTS = 2;
+
 function formatShortDate(iso: string, period: Period) {
   // timeZone SABİT: bkz. lib/format.ts formatTime() üzerindeki not — aynı
   // hydration uyuşmazlığı riski burada da geçerli.
@@ -47,11 +57,16 @@ function formatShortDate(iso: string, period: Period) {
   });
 }
 
-export default function GoldPriceChart({
-  history,
-}: {
-  history: GoldHistoryPoint[];
-}) {
+function formatStartDate(iso: string) {
+  return new Date(iso).toLocaleDateString("tr-TR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    timeZone: "Europe/Istanbul",
+  });
+}
+
+export default function GoldPriceChart({ data }: { data: GoldChartData }) {
   const [period, setPeriod] = useState<Period>(30);
   const [side, setSide] = useState<PriceSide>("sell");
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
@@ -68,7 +83,8 @@ export default function GoldPriceChart({
     return () => clearTimeout(t);
   }, []);
 
-  const points = useMemo(() => history.slice(-period), [history, period]);
+  const points = data.periods[period];
+  const insufficientData = points.length < MIN_POINTS;
 
   const {
     path,
@@ -80,6 +96,19 @@ export default function GoldPriceChart({
     highIndex,
     lowIndex,
   } = useMemo(() => {
+    if (points.length < MIN_POINTS) {
+      return {
+        path: "",
+        areaPath: "",
+        scaleX: () => 0,
+        scaleY: () => 0,
+        yMin: 0,
+        yMax: 0,
+        highIndex: 0,
+        lowIndex: 0,
+      };
+    }
+
     const values = points.map((p) => p[side]);
     const rawMin = Math.min(...values);
     const rawMax = Math.max(...values);
@@ -110,22 +139,24 @@ export default function GoldPriceChart({
     return { path, areaPath, scaleX, scaleY, yMin, yMax, highIndex, lowIndex };
   }, [points, side]);
 
-  const first = points[0];
-  const last = points[points.length - 1];
-  const periodChangePct = first ? ((last[side] - first[side]) / first[side]) * 100 : 0;
+  const first = insufficientData ? undefined : points[0];
+  const last = insufficientData ? undefined : points[points.length - 1];
+  const periodChangePct =
+    first && last ? ((last[side] - first[side]) / first[side]) * 100 : 0;
   const isUp = periodChangePct >= 0;
 
   function handlePointer(clientX: number) {
     const svg = svgRef.current;
-    if (!svg || points.length === 0) return;
+    if (!svg || insufficientData) return;
     const rect = svg.getBoundingClientRect();
     const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
     const idx = Math.round(ratio * (points.length - 1));
     setHoverIndex(idx);
   }
 
-  const hovered = hoverIndex !== null ? points[hoverIndex] : null;
-  const hoverLeftPct = hoverIndex !== null ? (hoverIndex / (points.length - 1)) * 100 : null;
+  const hovered = !insufficientData && hoverIndex !== null ? points[hoverIndex] : null;
+  const hoverLeftPct =
+    hoverIndex !== null && !insufficientData ? (hoverIndex / (points.length - 1)) * 100 : null;
   const tooltipLeftPct = hoverLeftPct === null ? null : Math.min(92, Math.max(8, hoverLeftPct));
 
   return (
@@ -135,23 +166,30 @@ export default function GoldPriceChart({
           <h3 className="text-sm font-semibold text-white/70">
             Gram Altın Fiyat Grafiği
           </h3>
-          <p className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-extrabold tabular-nums text-white">
-              {formatTL(last?.[side] ?? 0)} TL
-            </span>
-            <span
-              className={
-                "text-sm font-semibold tabular-nums " +
-                (isUp ? "text-positive" : "text-negative")
-              }
-            >
-              {isUp ? "+" : ""}
-              {periodChangePct.toFixed(2)}%
-            </span>
-          </p>
-          <p className="mt-0.5 text-xs text-white/40">
-            Başlangıç: {formatTL(first?.[side] ?? 0)} TL → Güncel: {formatTL(last?.[side] ?? 0)} TL
-          </p>
+          {!insufficientData && (
+            <>
+              <p className="mt-1 flex items-baseline gap-2">
+                <span className="text-2xl font-extrabold tabular-nums text-white">
+                  {formatTL(last?.[side] ?? 0)} TL
+                </span>
+                {/* Panel her zaman koyu — text-positive/negative yerine
+                    koyu temanın sabit karşılığı (bkz. dosya başındaki
+                    GOLD sabiti notuyla aynı gerekçe). */}
+                <span
+                  className={
+                    "text-sm font-semibold tabular-nums " +
+                    (isUp ? "text-[#34b787]" : "text-[#f2726f]")
+                  }
+                >
+                  {isUp ? "+" : ""}
+                  {periodChangePct.toFixed(2)}%
+                </span>
+              </p>
+              <p className="mt-0.5 text-xs text-white/50">
+                Başlangıç: {formatTL(first?.[side] ?? 0)} TL → Güncel: {formatTL(last?.[side] ?? 0)} TL
+              </p>
+            </>
+          )}
         </div>
 
         <div className="flex flex-col items-end gap-2">
@@ -203,165 +241,195 @@ export default function GoldPriceChart({
         </div>
       </div>
 
-      {/* Ekran okuyucular için görsel grafiğin yerini tutan metin özeti. */}
-      <p className="sr-only">
-        Son {period} günde gram altın {side === "sell" ? "satış" : "alış"} fiyatı{" "}
-        {formatTL(first?.[side] ?? 0)} TL&apos;den {formatTL(last?.[side] ?? 0)} TL&apos;ye,{" "}
-        {isUp ? "yükseldi" : "düştü"} ({periodChangePct.toFixed(2)}% değişim). Dönem
-        içi en düşük {formatTL(yMin)} TL, en yüksek {formatTL(yMax)} TL.
-      </p>
+      {insufficientData ? (
+        // Zamanlanmış görev bu aralık için henüz yeterli gerçek kayıt
+        // biriktirmedi. Sahte/uydurma bir çizgi çizmek yerine bunu açıkça
+        // söylüyoruz — veri toplandıkça bu alan otomatik olarak grafiğe
+        // dönüşür (kod değişikliği gerekmez).
+        <div className="mx-4 my-8 flex flex-col items-center gap-2 rounded-2xl border border-dashed border-white/15 px-4 py-10 text-center">
+          <ChartLine aria-hidden="true" size={22} className="text-white/40" />
+          <p className="text-sm font-medium text-white/70">
+            Bu aralık için grafik veri toplanıyor
+          </p>
+          <p className="max-w-xs text-xs text-white/50">
+            Fiyat geçmişi 5 dakikada bir gerçek kayıtlarla biriktiriliyor.
+            Yeterli veri toplandığında bu alanda otomatik olarak grafik
+            görünecek — sahte/örnek veri gösterilmez.
+          </p>
+        </div>
+      ) : (
+        <>
+          {/* Ekran okuyucular için görsel grafiğin yerini tutan metin özeti. */}
+          <p className="sr-only">
+            Son {period} günde gram altın {side === "sell" ? "satış" : "alış"} fiyatı{" "}
+            {formatTL(first?.[side] ?? 0)} TL&apos;den {formatTL(last?.[side] ?? 0)} TL&apos;ye,{" "}
+            {isUp ? "yükseldi" : "düştü"} ({periodChangePct.toFixed(2)}% değişim). Dönem
+            içi en düşük {formatTL(yMin)} TL, en yüksek {formatTL(yMax)} TL.
+          </p>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={`${period}-${side}`}
-          initial={reduceMotion ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={reduceMotion ? undefined : { opacity: 0 }}
-          transition={{ duration: reduceMotion ? 0 : 0.18 }}
-          className="relative mt-2 h-[290px] px-1 sm:h-[320px]"
-        >
-          <svg
-            ref={svgRef}
-            viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-            preserveAspectRatio="none"
-            className="h-full w-full touch-none"
-            aria-hidden="true"
-            onMouseMove={(e) => handlePointer(e.clientX)}
-            onMouseLeave={() => setHoverIndex(null)}
-            onTouchMove={(e) => handlePointer(e.touches[0].clientX)}
-            onTouchEnd={() => setHoverIndex(null)}
-          >
-            <defs>
-              <linearGradient id="gold-area-fill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={GOLD} stopOpacity="0.35" />
-                <stop offset="100%" stopColor={GOLD} stopOpacity="0" />
-              </linearGradient>
-            </defs>
-
-            {/* Recessive yatay grid çizgileri */}
-            {[0.25, 0.5, 0.75].map((t) => (
-              <line
-                key={t}
-                x1={0}
-                x2={WIDTH}
-                y1={TOP_PAD + t * (HEIGHT - TOP_PAD - BOTTOM_PAD)}
-                y2={TOP_PAD + t * (HEIGHT - TOP_PAD - BOTTOM_PAD)}
-                stroke="#292524"
-                strokeWidth={1}
-                vectorEffect="non-scaling-stroke"
-              />
-            ))}
-
-            <path d={areaPath} fill="url(#gold-area-fill)" stroke="none" />
-            <motion.path
-              d={path}
-              fill="none"
-              stroke={GOLD}
-              strokeWidth={2}
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              vectorEffect="non-scaling-stroke"
-              initial={!hasDrawnOnce && !reduceMotion ? { pathLength: 0 } : false}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: hasDrawnOnce ? 0 : 0.6, ease: "easeOut" }}
-            />
-
-            {/* En yüksek / en düşük değer işaretleri */}
-            {points[highIndex] && (
-              <g>
-                <circle
-                  cx={scaleX(highIndex)}
-                  cy={scaleY(points[highIndex][side])}
-                  r={3.5}
-                  fill="#10b981"
-                  vectorEffect="non-scaling-stroke"
-                />
-                {/* Brief: "mobilde etiketlerin üst üste gelmesini
-                    engelle" — dar ekranda sadece nokta işaretleri
-                    kalıyor, sayısal etiketler sm+ genişlikte görünüyor. */}
-                <text
-                  x={scaleX(highIndex)}
-                  y={scaleY(points[highIndex][side]) - 8}
-                  textAnchor="middle"
-                  fontSize={11}
-                  fill="#10b981"
-                  className="hidden sm:inline"
-                >
-                  {formatTL(points[highIndex][side])}
-                </text>
-              </g>
-            )}
-            {points[lowIndex] && lowIndex !== highIndex && (
-              <g>
-                <circle
-                  cx={scaleX(lowIndex)}
-                  cy={scaleY(points[lowIndex][side])}
-                  r={3.5}
-                  fill="#f87171"
-                  vectorEffect="non-scaling-stroke"
-                />
-                <text
-                  x={scaleX(lowIndex)}
-                  y={scaleY(points[lowIndex][side]) + 16}
-                  textAnchor="middle"
-                  fontSize={11}
-                  fill="#f87171"
-                  className="hidden sm:inline"
-                >
-                  {formatTL(points[lowIndex][side])}
-                </text>
-              </g>
-            )}
-
-            {hoverIndex !== null && hovered && (
-              <>
-                <line
-                  x1={scaleX(hoverIndex)}
-                  x2={scaleX(hoverIndex)}
-                  y1={TOP_PAD}
-                  y2={HEIGHT - BOTTOM_PAD}
-                  stroke="#57534e"
-                  strokeWidth={1}
-                  strokeDasharray="3 3"
-                  vectorEffect="non-scaling-stroke"
-                />
-                <circle
-                  cx={scaleX(hoverIndex)}
-                  cy={scaleY(hovered[side])}
-                  r={4}
-                  fill={GOLD}
-                  stroke="#0c0a09"
-                  strokeWidth={2}
-                  vectorEffect="non-scaling-stroke"
-                />
-              </>
-            )}
-          </svg>
-
-          {hovered && tooltipLeftPct !== null && (
-            <div
-              className="pointer-events-none absolute top-2 -translate-x-1/2 rounded-[10px] border border-white/15 bg-black/80 px-3 py-2 text-xs shadow-lg backdrop-blur"
-              style={{ left: `${tooltipLeftPct}%` }}
+          <AnimatePresence mode="wait">
+            {/* initial/exit sabit tutuluyor (reduceMotion'a göre
+                dallandırılmıyor) — bkz. Reveal.tsx'teki ayrıntılı not:
+                useReducedMotion() sunucu tarafında tutarsız dönebiliyor,
+                bu da initial={false} kullanan bileşenlerde animasyonun
+                hiç oynamamasına yol açabiliyor. Yalnızca süreyi 0'a
+                çekmek güvenli ve yeterli. */}
+            <motion.div
+              key={`${period}-${side}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.18 }}
+              className="relative mt-2 h-[290px] px-1 sm:h-[320px]"
             >
-              <p className="font-medium text-white/60">
-                {formatShortDate(hovered.date, period)}
-              </p>
-              <p className="tabular-nums font-semibold text-white">
-                {formatTL(hovered[side])} TL
-              </p>
-            </div>
-          )}
-        </motion.div>
-      </AnimatePresence>
+              <svg
+                ref={svgRef}
+                viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+                preserveAspectRatio="none"
+                className="h-full w-full touch-none"
+                aria-hidden="true"
+                onMouseMove={(e) => handlePointer(e.clientX)}
+                onMouseLeave={() => setHoverIndex(null)}
+                onTouchMove={(e) => handlePointer(e.touches[0].clientX)}
+                onTouchEnd={() => setHoverIndex(null)}
+              >
+                <defs>
+                  <linearGradient id="gold-area-fill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor={GOLD} stopOpacity="0.35" />
+                    <stop offset="100%" stopColor={GOLD} stopOpacity="0" />
+                  </linearGradient>
+                </defs>
 
-      <div className="flex justify-between px-2 pb-3 text-[11px] text-white/40">
-        <span>{first && formatShortDate(first.date, period)}</span>
-        <span>{last && formatShortDate(last.date, period)}</span>
-      </div>
+                {/* Recessive yatay grid çizgileri */}
+                {[0.25, 0.5, 0.75].map((t) => (
+                  <line
+                    key={t}
+                    x1={0}
+                    x2={WIDTH}
+                    y1={TOP_PAD + t * (HEIGHT - TOP_PAD - BOTTOM_PAD)}
+                    y2={TOP_PAD + t * (HEIGHT - TOP_PAD - BOTTOM_PAD)}
+                    stroke="#292524"
+                    strokeWidth={1}
+                    vectorEffect="non-scaling-stroke"
+                  />
+                ))}
 
-      <p className="border-t border-white/10 px-4 py-3 text-[11px] text-white/30">
-        Geçmiş fiyat verisi bilgilendirme amaçlıdır; gerçek piyasa
-        geçmişini birebir yansıtmayabilir.
+                <path d={areaPath} fill="url(#gold-area-fill)" stroke="none" />
+                <motion.path
+                  d={path}
+                  fill="none"
+                  stroke={GOLD}
+                  strokeWidth={2}
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  vectorEffect="non-scaling-stroke"
+                  initial={!hasDrawnOnce ? { pathLength: 0 } : false}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: hasDrawnOnce || reduceMotion ? 0 : 0.6, ease: "easeOut" }}
+                />
+
+                {/* En yüksek / en düşük değer işaretleri */}
+                {points[highIndex] && (
+                  <g>
+                    <circle
+                      cx={scaleX(highIndex)}
+                      cy={scaleY(points[highIndex][side])}
+                      r={3.5}
+                      fill="#10b981"
+                      vectorEffect="non-scaling-stroke"
+                    />
+                    {/* Brief: "mobilde etiketlerin üst üste gelmesini
+                        engelle" — dar ekranda sadece nokta işaretleri
+                        kalıyor, sayısal etiketler sm+ genişlikte görünüyor. */}
+                    <text
+                      x={scaleX(highIndex)}
+                      y={scaleY(points[highIndex][side]) - 8}
+                      textAnchor="middle"
+                      fontSize={11}
+                      fill="#10b981"
+                      className="hidden sm:inline"
+                    >
+                      {formatTL(points[highIndex][side])}
+                    </text>
+                  </g>
+                )}
+                {points[lowIndex] && lowIndex !== highIndex && (
+                  <g>
+                    <circle
+                      cx={scaleX(lowIndex)}
+                      cy={scaleY(points[lowIndex][side])}
+                      r={3.5}
+                      fill="#f87171"
+                      vectorEffect="non-scaling-stroke"
+                    />
+                    <text
+                      x={scaleX(lowIndex)}
+                      y={scaleY(points[lowIndex][side]) + 16}
+                      textAnchor="middle"
+                      fontSize={11}
+                      fill="#f87171"
+                      className="hidden sm:inline"
+                    >
+                      {formatTL(points[lowIndex][side])}
+                    </text>
+                  </g>
+                )}
+
+                {hoverIndex !== null && hovered && (
+                  <>
+                    <line
+                      x1={scaleX(hoverIndex)}
+                      x2={scaleX(hoverIndex)}
+                      y1={TOP_PAD}
+                      y2={HEIGHT - BOTTOM_PAD}
+                      stroke="#57534e"
+                      strokeWidth={1}
+                      strokeDasharray="3 3"
+                      vectorEffect="non-scaling-stroke"
+                    />
+                    <circle
+                      cx={scaleX(hoverIndex)}
+                      cy={scaleY(hovered[side])}
+                      r={4}
+                      fill={GOLD}
+                      stroke="#0c0a09"
+                      strokeWidth={2}
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  </>
+                )}
+              </svg>
+
+              {hovered && tooltipLeftPct !== null && (
+                <div
+                  className="pointer-events-none absolute top-2 -translate-x-1/2 rounded-[10px] border border-white/15 bg-black/80 px-3 py-2 text-xs shadow-lg backdrop-blur"
+                  style={{ left: `${tooltipLeftPct}%` }}
+                >
+                  <p className="font-medium text-white/60">
+                    {formatShortDate(hovered.date, period)}
+                  </p>
+                  <p className="tabular-nums font-semibold text-white">
+                    {formatTL(hovered[side])} TL
+                  </p>
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="flex justify-between px-2 pb-3 text-[11px] text-white/50">
+            <span>{first && formatShortDate(first.date, period)}</span>
+            <span>{last && formatShortDate(last.date, period)}</span>
+          </div>
+        </>
+      )}
+
+      <p className="border-t border-white/10 px-4 py-3 text-[11px] text-white/50">
+        Geçmiş veriler DenizliKuyumcu.com tarafından finans.truncgil.com
+        kaynağından periyodik (5 dakikada bir) kaydedilen gerçek fiyatlardır;
+        seçilen aralığa göre saatlik veya günlük ortalama olarak gösterilir.
+        {data.historyStartedAt && (
+          <> Kayıt başlangıcı: {formatStartDate(data.historyStartedAt)}.</>
+        )}
       </p>
     </div>
   );

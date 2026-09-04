@@ -58,7 +58,7 @@ export default function OnsAltinCard({
           </p>
         </div>
         <p className="mt-0.5 text-xs text-muted/70">
-          {formatTime(data.updatedAt)} itibarıyla
+          {formatTime(data.sourceUpdatedAt)} itibarıyla
         </p>
       </div>
     </div>

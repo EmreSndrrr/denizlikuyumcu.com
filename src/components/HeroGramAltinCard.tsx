@@ -40,10 +40,14 @@ export default function HeroGramAltinCard({
         <AnimatedNumber value={gram.sell} format={formatTL} />{" "}
         <span className="text-lg font-medium text-white/50">TL</span>
       </p>
+      {/* Kart her zaman koyu yüzeyli (temadan bağımsız) — text-positive/
+          text-negative açık temada AÇIK-mod tonuna döner ve bu zeminde AA
+          kontrastını geçemez; koyu temanın sabit karşılığı literal hex ile
+          veriliyor (bkz. GoldPriceChart/PriceMarquee'deki aynı düzeltme). */}
       <p
         className={
           "mt-1 flex items-center gap-1 text-sm font-semibold tabular-nums " +
-          (isUp ? "text-positive" : "text-negative")
+          (isUp ? "text-[#34b787]" : "text-[#f2726f]")
         }
       >
         {isUp ? (
@@ -77,8 +81,8 @@ export default function HeroGramAltinCard({
         <Sparkline points={history} id="hero" color="#e3bd6e" />
       </div>
 
-      <p className="mt-3 text-xs text-white/40">
-        Son güncelleme: {formatTime(data.updatedAt)}
+      <p className="mt-3 text-xs text-white/50">
+        Son güncelleme: {formatTime(data.sourceUpdatedAt)}
       </p>
     </div>
   );

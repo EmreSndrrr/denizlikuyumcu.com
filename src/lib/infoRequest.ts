@@ -16,7 +16,9 @@
 //                    yalnızca hesap sahibinin e-postasına teslim eder).
 //   INFO_REQUEST_TO  Talebin gönderileceği e-posta. Varsayılan aşağıda.
 
+import { headers } from "next/headers";
 import { KONULAR } from "@/lib/infoRequestConfig";
+import { isRateLimited } from "@/lib/rateLimit";
 
 export type InfoRequestState = {
   ok: boolean;
@@ -39,6 +41,21 @@ export async function sendInfoRequest(
   _prevState: InfoRequestState,
   formData: FormData,
 ): Promise<InfoRequestState> {
+  // Basit hız sınırlama: aynı IP kısa sürede art arda gönderirse (bot/spam
+  // ihtimali) nazikçe reddediyoruz. Honeypot'a EK bir katman — kesin/küresel
+  // bir limit değil (bkz. lib/rateLimit.ts).
+  const hdrs = await headers();
+  const ip =
+    hdrs.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    hdrs.get("x-real-ip") ||
+    "unknown";
+  if (isRateLimited(ip)) {
+    return {
+      ok: false,
+      message: "Çok sık istek gönderildi. Lütfen birkaç dakika sonra tekrar deneyin.",
+    };
+  }
+
   // Honeypot: gerçek kullanıcıya görünmeyen "website" alanı doluysa bot.
   if (str(formData, "website")) {
     return { ok: true, message: "Talebiniz alındı. En kısa sürede dönüş yapacağız." };

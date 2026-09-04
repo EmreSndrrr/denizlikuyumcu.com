@@ -7,7 +7,8 @@ import Footer from "@/components/Footer";
 import PriceMarquee from "@/components/PriceMarquee";
 import PageTransition from "@/components/PageTransition";
 import CookieConsentBanner from "@/components/CookieConsentBanner";
-import { getPrices } from "@/lib/prices";
+import SkipLink from "@/components/SkipLink";
+import { getPrices } from "@/lib/prices.server";
 
 // Ana arayüz fontu: Inter. Ekran okunabilirliği için tasarlanmış, tabular
 // rakam desteği olan bir sans-serif — arayüz, butonlar, fiyatlar ve
@@ -38,16 +39,10 @@ export const metadata: Metadata = {
     default: "Denizli Kuyumcu | Güncel Altın Fiyatları ve Kuyumcu Rehberi",
     template: "%s | DenizliKuyumcu.com",
   },
+  // "keywords" alanı arama motorları tarafından kullanılmıyor (2009'dan
+  // beri) — bakım yükü yaratan ölü kod olarak kaldırıldı.
   description:
-    "Denizli'de güncel gram altın, çeyrek altın ve döviz fiyatları; Denizli kuyumcu rehberi, altın ayarı ve alım-satım rehberleri.",
-  keywords: [
-    "denizli kuyumcu",
-    "güncel altın fiyatı",
-    "gram altın",
-    "çeyrek altın",
-    "döviz kurları",
-    "denizli altıncı",
-  ],
+    "Denizli'nin bağımsız altın ve döviz fiyat rehberi: güncel gram altın, çeyrek altın ve döviz fiyatları; kuyumcu rehberi, altın ayarı ve alım-satım rehberleri.",
   openGraph: {
     type: "website",
     locale: "tr_TR",
@@ -55,7 +50,7 @@ export const metadata: Metadata = {
     siteName: "DenizliKuyumcu.com",
     title: "Denizli Kuyumcu | Güncel Altın Fiyatları ve Kuyumcu Rehberi",
     description:
-      "Denizli'de güncel altın ve döviz fiyatları, kuyumcu rehberi ve alım-satım öncesi bilgilendirme içerikleri.",
+      "Denizli'nin bağımsız altın ve döviz fiyat rehberi — güncel fiyatlar, kuyumcu rehberi ve alım-satım öncesi bilgilendirme içerikleri.",
   },
   robots: {
     index: true,
@@ -93,9 +88,10 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         {/* Düz inline <script> — <body>'nin ilk çocuğu, senkron çalışır
             (bkz. THEME_INIT_SCRIPT yorumu). */}
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <SkipLink />
         <PriceMarquee initialData={prices} />
         <Header />
-        <main className="flex-1">
+        <main id="main-content" tabIndex={-1} className="flex-1 outline-none">
           <PageTransition>{children}</PageTransition>
         </main>
         <Footer />

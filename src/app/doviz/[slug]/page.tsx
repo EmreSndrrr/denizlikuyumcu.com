@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPrices } from "@/lib/prices";
+import { getPrices } from "@/lib/prices.server";
 import { priceContent, getPriceContentBySlug } from "@/lib/priceContent";
 import PriceDetailPage from "@/components/PriceDetailPage";
 

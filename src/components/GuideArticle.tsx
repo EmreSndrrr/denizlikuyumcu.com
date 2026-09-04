@@ -7,6 +7,13 @@ import { getAdForPosition } from "@/lib/ads";
 
 const SITE = "https://denizlikuyumcu.com";
 
+// Rehber içeriğinin siteyle birlikte yayına girdiği tarih — kullanıcı
+// tarafından onaylandı (bkz. proje planı, Aşama 5 kararı). Tüm makaleler
+// bugüne kadar bu tek tarihi taşıyor (`updated="Eylül 2026"` metniyle
+// tutarlı); bir makale gerçekten güncellenirse o çağrıya açık
+// `dateModified` verilerek override edilebilir.
+const CONTENT_LAUNCH_DATE = "2026-09-01";
+
 type GuideImage = {
   src: StaticImageData;
   alt: string;
@@ -25,6 +32,8 @@ export default function GuideArticle({
   image,
   faq,
   related,
+  datePublished = CONTENT_LAUNCH_DATE,
+  dateModified = datePublished,
   children,
 }: {
   title: string;
@@ -45,6 +54,10 @@ export default function GuideArticle({
   faq?: GuideFaq[];
   // Makale sonundaki "İlgili rehberler" iç bağlantı bloğu.
   related?: { href: string; title: string }[];
+  // ISO 8601 tarih. Verilmezse CONTENT_LAUNCH_DATE kullanılır — bkz.
+  // yukarıdaki sabit.
+  datePublished?: string;
+  dateModified?: string;
   children: ReactNode;
 }) {
   const url = slug ? `${SITE}/rehber/${slug}` : undefined;
@@ -59,6 +72,8 @@ export default function GuideArticle({
       description: intro,
       inLanguage: "tr-TR",
       isAccessibleForFree: true,
+      datePublished,
+      dateModified,
       ...(image ? { image: `${SITE}${image.src.src}` } : {}),
       author: {
         "@type": "Organization",

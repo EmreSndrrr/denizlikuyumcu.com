@@ -15,6 +15,7 @@ import { MapPin, List, X } from "@phosphor-icons/react/dist/ssr";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import ThemeToggle from "@/components/ThemeToggle";
 import HeaderSearch from "@/components/HeaderSearch";
+import { trackEvent } from "@/lib/analytics";
 
 const navLinks = [
   { href: "/#altin-fiyatlari", label: "Altın Fiyatları" },
@@ -214,6 +215,7 @@ export default function Header() {
           </div>
           <Link
             href="/reklam-ver"
+            onClick={() => trackEvent("ad_cta_click", { context: "header" })}
             className="hidden text-sm font-medium text-muted transition-colors hover:text-ink active:scale-[0.98] md:inline-block"
           >
             Kuyumcu musunuz?
@@ -296,7 +298,10 @@ export default function Header() {
               <div className="mt-4 flex flex-col gap-3 border-t border-border pt-4">
                 <Link
                   href="/reklam-ver"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    trackEvent("ad_cta_click", { context: "mobile-menu" });
+                  }}
                   className="flex min-h-11 items-center justify-center text-center text-sm font-medium text-muted transition-colors hover:text-ink"
                 >
                   Kuyumcu musunuz? İşletmenizi ekleyin

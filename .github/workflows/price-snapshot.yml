@@ -1,0 +1,51 @@
+# Fiyat anlık görüntüsü — zamanlanmış görev tetikleyicisi.
+#
+# Hobby planında Vercel Cron 5 dakikada bir çalışamadığı için, siteye
+# deploy edilen /api/cron/snapshot endpoint'ini buradan tetikliyoruz.
+# Endpoint kendi içinde Truncgil Update_Date'ini kontrol eder; değişmemişse
+# yeni kayıt oluşturmaz (çağrı boşa gitmiş sayılmaz, sadece "skipped").
+#
+# Kurulum (GitHub repo → Settings → Secrets and variables → Actions):
+#   Secret:   CRON_SECRET   — sitedeki CRON_SECRET ile AYNI değer
+#   Variable: SNAPSHOT_URL   — https://denizlikuyumcu.com/api/cron/snapshot
+#
+# NOT: GitHub'ın zamanlanmış workflow'ları yoğun saatlerde birkaç dakika
+# gecikebilir ve repo 60 gün hareketsiz kalırsa devre dışı bırakılır. Daha
+# katı bir zamanlama gerekirse cron-job.org gibi bir servis aynı endpoint'i
+# çağıracak şekilde ayarlanabilir (bkz. README).
+
+name: price-snapshot
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch: {}
+
+concurrency:
+  group: price-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Trigger snapshot endpoint
+        env:
+          SNAPSHOT_URL: ${{ vars.SNAPSHOT_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          if [ -z "$SNAPSHOT_URL" ] || [ -z "$CRON_SECRET" ]; then
+            echo "SNAPSHOT_URL (variable) veya CRON_SECRET (secret) tanımlı değil." >&2
+            exit 1
+          fi
+          code=$(curl -sS -o /tmp/snap.json -w "%{http_code}" \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            "$SNAPSHOT_URL")
+          echo "HTTP $code"
+          cat /tmp/snap.json
+          echo
+          case "$code" in
+            2*) exit 0 ;;
+            *)  exit 1 ;;
+          esac

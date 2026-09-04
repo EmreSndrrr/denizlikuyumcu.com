@@ -20,12 +20,32 @@ export default function VeriKaynaklariPage() {
       <h2>Altın ve döviz fiyatları</h2>
       <p>
         Fiyatlar <strong>finans.truncgil.com</strong> adlı üçüncü taraf,
-        ücretsiz bir uç noktadan çekilir ve yaklaşık her 60 saniyede bir
-        yenilenir. DenizliKuyumcu.com bu verinin doğruluğunu, güncelliğini
-        veya kesintisizliğini garanti etmez; kaynak API geçici olarak
-        erişilemez olursa site son bilinen değerleri gösterebilir. Kesin
-        işlem öncesi her zaman ilgili kuyumcuyla doğrudan teyitleşin (bkz.{" "}
+        ücretsiz bir uç noktadan gelir. Kaynağı biz sürekli yoklamıyoruz;
+        arka planda çalışan bir görev bunu <strong>5 dakikada bir</strong>{" "}
+        kontrol eder ve kaynağın kendi bildirdiği güncelleme zamanı
+        değiştiyse yeni fiyatları kaydeder. Sitedeki her fiyat bloğunun
+        altında gördüğünüz &quot;… itibarıyla&quot; ibaresi, bizim ne zaman
+        kontrol ettiğimizi DEĞİL, <strong>kaynağın kendi bildirdiği</strong>{" "}
+        güncelleme zamanını gösterir.
+      </p>
+      <p>
+        DenizliKuyumcu.com bu verinin doğruluğunu, güncelliğini veya
+        kesintisizliğini garanti etmez. Kaynağın güncellemesi ile şimdiki
+        zaman arasındaki fark <strong>15 dakikayı</strong> aşarsa (ör.
+        kaynak API geçici olarak erişilemez ya da görev aksarsa) site son
+        bilinen gerçek kaydı göstermeye devam eder ve bunu açıkça{" "}
+        <strong>&quot;Veri gecikmeli&quot;</strong> rozetiyle işaretler —
+        eski veriyi güncelmiş gibi göstermeyiz. Kesin işlem öncesi her
+        zaman ilgili kuyumcuyla doğrudan teyitleşin (bkz.{" "}
         <a href="/yasal-uyari">Yasal Uyarı</a>).
+      </p>
+      <h2>Fiyat grafikleri</h2>
+      <p>
+        Altın Fiyatları Grafiği ve kalem bazlı mini grafikler, yukarıda
+        açıklanan 5 dakikalık kayıtların biriktirilmesiyle oluşur —{" "}
+        <strong>hiçbir rastgele veya örnek veri kullanılmaz</strong>. Bir
+        aralık (ör. 1 yıl) için yeterli gerçek kayıt henüz birikmemişse
+        grafik yerine bunu açıkça belirten bir bilgi notu gösterilir.
       </p>
       <h2>Çeyrek/yarım Ata ve Reşat altını nasıl hesaplanıyor?</h2>
       <p>
