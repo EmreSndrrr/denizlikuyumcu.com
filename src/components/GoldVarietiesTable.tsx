@@ -143,7 +143,7 @@ export default function GoldVarietiesTable({
         <p className="text-sm font-semibold text-ink">Tüm Altın Çeşitleri</p>
         <span className="flex items-center gap-2 text-xs text-muted">
           {stale && <StaleBadge />}
-          {formatTime(data.updatedAt)} itibarıyla
+          {formatTime(data.sourceUpdatedAt)} itibarıyla
         </span>
       </div>
 

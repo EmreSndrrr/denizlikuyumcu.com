@@ -46,17 +46,42 @@ src/
 
 ### Fiyat verisi nasıl akıyor?
 
-1. `lib/prices.ts` → `getPrices()` şu an mock (rastgele oynamalı) veri
-   üretiyor. Gerçek bir sağlayıcı seçildiğinde sadece bu dosyanın içini
-   değiştirmemiz yeterli, sayfa/bileşen kodlarına dokunmamıza gerek yok.
-2. `page.tsx` (anasayfa) sunucuda `getPrices()`'ı çağırıp ilk veriyi
+1. **Zamanlanmış görev** (`app/api/cron/snapshot`) 5 dakikada bir
+   `finans.truncgil.com`'u kontrol eder. Kaynağın `Update_Date` değeri
+   değişmişse 21 kalemin alış/satış fiyatını `price_snapshots` tablosuna
+   yazar (`lib/priceHistory.ts`). Hobby planında Vercel Cron 5 dakikada
+   bir çalışamadığı için tetikleyici bir **GitHub Actions** workflow'u:
+   `.github/workflows/price-snapshot.yml`.
+2. `lib/prices.ts` → `getPrices()` sayfalara **en güncel kaydı
+   veritabanından** verir. Veritabanı boşsa (ilk deploy) veya erişilemezse
+   doğrudan Truncgil'e, o da olmazsa mock veriye düşer.
+3. `page.tsx` (anasayfa) sunucuda `getPrices()`'ı çağırıp ilk veriyi
    doğrudan HTML'e gömüyor — sayfa JS yüklenmeden önce bile fiyatlar
-   görünür (SEO + hız).
-3. `PriceTicker.tsx` (client) bu ilk veriyi prop olarak alıyor, sonra her
-   60 saniyede bir `/api/prices` endpoint'ini çağırıp ekranı tazeliyor.
-4. `/api/prices` (Route Handler) de aynı `getPrices()`'ı çağırıyor ve
-   sonucu 60 saniye cache'liyor (`export const revalidate = 60`) — böylece
-   gerçek veri kaynağına saniyede değil, dakikada bir gidiyoruz.
+   görünür (SEO + hız). Sayfa `revalidate = 60` ile en fazla dakikada bir
+   yeniden üretilir.
+4. Client bileşenleri (`PriceTicker` vb.) ilk veriyi prop olarak alır,
+   sonra `/api/prices`'ı 60 saniyede bir yoklar (`lib/useLivePrices.ts`).
+   Endpoint yine `getPrices()`'ı çağırır; yanıt CDN'de 30 sn tutulur.
+
+Grafikler **yalnızca `price_snapshots` tablosundaki gerçek kayıtlardan**
+üretilir (Aşama 1b'den itibaren). Sentetik/rastgele geçmiş üretilmez.
+
+### Veritabanı kurulumu
+
+1. Bir Postgres oluşturun — **Vercel Postgres (Neon)** önerilir (Vercel
+   projesi → Storage → Postgres). `DATABASE_URL` otomatik eklenir.
+2. Şemayı bir kez çalıştırın: `db/schema.sql` (Neon SQL Editor'a yapıştırın
+   ya da `psql "$DATABASE_URL" -f db/schema.sql`).
+3. `CRON_SECRET` env değişkenini ekleyin (`openssl rand -hex 32`).
+4. GitHub repo → Settings → Secrets and variables → Actions:
+   - Secret `CRON_SECRET` — sitedekiyle **aynı** değer
+   - Variable `SNAPSHOT_URL` — `https://denizlikuyumcu.com/api/cron/snapshot`
+5. İlk veriyi hemen almak için endpoint'i manuel tetikleyin:
+   `curl -H "Authorization: Bearer <CRON_SECRET>" https://denizlikuyumcu.com/api/cron/snapshot`
+
+Daha katı bir zamanlama gerekirse GitHub Actions yerine (veya ek olarak)
+[cron-job.org](https://cron-job.org) aynı endpoint'i çağıracak şekilde
+ayarlanabilir.
 
 ## Ortam değişkenleri
 
@@ -67,16 +92,17 @@ kopyalayarak başlayın:
 cp .env.example .env.local
 ```
 
-`.env.local` asla commit edilmez (`.gitignore`'da). Şu an tek amacı, ileride
-bağlanacak gerçek fiyat sağlayıcısının anahtarlarını tutmak — detaylar
-`.env.example` içindeki yorumlarda ve aşağıdaki maddede.
+`.env.local` asla commit edilmez (`.gitignore`'da). Yerel geliştirmede
+`PRICE_PROVIDER=mock` ile veritabanı kurmadan çalışabilirsiniz; detaylar
+`.env.example` içindeki yorumlarda ve yukarıdaki "Veritabanı kurulumu"
+maddesinde.
 
 ## Yapılacaklar / eksikler (canlıya almadan önce)
 
-- [x] **Gerçek fiyat API'si**: `lib/prices.ts`, `PRICE_PROVIDER=truncgil`
-      ile finans.truncgil.com'dan canlı veri çekiyor (anahtar gerekmiyor).
-      Başka bir sağlayıcıya geçmek gerekirse `getPrices()` içine yeni bir
-      dal eklenir — başka hiçbir dosyaya dokunmaya gerek kalmaz.
+- [x] **Gerçek fiyat verisi + geçmiş**: `lib/prices.ts` en güncel kaydı
+      Postgres'ten okuyor; zamanlanmış görev (`app/api/cron/snapshot`)
+      Truncgil'den 5 dakikada bir gerçek kayıt biriktiriyor. Kurulum
+      adımları için "Veritabanı kurulumu" bölümüne bakın.
 - [ ] **Gerçek kuyumcu verisi**: `lib/jewelers.ts` içindeki demo kayıtlar
       silinip gerçek (izinli) kuyumcu bilgileriyle değiştirilmeli.
 - [ ] **İletişim bilgileri**: `reklam-ver/page.tsx` içindeki placeholder

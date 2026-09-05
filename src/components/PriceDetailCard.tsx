@@ -51,10 +51,12 @@ export default function PriceDetailCard({
         <AnimatedNumber value={item.sell} format={format} />{" "}
         {!isUsd && <span className="text-lg font-medium text-white/50">{item.unit}</span>}
       </p>
+      {/* Kart her zaman koyu yüzeyli — text-positive/negative yerine koyu
+          temanın sabit karşılığı (bkz. HeroGramAltinCard'daki aynı not). */}
       <p
         className={
           "mt-1 flex items-center gap-1 text-sm font-semibold tabular-nums " +
-          (isUp ? "text-positive" : "text-negative")
+          (isUp ? "text-[#34b787]" : "text-[#f2726f]")
         }
       >
         {isUp ? (
@@ -88,8 +90,8 @@ export default function PriceDetailCard({
         </div>
       )}
 
-      <p className="mt-3 text-xs text-white/40">
-        Son güncelleme: {formatTime(data.updatedAt)}
+      <p className="mt-3 text-xs text-white/50">
+        Son güncelleme: {formatTime(data.sourceUpdatedAt)}
       </p>
     </div>
   );

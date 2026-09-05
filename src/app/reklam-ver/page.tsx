@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { CheckCircle, MagnifyingGlass, ArrowsClockwise, MapPin } from "@phosphor-icons/react/dist/ssr";
 import InfoRequestForm from "@/components/InfoRequestForm";
+import WhatsAppCta from "@/components/WhatsAppCta";
+import { adPackages } from "@/lib/adPackages";
 
 export const metadata: Metadata = {
   title: "Reklam Ver: Kuyumcunuzu Öne Çıkarın",
@@ -9,42 +10,6 @@ export const metadata: Metadata = {
     "DenizliKuyumcu.com üzerinde reklam vererek kuyumcunuzu Denizli'de altın/döviz fiyatı arayan yerel ziyaretçilere ulaştırın. Paketler, nasıl çalışır ve sık sorulanlar.",
   alternates: { canonical: "/reklam-ver" },
 };
-
-// Paket fiyatları: netleştikçe `priceFrom` alanına bir metin yazın
-// (ör. "Aylık ₺750'den başlayan"). Boşken sayfada "Fiyat için bilgi alın"
-// görünür — küçük esnaf için "teklif isteyin" demekten daha az sürtünme.
-const packages: {
-  name: string;
-  priceFrom?: string;
-  features: string[];
-  highlight?: boolean;
-}[] = [
-  {
-    name: "Öne Çıkan Kuyumcu",
-    features: [
-      "Anasayfada 'Denizli'de Kuyumculuk' bölümünde vurgulu kart",
-      "Kuyumcular sayfasında üst sırada listeleme",
-      "Kısa tanıtım metni, telefon ve yol tarifi bağlantısı",
-    ],
-    highlight: true,
-  },
-  {
-    name: "Fiyat Sayfası Reklamı",
-    features: [
-      "Gram, çeyrek, bilezik gibi fiyat sayfalarının kenar sütununda 'Sponsorlu' kart",
-      "Alışveriş niyeti en yüksek ziyaretçiye görünürlük",
-      "İstediğiniz kaleme (ör. yalnızca 22 ayar bilezik) hedefleme",
-    ],
-  },
-  {
-    name: "Size Özel Web Sitesi",
-    features: [
-      "Kuyumcunuza özel, bağımsız bir web sitesi",
-      "Kendi alan adınız ve tasarımınız",
-      "İsteğe bağlı olarak DenizliKuyumcu.com'a bağlantı",
-    ],
-  },
-];
 
 const steps = [
   {
@@ -113,7 +78,7 @@ export default function ReklamVerPage() {
         Paketler
       </h2>
       <div className="mt-4 grid gap-4 sm:grid-cols-3">
-        {packages.map((pkg) => (
+        {adPackages.map((pkg) => (
           <div
             key={pkg.name}
             className={
@@ -183,26 +148,26 @@ export default function ReklamVerPage() {
         <div className="mt-6">
           <InfoRequestForm defaultKonu="Reklam / işletme tanıtımı" />
         </div>
-        <p className="mt-6 text-sm text-muted">
-          Dilerseniz doğrudan da ulaşabilirsiniz — E-posta:{" "}
-          <a
-            href="mailto:info@ventiajans.com"
-            className="font-medium text-ink hover:text-brand"
-          >
-            info@ventiajans.com
-          </a>
-          {" · "}Telefon:{" "}
-          <a href="tel:05445965622" className="font-medium text-ink hover:text-brand">
-            0544 596 56 22
-          </a>
-        </p>
-        <p className="mt-4 text-xs text-muted">
-          Kuyumcu dizinine ücretsiz eklenmek için{" "}
-          <Link href="/kuyumcular" className="text-brand hover:underline">
-            Kuyumcular
-          </Link>{" "}
-          sayfasına da bakabilirsiniz.
-        </p>
+
+        {/* WhatsApp: brief'in "mobilde görünür teklif CTA'sı" isteği —
+            site genelinde yüzen bir "chat bubble" yerine, yalnızca reklam
+            bağlamının olduğu burada normal bir buton olarak. */}
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <WhatsAppCta context="reklam-ver" />
+          <span className="text-sm text-muted">
+            veya E-posta:{" "}
+            <a
+              href="mailto:info@ventiajans.com"
+              className="font-medium text-ink hover:text-brand"
+            >
+              info@ventiajans.com
+            </a>
+            {" · "}Telefon:{" "}
+            <a href="tel:+905445965622" className="font-medium text-ink hover:text-brand">
+              +90 544 596 56 22
+            </a>
+          </span>
+        </div>
       </div>
     </div>
   );

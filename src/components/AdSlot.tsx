@@ -1,7 +1,8 @@
-import Link from "next/link";
 import { ArrowRight, Storefront } from "@phosphor-icons/react/dist/ssr";
 import { getAdForPosition, type AdPosition } from "@/lib/ads";
 import JewelerProfileCard from "@/components/JewelerProfileCard";
+import WhatsAppCta from "@/components/WhatsAppCta";
+import TrackedLink from "@/components/TrackedLink";
 
 // Gerçek bir reklam varsa (adSlots içinde bu pozisyon için aktif bir
 // kayıt), aynı JewelerProfileCard'ı "Sponsorlu" etiketiyle gösterir.
@@ -37,6 +38,7 @@ export default function AdSlot({
         phone={ad.phone}
         openNow={ad.openNow}
         profileHref={ad.href}
+        trackContext={`ad-slot-${position}`}
       />
     );
   }
@@ -55,13 +57,22 @@ export default function AdSlot({
       <p className="mt-1 text-sm text-muted">
         Fiyat sayfalarını takip eden yerel ziyaretçilere işletmenizi tanıtın.
       </p>
-      <Link
-        href="/reklam-ver"
-        className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:underline"
-      >
-        Reklam seçenekleri
-        <ArrowRight aria-hidden="true" size={14} />
-      </Link>
+      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+        <TrackedLink
+          href="/reklam-ver"
+          event="ad_cta_click"
+          eventProps={{ context: `ad-slot-${position}` }}
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:underline"
+        >
+          Reklam seçenekleri
+          <ArrowRight aria-hidden="true" size={14} />
+        </TrackedLink>
+        <WhatsAppCta
+          variant="link"
+          label="WhatsApp'tan sorun"
+          context={`ad-slot-${position}`}
+        />
+      </div>
     </div>
   );
 }

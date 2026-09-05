@@ -4,13 +4,26 @@
 // GoldCalculator, GoldVarietiesTable, DailyChangeTable, OnsAltinCard)
 // ortak deseni: sunucudan gelen ilk veriyle başla, sonra periyodik olarak
 // /api/prices'ı yokla. Bu hook o tekrar eden mantığı tek yerde topluyor
-// ve ayrıca "veri gecikmeli" durumunu (ardışık başarısız yoklamalar)
-// izliyor — her bileşen bunu ayrı ayrı yeniden yazmak zorunda kalmıyor.
+// ve "veri gecikmeli" durumunu izliyor — her bileşen bunu ayrı ayrı
+// yeniden yazmak zorunda kalmıyor.
 
 import { useEffect, useRef, useState } from "react";
 import type { PriceSnapshot } from "@/lib/prices";
 
 const POLL_INTERVAL_MS = 60_000;
+
+// Kaynağın (Truncgil) KENDİ bildirdiği güncelleme zamanı ile şimdi
+// arasındaki fark bunu aşarsa "Veri gecikmeli" gösterilir. Zamanlanmış
+// görev normalde 5 dakikada bir çalışıyor (bkz. app/api/cron/snapshot);
+// 15 dakika üç kaçırılmış döngüye karşılık gelir — geçici bir titremeyi
+// gürültü yapmadan gerçek bir kesintiyi (görev durmuş, kaynak API çökmüş)
+// yakalar.
+const STALE_THRESHOLD_MS = 15 * 60 * 1000;
+
+function isSourceStale(sourceUpdatedAt: string): boolean {
+  const t = new Date(sourceUpdatedAt).getTime();
+  return Number.isFinite(t) && Date.now() - t > STALE_THRESHOLD_MS;
+}
 
 export function useLivePrices<T = PriceSnapshot>(
   initialData: PriceSnapshot,
@@ -20,7 +33,11 @@ export function useLivePrices<T = PriceSnapshot>(
   // Sunucudan gelen ilk zaman damgası — yoklama başarısız olmaya devam
   // ederse kullanıcıya "en son ne zaman doğrulandı" bilgisini vermek için.
   const [lastSuccessAt, setLastSuccessAt] = useState(initialData.updatedAt);
-  const [stale, setStale] = useState(false);
+  // Kaynağın kendi zaman damgası — "veri gecikmeli" eşiği buna göre
+  // hesaplanır (data'nın select() sonrası şeklinden bağımsız tutuyoruz ki
+  // hook her select fonksiyonuyla çalışsın).
+  const [sourceUpdatedAt, setSourceUpdatedAt] = useState(initialData.sourceUpdatedAt);
+  const [pollFailed, setPollFailed] = useState(false);
   const selectRef = useRef(select);
   // Render sırasında ref'e YAZMIYORUZ (React'in eşzamanlı render
   // modelinde güvenli değil) — bunun yerine her render sonrasında çalışan,
@@ -42,11 +59,12 @@ export function useLivePrices<T = PriceSnapshot>(
         if (cancelled) return;
         setData(selectRef.current(fresh));
         setLastSuccessAt(fresh.updatedAt);
-        setStale(false);
+        setSourceUpdatedAt(fresh.sourceUpdatedAt);
+        setPollFailed(false);
       } catch {
         // Ağ hatasında eski veriyi göstermeye devam ediyoruz ama kullanıcıyı
         // "bu artık en güncel olmayabilir" diye bilgilendiriyoruz.
-        if (!cancelled) setStale(true);
+        if (!cancelled) setPollFailed(true);
       }
     }, POLL_INTERVAL_MS);
     return () => {
@@ -55,5 +73,11 @@ export function useLivePrices<T = PriceSnapshot>(
     };
   }, []);
 
-  return { data, stale, lastSuccessAt };
+  // "Veri gecikmeli": ya yoklama başarısız oluyor, ya da kaynağın KENDİ
+  // güncelleme zamanı eşiği aşmış — ikincisi, yoklama teknik olarak
+  // başarılı olsa bile yakalanır (ör. zamanlanmış görev durmuş ama
+  // veritabanı eskiyen kaydı sorunsuzca döndürmeye devam ediyor).
+  const stale = pollFailed || isSourceStale(sourceUpdatedAt);
+
+  return { data, stale, lastSuccessAt, sourceUpdatedAt };
 }

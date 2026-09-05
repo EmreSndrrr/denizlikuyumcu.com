@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import TrackedLink from "@/components/TrackedLink";
 
 export default function Footer() {
   return (
@@ -30,8 +31,8 @@ export default function Footer() {
               />
             </span>
             <p className="mt-2 max-w-xs">
-              Denizli&apos;de güncel altın ve döviz fiyatları, kuyumcu rehberi
-              ve alım-satım öncesi bilgilendirme içerikleri.
+              Denizli&apos;nin bağımsız altın/döviz fiyat ve kuyumcu rehberi —
+              güncel fiyatlar ve alım-satım öncesi bilgilendirme içerikleri.
             </p>
           </div>
           <div>
@@ -78,9 +79,14 @@ export default function Footer() {
           </p>
           <p className="text-xs text-muted">
             Kuyumcu musunuz?{" "}
-            <Link href="/reklam-ver" className="font-medium text-brand hover:underline">
+            <TrackedLink
+              href="/reklam-ver"
+              event="ad_cta_click"
+              eventProps={{ context: "footer" }}
+              className="font-medium text-brand hover:underline"
+            >
               İşletmenizi Denizli&apos;de öne çıkarın
-            </Link>
+            </TrackedLink>
           </p>
         </div>
       </div>

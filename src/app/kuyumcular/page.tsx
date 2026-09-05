@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowRight, CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import { visibleJewelers } from "@/lib/jewelers";
+import { adPackages } from "@/lib/adPackages";
 import Reveal from "@/components/Reveal";
 import JewelerProfileCard from "@/components/JewelerProfileCard";
+import WhatsAppCta from "@/components/WhatsAppCta";
+import TrackedLink from "@/components/TrackedLink";
 
 export const metadata: Metadata = {
   title: "Denizli Kuyumcuları — Rehber ve Bölgeler",
@@ -104,6 +107,7 @@ export default function KuyumcularPage() {
                     isDemo={j.isDemo}
                     phone={j.phone}
                     headingLevel="h3"
+                    trackContext="kuyumcular-list"
                   />
                 </Reveal>
               ))}
@@ -157,30 +161,50 @@ export default function KuyumcularPage() {
         </ul>
       </section>
 
+      {/* Bu sayfada listelenmek ÜCRETSİZ değildir (bkz. PRODUCT.md ürün
+          kararı) — bu bölüm bilinçli olarak satış odaklı: paket özeti +
+          onaylı ne demek + doğrudan iletişim. Ücretsiz "bilgilerinizi
+          gönderin, ekleyelim" çağrısı YOK. */}
       <section className="mt-12 max-w-3xl rounded-2xl border border-border bg-gold-surface/50 p-6">
         <h2 className="text-lg font-bold tracking-tight text-ink">
           Kuyumcu musunuz? İşletmenizi Denizli&apos;de öne çıkarın
         </h2>
         <p className="mt-2 text-sm text-muted">
-          DenizliKuyumcu.com, güncel altın fiyatı ve kuyumculuk rehberi arayan
-          yerel ziyaretçileri ağırlar. İşletmenizi bu sayfada ve anasayfada
-          tanıtmak için reklam seçeneklerine bakabilir veya bilgilerinizi bize
-          iletebilirsiniz.
+          Bu sayfadaki listeleme <strong className="text-ink">ücretli ve onaylıdır</strong> —
+          sayfa dolu görünsün diye rastgele işletme eklenmez. DenizliKuyumcu.com,
+          güncel altın fiyatı ve kuyumculuk rehberi arayan yerel ziyaretçileri
+          ağırlar; işletmeniz onay sonrası bu sayfada ve anasayfada
+          &quot;Sponsorlu&quot; etiketiyle görünür.
         </p>
-        <div className="mt-4 flex flex-wrap gap-3">
-          <Link
+
+        <ul className="mt-4 grid gap-2 sm:grid-cols-3">
+          {adPackages.map((pkg) => (
+            <li
+              key={pkg.name}
+              className="flex items-start gap-2 rounded-[10px] border border-border bg-surface px-3 py-2.5 text-sm"
+            >
+              <CheckCircle
+                aria-hidden="true"
+                weight="fill"
+                size={16}
+                className="mt-0.5 shrink-0 text-brand"
+              />
+              <span className="font-medium text-ink">{pkg.name}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          <TrackedLink
             href="/reklam-ver"
+            event="ad_cta_click"
+            eventProps={{ context: "kuyumcular" }}
             className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98]"
           >
-            Reklam seçeneklerini gör
+            Paketleri ve fiyatlandırmayı gör
             <ArrowRight aria-hidden="true" size={15} />
-          </Link>
-          <Link
-            href="/bilgi-talebi"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2.5 text-sm font-semibold text-ink transition-all hover:border-brand hover:text-brand active:scale-[0.98]"
-          >
-            İşletme bilgisi gönder
-          </Link>
+          </TrackedLink>
+          <WhatsAppCta variant="link" label="veya WhatsApp'tan hızlıca sorun" context="kuyumcular" />
         </div>
       </section>
 

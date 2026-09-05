@@ -1,4 +1,7 @@
+"use client";
+
 import { MapPin, Phone, NavigationArrow, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { trackEvent } from "@/lib/analytics";
 
 // Kuyumcu/reklamveren kartlarının TEK ortak sunumu — hem anasayfadaki
 // "Öne Çıkan Kuyumcular" (gerçek, ücretsiz öne çıkan kayıtlar) hem
@@ -20,6 +23,7 @@ export default function JewelerProfileCard({
   // h3 olmalı. /kuyumcular sayfasında doğrudan h1'in altında — orada
   // h2 verilmezse h1 -> h3 atlanmış olur.
   headingLevel: Heading = "h3",
+  trackContext = "unknown",
 }: {
   name: string;
   district: string;
@@ -33,6 +37,8 @@ export default function JewelerProfileCard({
   // Kuyumcunun kendi sitesi/profili gibi harici bir bağlantı varsa.
   profileHref?: string;
   headingLevel?: "h2" | "h3";
+  // Ölçüm için: bu kart hangi yüzeyde görünüyor? (bkz. lib/analytics.ts)
+  trackContext?: string;
 }) {
   const monogram = name.trim().charAt(0).toUpperCase() || "K";
   const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
@@ -99,6 +105,7 @@ export default function JewelerProfileCard({
             href={profileHref}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent("profile_click", { context: trackContext })}
             className="inline-flex items-center gap-2 rounded-[10px] bg-ink px-3 py-2 text-xs font-semibold text-surface transition-colors hover:bg-brand"
           >
             Profili İncele
@@ -109,6 +116,7 @@ export default function JewelerProfileCard({
           href={mapsHref}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => trackEvent("directions_click", { context: trackContext })}
           className="inline-flex items-center gap-2 rounded-[10px] border border-border px-3 py-2 text-xs font-semibold text-ink transition-colors hover:border-brand hover:text-brand"
         >
           <NavigationArrow aria-hidden="true" size={13} weight="bold" />
@@ -117,6 +125,7 @@ export default function JewelerProfileCard({
         {phone && (
           <a
             href={`tel:${phone.replace(/\s+/g, "")}`}
+            onClick={() => trackEvent("phone_click", { context: trackContext })}
             className="inline-flex items-center gap-2 rounded-[10px] border border-border px-3 py-2 text-xs font-semibold text-ink transition-colors hover:border-brand hover:text-brand"
           >
             <Phone aria-hidden="true" size={13} weight="bold" />

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, MapPin } from "@phosphor-icons/react/dist/ssr";
-import { getPrices, getGoldHistory, getGoldItemSparklines } from "@/lib/prices";
+import { getPrices, getGoldChart, getGoldItemSparklines } from "@/lib/prices.server";
 import { visibleJewelers } from "@/lib/jewelers";
 import PriceTicker from "@/components/PriceTicker";
 import GoldCalculator from "@/components/GoldCalculator";
@@ -16,6 +16,7 @@ import GuideList from "@/components/GuideList";
 import Faq from "@/components/Faq";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
+import TrackedLink from "@/components/TrackedLink";
 
 // Bu bir Server Component (dosyanın başında "use client" YOK). Varsayılan
 // davranış bu: sunucuda çalışır, doğrudan getPrices() gibi fonksiyonları
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
 // "kullanıcı fiyatlardan kuyumcu keşfine doğal biçimde yönlendirilmeli".
 export default async function HomePage() {
   const prices = await getPrices();
-  const goldHistory = await getGoldHistory();
+  const goldChart = await getGoldChart();
   const goldSparklines = await getGoldItemSparklines();
   const featuredJewelers = visibleJewelers.filter((j) => j.featured).slice(0, 3);
 
@@ -74,7 +75,7 @@ export default async function HomePage() {
         name: "DenizliKuyumcu.com",
         url: "https://denizlikuyumcu.com",
         description:
-          "Denizli'de güncel altın ve döviz fiyatları, kuyumcu rehberi.",
+          "Denizli'nin bağımsız altın/döviz fiyat ve kuyumcu rehberi.",
         publisher: { "@id": "https://denizlikuyumcu.com/#organization" },
         inLanguage: "tr-TR",
       },
@@ -120,34 +121,43 @@ export default async function HomePage() {
 
           <div className="relative grid gap-8 p-6 sm:p-8 lg:grid-cols-2 lg:items-center lg:gap-12 lg:p-16">
             <div>
-              <h1 className="max-w-lg text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl">
-                Denizli altın fiyatları ve kuyumcu rehberi, tek ekranda.
-              </h1>
-              <p className="mt-3 max-w-md text-base text-muted sm:mt-4 sm:text-lg">
-                Güncel fiyatları takip edin, Denizli&apos;deki kuyumcu ve
-                mücevher mağazalarını keşfedin.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
-                <a
-                  href="#altin-fiyatlari"
-                  className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-3 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98]"
-                >
-                  Altın fiyatlarını incele
-                  <ArrowRight aria-hidden="true" size={16} />
-                </a>
-                <Link
-                  href="/kuyumcular"
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-3 text-sm font-semibold text-ink transition-all hover:border-brand hover:text-brand active:scale-[0.98]"
-                >
-                  <MapPin aria-hidden="true" size={16} weight="bold" />
-                  Yakındaki kuyumcuları bul
-                </Link>
-              </div>
+              {/* Hero zaten ilk ekranda olduğu için "view" (scroll-tetikli)
+                  değil "mount" modunda: sayfa açılır açılmaz, aşağı doğru
+                  kademeli bir giriş (brief: "200-450ms opacity+translateY"). */}
+              <Reveal mode="mount">
+                <h1 className="max-w-lg text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl">
+                  Denizli altın fiyatları ve kuyumcu rehberi, tek ekranda.
+                </h1>
+              </Reveal>
+              <Reveal mode="mount" delay={0.08}>
+                <p className="mt-3 max-w-md text-base text-muted sm:mt-4 sm:text-lg">
+                  Güncel fiyatları takip edin, Denizli&apos;deki kuyumcu ve
+                  mücevher mağazalarını keşfedin.
+                </p>
+              </Reveal>
+              <Reveal mode="mount" delay={0.16}>
+                <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
+                  <a
+                    href="#altin-fiyatlari"
+                    className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-3 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98]"
+                  >
+                    Altın fiyatlarını incele
+                    <ArrowRight aria-hidden="true" size={16} />
+                  </a>
+                  <Link
+                    href="/kuyumcular"
+                    className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-3 text-sm font-semibold text-ink transition-all hover:border-brand hover:text-brand active:scale-[0.98]"
+                  >
+                    <MapPin aria-hidden="true" size={16} weight="bold" />
+                    Yakındaki kuyumcuları bul
+                  </Link>
+                </div>
+              </Reveal>
             </div>
 
-            <div className="flex justify-center lg:justify-end">
-              <HeroGramAltinCard initialData={prices} history={goldHistory.slice(-30)} />
-            </div>
+            <Reveal mode="mount" delay={0.22} className="flex justify-center lg:justify-end">
+              <HeroGramAltinCard initialData={prices} history={goldChart.periods[30]} />
+            </Reveal>
           </div>
         </div>
       </section>
@@ -216,6 +226,7 @@ export default async function HomePage() {
                   tag="Öne Çıkan"
                   isDemo={j.isDemo}
                   phone={j.phone}
+                  trackContext="home-featured"
                 />
               </Reveal>
             ))}
@@ -226,13 +237,15 @@ export default async function HomePage() {
               Bu bölümde öne çıkan Denizli kuyumcuları listelenecek. İşletmenizi
               ilk ekleyen siz olun.
             </p>
-            <Link
+            <TrackedLink
               href="/reklam-ver"
+              event="ad_cta_click"
+              eventProps={{ context: "home-empty-state" }}
               className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-ink px-4 py-2 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98] sm:self-auto"
             >
               İlk siz olun
               <ArrowRight aria-hidden="true" size={15} />
-            </Link>
+            </TrackedLink>
           </div>
         )}
       </section>
@@ -250,7 +263,7 @@ export default async function HomePage() {
       <section id="grafik" className="mx-auto max-w-[1240px] px-4 pb-16">
         <SectionHeading title="Altın Fiyatları Grafiği" />
         <div className="mt-6 grid gap-4 lg:grid-cols-[1fr_360px] lg:items-start">
-          <GoldPriceChart history={goldHistory} />
+          <GoldPriceChart data={goldChart} />
           {/* Grafiğin yanında, "bugün kimler hareketlendi" detayının tam
               listesi — DailyMarketSummary'nin (hero altı) kısa özetini
               tamamlıyor, tekrarlamıyor. */}

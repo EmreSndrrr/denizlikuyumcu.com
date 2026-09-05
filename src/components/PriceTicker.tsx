@@ -28,6 +28,7 @@ import { usePriceFlash } from "@/lib/usePriceFlash";
 import { getPriceHref } from "@/lib/priceContent";
 import StaleBadge from "@/components/StaleBadge";
 import AnimatedNumber from "@/components/AnimatedNumber";
+import Reveal from "@/components/Reveal";
 
 export default function PriceTicker({
   initialData,
@@ -83,18 +84,18 @@ export default function PriceTicker({
               aria-hidden="true"
               className="h-1.5 w-1.5 rounded-full bg-positive animate-pulse motion-reduce:animate-none"
             />
-            {formatTime(data.updatedAt)} itibarıyla
+            {formatTime(data.sourceUpdatedAt)} itibarıyla
           </span>
         </span>
       </div>
       <div className={"grid gap-px overflow-hidden rounded-b-2xl bg-border " + gridClass}>
-        {data.items.map((item) => {
+        {data.items.map((item, index) => {
           const isUp = item.changePercent >= 0;
           const flash = flashKeys[item.key];
           const href = getPriceHref(item.key);
           const cellClassName =
-            "bg-surface px-4 py-3 " +
-            (href ? "block transition-colors hover:bg-bg " : "") +
+            "block h-full bg-surface px-4 py-3 " +
+            (href ? "transition-colors hover:bg-bg " : "") +
             (flash === "up" ? "price-flash-up" : flash === "down" ? "price-flash-down" : "");
           const content = (
             <>
@@ -120,14 +121,19 @@ export default function PriceTicker({
           );
           // Kalemin ayrı bir detay sayfası varsa (bkz. lib/priceContent.ts)
           // hücrenin tamamı o sayfaya bağlanıyor; yoksa düz <div> kalıyor.
-          return href ? (
-            <Link key={item.key} href={href} className={cellClassName}>
-              {content}
-            </Link>
-          ) : (
-            <div key={item.key} className={cellClassName}>
-              {content}
-            </div>
+          // Reveal: kartlar ekrana girince kademeli giriş (brief) — item.key
+          // stabil kaldığı için 60sn'lik veri yenilemelerinde YENİDEN
+          // mount olmuyor, animasyon yalnızca ilk görünümde bir kez oynar.
+          return (
+            <Reveal key={item.key} delay={Math.min(index * 0.03, 0.3)} className="h-full">
+              {href ? (
+                <Link href={href} className={cellClassName}>
+                  {content}
+                </Link>
+              ) : (
+                <div className={cellClassName}>{content}</div>
+              )}
+            </Reveal>
           );
         })}
       </div>

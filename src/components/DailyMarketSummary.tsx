@@ -13,6 +13,7 @@ import type { PriceSnapshot } from "@/lib/prices";
 import { formatTL, formatTime } from "@/lib/format";
 import { useLivePrices } from "@/lib/useLivePrices";
 import StaleBadge from "@/components/StaleBadge";
+import Reveal from "@/components/Reveal";
 
 export default function DailyMarketSummary({
   initialData,
@@ -38,11 +39,12 @@ export default function DailyMarketSummary({
         <p className="text-sm font-semibold text-ink">Bugün ne değişti?</p>
         <span className="flex items-center gap-2 text-xs text-muted">
           {stale && <StaleBadge />}
-          {formatTime(data.updatedAt)} itibarıyla
+          {formatTime(data.sourceUpdatedAt)} itibarıyla
         </span>
       </div>
       <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-4">
         <SummaryItem
+          delay={0}
           label="En çok yükselen"
           name={topGainer.label}
           value={`${topGainer.changePercent >= 0 ? "+" : ""}${topGainer.changePercent.toFixed(2)}%`}
@@ -50,6 +52,7 @@ export default function DailyMarketSummary({
         />
         {topLoser ? (
           <SummaryItem
+            delay={0.05}
             label="En çok düşen"
             name={topLoser.label}
             value={`${topLoser.changePercent.toFixed(2)}%`}
@@ -57,6 +60,7 @@ export default function DailyMarketSummary({
           />
         ) : (
           <SummaryItem
+            delay={0.05}
             label="En az yükselen"
             name={weakest.label}
             value={`${weakest.changePercent >= 0 ? "+" : ""}${weakest.changePercent.toFixed(2)}%`}
@@ -65,13 +69,14 @@ export default function DailyMarketSummary({
         )}
         {gramAltin && (
           <SummaryItem
+            delay={0.1}
             label="Gram altın (günlük)"
             name={`${formatTL(gramAltin.sell)} TL`}
             value={`${gramAltin.changePercent >= 0 ? "+" : ""}${gramAltin.changePercent.toFixed(2)}%`}
             tone={gramAltin.changePercent >= 0 ? "up" : "down"}
           />
         )}
-        <SummaryItem label="Toplam takip edilen" name={`${data.items.length} kalem`} />
+        <SummaryItem delay={0.15} label="Toplam takip edilen" name={`${data.items.length} kalem`} />
       </div>
     </div>
   );
@@ -82,14 +87,16 @@ function SummaryItem({
   name,
   value,
   tone,
+  delay = 0,
 }: {
   label: string;
   name: string;
   value?: string;
   tone?: "up" | "down";
+  delay?: number;
 }) {
   return (
-    <div className="min-w-0">
+    <Reveal delay={delay} className="min-w-0">
       <p className="text-[11px] text-muted">{label}</p>
       <p className="mt-0.5 truncate text-sm font-semibold text-ink">{name}</p>
       {value && (
@@ -107,6 +114,6 @@ function SummaryItem({
           {value}
         </p>
       )}
-    </div>
+    </Reveal>
   );
 }

@@ -31,12 +31,18 @@ function MarqueeItem({ item, duplicate }: { item: PriceItem; duplicate?: boolean
     >
       <span className="font-medium text-white/60">{item.label}</span>
       <span className="tabular-nums font-semibold text-white">
-        {formatTL(item.sell)} <span className="text-white/40">TL</span>
+        {formatTL(item.sell)} <span className="text-white/50">TL</span>
       </span>
+      {/* Bu şerit temadan bağımsız HER ZAMAN koyu (bkz. dosya başı notu) —
+          text-positive/text-negative sınıfları ise <html>'in .dark
+          sınıfına göre değişir (açık temada AÇIK-mod tonu döner, bu koyu
+          zeminde ~3.9:1 kalıp WCAG AA'yı geçemez). Bu yüzden koyu temanın
+          sabit karşılığı burada literal hex olarak veriliyor — GoldPriceChart/
+          HeroGramAltinCard/PriceDetailCard'daki aynı düzeltmeyle tutarlı. */}
       <span
         className={
           "flex items-center gap-0.5 tabular-nums font-medium " +
-          (isUp ? "text-positive" : "text-negative")
+          (isUp ? "text-[#34b787]" : "text-[#f2726f]")
         }
       >
         {isUp ? (
@@ -90,13 +96,13 @@ export default function PriceMarquee({
           sm+ genişlikte görünür; ekran okuyucular için her zaman
           sr-only bir karşılığı var. */}
       <span className="sr-only">
-        Fiyatlar son {formatTime(data.updatedAt)} itibarıyla güncellendi
+        Fiyatlar son {formatTime(data.sourceUpdatedAt)} itibarıyla güncellendi
       </span>
       <span
         aria-hidden="true"
-        className="hidden shrink-0 items-center border-r border-white/10 px-3 text-[11px] tabular-nums text-white/40 sm:flex"
+        className="hidden shrink-0 items-center border-r border-white/10 px-3 text-[11px] tabular-nums text-white/50 sm:flex"
       >
-        {formatTime(data.updatedAt)}
+        {formatTime(data.sourceUpdatedAt)}
       </span>
       <div className="overflow-hidden">
         <div className="flex w-max animate-price-marquee">

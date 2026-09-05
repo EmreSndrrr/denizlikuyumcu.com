@@ -44,7 +44,7 @@ export default function DailyChangeTable({
         <h3 className="text-sm font-semibold text-ink">Günlük Değişim</h3>
         <span className="flex items-center gap-2 text-xs text-muted">
           {stale && <StaleBadge />}
-          {formatTime(data.updatedAt)} itibarıyla
+          {formatTime(data.sourceUpdatedAt)} itibarıyla
         </span>
       </div>
       <div className="grid divide-y divide-border sm:grid-cols-2 sm:divide-x sm:divide-y-0">

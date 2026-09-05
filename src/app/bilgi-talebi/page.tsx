@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import InfoRequestForm from "@/components/InfoRequestForm";
+import { resolveKonuSlug } from "@/lib/infoRequestConfig";
 
 export const metadata: Metadata = {
   title: "Bilgi Talebi — Sorunuzu Bize İletin",
@@ -9,7 +10,16 @@ export const metadata: Metadata = {
   alternates: { canonical: "/bilgi-talebi" },
 };
 
-export default function BilgiTalebiPage() {
+export default async function BilgiTalebiPage({
+  searchParams,
+}: {
+  // Ör. /bilgi-talebi?konu=reklam -> formun "Konu" alanı "Reklam / işletme
+  // tanıtımı" ile ön seçili açılır (bkz. lib/infoRequestConfig.ts).
+  searchParams: Promise<{ konu?: string }>;
+}) {
+  const { konu } = await searchParams;
+  const defaultKonu = resolveKonuSlug(konu);
+
   return (
     <div className="mx-auto max-w-2xl px-4 py-12">
       <h1 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
@@ -35,7 +45,7 @@ export default function BilgiTalebiPage() {
       </div>
 
       <div className="mt-8">
-        <InfoRequestForm />
+        <InfoRequestForm defaultKonu={defaultKonu} />
       </div>
 
       <p className="mt-8 border-t border-border pt-6 text-sm text-muted">

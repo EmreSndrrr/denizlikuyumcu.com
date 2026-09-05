@@ -1,10 +1,11 @@
 "use client";
 
-import { useActionState, useId } from "react";
+import { useActionState, useEffect, useId } from "react";
 import { useFormStatus } from "react-dom";
 import { CheckCircle, WarningCircle } from "@phosphor-icons/react/dist/ssr";
 import { sendInfoRequest, type InfoRequestState } from "@/lib/infoRequest";
 import { KONULAR } from "@/lib/infoRequestConfig";
+import { trackEvent } from "@/lib/analytics";
 
 const initialState: InfoRequestState = { ok: false, message: "" };
 
@@ -33,6 +34,15 @@ export default function InfoRequestForm({
 } = {}) {
   const [state, formAction] = useActionState(sendInfoRequest, initialState);
   const uid = useId();
+
+  // Başarılı gönderimde dönüşüm event'i — kişisel veri içermez, yalnızca
+  // hangi "konu" ile gönderildiği (bkz. lib/analytics.ts).
+  useEffect(() => {
+    if (state.ok) {
+      trackEvent("form_submit", { konu: defaultKonu ?? "genel" });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.ok]);
 
   if (state.ok) {
     return (
