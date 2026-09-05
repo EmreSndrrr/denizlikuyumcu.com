@@ -46,10 +46,28 @@ const GOLD = "#e3bd6e";
 // Bir aralık için "kullanılabilir" grafik çizmeye yeter sayıda gerçek nokta.
 const MIN_POINTS = 2;
 
-function formatShortDate(iso: string, period: Period) {
+// Sayısal etiketler viewBox dışına taşmasın diye: uçlardaki noktalarda
+// metni içeri kıstırıp hizalamayı da ona göre değiştiriyoruz.
+const LABEL_PAD = 4;
+const clampLabelX = (x: number) => Math.min(Math.max(x, LABEL_PAD), WIDTH - LABEL_PAD);
+const labelAnchor = (x: number): "start" | "middle" | "end" =>
+  x <= 60 ? "start" : x >= WIDTH - 60 ? "end" : "middle";
+
+// `sameDay`: tüm noktalar aynı güne düşüyorsa tarih yerine SAAT gösteriyoruz
+// — aksi halde eksenin iki ucunda da "05 Eyl" yazıyor ve grafik bozuk
+// görünüyor (veri toplamanın ilk gününde tam olarak bu oluyordu).
+function formatShortDate(iso: string, period: Period, sameDay = false) {
   // timeZone SABİT: bkz. lib/format.ts formatTime() üzerindeki not — aynı
   // hydration uyuşmazlığı riski burada da geçerli.
-  return new Date(iso).toLocaleDateString("tr-TR", {
+  const d = new Date(iso);
+  if (sameDay) {
+    return d.toLocaleTimeString("tr-TR", {
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZone: "Europe/Istanbul",
+    });
+  }
+  return d.toLocaleDateString("tr-TR", {
     day: "2-digit",
     month: "short",
     year: period === 365 ? "2-digit" : undefined,
@@ -102,6 +120,16 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
   const points = data.periods[effectivePeriod];
   const insufficientData = points.length < MIN_POINTS;
 
+  // Tüm noktalar aynı takvim gününe düşüyorsa eksende tarih yerine saat
+  // gösteriyoruz — aksi halde iki uçta da aynı tarih ("05 Eyl / 05 Eyl")
+  // yazıyor ve grafik hatalı görünüyor.
+  const sameDay = useMemo(() => {
+    if (points.length < MIN_POINTS) return false;
+    const day = (iso: string) =>
+      new Date(iso).toLocaleDateString("tr-TR", { timeZone: "Europe/Istanbul" });
+    return day(points[0].date) === day(points[points.length - 1].date);
+  }, [points]);
+
   const {
     path,
     areaPath,
@@ -111,6 +139,7 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
     yMax,
     highIndex,
     lowIndex,
+    isFlat,
   } = useMemo(() => {
     if (points.length < MIN_POINTS) {
       return {
@@ -122,12 +151,17 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
         yMax: 0,
         highIndex: 0,
         lowIndex: 0,
+        isFlat: true,
       };
     }
 
     const values = points.map((p) => p[side]);
     const rawMin = Math.min(...values);
     const rawMax = Math.max(...values);
+    // Tüm değerler AYNIYSA (ör. hafta sonu — piyasa kapalı, kaynak zaman
+    // damgasını tazeliyor ama fiyat sabit) gerçek bir en yüksek/en düşük
+    // yoktur; o işaretleri çizmek anlamsız ve görsel olarak kafa karıştırıcı.
+    const isFlat = rawMax === rawMin;
     const range = rawMax - rawMin || rawMax * 0.02 || 1;
     const yMin = rawMin - range * 0.12;
     const yMax = rawMax + range * 0.12;
@@ -152,7 +186,7 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
       if (v < values[lowIndex]) lowIndex = i;
     });
 
-    return { path, areaPath, scaleX, scaleY, yMin, yMax, highIndex, lowIndex };
+    return { path, areaPath, scaleX, scaleY, yMin, yMax, highIndex, lowIndex, isFlat };
   }, [points, side]);
 
   const first = insufficientData ? undefined : points[0];
@@ -274,7 +308,7 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
             Bu aralık için grafik veri toplanıyor
           </p>
           <p className="max-w-xs text-xs text-white/50">
-            Fiyat geçmişi 5 dakikada bir gerçek kayıtlarla biriktiriliyor.
+            Fiyat geçmişi 15 dakikada bir gerçek kayıtlarla biriktiriliyor.
             Yeterli veri toplandığında bu alanda otomatik olarak grafik
             görünecek — sahte/örnek veri gösterilmez.
           </p>
@@ -350,8 +384,27 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
                   transition={{ duration: hasDrawnOnce || reduceMotion ? 0 : 0.6, ease: "easeOut" }}
                 />
 
-                {/* En yüksek / en düşük değer işaretleri */}
-                {points[highIndex] && (
+                {/* Az sayıda kayıt varken (veri toplamanın ilk günleri)
+                    çizgi tek başına "bozuk" görünüyor — her ölçümü nokta
+                    olarak da işaretleyince kaç gerçek okuma olduğu
+                    anlaşılıyor. Nokta kalabalığı yapmasın diye yalnızca
+                    12'den az kayıtta gösteriliyor. */}
+                {points.length < 12 &&
+                  points.map((p, i) => (
+                    <circle
+                      key={p.date}
+                      cx={scaleX(i)}
+                      cy={scaleY(p[side])}
+                      r={2.5}
+                      fill={GOLD}
+                      vectorEffect="non-scaling-stroke"
+                    />
+                  ))}
+
+                {/* En yüksek / en düşük değer işaretleri — tüm değerler
+                    aynıysa (isFlat) "en yüksek"/"en düşük" diye bir şey
+                    yok, çizilmiyor. */}
+                {!isFlat && points[highIndex] && (
                   <g>
                     <circle
                       cx={scaleX(highIndex)}
@@ -362,11 +415,14 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
                     />
                     {/* Brief: "mobilde etiketlerin üst üste gelmesini
                         engelle" — dar ekranda sadece nokta işaretleri
-                        kalıyor, sayısal etiketler sm+ genişlikte görünüyor. */}
+                        kalıyor, sayısal etiketler sm+ genişlikte görünüyor.
+                        x ve textAnchor viewBox kenarlarına göre kıstırılıyor:
+                        aksi halde ilk/son nokta en yüksek olduğunda etiket
+                        yarısı kırpılıyordu ("…8,85" gibi). */}
                     <text
-                      x={scaleX(highIndex)}
+                      x={clampLabelX(scaleX(highIndex))}
                       y={scaleY(points[highIndex][side]) - 8}
-                      textAnchor="middle"
+                      textAnchor={labelAnchor(scaleX(highIndex))}
                       fontSize={11}
                       fill="#10b981"
                       className="hidden sm:inline"
@@ -375,7 +431,7 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
                     </text>
                   </g>
                 )}
-                {points[lowIndex] && lowIndex !== highIndex && (
+                {!isFlat && points[lowIndex] && lowIndex !== highIndex && (
                   <g>
                     <circle
                       cx={scaleX(lowIndex)}
@@ -385,9 +441,9 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
                       vectorEffect="non-scaling-stroke"
                     />
                     <text
-                      x={scaleX(lowIndex)}
+                      x={clampLabelX(scaleX(lowIndex))}
                       y={scaleY(points[lowIndex][side]) + 16}
-                      textAnchor="middle"
+                      textAnchor={labelAnchor(scaleX(lowIndex))}
                       fontSize={11}
                       fill="#f87171"
                       className="hidden sm:inline"
@@ -428,7 +484,7 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
                   style={{ left: `${tooltipLeftPct}%` }}
                 >
                   <p className="font-medium text-white/60">
-                    {formatShortDate(hovered.date, effectivePeriod)}
+                    {formatShortDate(hovered.date, effectivePeriod, sameDay)}
                   </p>
                   <p className="tabular-nums font-semibold text-white">
                     {formatTL(hovered[side])} TL
@@ -439,15 +495,15 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
           </AnimatePresence>
 
           <div className="flex justify-between px-2 pb-3 text-[11px] text-white/50">
-            <span>{first && formatShortDate(first.date, effectivePeriod)}</span>
-            <span>{last && formatShortDate(last.date, effectivePeriod)}</span>
+            <span>{first && formatShortDate(first.date, effectivePeriod, sameDay)}</span>
+            <span>{last && formatShortDate(last.date, effectivePeriod, sameDay)}</span>
           </div>
         </>
       )}
 
       <p className="border-t border-white/10 px-4 py-3 text-[11px] text-white/50">
         Geçmiş veriler DenizliKuyumcu.com tarafından finans.truncgil.com
-        kaynağından periyodik (5 dakikada bir) kaydedilen gerçek fiyatlardır;
+        kaynağından periyodik (15 dakikada bir) kaydedilen gerçek fiyatlardır;
         seçilen aralığa göre saatlik veya günlük ortalama olarak gösterilir.
         {data.historyStartedAt && (
           <> Kayıt başlangıcı: {formatStartDate(data.historyStartedAt)}.</>
