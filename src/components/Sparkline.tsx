@@ -27,10 +27,24 @@ export default function Sparkline({
   const values = points.map((p) => p.sell);
   const min = Math.min(...values);
   const max = Math.max(...values);
-  const range = max - min || 1;
+  const range = max - min;
+
+  // Dikey pay: çizgi 0 ile height arasına TAM oturduğunda 2px'lik kalem
+  // viewBox'ın alt/üst kenarında yarı yarıya kırpılıyordu.
+  const PAD = 3;
+  const usable = height - PAD * 2;
+
+  // Bütün değerler AYNIYSA (hafta sonu / piyasa kapalı) eski hesap
+  // "range = 0 || 1 = 1" yapıp y = height - 0 = height veriyordu: çizgi
+  // kartın en DİBİNE yapışıyor, dolgu alanı sıfır yükseklikte kalıyordu —
+  // "grafik çalışmıyor, dümdüz" görüntüsünün sebebi buydu. Düz seride
+  // doğru yer ortadır: "değişim yok" demek, "dibe vurdu" demek değil.
+  const flat = range === 0;
   const coords = points.map((p, i) => {
     const x = (i / (points.length - 1)) * width;
-    const y = height - ((p.sell - min) / range) * height;
+    const y = flat
+      ? height / 2
+      : PAD + (1 - (p.sell - min) / range) * usable;
     return [x, y] as const;
   });
   const path = coords
@@ -51,7 +65,10 @@ export default function Sparkline({
           <stop offset="100%" stopColor={color} stopOpacity="0" />
         </linearGradient>
       </defs>
-      <path d={areaPath} fill={`url(#${gradientId})`} stroke="none" />
+      {/* Düz seride dolgu, çizginin altında düz bir blok bırakıyor ve
+          "grafik bozuk" izlenimi veriyor — değişim yokken çizgi yeterli
+          (aynı karar GoldPriceChart'ta da uygulandı). */}
+      {!flat && <path d={areaPath} fill={`url(#${gradientId})`} stroke="none" />}
       <path
         d={path}
         fill="none"

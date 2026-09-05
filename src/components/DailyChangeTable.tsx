@@ -35,8 +35,13 @@ export default function DailyChangeTable({
     .reverse();
 
   return (
-    <div className="rounded-2xl border border-border bg-surface shadow-sm">
-      <div className="flex items-center justify-between gap-2 border-b border-border px-4 py-3">
+    // @container: aşağıdaki iki sütunlu bölünme VIEWPORT'a değil KARTIN
+    // KENDİ genişliğine bakmalı. Bu kart anasayfada grafiğin yanında 360px
+    // sabit bir kolonda duruyor; "sm:grid-cols-2" (viewport 640px) o dar
+    // kolonu geniş ekranda bile ikiye bölüyor, her sütun ~170px'e düşüyor
+    // ve enstrüman adları truncate ile tamamen kayboluyordu ("1 S 12,91").
+    <div className="@container rounded-2xl border border-border bg-surface shadow-sm">
+      <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 border-b border-border px-4 py-3">
         {/* h3: bu bileşen artık kendi SectionHeading'i olmayan bir
             konumda (Grafik bölümünün yanında) — GoldPriceChart'ın kendi
             h3'üyle aynı hiyerarşi seviyesinde, başlık gezinmesinde
@@ -47,7 +52,7 @@ export default function DailyChangeTable({
           {formatTime(data.sourceUpdatedAt)} itibarıyla
         </span>
       </div>
-      <div className="grid divide-y divide-border sm:grid-cols-2 sm:divide-x sm:divide-y-0">
+      <div className="grid divide-y divide-border @lg:grid-cols-2 @lg:divide-x @lg:divide-y-0">
         <ChangeList
           title="En Çok Yükselenler"
           items={gainers}
@@ -99,7 +104,10 @@ function ChangeList({
           const href = getPriceHref(item.key);
           return (
             <li key={item.key} className="flex items-center justify-between gap-3 text-sm">
-              <span className="flex min-w-0 items-center gap-2">
+              {/* flex-1: ad grubu kalan alanı ALSIN. Sadece min-w-0 varken
+                  varsayılan "flex: 0 1 auto" ile ad grubu sıkışıkta sıfıra
+                  kadar büzülüp truncate yüzünden görünmez oluyordu. */}
+              <span className="flex min-w-0 flex-1 items-center gap-2">
                 <span className="w-4 shrink-0 text-xs tabular-nums text-muted">{i + 1}</span>
                 {href ? (
                   <Link href={href} className="truncate text-ink hover:text-brand hover:underline">
