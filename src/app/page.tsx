@@ -16,7 +16,7 @@ import GuideList from "@/components/GuideList";
 import Faq from "@/components/Faq";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
-import TrackedLink from "@/components/TrackedLink";
+import JewelerSalesCta from "@/components/JewelerSalesCta";
 
 // Bu bir Server Component (dosyanın başında "use client" YOK). Varsayılan
 // davranış bu: sunucuda çalışır, doğrudan getPrices() gibi fonksiyonları
@@ -232,20 +232,11 @@ export default async function HomePage() {
             ))}
           </div>
         ) : (
-          <div className="mt-8 flex flex-col gap-3 rounded-2xl border border-dashed border-border bg-surface p-6 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-muted">
-              Bu bölümde öne çıkan Denizli kuyumcuları listelenecek. İşletmenizi
-              ilk ekleyen siz olun.
-            </p>
-            <TrackedLink
-              href="/reklam-ver"
-              event="ad_cta_click"
-              eventProps={{ context: "home-empty-state" }}
-              className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-ink px-4 py-2 text-sm font-semibold text-surface transition-all hover:bg-brand active:scale-[0.98] sm:self-auto"
-            >
-              İlk siz olun
-              <ArrowRight aria-hidden="true" size={15} />
-            </TrackedLink>
+          // Henüz ücretli/onaylı kuyumcu yokken sahte kart göstermek yerine
+          // (PRODUCT.md ilkesi) bu alanı doğrudan satış bloğuna ayırıyoruz —
+          // kuyumcu sahibinin siteyi keşfettiği en görünür yer burası.
+          <div className="mt-8">
+            <JewelerSalesCta variant="prominent" context="home" headingLevel="h3" />
           </div>
         )}
       </section>

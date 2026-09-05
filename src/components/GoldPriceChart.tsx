@@ -83,7 +83,23 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
     return () => clearTimeout(t);
   }, []);
 
-  const points = data.periods[period];
+  // Yalnızca GERÇEKTEN yeterli kaydı olan aralıkları sunuyoruz. Veri
+  // toplama yeni başladığında 7G birkaç saatte dolarken 3A/1Y aylar
+  // sürer — o düğmeleri gösterip boş grafik açmak yerine hiç göstermiyoruz,
+  // böylece grafik her zaman DOLU görünüyor. Veri biriktikçe aralıklar
+  // kendiliğinden ortaya çıkar (kod değişikliği gerekmez).
+  const availablePeriods = PERIODS.filter(
+    (p) => data.periods[p.value].length >= MIN_POINTS,
+  );
+  // Seçili aralığın verisi yoksa (ör. varsayılan 30G henüz dolmamışsa)
+  // mevcut olanların ilkine düşüyoruz — state'i effect'le senkronlamak
+  // yerine render sırasında türetiyoruz.
+  const effectivePeriod =
+    availablePeriods.some((p) => p.value === period)
+      ? period
+      : (availablePeriods[0]?.value ?? period);
+
+  const points = data.periods[effectivePeriod];
   const insufficientData = points.length < MIN_POINTS;
 
   const {
@@ -193,30 +209,36 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
         </div>
 
         <div className="flex flex-col items-end gap-2">
-          <div
-            role="tablist"
-            aria-label="Grafik zaman aralığı"
-            className="inline-flex rounded-full border border-white/15 p-1"
-          >
-            {PERIODS.map((p) => (
-              <button
-                key={p.value}
-                type="button"
-                role="tab"
-                aria-selected={period === p.value}
-                onClick={() => {
-                  setPeriod(p.value);
-                  setHoverIndex(null);
-                }}
-                className={
-                  "rounded-full px-3 py-1 text-xs font-medium transition-all active:scale-[0.94] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold " +
-                  (period === p.value ? "bg-brand text-white" : "text-white/50 hover:text-white")
-                }
-              >
-                {p.label}
-              </button>
-            ))}
-          </div>
+          {/* Yalnızca verisi olan aralıklar; tek aralık varsa seçici hiç
+              gösterilmiyor (tek düğmeli bir "sekme" anlamsız olurdu). */}
+          {availablePeriods.length > 1 && (
+            <div
+              role="tablist"
+              aria-label="Grafik zaman aralığı"
+              className="inline-flex rounded-full border border-white/15 p-1"
+            >
+              {availablePeriods.map((p) => (
+                <button
+                  key={p.value}
+                  type="button"
+                  role="tab"
+                  aria-selected={effectivePeriod === p.value}
+                  onClick={() => {
+                    setPeriod(p.value);
+                    setHoverIndex(null);
+                  }}
+                  className={
+                    "rounded-full px-3 py-1 text-xs font-medium transition-all active:scale-[0.94] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold " +
+                    (effectivePeriod === p.value
+                      ? "bg-brand text-white"
+                      : "text-white/50 hover:text-white")
+                  }
+                >
+                  {p.label}
+                </button>
+              ))}
+            </div>
+          )}
           <div
             role="tablist"
             aria-label="Alış / satış fiyatı"
@@ -261,7 +283,7 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
         <>
           {/* Ekran okuyucular için görsel grafiğin yerini tutan metin özeti. */}
           <p className="sr-only">
-            Son {period} günde gram altın {side === "sell" ? "satış" : "alış"} fiyatı{" "}
+            Son {effectivePeriod} günde gram altın {side === "sell" ? "satış" : "alış"} fiyatı{" "}
             {formatTL(first?.[side] ?? 0)} TL&apos;den {formatTL(last?.[side] ?? 0)} TL&apos;ye,{" "}
             {isUp ? "yükseldi" : "düştü"} ({periodChangePct.toFixed(2)}% değişim). Dönem
             içi en düşük {formatTL(yMin)} TL, en yüksek {formatTL(yMax)} TL.
@@ -275,7 +297,7 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
                 hiç oynamamasına yol açabiliyor. Yalnızca süreyi 0'a
                 çekmek güvenli ve yeterli. */}
             <motion.div
-              key={`${period}-${side}`}
+              key={`${effectivePeriod}-${side}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -406,7 +428,7 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
                   style={{ left: `${tooltipLeftPct}%` }}
                 >
                   <p className="font-medium text-white/60">
-                    {formatShortDate(hovered.date, period)}
+                    {formatShortDate(hovered.date, effectivePeriod)}
                   </p>
                   <p className="tabular-nums font-semibold text-white">
                     {formatTL(hovered[side])} TL
@@ -417,8 +439,8 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
           </AnimatePresence>
 
           <div className="flex justify-between px-2 pb-3 text-[11px] text-white/50">
-            <span>{first && formatShortDate(first.date, period)}</span>
-            <span>{last && formatShortDate(last.date, period)}</span>
+            <span>{first && formatShortDate(first.date, effectivePeriod)}</span>
+            <span>{last && formatShortDate(last.date, effectivePeriod)}</span>
           </div>
         </>
       )}

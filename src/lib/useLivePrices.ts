@@ -13,12 +13,15 @@ import type { PriceSnapshot } from "@/lib/prices";
 const POLL_INTERVAL_MS = 60_000;
 
 // Kaynağın (Truncgil) KENDİ bildirdiği güncelleme zamanı ile şimdi
-// arasındaki fark bunu aşarsa "Veri gecikmeli" gösterilir. Zamanlanmış
-// görev normalde 5 dakikada bir çalışıyor (bkz. app/api/cron/snapshot);
-// 15 dakika üç kaçırılmış döngüye karşılık gelir — geçici bir titremeyi
-// gürültü yapmadan gerçek bir kesintiyi (görev durmuş, kaynak API çökmüş)
-// yakalar.
-const STALE_THRESHOLD_MS = 15 * 60 * 1000;
+// arasındaki fark bunu aşarsa "Veri gecikmeli" gösterilir.
+//
+// ÖNEMLİ (canlıda ölçüldü): Truncgil kendi verisini ~15 DAKİKADA BİR
+// güncelliyor (Update_Date hep çeyrek saat sınırında: 11:45:02, 12:00:02…).
+// Eşik 15 dakika olduğunda her döngünün sonunda, her şey normal
+// çalışırken rozet yanlışlıkla görünüyordu. 45 dakika = üç kaçırılmış
+// kaynak döngüsü: normal ritimde ASLA tetiklenmez, ama gerçek bir
+// kesintiyi (zamanlanmış görev durmuş, kaynak API çökmüş) yakalar.
+const STALE_THRESHOLD_MS = 45 * 60 * 1000;
 
 function isSourceStale(sourceUpdatedAt: string): boolean {
   const t = new Date(sourceUpdatedAt).getTime();
