@@ -60,3 +60,11 @@ claude-seo/
 # SEO denetim raporları — sadece yerel/kişisel kullanım için, deploy
 # edilen siteye veya git geçmişine dahil edilmesi gerekmiyor.
 seo-audit/
+
+# vercel link tarafından eklendi. (Buraya ikinci bir ".env*" satırı da
+# eklemişti; yukarıdaki "!.env.example" istisnasından SONRA geldiği için
+# şablonu tekrar yok sayıyordu — kaldırıldı, .env kuralları yukarıda.)
+.vercel
+
+# Kurulum sırasında üretilen geçici sır dosyası — asla commit edilmez.
+.tmp_cron_secret
