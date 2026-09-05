@@ -1,10 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { parseTruncgil } from "@/lib/truncgil";
-import {
-  getLatestStoredSourceUpdatedAt,
-  insertSnapshot,
-  hasDatabase,
-} from "@/lib/priceHistory";
+import { captureSnapshot } from "@/lib/snapshotCapture";
 
 // Zamanlanmış görev: Truncgil'i kontrol eder, kaynağın Update_Date'i son
 // kaydettiğimizden farklıysa 21 kalemin fiyatını `price_snapshots`
@@ -40,56 +35,17 @@ async function run(req: NextRequest) {
   if (!authorized(req)) {
     return NextResponse.json({ ok: false, error: "Yetkisiz" }, { status: 401 });
   }
-  if (!hasDatabase) {
+
+  // Asıl iş lib/snapshotCapture.ts'te — aynı mantığı /api/prices de
+  // (trafikle, arka planda) çağırıyor, bu yüzden tek yerde duruyor.
+  const result = await captureSnapshot();
+  if (!result.ok) {
     return NextResponse.json(
-      { ok: false, error: "DATABASE_URL tanımlı değil" },
-      { status: 500 },
+      { ok: false, error: result.error },
+      { status: result.status },
     );
   }
-
-  let data: Record<string, unknown>;
-  try {
-    const res = await fetch("https://finans.truncgil.com/today.json", {
-      cache: "no-store",
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    data = (await res.json()) as Record<string, unknown>;
-  } catch (err) {
-    console.error("[cron/snapshot] Truncgil çekilemedi:", err);
-    return NextResponse.json(
-      { ok: false, error: "Truncgil kaynağına ulaşılamadı" },
-      { status: 502 },
-    );
-  }
-
-  let parsed;
-  try {
-    parsed = parseTruncgil(data);
-  } catch (err) {
-    console.error("[cron/snapshot] Truncgil yanıtı çözümlenemedi:", err);
-    return NextResponse.json(
-      { ok: false, error: "Kaynak yanıtı çözümlenemedi" },
-      { status: 502 },
-    );
-  }
-
-  const lastStored = await getLatestStoredSourceUpdatedAt();
-  if (lastStored && new Date(lastStored).getTime() === new Date(parsed.sourceUpdatedAt).getTime()) {
-    return NextResponse.json({
-      ok: true,
-      skipped: true,
-      reason: "Update_Date değişmedi",
-      sourceUpdatedAt: parsed.sourceUpdatedAt,
-    });
-  }
-
-  const inserted = await insertSnapshot(parsed.items, parsed.sourceUpdatedAt);
-  return NextResponse.json({
-    ok: true,
-    inserted,
-    sourceUpdatedAt: parsed.sourceUpdatedAt,
-    previous: lastStored,
-  });
+  return NextResponse.json(result);
 }
 
 export async function GET(req: NextRequest) {

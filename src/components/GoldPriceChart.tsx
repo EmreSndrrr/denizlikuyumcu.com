@@ -370,7 +370,13 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
                   />
                 ))}
 
-                <path d={areaPath} fill="url(#gold-area-fill)" stroke="none" />
+                {/* Düz seride (piyasa kapalı — bütün kayıtlar aynı fiyat)
+                    dolgu alanı, çizginin altında kocaman tek renk bir blok
+                    bırakıyor ve grafik "bozuk" görünüyor. Değişim yokken
+                    çizginin kendisi zaten yeterli bilgi. */}
+                {!isFlat && (
+                  <path d={areaPath} fill="url(#gold-area-fill)" stroke="none" />
+                )}
                 <motion.path
                   d={path}
                   fill="none"
@@ -477,6 +483,20 @@ export default function GoldPriceChart({ data }: { data: GoldChartData }) {
                   </>
                 )}
               </svg>
+
+              {/* Düz çizginin NEDEN düz olduğunu söylemezsek kullanıcı
+                  bunu "grafik çalışmıyor" diye okuyor (canlıda geri bildirim
+                  geldi). Uydurma hareket üretmek yerine durumu açıkça
+                  yazıyoruz. */}
+              {isFlat && (
+                // Çizgi düz seride tam ortada duruyor; not da ortaya
+                // konursa metin çizginin üstüne biniyor. Biraz aşağıda ve
+                // kendi zemininde duruyor ki hem okunsun hem grafiği
+                // kapatmasın.
+                <span className="pointer-events-none absolute left-1/2 top-[calc(50%+14px)] max-w-[90%] -translate-x-1/2 rounded-full border border-white/10 bg-black/70 px-3 py-1 text-center text-[11px] text-white/60 backdrop-blur">
+                  Bu aralıkta fiyat değişmedi — piyasa kapalı
+                </span>
+              )}
 
               {hovered && tooltipLeftPct !== null && (
                 <div
