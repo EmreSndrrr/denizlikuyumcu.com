@@ -1,24 +1,22 @@
-# Fiyat anlık görüntüsü — zamanlanmış görev tetikleyicisi.
+# Fiyat anlık görüntüsü — YEDEK tetikleyici.
 #
-# Hobby planında Vercel Cron 5 dakikada bir çalışamadığı için, siteye
-# deploy edilen /api/cron/snapshot endpoint'ini buradan tetikliyoruz.
-# Endpoint kendi içinde Truncgil Update_Date'ini kontrol eder; değişmemişse
-# yeni kayıt oluşturmaz (çağrı boşa gitmiş sayılmaz, sadece "skipped").
+# BİRİNCİL yol artık Vercel Cron (bkz. vercel.json): Vercel, cron
+# çağrısında CRON_SECRET'i otomatik olarak "Authorization: Bearer …"
+# başlığıyla gönderiyor, bu yüzden ek bir sır paylaşımı gerekmiyor.
 #
-# Kurulum (GitHub repo → Settings → Secrets and variables → Actions):
+# Bu workflow yalnızca ELLE (workflow_dispatch) çalışacak şekilde
+# bırakıldı — Vercel Cron'un yetmediği veya planın izin vermediği bir
+# durumda `schedule` satırını geri açıp şu ikisini tanımlamak yeterli:
 #   Secret:   CRON_SECRET   — sitedeki CRON_SECRET ile AYNI değer
-#   Variable: SNAPSHOT_URL   — https://denizlikuyumcu.com/api/cron/snapshot
+#   Variable: SNAPSHOT_URL  — https://denizlikuyumcu.com/api/cron/snapshot
 #
-# NOT: GitHub'ın zamanlanmış workflow'ları yoğun saatlerde birkaç dakika
-# gecikebilir ve repo 60 gün hareketsiz kalırsa devre dışı bırakılır. Daha
-# katı bir zamanlama gerekirse cron-job.org gibi bir servis aynı endpoint'i
-# çağıracak şekilde ayarlanabilir (bkz. README).
+# Endpoint kendi içinde Truncgil Update_Date'ini kontrol eder; değişmemişse
+# yeni kayıt oluşturmaz ("skipped" döner), bu yüzden fazladan tetiklenme
+# zararsızdır.
 
 name: price-snapshot
 
 on:
-  schedule:
-    - cron: "*/5 * * * *"
   workflow_dispatch: {}
 
 concurrency:
