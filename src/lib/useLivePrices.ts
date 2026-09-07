@@ -8,24 +8,47 @@
 // yeniden yazmak zorunda kalmıyor.
 
 import { useEffect, useRef, useState } from "react";
-import type { PriceSnapshot } from "@/lib/prices";
+import { STALE_THRESHOLD_MS, type PriceSnapshot } from "@/lib/prices";
 
 const POLL_INTERVAL_MS = 60_000;
-
-// Kaynağın (Truncgil) KENDİ bildirdiği güncelleme zamanı ile şimdi
-// arasındaki fark bunu aşarsa "Veri gecikmeli" gösterilir.
-//
-// ÖNEMLİ (canlıda ölçüldü): Truncgil kendi verisini ~15 DAKİKADA BİR
-// güncelliyor (Update_Date hep çeyrek saat sınırında: 11:45:02, 12:00:02…).
-// Eşik 15 dakika olduğunda her döngünün sonunda, her şey normal
-// çalışırken rozet yanlışlıkla görünüyordu. 45 dakika = üç kaçırılmış
-// kaynak döngüsü: normal ritimde ASLA tetiklenmez, ama gerçek bir
-// kesintiyi (zamanlanmış görev durmuş, kaynak API çökmüş) yakalar.
-const STALE_THRESHOLD_MS = 45 * 60 * 1000;
 
 function isSourceStale(sourceUpdatedAt: string): boolean {
   const t = new Date(sourceUpdatedAt).getTime();
   return Number.isFinite(t) && Date.now() - t > STALE_THRESHOLD_MS;
+}
+
+// --- Yoklamaların modül düzeyinde birleştirilmesi -------------------------
+//
+// Anasayfada bu hook'u kullanan 18 bileşen var ve her biri KENDİ
+// setInterval'ını kuruyordu: ziyaretçi başına dakikada 18 ayrı /api/prices
+// isteği. Hepsi aynı anda mount olduğu için istekler de aynı ana yığılıyor,
+// yani 18'i de tek bir yanıtın taşıyabileceği veriyi ayrı ayrı çekiyor.
+//
+// Aşağıdaki iki kapı bunu tek isteğe indiriyor: uçuştaki bir istek varsa
+// yenisi açılmıyor (hepsi aynı Promise'i paylaşıyor), yeni tamamlanmış bir
+// yanıt varsa kısa bir pencere boyunca o tekrar kullanılıyor. Bileşenlerin
+// kendi interval'ları duruyor — davranış aynı, ağ trafiği 18'de 1.
+const COALESCE_WINDOW_MS = 5_000;
+let inFlight: Promise<PriceSnapshot> | null = null;
+let sonYanit: PriceSnapshot | null = null;
+let sonYanitZamani = 0;
+
+function fiyatlariCek(): Promise<PriceSnapshot> {
+  if (inFlight) return inFlight;
+  if (sonYanit && Date.now() - sonYanitZamani < COALESCE_WINDOW_MS) {
+    return Promise.resolve(sonYanit);
+  }
+  inFlight = (async () => {
+    const res = await fetch("/api/prices", { cache: "no-store" });
+    if (!res.ok) throw new Error(`status ${res.status}`);
+    const fresh: PriceSnapshot = await res.json();
+    sonYanit = fresh;
+    sonYanitZamani = Date.now();
+    return fresh;
+  })().finally(() => {
+    inFlight = null;
+  });
+  return inFlight;
 }
 
 export function useLivePrices<T = PriceSnapshot>(
@@ -54,11 +77,10 @@ export function useLivePrices<T = PriceSnapshot>(
 
   useEffect(() => {
     let cancelled = false;
-    const id = setInterval(async () => {
+
+    const yokla = async () => {
       try {
-        const res = await fetch("/api/prices", { cache: "no-store" });
-        if (!res.ok) throw new Error(`status ${res.status}`);
-        const fresh: PriceSnapshot = await res.json();
+        const fresh = await fiyatlariCek();
         if (cancelled) return;
         setData(selectRef.current(fresh));
         setLastSuccessAt(fresh.updatedAt);
@@ -69,7 +91,19 @@ export function useLivePrices<T = PriceSnapshot>(
         // "bu artık en güncel olmayabilir" diye bilgilendiriyoruz.
         if (!cancelled) setPollFailed(true);
       }
-    }, POLL_INTERVAL_MS);
+    };
+
+    // ÖNEMLİ: ilk yoklama HEMEN yapılıyor, 60 sn beklenmeden.
+    // Sayfa HTML'i Vercel CDN'inde tutuluyor (bkz. page.tsx revalidate),
+    // dolayısıyla ziyaretçiye gelen ilk boyama sunucu tarafında ÜRETİLDİĞİ
+    // ANDAKİ veriyi taşıyor. Yalnızca setInterval kurulduğunda bu eski
+    // değer tam bir dakika ekranda kalıyor ve yeterince eskiyse yanında
+    // "Veri gecikmeli" rozeti de görünüyordu — veri aslında tazeyken.
+    // Anında yoklama hem ekranı düzeltiyor hem de sunucudaki anlık görüntü
+    // yakalamasını tetikliyor (bkz. api/prices/route.ts).
+    void yokla();
+
+    const id = setInterval(yokla, POLL_INTERVAL_MS);
     return () => {
       cancelled = true;
       clearInterval(id);
