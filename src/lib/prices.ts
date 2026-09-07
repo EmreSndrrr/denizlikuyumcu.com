@@ -78,3 +78,17 @@ export type GoldChartData = {
   // takibi şu tarihten beri" şeffaflık notu için. Hiç kayıt yoksa null.
   historyStartedAt: string | null;
 };
+
+// Kaynağın (Truncgil) kendi bildirdiği güncelleme zamanı ile şimdi
+// arasındaki fark bunu aşarsa arayüzde "Veri gecikmeli" rozeti gösterilir.
+//
+// ÖNEMLİ (canlıda ölçüldü): Truncgil kendi verisini ~15 DAKİKADA BİR
+// güncelliyor (Update_Date hep çeyrek saat sınırında: 14:15:03, 14:30:03…).
+// Eşik 15 dakika olduğunda her döngünün sonunda, her şey normal çalışırken
+// rozet yanlışlıkla görünüyordu. 45 dakika = üç kaçırılmış kaynak döngüsü:
+// normal ritimde ASLA tetiklenmez, ama gerçek bir kesintiyi yakalar.
+//
+// Burada (client'ın da import edebildiği paylaşılan modülde) duruyor çünkü
+// iki taraf da aynı sayıya bakmak zorunda: rozeti gösteren hook ve
+// "yanıt vermeden önce yeni veri çek" kararını veren /api/prices.
+export const STALE_THRESHOLD_MS = 45 * 60 * 1000;

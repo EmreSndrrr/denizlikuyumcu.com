@@ -1,5 +1,6 @@
 import { NextResponse, after } from "next/server";
 import { getPrices } from "@/lib/prices.server";
+import { STALE_THRESHOLD_MS } from "@/lib/prices";
 import { captureIfStale } from "@/lib/snapshotCapture";
 
 // Bu dosya bir "Route Handler". app/api/prices/route.ts yolu otomatik
@@ -16,21 +17,43 @@ import { captureIfStale } from "@/lib/snapshotCapture";
 
 export const dynamic = "force-dynamic";
 
-export async function GET() {
-  const data = await getPrices();
+// Kayıt bu kadar eskiyse arayüz zaten "Veri gecikmeli" gösterecek demektir;
+// o noktada yakalamayı arka plana bırakmak kullanıcıyı bir sonraki yoklamaya
+// (60 sn) kadar yanlış bir uyarıyla baş başa bırakıyor. Eşiğin biraz
+// altından itibaren yakalamayı YANITTAN ÖNCE yapıyoruz, böylece dönen veri
+// zaten taze oluyor ve rozet hiç görünmüyor.
+const INLINE_CAPTURE_AFTER_MS = STALE_THRESHOLD_MS - 5 * 60 * 1000;
 
-  // Elimizdeki en yeni kayıt bayatlamışsa, YANIT GÖNDERİLDİKTEN SONRA
-  // (after) arka planda yeni bir anlık görüntü almayı dene. Bu, zamanlanmış
-  // tetikleyici atladığında geçmişin durmasını engelliyor — ayrıntılı
-  // gerekçe için bkz. lib/snapshotCapture.ts. Yanıt süresini etkilemez;
-  // hata olursa sessizce yutulur, kullanıcı isteği bundan etkilenmemeli.
-  after(async () => {
+export async function GET() {
+  let data = await getPrices();
+
+  const yas = Date.now() - new Date(data.sourceUpdatedAt).getTime();
+  const cokEski = Number.isFinite(yas) && yas > INLINE_CAPTURE_AFTER_MS;
+
+  if (cokEski) {
+    // Sessiz bir dönemin (gece, zamanlanmış görev atlamış) ardından gelen
+    // İLK istek: kısa bir gecikmeyi göze alıp taze veriyle dönüyoruz.
+    // Yanıt CDN'de 30 sn tutulduğu ve captureIfStale kendi soğuma süresini
+    // uyguladığı için bu maliyet arka arkaya tekrarlanmıyor.
     try {
-      await captureIfStale(data.sourceUpdatedAt);
+      const sonuc = await captureIfStale(data.sourceUpdatedAt);
+      if (sonuc.ok && !sonuc.skipped) data = await getPrices();
     } catch (err) {
-      console.error("[api/prices] arka plan anlık görüntü hatası:", err);
+      // Kaynak ulaşılamıyorsa eski veriyle devam — istek başarısız olmamalı.
+      console.error("[api/prices] eşzamanlı anlık görüntü hatası:", err);
     }
-  });
+  } else {
+    // Normal durum: yakalama YANIT GÖNDERİLDİKTEN SONRA (after) arka planda
+    // denenir, yanıt süresi etkilenmez. Ayrıntılı gerekçe için bkz.
+    // lib/snapshotCapture.ts.
+    after(async () => {
+      try {
+        await captureIfStale(data.sourceUpdatedAt);
+      } catch (err) {
+        console.error("[api/prices] arka plan anlık görüntü hatası:", err);
+      }
+    });
+  }
 
   return NextResponse.json(data, {
     headers: {

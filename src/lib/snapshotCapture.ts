@@ -39,8 +39,13 @@ export async function captureSnapshot(): Promise<CaptureResult> {
 
   let data: Record<string, unknown>;
   try {
+    // Zaman aşımı şart: bu fonksiyon artık /api/prices'tan YANIT ÖNCESİ de
+    // çağrılabiliyor (bkz. INLINE_CAPTURE_AFTER_MS). Kaynak yanıt vermezse
+    // ziyaretçinin isteği askıda kalmamalı — 4 sn sonra vazgeçip eski
+    // veriyle devam ediyoruz.
     const res = await fetch("https://finans.truncgil.com/today.json", {
       cache: "no-store",
+      signal: AbortSignal.timeout(4000),
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     data = (await res.json()) as Record<string, unknown>;
