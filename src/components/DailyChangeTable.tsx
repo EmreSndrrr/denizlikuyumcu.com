@@ -8,10 +8,10 @@
 import Link from "next/link";
 import { TrendUp, TrendDown } from "@phosphor-icons/react/dist/ssr";
 import type { PriceItem, PriceSnapshot } from "@/lib/prices";
-import { formatTL, formatTime } from "@/lib/format";
+import { formatTL } from "@/lib/format";
 import { useLivePrices } from "@/lib/useLivePrices";
 import { getPriceHref } from "@/lib/priceContent";
-import StaleBadge from "@/components/StaleBadge";
+import UpdatedAt from "@/components/UpdatedAt";
 
 const LIST_SIZE = 5;
 
@@ -20,7 +20,7 @@ export default function DailyChangeTable({
 }: {
   initialData: PriceSnapshot;
 }) {
-  const { data, stale } = useLivePrices(initialData);
+  const { data, stale, refreshing } = useLivePrices(initialData);
 
   // Sadece GERÇEKTEN yükselen/düşen kalemler listelenir. Önceden bütün
   // kalemler değişime göre sıralanıp en alttaki 5'i "Düşenler" diye
@@ -47,10 +47,12 @@ export default function DailyChangeTable({
             h3'üyle aynı hiyerarşi seviyesinde, başlık gezinmesinde
             görünsün diye gerçek bir heading elementi. */}
         <h3 className="text-sm font-semibold text-ink">Günlük Değişim</h3>
-        <span className="flex items-center gap-2 text-xs text-muted">
-          {stale && <StaleBadge />}
-          {formatTime(data.sourceUpdatedAt)} itibarıyla
-        </span>
+        <UpdatedAt
+          at={data.sourceUpdatedAt}
+          stale={stale}
+          refreshing={refreshing}
+          className="flex items-center gap-2 text-xs text-muted"
+        />
       </div>
       <div className="grid divide-y divide-border @lg:grid-cols-2 @lg:divide-x @lg:divide-y-0">
         <ChangeList

@@ -24,7 +24,7 @@ export default function PriceDetailCard({
   initialData: PriceSnapshot;
   history?: GoldHistoryPoint[];
 }) {
-  const { data, stale } = useLivePrices(initialData);
+  const { data, stale, refreshing } = useLivePrices(initialData);
   const item = data.items.find((i) => i.key === itemKey);
   const flashKeys = usePriceFlash(item ? [item] : []);
   if (!item) return null;
@@ -43,7 +43,7 @@ export default function PriceDetailCard({
     >
       <div className="flex items-center justify-between">
         <p className="text-sm font-medium text-white/60">{item.label}</p>
-        {stale && <StaleBadge />}
+        {stale && !refreshing && <StaleBadge />}
       </div>
 
       <p className="mt-2 text-4xl font-extrabold tabular-nums">
@@ -91,7 +91,9 @@ export default function PriceDetailCard({
       )}
 
       <p className="mt-3 text-xs text-white/50">
-        Son güncelleme: {formatTime(data.sourceUpdatedAt)}
+        {refreshing
+          ? "Fiyatlar güncelleniyor…"
+          : `Son güncelleme: ${formatTime(data.sourceUpdatedAt)}`}
       </p>
     </div>
   );

@@ -68,7 +68,7 @@ export default function PriceMarquee({
   // selectMain zaten modül seviyesinde sabit bir referans olduğu için
   // useCallback'e SARMAYA gerek yok — bu sadece gereksiz bir tekrar
   // sarmalamaydı, davranışı değiştirmez.
-  const { data } = useLivePrices(initialData, selectMain);
+  const { data, refreshing } = useLivePrices(initialData, selectMain);
   const [paused, setPaused] = useState(false);
 
   return (
@@ -96,13 +96,15 @@ export default function PriceMarquee({
           sm+ genişlikte görünür; ekran okuyucular için her zaman
           sr-only bir karşılığı var. */}
       <span className="sr-only">
-        Fiyatlar son {formatTime(data.sourceUpdatedAt)} itibarıyla güncellendi
+        {refreshing
+          ? "Fiyatlar güncelleniyor"
+          : `Fiyatlar son ${formatTime(data.sourceUpdatedAt)} itibarıyla güncellendi`}
       </span>
       <span
         aria-hidden="true"
         className="hidden shrink-0 items-center border-r border-white/10 px-3 text-[11px] tabular-nums text-white/50 sm:flex"
       >
-        {formatTime(data.sourceUpdatedAt)}
+        {refreshing ? "güncelleniyor…" : formatTime(data.sourceUpdatedAt)}
       </span>
       <div className="overflow-hidden">
         <div className="flex w-max animate-price-marquee">

@@ -24,7 +24,7 @@ export default function HeroGramAltinCard({
   initialData: PriceSnapshot;
   history: GoldHistoryPoint[];
 }) {
-  const { data, stale } = useLivePrices(initialData);
+  const { data, stale, refreshing } = useLivePrices(initialData);
   const gram = data.items.find((i) => i.key === "gram-altin");
   if (!gram) return null;
   const isUp = gram.changePercent >= 0;
@@ -33,7 +33,7 @@ export default function HeroGramAltinCard({
     <div className="w-full max-w-md rounded-[24px] border border-black/10 bg-surface-dark p-6 text-white shadow-xl">
       <div className="flex items-center justify-between">
         <p className="text-sm font-medium text-white/60">Gram Altın</p>
-        {stale && <StaleBadge />}
+        {stale && !refreshing && <StaleBadge />}
       </div>
 
       <p className="mt-2 text-4xl font-extrabold tabular-nums">
@@ -82,7 +82,9 @@ export default function HeroGramAltinCard({
       </div>
 
       <p className="mt-3 text-xs text-white/50">
-        Son güncelleme: {formatTime(data.sourceUpdatedAt)}
+        {refreshing
+          ? "Fiyatlar güncelleniyor…"
+          : `Son güncelleme: ${formatTime(data.sourceUpdatedAt)}`}
       </p>
     </div>
   );

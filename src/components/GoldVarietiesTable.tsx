@@ -25,11 +25,11 @@ import {
   type PriceSnapshot,
   type GoldHistoryPoint,
 } from "@/lib/prices";
-import { formatTL, formatTime } from "@/lib/format";
+import { formatTL } from "@/lib/format";
 import { useLivePrices } from "@/lib/useLivePrices";
 import { usePriceFlash } from "@/lib/usePriceFlash";
 import { getPriceHref } from "@/lib/priceContent";
-import StaleBadge from "@/components/StaleBadge";
+import UpdatedAt from "@/components/UpdatedAt";
 import Sparkline from "@/components/Sparkline";
 import AnimatedNumber from "@/components/AnimatedNumber";
 
@@ -67,7 +67,7 @@ export default function GoldVarietiesTable({
   initialData: PriceSnapshot;
   sparklines: Record<string, GoldHistoryPoint[]>;
 }) {
-  const { data, stale } = useLivePrices(initialData, selectAllGold);
+  const { data, stale, refreshing } = useLivePrices(initialData, selectAllGold);
   const flashKeys = usePriceFlash(data.items);
   const [sortKey, setSortKey] = useState<SortKey>("sell");
   const [sortDesc, setSortDesc] = useState(true);
@@ -141,10 +141,12 @@ export default function GoldVarietiesTable({
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-3">
         {/* Sayfa-seviyesi <SectionHeading> zaten bu bölümün h2'si. */}
         <p className="text-sm font-semibold text-ink">Tüm Altın Çeşitleri</p>
-        <span className="flex items-center gap-2 text-xs text-muted">
-          {stale && <StaleBadge />}
-          {formatTime(data.sourceUpdatedAt)} itibarıyla
-        </span>
+        <UpdatedAt
+          at={data.sourceUpdatedAt}
+          stale={stale}
+          refreshing={refreshing}
+          className="flex items-center gap-2 text-xs text-muted"
+        />
       </div>
 
       {/* Arama + kategori filtreleri */}

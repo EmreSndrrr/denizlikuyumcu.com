@@ -24,7 +24,7 @@ export default function GoldCalculator({
 }: {
   initialData: PriceSnapshot;
 }) {
-  const { data, stale } = useLivePrices(initialData);
+  const { data, stale, refreshing } = useLivePrices(initialData);
   const [mode, setMode] = useState<Mode>("product");
   const [priceSide, setPriceSide] = useState<"sell" | "buy">("sell");
 
@@ -60,7 +60,7 @@ export default function GoldCalculator({
               tekrar bir başlık elementi açmıyoruz (yinelenen heading olmasın). */}
           <p className="text-base font-semibold text-ink">Altın Hesaplama Aracı</p>
         </div>
-        {stale && <StaleBadge />}
+        {stale && !refreshing && <StaleBadge />}
       </div>
 
       <div className="p-4">

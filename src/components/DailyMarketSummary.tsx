@@ -10,9 +10,9 @@
 
 import { TrendUp, TrendDown } from "@phosphor-icons/react/dist/ssr";
 import type { PriceSnapshot } from "@/lib/prices";
-import { formatTL, formatTime } from "@/lib/format";
+import { formatTL } from "@/lib/format";
 import { useLivePrices } from "@/lib/useLivePrices";
-import StaleBadge from "@/components/StaleBadge";
+import UpdatedAt from "@/components/UpdatedAt";
 import Reveal from "@/components/Reveal";
 
 export default function DailyMarketSummary({
@@ -20,7 +20,7 @@ export default function DailyMarketSummary({
 }: {
   initialData: PriceSnapshot;
 }) {
-  const { data, stale } = useLivePrices(initialData);
+  const { data, stale, refreshing } = useLivePrices(initialData);
   const sorted = [...data.items].sort((a, b) => b.changePercent - a.changePercent);
   const topGainer = sorted[0];
   // Gerçekten düşen kalem varsa onu göster; yoksa (her şey artıda/sabit
@@ -37,10 +37,12 @@ export default function DailyMarketSummary({
     <div className="rounded-2xl border border-border bg-surface px-4 py-4 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-sm font-semibold text-ink">Bugün ne değişti?</p>
-        <span className="flex items-center gap-2 text-xs text-muted">
-          {stale && <StaleBadge />}
-          {formatTime(data.sourceUpdatedAt)} itibarıyla
-        </span>
+        <UpdatedAt
+          at={data.sourceUpdatedAt}
+          stale={stale}
+          refreshing={refreshing}
+          className="flex items-center gap-2 text-xs text-muted"
+        />
       </div>
       <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-4">
         <SummaryItem
