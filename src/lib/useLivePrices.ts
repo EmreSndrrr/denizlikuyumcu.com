@@ -64,6 +64,20 @@ export function useLivePrices<T = PriceSnapshot>(
   // hook her select fonksiyonuyla çalışsın).
   const [sourceUpdatedAt, setSourceUpdatedAt] = useState(initialData.sourceUpdatedAt);
   const [pollFailed, setPollFailed] = useState(false);
+  const [ilkYoklamaBitti, setIlkYoklamaBitti] = useState(false);
+  // SSR verisi mount anında ZATEN eski miydi? Bu, sayfanın CDN'de donmuş
+  // olduğu anlamına gelir (gece trafik yok → ISR girdisi tazelenmemiş).
+  //
+  // DİKKAT: bu ölçüm RENDER sırasında yapılamaz. Sayfa CDN'de tutulduğu
+  // için sunucu render'ı ile tarayıcıdaki hidrasyon arasında saatler
+  // geçebiliyor: sunucu "taze" der, istemci aynı veriye "eski" der ve
+  // ortaya bir hidrasyon uyuşmazlığı çıkar. Bu yüzden başlangıç değeri
+  // sunucuyla AYNI (false) ve gerçek ölçüm mount'tan sonra yapılıyor.
+  const [ssrVerisiEskiydi, setSsrVerisiEskiydi] = useState(false);
+  // Sunucudan gelen ilk zaman damgasını sabitliyoruz: aşağıdaki effect
+  // yalnızca mount'ta çalışsın diye bağımlılığı değişmeyen bir değer olmalı.
+  // Düz bir string olduğu için sunucu ve istemcide aynı — uyuşmazlık yok.
+  const [ilkKaynakZamani] = useState(initialData.sourceUpdatedAt);
   const selectRef = useRef(select);
   // Render sırasında ref'e YAZMIYORUZ (React'in eşzamanlı render
   // modelinde güvenli değil) — bunun yerine her render sonrasında çalışan,
@@ -90,8 +104,23 @@ export function useLivePrices<T = PriceSnapshot>(
         // Ağ hatasında eski veriyi göstermeye devam ediyoruz ama kullanıcıyı
         // "bu artık en güncel olmayabilir" diye bilgilendiriyoruz.
         if (!cancelled) setPollFailed(true);
+      } finally {
+        // Başarılı da olsa başarısız da olsa ilk yoklama artık sonuçlandı:
+        // bundan sonra ekranda gerçek durum gösterilir.
+        if (!cancelled) setIlkYoklamaBitti(true);
       }
     };
+
+    // Bayatlık ölçümü mount'tan SONRA, mikro görevde yapılıyor: render
+    // sırasında Date.now() okumadığımız için ilk istemci render'ı
+    // sunucununkiyle birebir aynı oluyor (yukarıdaki nota bakınız).
+    // Mikro görev boyamadan önce işlendiğinden kullanıcı eski saati
+    // pratikte görmüyor.
+    queueMicrotask(() => {
+      if (!cancelled && isSourceStale(ilkKaynakZamani)) {
+        setSsrVerisiEskiydi(true);
+      }
+    });
 
     // ÖNEMLİ: ilk yoklama HEMEN yapılıyor, 60 sn beklenmeden.
     // Sayfa HTML'i Vercel CDN'inde tutuluyor (bkz. page.tsx revalidate),
@@ -108,7 +137,7 @@ export function useLivePrices<T = PriceSnapshot>(
       cancelled = true;
       clearInterval(id);
     };
-  }, []);
+  }, [ilkKaynakZamani]);
 
   // "Veri gecikmeli": ya yoklama başarısız oluyor, ya da kaynağın KENDİ
   // güncelleme zamanı eşiği aşmış — ikincisi, yoklama teknik olarak
@@ -116,5 +145,16 @@ export function useLivePrices<T = PriceSnapshot>(
   // veritabanı eskiyen kaydı sorunsuzca döndürmeye devam ediyor).
   const stale = pollFailed || isSourceStale(sourceUpdatedAt);
 
-  return { data, stale, lastSuccessAt, sourceUpdatedAt };
+  // "refreshing": sayfa CDN'den ESKİ veriyle geldi ve ilk yoklama henüz
+  // sonuçlanmadı. Bu pencerede saati ("09:00 itibarıyla") ve gecikme
+  // rozetini göstermek kullanıcıya sitenin bozuk/terk edilmiş olduğunu
+  // düşündürüyor — oysa veri saniyeler içinde tazelenecek (canlıda
+  // bildirilen deneyim tam olarak buydu). Bunun yerine bileşenler kısa bir
+  // "güncelleniyor" ifadesi gösteriyor.
+  //
+  // SSR verisi tazeyken bu bayrak HİÇ açılmaz: normal durumda gereksiz bir
+  // yükleme titremesi oluşmasın diye.
+  const refreshing = ssrVerisiEskiydi && !ilkYoklamaBitti;
+
+  return { data, stale, refreshing, lastSuccessAt, sourceUpdatedAt };
 }

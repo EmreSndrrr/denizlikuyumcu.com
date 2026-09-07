@@ -46,7 +46,7 @@ export default function PriceTicker({
     (s: PriceSnapshot) => filterSnapshot(s, filterType),
     [filterType]
   );
-  const { data, stale } = useLivePrices(initialData, select);
+  const { data, stale, refreshing } = useLivePrices(initialData, select);
   const flashKeys = usePriceFlash(data.items);
 
   // Izgara sütun sayısı öğe sayısına göre: sabit sütun sayısı kalanlı
@@ -78,14 +78,22 @@ export default function PriceTicker({
             değiştiği için aria-live yapmıyoruz — aksi halde ekran okuyucu
             kullanıcıları dakikada bir gereksiz yere kesintiye uğrardı. */}
         <span className="flex items-center gap-2 text-xs text-muted">
-          {stale && <StaleBadge />}
-          <span className="flex items-center gap-2">
-            <span
-              aria-hidden="true"
-              className="h-1.5 w-1.5 rounded-full bg-positive animate-pulse motion-reduce:animate-none"
-            />
-            {formatTime(data.sourceUpdatedAt)} itibarıyla
-          </span>
+          {refreshing ? (
+            // Sayfa CDN'den eski veriyle geldi ve ilk yoklama sürüyor —
+            // saat göstermek yanıltıcı olurdu (bkz. useLivePrices).
+            <span>Fiyatlar güncelleniyor…</span>
+          ) : (
+            <>
+              {stale && <StaleBadge />}
+              <span className="flex items-center gap-2">
+                <span
+                  aria-hidden="true"
+                  className="h-1.5 w-1.5 rounded-full bg-positive animate-pulse motion-reduce:animate-none"
+                />
+                {formatTime(data.sourceUpdatedAt)} itibarıyla
+              </span>
+            </>
+          )}
         </span>
       </div>
       <div className={"grid gap-px overflow-hidden rounded-b-2xl bg-border " + gridClass}>

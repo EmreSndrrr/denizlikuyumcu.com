@@ -17,7 +17,7 @@ export default function OnsAltinCard({
 }: {
   initialData: PriceSnapshot;
 }) {
-  const { data, stale } = useLivePrices(initialData);
+  const { data, stale, refreshing } = useLivePrices(initialData);
   const ons = data.items.find((i) => i.key === "ons-altin");
   if (!ons) return null;
   const isUp = ons.changePercent >= 0;
@@ -42,7 +42,7 @@ export default function OnsAltinCard({
       </div>
       <div className="text-right">
         <div className="flex items-center justify-end gap-2">
-          {stale && <StaleBadge />}
+          {stale && !refreshing && <StaleBadge />}
           <p
             className={
               "flex items-center gap-1 text-sm font-semibold tabular-nums " +
@@ -58,7 +58,9 @@ export default function OnsAltinCard({
           </p>
         </div>
         <p className="mt-0.5 text-xs text-muted/70">
-          {formatTime(data.sourceUpdatedAt)} itibarıyla
+          {refreshing
+            ? "Fiyatlar güncelleniyor…"
+            : `${formatTime(data.sourceUpdatedAt)} itibarıyla`}
         </p>
       </div>
     </div>
