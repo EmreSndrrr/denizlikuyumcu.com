@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import TrackedLink from "@/components/TrackedLink";
+import CookiePreferencesLink from "@/components/CookiePreferencesLink";
 
 export default function Footer() {
   return (
@@ -56,6 +57,9 @@ export default function Footer() {
               <li><Link href="/kullanim-kosullari" className="hover:text-brand">Kullanım Koşulları</Link></li>
               <li><Link href="/kvkk" className="hover:text-brand">KVKK</Link></li>
               <li><Link href="/cerez-politikasi" className="hover:text-brand">Çerez Politikası</Link></li>
+              {/* Verilen çerez onayının geri alınabilmesi için (KVKK m. 7).
+                  Seçim yapılmamışken kendini gizler. */}
+              <li><CookiePreferencesLink /></li>
             </ul>
           </div>
           <div>
