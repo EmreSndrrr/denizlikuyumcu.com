@@ -29,9 +29,12 @@ export default function KvkkPage() {
       </div>
       <h2>İşlenen kişisel veri</h2>
       <p>
-        Site üzerinde bir üyelik/hesap sistemi veya çerez tabanlı takip
-        bulunmamaktadır. Site, ziyaretçilerden yalnızca aşağıdaki iki durumda
-        ve verdiğiniz kadarıyla kişisel veri işler:
+        Site üzerinde bir üyelik/hesap sistemi bulunmamaktadır. Çerez tabanlı
+        ziyaretçi istatistiği (Google Analytics) yalnızca çerez bildiriminde
+        <strong> açık rıza</strong> vermeniz hâlinde devreye girer; rıza
+        vermezseniz ilgili betik hiç yüklenmez. Bunun dışında site,
+        ziyaretçilerden yalnızca aşağıdaki iki durumda ve verdiğiniz
+        kadarıyla kişisel veri işler:
       </p>
       <ul>
         <li>
@@ -52,7 +55,12 @@ export default function KvkkPage() {
         güvenlik amaçlarıyla tutulabilir. Ayrıca <strong>Vercel Web
         Analytics</strong> ile çerezsiz, anonim ziyaretçi istatistiği
         (sayfa görüntüleme, ülke, cihaz türü) toplanır — bu veriden kimliği
-        belirli bir kişiye ulaşılamaz.
+        belirli bir kişiye ulaşılamaz. Açık rıza vermeniz hâlinde ayrıca{" "}
+        <strong>Google Analytics 4</strong> çalışır; bu araç tarayıcınıza
+        çerez yazarak cihazınıza rastgele bir tanımlayıcı atar ve sayfa
+        gezinmelerinizi bu tanımlayıcıyla ilişkilendirir. Rızanızı sayfanın
+        altındaki <strong>Çerez Tercihleri</strong> bağlantısından
+        istediğiniz zaman geri alabilirsiniz (KVKK m. 7).
       </p>
       <h2>İşleme amacı ve hukuki sebep</h2>
       <p>
@@ -75,7 +83,10 @@ export default function KvkkPage() {
         (e-posta altyapı sağlayıcısı) aracılığıyla iletilir; site{" "}
         <strong>Vercel</strong> altyapısında barındırılır ve ziyaretçi
         istatistiği <strong>Vercel Web Analytics</strong> ile (çerezsiz,
-        anonim) tutulur. Bu sağlayıcıların sunucuları yurt dışında
+        anonim) tutulur. Açık rıza vermeniz hâlinde <strong>Google Ireland
+        Limited</strong> (Google Analytics) da bu sağlayıcılara eklenir ve
+        veriler bu kapsamda yurt dışına aktarılır. Bu sağlayıcıların
+        sunucuları yurt dışında
         bulunabilir; verileriniz yalnızca hizmetin teknik olarak
         sağlanabilmesi için ve bu amaçla sınırlı olarak işlenir. Bunun
         dışında kişisel verileriniz üçüncü kişilerle paylaşılmaz, satılmaz.

@@ -14,7 +14,9 @@ export default function GizlilikPolitikasiPage() {
       <p>
         Bu sayfa, DenizliKuyumcu.com&apos;u kullanırken hangi verilerin nasıl
         işlendiğini basit bir dille açıklar. Sitede bir kullanıcı hesabı
-        sistemi veya çerez tabanlı takip yoktur; kişisel veri yalnızca{" "}
+        sistemi yoktur. Çerez tabanlı ziyaretçi istatistiği (Google
+        Analytics) yalnızca <strong>açık onay verirseniz</strong> çalışır;
+        bunun dışında kişisel veri yalnızca{" "}
         <a href="/bilgi-talebi">Bilgi Talebi formunu</a> doldurursanız ya da
         bize doğrudan yazarsanız işlenir.
       </p>
@@ -66,6 +68,20 @@ export default function GizlilikPolitikasiPage() {
         alanlarımızın erişimini olası reklamverenlere gösterebilmek için
         kullanılır ve üçüncü kişilere satılmaz.
       </p>
+      <h2>Google Analytics (onayınıza bağlı)</h2>
+      <p>
+        Daha ayrıntılı kullanım ölçümü için <strong>Google Analytics 4</strong>{" "}
+        kullanıyoruz. Bu araç Vercel Web Analytics&apos;ten farklı olarak
+        tarayıcınıza çerez yazar ve cihazınıza rastgele bir tanımlayıcı
+        atar; bu yüzden <strong>yalnızca çerez bildiriminde açık onay
+        verirseniz</strong> yüklenir. Onay vermezseniz betik tarayıcınıza
+        hiç indirilmez. Onayınızı sayfanın altındaki{" "}
+        <strong>Çerez Tercihleri</strong> bağlantısından istediğiniz zaman
+        geri alabilirsiniz. Toplanan veriler Google Ireland Limited
+        tarafından işlenir ve yurt dışına aktarılır; ayrıntılı çerez listesi
+        için <a href="/cerez-politikasi">Çerez Politikası</a>&apos;na
+        bakabilirsiniz.
+      </p>
       <h2>Reklam gösterimi</h2>
       <p>
         Sitede yer alan &quot;Sponsorlu&quot; kuyumcu kartları ve reklam
@@ -81,7 +97,8 @@ export default function GizlilikPolitikasiPage() {
         ziyaretçinin herhangi bir kişisel verisi bu isteğe dahil edilmez
         (bkz. <a href="/veri-kaynaklari">Veri Kaynakları</a>). Bilgi Talebi
         formu gönderimleri e-posta olarak Resend altyapısıyla iletilir. Site{" "}
-        <strong>Vercel</strong> üzerinde barındırılır.
+        <strong>Vercel</strong> üzerinde barındırılır. Onay vermeniz hâlinde{" "}
+        <strong>Google</strong> (Analytics) da bu listeye eklenir.
       </p>
       <p>
         Kişisel verilerin işlenmesine ilişkin yasal çerçeve için{" "}

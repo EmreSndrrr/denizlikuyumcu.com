@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import PriceMarquee from "@/components/PriceMarquee";
 import PageTransition from "@/components/PageTransition";
 import CookieConsentBanner from "@/components/CookieConsentBanner";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import SkipLink from "@/components/SkipLink";
 import { getPrices } from "@/lib/prices.server";
 
@@ -103,6 +104,11 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             (bkz. /gizlilik-politikasi). Vercel panelinden Analytics'in
             ayrıca etkinleştirilmesi gerekir. */}
         <Analytics />
+        {/* Google Analytics 4 — Vercel Analytics'ten farklı olarak ÇEREZ
+            yazar, bu yüzden yalnızca çerez bildiriminde açık onay
+            verildiyse yüklenir (bkz. components/GoogleAnalytics.tsx ve
+            lib/consent.ts). Onay yoksa hiçbir betik indirilmez. */}
+        <GoogleAnalytics />
       </body>
     </html>
   );
