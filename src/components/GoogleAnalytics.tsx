@@ -12,19 +12,8 @@
 // Vercel Web Analytics (layout.tsx) ayrı bir araç ve çerezsiz çalıştığı
 // için onaydan bağımsız olarak yüklenmeye devam ediyor.
 
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
 import Script from "next/script";
 import { useConsent } from "@/lib/consent";
-
-type GtagFn = (...args: unknown[]) => void;
-
-declare global {
-  interface Window {
-    dataLayer?: unknown[];
-    gtag?: GtagFn;
-  }
-}
 
 // Ölçüm kimliği gizli bir değer değil — istemciye gönderilen her sayfada
 // zaten görünür. Bu yüzden ortam değişkeni yerine burada duruyor.
@@ -52,49 +41,26 @@ export default function GoogleAnalytics() {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });
+          gtag('config', '${GA_MEASUREMENT_ID}');
         `}
       </Script>
-      <PageViewTracker />
     </>
   );
 }
 
-// Sayfa görüntülemelerini BİZ gönderiyoruz; yukarıdaki config'de
-// send_page_view kapalı.
+// SAYFA GÖRÜNTÜLEMELERİ — burada elle page_view GÖNDERİLMİYOR, bilerek.
 //
-// Neden: App Router istemci tarafı gezinmede tam sayfa yüklemesi yapmaz,
-// History API kullanır. Yerelde ölçüldü — varsayılan kurulumda ilk açılışta
-// bir page_view gidiyor, sonraki gezinmelerde HİÇBİR isabet gitmiyordu.
-// Yani ziyaretçinin yalnızca siteye girdiği ilk sayfa sayılıyordu.
+// App Router istemci tarafı gezinmede tam sayfa yüklemesi yapmaz, History
+// API kullanır. Bu yüzden önce "gezinmeleri biz sayalım" diye elle
+// gönderim eklenmişti; canlıda ölçünce her gezinme için GA'ya İKİ page_view
+// gittiği görüldü (_s sıra numaraları 4 ve 5). dataLayer izlenerek bunun
+// yalnızca biri bizden, diğeri doğrudan gtag.js'ten geldiği doğrulandı:
+// GA4 mülkünde "Gelişmiş ölçüm > tarayıcı geçmişi olaylarına dayalı sayfa
+// değişiklikleri" açık ve gezinmeleri zaten kendisi sayıyor. Elle gönderim
+// yalnızca çift sayım üretiyordu.
 //
-// GA4'ün "Gelişmiş ölçüm > tarayıcı geçmişi olayları" ayarına bel
-// bağlamak yerine gönderimi elle yapıyoruz: ayar açık da olsa kapalı da
-// olsa her yol değişiminde tam olarak bir page_view gider, çift sayım
-// olmaz.
-function PageViewTracker() {
-  const pathname = usePathname();
-
-  useEffect(() => {
-    // useSearchParams BİLİNÇLİ olarak kullanılmıyor: App Router'da bir
-    // client component'te çağrıldığında Suspense sınırı gerektiriyor ve
-    // statik sayfaları istemci render'ına düşürüyor. Yol değişimini
-    // izlemek için pathname yeterli; adresin sorgu dizisi dahil tam hâli
-    // zaten aşağıda location.href ile gönderiliyor.
-    const gtag: GtagFn =
-      window.gtag ??
-      ((...args: unknown[]) => {
-        // Betikler henüz yüklenmediyse kuyruğa yaz; gtag.js yüklenince
-        // dataLayer'daki bu kayıtları işler.
-        window.dataLayer = window.dataLayer ?? [];
-        window.dataLayer.push(args);
-      });
-
-    gtag("event", "page_view", {
-      page_location: window.location.href,
-      page_title: document.title,
-    });
-  }, [pathname]);
-
-  return null;
-}
+// DİKKAT: Bu kurulum GA panelindeki o ayara bağlı. Gelişmiş ölçüm (ya da
+// içindeki "sayfa değişiklikleri" maddesi) kapatılırsa istemci tarafı
+// gezinmeler sayılmaz — yalnızca ziyaretçinin girdiği ilk sayfa görünür.
+// O durumda buraya pathname'i izleyen bir page_view göndericisi eklenmeli
+// ve config'e send_page_view: false konmalıdır.
