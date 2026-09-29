@@ -19,7 +19,7 @@ export const faqItems: FaqItem[] = [
   {
     question: "Gram altın bugün ne kadar?",
     answer:
-      "Gram altının güncel alış ve satış fiyatını sayfanın üst kısmındaki fiyat şeridinden ve anasayfadaki fiyat tablosundan canlı olarak görebilirsiniz; veriler yaklaşık her 60 saniyede bir tazelenir. Gösterilen rakam bilgilendirme amaçlıdır, kesin işlem fiyatı için kuyumcunuzla teyitleşin.",
+      "Gram altının güncel alış ve satış fiyatını sayfanın üst kısmındaki fiyat şeridinden ve anasayfadaki fiyat tablosundan canlı olarak görebilirsiniz; veriler kaynağında piyasa açıkken yaklaşık 15 dakikada bir güncellenir. Gösterilen rakam bilgilendirme amaçlıdır, kesin işlem fiyatı için kuyumcunuzla teyitleşin.",
     href: "/rehber/gram-altin-bugun-ne-kadar",
     home: true,
   },
@@ -97,7 +97,7 @@ export const faqItems: FaqItem[] = [
   {
     question: "Sitedeki altın ve döviz fiyatları ne sıklıkla güncelleniyor?",
     answer:
-      "Fiyatlar otomatik olarak periyodik aralıklarla (yaklaşık her 60 saniyede bir) tazelenir ve sayfa üzerinde 'son güncelleme' saatiyle gösterilir. Piyasa anlık hareket edebileceğinden, kesin işlem öncesi kuyumcunuzla teyitleşmenizi öneririz.",
+      "Fiyatlar finans.truncgil.com kaynağından alınır; kaynak verisini piyasa açıkken yaklaşık 15 dakikada bir günceller. Sayfa yeni veri olup olmadığını dakikada bir kontrol eder ve her bölümde kaynağın bildirdiği 'son güncelleme' saatini gösterir. Hafta sonu ve resmî tatillerde piyasa kapalı olduğundan fiyat değişmeyebilir. Piyasa anlık hareket edebileceğinden, kesin işlem öncesi kuyumcunuzla teyitleşmenizi öneririz.",
   },
   {
     question: "Sitede gösterilen fiyatla kuyumcudaki fiyat neden farklı olabilir?",

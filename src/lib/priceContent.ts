@@ -49,7 +49,7 @@ export const priceContent: PriceContentEntry[] = [
     intro:
       "Gram altın, has değeri en yüksek ve en kolay nakde çevrilebilen altın türlerinden biridir. Aşağıda Denizli gram altın fiyatını canlı olarak, alış ve satış olmak üzere ayrı ayrı görebilirsiniz.",
     summary:
-      "Denizli gram altın fiyatı, güncel piyasa koşullarına göre saniyeler içinde değişebilen, Türkiye'nin en çok takip edilen yatırım araçlarından biridir. Gram altın fiyatı temelde iki değişkene bağlıdır: uluslararası ons altın fiyatı ve dolar/TL kuru; bu ikisinin çarpımı yaklaşık 31,1'e bölünerek gram altın değeri elde edilir. Denizli'de gram altın alıp satan kuyumcular da bu referans fiyatın üzerine kendi işçilik ve kâr marjlarını ekler, bu yüzden kuyumcudan kuyumcuya küçük farklar görmeniz normaldir. Bu sayfada gram altın fiyatını alış ve satış olarak ayrı ayrı, yaklaşık her 60 saniyede bir güncellenen canlı verilerle takip edebilir, aynı zamanda aşağıdaki hesaplama aracıyla elinizdeki gram miktarının güncel karşılığını anında öğrenebilirsiniz. Yatırım kararı vermeden önce güncel fiyatı mutlaka kuyumcunuzla teyit edin.",
+      "Denizli gram altın fiyatı, güncel piyasa koşullarına göre saniyeler içinde değişebilen, Türkiye'nin en çok takip edilen yatırım araçlarından biridir. Gram altın fiyatı temelde iki değişkene bağlıdır: uluslararası ons altın fiyatı ve dolar/TL kuru; bu ikisinin çarpımı yaklaşık 31,1'e bölünerek gram altın değeri elde edilir. Denizli'de gram altın alıp satan kuyumcular da bu referans fiyatın üzerine kendi işçilik ve kâr marjlarını ekler, bu yüzden kuyumcudan kuyumcuya küçük farklar görmeniz normaldir. Bu sayfada gram altın fiyatını alış ve satış olarak ayrı ayrı, kaynağında yaklaşık 15 dakikada bir güncellenen canlı verilerle takip edebilir, aynı zamanda aşağıdaki hesaplama aracıyla elinizdeki gram miktarının güncel karşılığını anında öğrenebilirsiniz. Yatırım kararı vermeden önce güncel fiyatı mutlaka kuyumcunuzla teyit edin.",
     sections: [
       {
         heading: "Gram Altın Nedir?",
@@ -57,7 +57,7 @@ export const priceContent: PriceContentEntry[] = [
       },
       {
         heading: "Gram Altın Fiyatını Ne Belirler?",
-        body: "Gram altın fiyatı iki ana bileşenden oluşur: uluslararası piyasada dolar bazında işlem gören ons altın fiyatı ve o anki dolar/TL kuru. Ons altındaki bir yükseliş veya dolar kurundaki bir artış, gram altın fiyatını doğrudan yukarı çeker. Bu yüzden Denizli'de gram altın fiyatını takip ederken yalnızca yerel arz-talebe değil, küresel piyasalara ve kur hareketlerine de bakmak gerekir. Sayfamızdaki fiyat, bu iki bileşenin güncel yansımasıdır ve yaklaşık her 60 saniyede bir tazelenir.",
+        body: "Gram altın fiyatı iki ana bileşenden oluşur: uluslararası piyasada dolar bazında işlem gören ons altın fiyatı ve o anki dolar/TL kuru. Ons altındaki bir yükseliş veya dolar kurundaki bir artış, gram altın fiyatını doğrudan yukarı çeker. Bu yüzden Denizli'de gram altın fiyatını takip ederken yalnızca yerel arz-talebe değil, küresel piyasalara ve kur hareketlerine de bakmak gerekir. Sayfamızdaki fiyat, bu iki bileşenin güncel yansımasıdır ve kaynağında piyasa açıkken yaklaşık 15 dakikada bir güncellenir.",
       },
       {
         heading: "Denizli'de Gram Altın Alırken Nelere Dikkat Edilmeli?",
@@ -115,7 +115,7 @@ export const priceContent: PriceContentEntry[] = [
     intro:
       "Yarım altın, çeyrek altının iki katı ağırlığındaki ziynet altınıdır ve orta büyüklükteki hediye/yatırım ihtiyaçları için tercih edilir. Güncel Denizli yarım altın fiyatını aşağıda bulabilirsiniz.",
     summary:
-      "Denizli yarım altın fiyatı, çeyrek altının tam iki katı ağırlığındaki ziynet altınının güncel piyasa karşılığıdır. Yaklaşık 3,5 gram has altın içeren yarım altın, hem hediye hem de orta ölçekli yatırım ihtiyaçları için tercih edilir ve fiyatı gram altın fiyatının yaklaşık 3,5 katına yakın seyreder. Türkiye genelinde yarım altın fiyatı arandığında çıkan rakamlar piyasa ortalamasını yansıtır; Denizli'deki kuyumcularda işçilik ve talebe bağlı küçük farklar görülebilir. Bu sayfada yarım altın alış/satış fiyatını gram altınla birlikte, yaklaşık her dakika yenilenen canlı verilerle takip edebilir, elinizdeki veya almayı düşündüğünüz yarım altın adedinin güncel TL karşılığını hesaplama aracıyla anında görebilirsiniz. Fiyatlar bilgilendirme amaçlıdır; kesin alım-satım için kuyumcuyla iletişime geçilmesi önerilir.",
+      "Denizli yarım altın fiyatı, çeyrek altının tam iki katı ağırlığındaki ziynet altınının güncel piyasa karşılığıdır. Yaklaşık 3,5 gram has altın içeren yarım altın, hem hediye hem de orta ölçekli yatırım ihtiyaçları için tercih edilir ve fiyatı gram altın fiyatının yaklaşık 3,5 katına yakın seyreder. Türkiye genelinde yarım altın fiyatı arandığında çıkan rakamlar piyasa ortalamasını yansıtır; Denizli'deki kuyumcularda işçilik ve talebe bağlı küçük farklar görülebilir. Bu sayfada yarım altın alış/satış fiyatını gram altınla birlikte, kaynağında yaklaşık 15 dakikada bir güncellenen canlı verilerle takip edebilir, elinizdeki veya almayı düşündüğünüz yarım altın adedinin güncel TL karşılığını hesaplama aracıyla anında görebilirsiniz. Fiyatlar bilgilendirme amaçlıdır; kesin alım-satım için kuyumcuyla iletişime geçilmesi önerilir.",
     sections: [
       {
         heading: "Yarım Altın Kaç Gram?",
@@ -369,7 +369,7 @@ export const priceContent: PriceContentEntry[] = [
     intro:
       "Tam Ata, Ata Lirası serisinin en büyük gramajlı üyesidir. Denizli tam Ata altın fiyatını aşağıda canlı olarak görebilirsiniz.",
     summary:
-      "Denizli tam Ata altın fiyatı, Ata Lirası serisinin en büyük gramajlı üyesinin güncel piyasa karşılığıdır. Yaklaşık 7 gram has altın içeren tam Ata, tam Cumhuriyet altınına yakın bir gramaja sahiptir ve Osmanlı dönemi sultan tasvirleriyle basılan bu seri hem yatırım hem koleksiyon amaçlı yoğun talep görür. Tam Ata ile tam Cumhuriyet altını benzer has değere sahip olsa da tercih genellikle koleksiyon ilgisine veya kuyumcunun elindeki stoğa göre şekillenir. Yüksek gramajı nedeniyle tam Ata, büyük hediyelerde ve toplu yatırımlarda tercih edilir. Bu sayfadaki tam Ata fiyatı, finans.truncgil.com kaynağından doğrudan (türetme olmadan) çekilir ve yaklaşık her 60 saniyede bir güncellenir; alış/satış fiyatını canlı olarak takip edebilir, hesaplama aracıyla güncel TL karşılığını öğrenebilirsiniz.",
+      "Denizli tam Ata altın fiyatı, Ata Lirası serisinin en büyük gramajlı üyesinin güncel piyasa karşılığıdır. Yaklaşık 7 gram has altın içeren tam Ata, tam Cumhuriyet altınına yakın bir gramaja sahiptir ve Osmanlı dönemi sultan tasvirleriyle basılan bu seri hem yatırım hem koleksiyon amaçlı yoğun talep görür. Tam Ata ile tam Cumhuriyet altını benzer has değere sahip olsa da tercih genellikle koleksiyon ilgisine veya kuyumcunun elindeki stoğa göre şekillenir. Yüksek gramajı nedeniyle tam Ata, büyük hediyelerde ve toplu yatırımlarda tercih edilir. Bu sayfadaki tam Ata fiyatı, finans.truncgil.com kaynağından doğrudan (türetme olmadan) çekilir ve kaynağında piyasa açıkken yaklaşık 15 dakikada bir güncellenir; alış/satış fiyatını canlı olarak takip edebilir, hesaplama aracıyla güncel TL karşılığını öğrenebilirsiniz.",
     sections: [
       {
         heading: "Tam Ata Kaç Gram?",
@@ -457,7 +457,7 @@ export const priceContent: PriceContentEntry[] = [
     intro:
       "Tam Reşat, Reşat Altını serisinin en büyük gramajlı üyesidir. Denizli tam Reşat altın fiyatını aşağıda canlı olarak görebilirsiniz.",
     summary:
-      "Denizli tam Reşat altın fiyatı, Reşat Altını serisinin en büyük gramajlı ve en yüksek koleksiyon değerine sahip üyesinin güncel karşılığıdır. Yaklaşık 7 gram has altın içeren tam Reşat, Sultan V. Mehmed Reşad dönemi tasarımıyla basılmıştır ve hem yatırım hem koleksiyon amaçlı yüksek talep görür; tarihi tasarımı nedeniyle bazı dönemlerde has altın değerinin üzerinde küçük bir prim oluşabilir. Yüksek gramajı nedeniyle tam Reşat, büyük hediyelerde ve toplu yatırımlarda tercih edilir. Bu sayfadaki tam Reşat fiyatı, finans.truncgil.com kaynağından doğrudan (türetme olmadan) çekilir ve yaklaşık her 60 saniyede bir güncellenir; alış/satış fiyatını canlı olarak takip edebilir, hesaplama aracıyla güncel TL karşılığını öğrenebilirsiniz. Kesin fiyat için kuyumcunuzla görüşmenizi öneririz.",
+      "Denizli tam Reşat altın fiyatı, Reşat Altını serisinin en büyük gramajlı ve en yüksek koleksiyon değerine sahip üyesinin güncel karşılığıdır. Yaklaşık 7 gram has altın içeren tam Reşat, Sultan V. Mehmed Reşad dönemi tasarımıyla basılmıştır ve hem yatırım hem koleksiyon amaçlı yüksek talep görür; tarihi tasarımı nedeniyle bazı dönemlerde has altın değerinin üzerinde küçük bir prim oluşabilir. Yüksek gramajı nedeniyle tam Reşat, büyük hediyelerde ve toplu yatırımlarda tercih edilir. Bu sayfadaki tam Reşat fiyatı, finans.truncgil.com kaynağından doğrudan (türetme olmadan) çekilir ve kaynağında piyasa açıkken yaklaşık 15 dakikada bir güncellenir; alış/satış fiyatını canlı olarak takip edebilir, hesaplama aracıyla güncel TL karşılığını öğrenebilirsiniz. Kesin fiyat için kuyumcunuzla görüşmenizi öneririz.",
     sections: [
       {
         heading: "Tam Reşat Kaç Gram?",
@@ -485,7 +485,7 @@ export const priceContent: PriceContentEntry[] = [
     intro:
       "Gremse altın, özellikle Ege bölgesinde geleneksel takı kültüründe yer bulan, kendine özgü bir ziynet altını türüdür. Denizli gremse altın fiyatını aşağıda bulabilirsiniz.",
     summary:
-      "Denizli gremse altın fiyatı, özellikle Ege bölgesinde geleneksel takı kültüründe yer bulan, kendine özgü bir ziynet altını türünün güncel piyasa karşılığıdır. Gremse, diğer sikke tipi altınlar (çeyrek, yarım, tam) kadar ulusal ölçekte yaygın olmasa da Ege ve çevre illerde tanınan, bölgesel talep gören bir kuyumculuk ürünüdür. Fiyatı, diğer ziynet altınları gibi has altın değerine ve güncel piyasa koşullarına göre şekillenir; kuyumcudaki nihai fiyata işçilik ve tasarım farkı eklenebilir. Bölgesel bir gelenek ürünü olması nedeniyle Denizli'deki kuyumcularda talep gördüğünde bulunabilir; almadan önce kuyumcunuzla stok durumunu teyit etmenizi öneririz. Bu sayfada gremse altın alış/satış fiyatını canlı olarak, yaklaşık her 60 saniyede bir yenilenen verilerle takip edebilir, hesaplama aracıyla güncel TL karşılığını öğrenebilirsiniz.",
+      "Denizli gremse altın fiyatı, özellikle Ege bölgesinde geleneksel takı kültüründe yer bulan, kendine özgü bir ziynet altını türünün güncel piyasa karşılığıdır. Gremse, diğer sikke tipi altınlar (çeyrek, yarım, tam) kadar ulusal ölçekte yaygın olmasa da Ege ve çevre illerde tanınan, bölgesel talep gören bir kuyumculuk ürünüdür. Fiyatı, diğer ziynet altınları gibi has altın değerine ve güncel piyasa koşullarına göre şekillenir; kuyumcudaki nihai fiyata işçilik ve tasarım farkı eklenebilir. Bölgesel bir gelenek ürünü olması nedeniyle Denizli'deki kuyumcularda talep gördüğünde bulunabilir; almadan önce kuyumcunuzla stok durumunu teyit etmenizi öneririz. Bu sayfada gremse altın alış/satış fiyatını canlı olarak, kaynağında yaklaşık 15 dakikada bir güncellenen verilerle takip edebilir, hesaplama aracıyla güncel TL karşılığını öğrenebilirsiniz.",
     sections: [
       {
         heading: "Gremse Altın Nedir?",
@@ -545,7 +545,7 @@ export const priceContent: PriceContentEntry[] = [
     intro:
       "Dolar kuru, hem günlük hayatta hem de altın fiyatlarının belirlenmesinde kilit bir referans noktasıdır. Denizli dolar kurunu aşağıda canlı olarak takip edebilirsiniz.",
     summary:
-      "Denizli dolar kuru (USD/TRY), hem günlük hayatta hem de altın fiyatlarının belirlenmesinde kilit bir referans noktasıdır. Altın uluslararası piyasada dolar bazında (ons altın) fiyatlandığı için Türkiye'deki gram altın fiyatı hem ons altına hem de dolar/TL kuruna bağlıdır — dolar kurundaki bir yükseliş, ons altın sabit kalsa bile TL bazında altın fiyatını yukarı çeker. Dolar kuru, Türkiye Cumhuriyet Merkez Bankası faiz kararları, enflasyon verileri, küresel risk iştahı ve ABD Merkez Bankası (Fed) politikalarından doğrudan etkilenir. Kuyumcular, ithalat yapan işletmeler ve bireysel yatırımcılar dolar kurunu günlük olarak takip eder. Bu sayfada güncel dolar alış/satış kurunu canlı olarak, yaklaşık her 60 saniyede bir yenilenen verilerle takip edebilir, hesaplama aracıyla istediğiniz miktarın TL karşılığını anında öğrenebilirsiniz.",
+      "Denizli dolar kuru (USD/TRY), hem günlük hayatta hem de altın fiyatlarının belirlenmesinde kilit bir referans noktasıdır. Altın uluslararası piyasada dolar bazında (ons altın) fiyatlandığı için Türkiye'deki gram altın fiyatı hem ons altına hem de dolar/TL kuruna bağlıdır — dolar kurundaki bir yükseliş, ons altın sabit kalsa bile TL bazında altın fiyatını yukarı çeker. Dolar kuru, Türkiye Cumhuriyet Merkez Bankası faiz kararları, enflasyon verileri, küresel risk iştahı ve ABD Merkez Bankası (Fed) politikalarından doğrudan etkilenir. Kuyumcular, ithalat yapan işletmeler ve bireysel yatırımcılar dolar kurunu günlük olarak takip eder. Bu sayfada güncel dolar alış/satış kurunu canlı olarak, kaynağında yaklaşık 15 dakikada bir güncellenen verilerle takip edebilir, hesaplama aracıyla istediğiniz miktarın TL karşılığını anında öğrenebilirsiniz.",
     sections: [
       {
         heading: "Dolar Kuru Neden Önemli?",
@@ -557,7 +557,7 @@ export const priceContent: PriceContentEntry[] = [
       },
       {
         heading: "Denizli'de Dolar Kuru Takibi",
-        body: "Kuyumcular, ithalat yapan işletmeler ve bireysel yatırımcılar dolar kurunu günlük olarak takip eder. Bu sayfadaki kur, yaklaşık her 60 saniyede bir tazelenir.",
+        body: "Kuyumcular, ithalat yapan işletmeler ve bireysel yatırımcılar dolar kurunu günlük olarak takip eder. Bu sayfadaki kur, kaynağında piyasa açıkken yaklaşık 15 dakikada bir güncellenir.",
       },
     ],
     relatedGuides: [

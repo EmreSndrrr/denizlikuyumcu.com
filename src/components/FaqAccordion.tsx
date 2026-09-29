@@ -11,6 +11,25 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight, CaretDown } from "@phosphor-icons/react/dist/ssr";
 import type { FaqItem } from "@/lib/faq";
+import { searchIndex } from "@/lib/searchIndex";
+
+// Bağlantı metni HEDEF SAYFAYI anlatmalı. Önceden her sorunun altında aynı
+// "Detaylı rehber" metni vardı ve anasayfada 7 FARKLI adrese gidiyordu;
+// arama motorları bağlantı metnini hedef sayfanın konusu için bir sinyal
+// olarak kullanır, aynı metin yedi ayrı konuya işaret edince bu sinyal
+// boşa gidiyordu (SEO denetim aracı: "anchor text birden fazla kez
+// kullanılıyor"). Başlıklar arama dizininden geliyor — bu dizin zaten her
+// sayfadaki arama kutusu için istemciye gönderildiğinden ek yük yok.
+const BASLIK = new Map(searchIndex.map((e) => [e.href, e.label]));
+const OZEL_BASLIK: Record<string, string> = {
+  // Arama dizinindeki genel "Kuyumcular" etiketi yerine sayfanın gerçekte
+  // cevapladığı soru.
+  "/kuyumcular": "Denizli'de Kuyumcular Nerede?",
+};
+
+function rehberBasligi(href: string): string {
+  return OZEL_BASLIK[href] ?? BASLIK.get(href) ?? "İlgili rehber";
+}
 
 export default function FaqAccordion({ items }: { items: FaqItem[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -54,7 +73,8 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
                   href={item.href}
                   className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand hover:underline"
                 >
-                  Detaylı rehber
+                  <span className="font-normal text-muted">Rehber:</span>{" "}
+                  {rehberBasligi(item.href)}
                   <ArrowRight aria-hidden="true" size={14} />
                 </Link>
               )}

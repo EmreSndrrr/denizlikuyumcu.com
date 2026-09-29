@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import AdSlot from "@/components/AdSlot";
 import { getAdForPosition } from "@/lib/ads";
+import ShareButtons from "@/components/ShareButtons";
 
 const SITE = "https://denizlikuyumcu.com";
 
@@ -177,6 +178,20 @@ export default function GuideArticle({
       <article className="prose prose-stone dark:prose-invert mt-8 max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-brand">
         {children}
       </article>
+
+      {/* Paylaşım: makaleyi bitiren okuyucu için en doğal an. slug yoksa
+          (kanonik adres bilinmiyorsa) gösterilmiyor. */}
+      {slug && (
+        <div className="mt-10 border-t border-border pt-6">
+          <ShareButtons
+            path={`/rehber/${slug}`}
+            title={title}
+            text={`${title} — DenizliKuyumcu.com`}
+            context="rehber"
+            label="Bu rehberi paylaş"
+          />
+        </div>
+      )}
 
       {faq && faq.length > 0 && (
         <section className="mt-12">

@@ -22,7 +22,7 @@ export default function Page() {
         {
           question: "Gram altının bugünkü fiyatını nereden görebilirim?",
           answer:
-            "Sayfanın üstündeki canlı fiyat şeridinden ve anasayfadaki fiyat tablosundan; veriler yaklaşık her 60 saniyede bir yenilenir ve son güncelleme saati gösterilir.",
+            "Sayfanın üstündeki canlı fiyat şeridinden ve anasayfadaki fiyat tablosundan; veriler kaynağında piyasa açıkken yaklaşık 15 dakikada bir güncellenir, sayfa yeni veriyi dakikada bir kontrol eder ve son güncelleme saatini gösterir.",
         },
         {
           question: "Alış mı satış fiyatına bakmalıyım?",
@@ -46,7 +46,7 @@ export default function Page() {
         Gram altının bugünkü alış ve satış fiyatını{" "}
         <a href="/altin/gram-altin">gram altın fiyat sayfamızdan</a> ve{" "}
         <a href="/#altin-fiyatlari">anasayfadaki fiyat tablosundan</a> canlı
-        olarak görebilirsiniz. Rakamlar yaklaşık her 60 saniyede bir yenilenir
+        olarak görebilirsiniz. Veriler kaynağında piyasa açıkken yaklaşık 15 dakikada bir güncellenir
         ve her bölümde &quot;… itibarıyla&quot; etiketiyle son güncelleme
         zamanı gösterilir. Bu fiyatlar bilgilendirme amaçlıdır; kesin işlem
         için kuyumcunuzla teyitleşin.
