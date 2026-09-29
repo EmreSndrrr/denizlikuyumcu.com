@@ -74,7 +74,7 @@ export default function Faq() {
         <div>
           <p className="text-sm font-semibold text-ink">Veri güvenilirliği</p>
           <p className="mt-1 text-sm text-muted">
-            Fiyatlar periyodik olarak (yaklaşık her 60 saniyede bir)
+            Fiyatlar periyodik olarak (kaynakta piyasa açıkken yaklaşık 15 dakikada bir)
             tazelenir ve her bölümde &quot;… itibarıyla&quot; etiketiyle son
             güncelleme zamanı gösterilir. Bağlantı kesilirse veya bir
             yenileme başarısız olursa bunu &quot;Veri gecikmeli&quot;

@@ -27,7 +27,7 @@ export default function YasalUyariPage() {
       <p>
         Fiyatlar üçüncü taraf bir kaynaktan (bkz.{" "}
         <a href="/veri-kaynaklari">Veri Kaynakları</a>) otomatik olarak
-        çekilir ve periyodik aralıklarla (yaklaşık 60 saniyede bir)
+        çekilir ve periyodik aralıklarla (kaynakta piyasa açıkken yaklaşık 15 dakikada bir)
         yenilenir. Kaynak API&apos;deki gecikme, hata veya geçici kesinti
         durumunda sitede gösterilen değerler gerçek piyasa fiyatından farklı
         olabilir. Çeyrek/yarım Ata ve Reşat altını gibi bazı kalemler

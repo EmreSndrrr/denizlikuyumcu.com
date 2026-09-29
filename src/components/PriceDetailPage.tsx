@@ -5,6 +5,8 @@ import { priceContent, type PriceContentEntry } from "@/lib/priceContent";
 import PriceDetailCard from "@/components/PriceDetailCard";
 import PriceItemCalculator from "@/components/PriceItemCalculator";
 import AdSlot from "@/components/AdSlot";
+import ShareButtons from "@/components/ShareButtons";
+import PriceDirectAnswer from "@/components/PriceDirectAnswer";
 
 // /altin/[slug] ve /doviz/[slug] sayfalarının ORTAK şablonu — Server
 // Component (canlı fiyat kartı hariç her şey sunucuda render edilir, SEO
@@ -73,7 +75,20 @@ export default function PriceDetailPage({
           <h1 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
             {entry.h1}
           </h1>
+          <PriceDirectAnswer itemKey={entry.key} initialData={initialData} />
           <p className="mt-3 max-w-2xl text-muted">{entry.intro}</p>
+          {/* Paylaşım metnine fiyat KONMUYOR: bu metin sunucuda üretiliyor
+              ve sayfa CDN'den geldiğinde saatlerce eski olabilir; WhatsApp'ta
+              güncel sanılarak yayılırdı. Alıcı bağlantıyı açınca canlı
+              fiyatı görüyor. */}
+          <div className="mt-4">
+            <ShareButtons
+              path={`/${entry.category}/${entry.slug}`}
+              title={entry.h1}
+              text={`${entry.h1} — güncel alış/satış`}
+              context="fiyat-sayfasi"
+            />
+          </div>
 
           {/* Sadece mobilde/dar ekranda kart, başlığın hemen altında —
               sağ sütun lg'de görünmeye başladığında burada tekrar

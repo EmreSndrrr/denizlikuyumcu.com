@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // "X-Powered-By: Next.js" yanıt başlığını kapatır. Başlık işlevsel bir
+  // şey taşımıyor; yalnızca kullanılan çatıyı ve dolaylı olarak sürüm
+  // aralığını dışarıya duyuruyor (SEO denetim aracı bulgusu, Eylül 2026).
+  poweredByHeader: false,
+
   // Güvenlik denetimi (Eylül 2026) bulgusu: sitede hiçbir HTTP güvenlik
   // başlığı yoktu. Site kullanıcı hesabı/form/ödeme almadığı için risk
   // düşük, ama bu başlıklar bedelsiz ve standart bir "iyi hijyen"

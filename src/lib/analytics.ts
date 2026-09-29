@@ -16,7 +16,10 @@ export type AnalyticsEventName =
   | "phone_click"
   | "directions_click"
   | "profile_click"
-  | "form_submit";
+  | "form_submit"
+  // Paylaşım düğmeleri (ShareButtons). `channel`: native | whatsapp | x |
+  // facebook | copy. Paylaşılan içerik değil, yalnızca kanal ve yüzey.
+  | "share_click";
 
 // `context`: olayın hangi yüzeyde olduğu (ör. "reklam-ver", "fiyat-sayfasi",
 // "kuyumcular", "home-featured", "header"). Serbest metin ama kısa/sabit

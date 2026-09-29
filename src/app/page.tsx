@@ -17,6 +17,7 @@ import Faq from "@/components/Faq";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 import JewelerSalesCta from "@/components/JewelerSalesCta";
+import ShareButtons from "@/components/ShareButtons";
 
 // Bu bir Server Component (dosyanın başında "use client" YOK). Varsayılan
 // davranış bu: sunucuda çalışır, doğrudan getPrices() gibi fonksiyonları
@@ -126,7 +127,11 @@ export default async function HomePage() {
                   kademeli bir giriş (brief: "200-450ms opacity+translateY"). */}
               <Reveal mode="mount">
                 <h1 className="max-w-lg text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl">
-                  Denizli altın fiyatları ve kuyumcu rehberi, tek ekranda.
+                  {/* "…, tek ekranda." kuyruğu kaldırıldı: H1'deki "ekranda"
+                      kelimesi sayfa gövdesinde hiç geçmiyordu (SEO denetim
+                      aracı bulgusu). Başlık artık yalnızca sayfanın gerçekten
+                      işlediği iki konuyu söylüyor. */}
+                  Denizli altın fiyatları ve kuyumcu rehberi
                 </h1>
               </Reveal>
               <Reveal mode="mount" delay={0.08}>
@@ -171,6 +176,18 @@ export default async function HomePage() {
       {/* En çok takip edilen fiyatlar */}
       <section id="altin-fiyatlari" className="mx-auto max-w-[1240px] px-4 pb-16">
         <PriceTicker initialData={prices} />
+        {/* Fiyat tablosunun hemen altı: altın fiyatını WhatsApp'ta
+            paylaşmak Türkiye'de yaygın bir davranış, düğme tam da o
+            niyetin oluştuğu yerde. */}
+        <div className="mt-4">
+          <ShareButtons
+            path="/"
+            title="Denizli güncel altın ve döviz fiyatları"
+            text="Denizli güncel altın ve döviz fiyatları — DenizliKuyumcu.com"
+            context="anasayfa"
+            label="Fiyatları paylaş"
+          />
+        </div>
       </section>
 
       <section id="doviz" className="mx-auto max-w-[1240px] px-4 pb-16">
