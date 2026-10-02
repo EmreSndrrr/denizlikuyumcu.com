@@ -70,8 +70,13 @@ async function truncgilCek(butceMs: number): Promise<Record<string, unknown>> {
       sonHata = err;
       console.warn(`[snapshot] Truncgil denemesi ${deneme}/${AZAMI_DENEME} başarısız:`, err);
       if (deneme < AZAMI_DENEME) {
-        // Kısa, artan bekleme; bütçeyi aşmayacak şekilde.
-        await bekle(Math.min(300 * deneme, Math.max(0, bitis - Date.now() - 500)));
+        // Denemeler bütçeye YAYILIYOR (1,5 sn, sonra 3 sn). Üretimde
+        // gözlendi: Vercel'den kopmalar tek tek değil birkaç saniyelik
+        // pencereler hâlinde geliyor — ilk sürümdeki 300/600 ms beklemeyle
+        // üç deneme de aynı kötü pencereye düşüp 502 döndü, 20 sn sonraki
+        // tur ise başarılı oldu. Kopan bağlantı anında hata verdiği için
+        // beklemenin maliyeti yalnızca kaynak gerçekten sorunluyken ödenir.
+        await bekle(Math.min(1500 * deneme, Math.max(0, bitis - Date.now() - 500)));
       }
     }
   }
