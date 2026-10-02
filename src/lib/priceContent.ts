@@ -82,11 +82,11 @@ export const priceContent: PriceContentEntry[] = [
     intro:
       "Çeyrek altın, Türkiye'de düğün, nişan ve doğum gibi özel günlerde en sık hediye edilen ziynet altınıdır. Denizli çeyrek altın fiyatını aşağıda anlık olarak takip edebilirsiniz.",
     summary:
-      "Denizli çeyrek altın fiyatı, düğün, nişan ve altın günü gibi geleneksel günlerde en sık hediye edilen ziynet altınının güncel karşılığıdır. Çeyrek altın adını Osmanlı lirasının dörtte biri olmasından alır ve yaklaşık 1,75 gram has altın içerir; bu yüzden fiyatı büyük ölçüde gram altın fiyatının 1,75 katına yakın seyreder, üzerine basım ve nadirlik payı gibi küçük bir prim eklenebilir. Çeyrek altın fiyatı arattığınızda karşınıza çıkan rakamlar genellikle ulusal ortalamayı yansıtır; Denizli'de kuyumcudan kuyumcuya işçilik farkı nedeniyle birkaç TL'lik sapmalar olabilir. Bu sayfada çeyrek altın alış ve satış fiyatını canlı olarak, gram altınla birlikte anlık takip edebilir, kaç adet çeyrek altının güncel karşılığını hesaplama aracıyla saniyeler içinde öğrenebilirsiniz. Kesin fiyat için kuyumcunuzla görüşmenizi öneririz.",
+      "Denizli çeyrek altın fiyatı, düğün, nişan ve altın günü gibi geleneksel günlerde en sık hediye edilen ziynet altınının güncel karşılığıdır. Çeyrek altın adını Osmanlı lirasının dörtte biri olmasından alır; yaklaşık 1,75 gram ağırlığındadır ve 22 ayar olduğu için içinde yaklaşık 1,60 gram has altın bulunur; bu yüzden fiyatı büyük ölçüde gram altın fiyatının yaklaşık 1,6 katına yakın seyreder, üzerine basım ve nadirlik payı gibi küçük bir prim eklenebilir. Çeyrek altın fiyatı arattığınızda karşınıza çıkan rakamlar genellikle ulusal ortalamayı yansıtır; Denizli'de kuyumcudan kuyumcuya işçilik farkı nedeniyle birkaç TL'lik sapmalar olabilir. Bu sayfada çeyrek altın alış ve satış fiyatını canlı olarak, gram altınla birlikte anlık takip edebilir, kaç adet çeyrek altının güncel karşılığını hesaplama aracıyla saniyeler içinde öğrenebilirsiniz. Kesin fiyat için kuyumcunuzla görüşmenizi öneririz.",
     sections: [
       {
         heading: "Çeyrek Altın Nedir, Kaç Gram?",
-        body: "Çeyrek altın, adını 'lira'nın dörtte biri' olmasından alır ve yaklaşık 1,75 gram has altın içerir. Üzerinde basılı yıl ve figürler taşıyan bir sikke formudur; bu yüzden gram altından farklı olarak basım ve nadirlik payı (nadir olan yıllarda birkaç TL'lik bir fark) fiyata küçük bir prim olarak yansıyabilir. Yine de büyük çoğunlukla fiyatı, gram altın fiyatının 1,75 katına yakın seyreder.",
+        body: "Çeyrek altın, adını 'lira'nın dörtte biri' olmasından alır; yaklaşık 1,75 gram ağırlığında, 22 ayar bir sikkedir ve içinde yaklaşık 1,60 gram has altın bulunur. Üzerinde basılı yıl ve figürler taşıyan bir sikke formudur; bu yüzden gram altından farklı olarak basım ve nadirlik payı (nadir olan yıllarda birkaç TL'lik bir fark) fiyata küçük bir prim olarak yansıyabilir. Yine de büyük çoğunlukla fiyatı, gram altın fiyatının yaklaşık 1,6 katına yakın seyreder.",
       },
       {
         heading: "Çeyrek Altın Ne Zaman Hediye Edilir?",
@@ -115,11 +115,11 @@ export const priceContent: PriceContentEntry[] = [
     intro:
       "Yarım altın, çeyrek altının iki katı ağırlığındaki ziynet altınıdır ve orta büyüklükteki hediye/yatırım ihtiyaçları için tercih edilir. Güncel Denizli yarım altın fiyatını aşağıda bulabilirsiniz.",
     summary:
-      "Denizli yarım altın fiyatı, çeyrek altının tam iki katı ağırlığındaki ziynet altınının güncel piyasa karşılığıdır. Yaklaşık 3,5 gram has altın içeren yarım altın, hem hediye hem de orta ölçekli yatırım ihtiyaçları için tercih edilir ve fiyatı gram altın fiyatının yaklaşık 3,5 katına yakın seyreder. Türkiye genelinde yarım altın fiyatı arandığında çıkan rakamlar piyasa ortalamasını yansıtır; Denizli'deki kuyumcularda işçilik ve talebe bağlı küçük farklar görülebilir. Bu sayfada yarım altın alış/satış fiyatını gram altınla birlikte, kaynağında yaklaşık 15 dakikada bir güncellenen canlı verilerle takip edebilir, elinizdeki veya almayı düşündüğünüz yarım altın adedinin güncel TL karşılığını hesaplama aracıyla anında görebilirsiniz. Fiyatlar bilgilendirme amaçlıdır; kesin alım-satım için kuyumcuyla iletişime geçilmesi önerilir.",
+      "Denizli yarım altın fiyatı, çeyrek altının tam iki katı ağırlığındaki ziynet altınının güncel piyasa karşılığıdır. Yaklaşık 3,5 gram ağırlığındaki (içinde yaklaşık 3,2 gram has altın bulunan) yarım altın, hem hediye hem de orta ölçekli yatırım ihtiyaçları için tercih edilir ve fiyatı gram altın fiyatının yaklaşık 3,2 katına yakın seyreder. Türkiye genelinde yarım altın fiyatı arandığında çıkan rakamlar piyasa ortalamasını yansıtır; Denizli'deki kuyumcularda işçilik ve talebe bağlı küçük farklar görülebilir. Bu sayfada yarım altın alış/satış fiyatını gram altınla birlikte, kaynağında yaklaşık 15 dakikada bir güncellenen canlı verilerle takip edebilir, elinizdeki veya almayı düşündüğünüz yarım altın adedinin güncel TL karşılığını hesaplama aracıyla anında görebilirsiniz. Fiyatlar bilgilendirme amaçlıdır; kesin alım-satım için kuyumcuyla iletişime geçilmesi önerilir.",
     sections: [
       {
         heading: "Yarım Altın Kaç Gram?",
-        body: "Yarım altın yaklaşık 3,5 gram has altın içerir — yani tam olarak çeyrek altının iki katı. Çeyrek altınla aynı sikke ailesine ait olduğu için fiyatı da benzer mantıkla, gram altın fiyatının yaklaşık 3,5 katına yakın seyreder.",
+        body: "Yarım altın yaklaşık 3,5 gram ağırlığındadır ve içinde yaklaşık 3,2 gram has altın bulunur — yani tam olarak çeyrek altının iki katı. Çeyrek altınla aynı sikke ailesine ait olduğu için fiyatı da benzer mantıkla, gram altın fiyatının yaklaşık 3,2 katına yakın seyreder.",
       },
       {
         heading: "Yarım Altın Ne Zaman Tercih Edilir?",
@@ -147,11 +147,11 @@ export const priceContent: PriceContentEntry[] = [
     intro:
       "Tam altın, ziynet altınları arasında en büyük gramajlı ve en yüksek değerli sikke türüdür. Denizli tam altın fiyatını aşağıdan anlık olarak takip edebilirsiniz.",
     summary:
-      "Denizli tam altın fiyatı, ziynet altınları arasında en yüksek gramajlı ve en çok tercih edilen sikke türlerinden birinin güncel karşılığıdır. Tam altın yaklaşık 7 gram has altın içerir — çeyrek altının tam dört katı — ve büyük düğün takı setlerinde veya tek seferde yüksek tutarlı yatırım yapmak isteyenlerde öne çıkar. Tam altın fiyatı ülke genelinde piyasa ortalamasına göre şekillenir; Denizli'deki kuyumcularda işçilik farkı nedeniyle küçük sapmalar görülebilir. Bu sayfada tam altın alış ve satış fiyatını gram altınla birlikte canlı olarak takip edebilir, hesaplama aracıyla istediğiniz adetteki tam altının güncel TL karşılığını anında hesaplayabilirsiniz. Yüksek gramajı nedeniyle alım-satımda kuyumcudan fatura ve ayar damgası istemeniz, ileride olası bir geri satışta sorun yaşamamanız için önemlidir.",
+      "Denizli tam altın fiyatı, ziynet altınları arasında en yüksek gramajlı ve en çok tercih edilen sikke türlerinden birinin güncel karşılığıdır. Tam altın yaklaşık 7 gram ağırlığındadır (içinde yaklaşık 6,4 gram has altın bulunur) — çeyrek altının tam dört katı — ve büyük düğün takı setlerinde veya tek seferde yüksek tutarlı yatırım yapmak isteyenlerde öne çıkar. Tam altın fiyatı ülke genelinde piyasa ortalamasına göre şekillenir; Denizli'deki kuyumcularda işçilik farkı nedeniyle küçük sapmalar görülebilir. Bu sayfada tam altın alış ve satış fiyatını gram altınla birlikte canlı olarak takip edebilir, hesaplama aracıyla istediğiniz adetteki tam altının güncel TL karşılığını anında hesaplayabilirsiniz. Yüksek gramajı nedeniyle alım-satımda kuyumcudan fatura ve ayar damgası istemeniz, ileride olası bir geri satışta sorun yaşamamanız için önemlidir.",
     sections: [
       {
         heading: "Tam Altın Kaç Gram?",
-        body: "Tam altın yaklaşık 7 gram has altın içerir — çeyrek altının tam 4 katı. Büyük düğün takı setlerinde, önemli hediyelerde veya tek seferde daha yüksek tutarlı bir altın yatırımı yapmak isteyenlerde tercih edilir.",
+        body: "Tam altın yaklaşık 7 gram ağırlığındadır ve içinde yaklaşık 6,4 gram has altın bulunur — çeyrek altının tam 4 katı. Büyük düğün takı setlerinde, önemli hediyelerde veya tek seferde daha yüksek tutarlı bir altın yatırımı yapmak isteyenlerde tercih edilir.",
       },
       {
         heading: "Tam Altın mı, 4 Çeyrek mi?",
@@ -179,7 +179,7 @@ export const priceContent: PriceContentEntry[] = [
     intro:
       "Cumhuriyet Altını, üzerinde Mustafa Kemal Atatürk portresi bulunan, Türkiye Cumhuriyeti Darphanesi tarafından basılan en bilinen külçe/hatıra sikkedir. Güncel Denizli Cumhuriyet altını fiyatını aşağıda bulabilirsiniz.",
     summary:
-      "Denizli Cumhuriyet altını fiyatı, üzerinde Mustafa Kemal Atatürk portresi bulunan ve Türkiye Cumhuriyeti Darphanesi tarafından basılan bu tarihi sikkenin güncel piyasa karşılığıdır. Tam altınla benzer gramaja (yaklaşık 7,2 gram has altın) sahip olan Cumhuriyet altını, hem yatırım hem koleksiyon değeri taşıması nedeniyle Türkiye'de en çok aranan altın türlerinden biridir. Cumhuriyet altını fiyatı genel olarak gram altın ve ons altın hareketleriyle paralel seyreder; basım kalitesi ve tanınırlığı nedeniyle bazı dönemlerde hafif bir prim oluşabilir. Bu sayfada Cumhuriyet altını alış/satış fiyatını canlı olarak takip edebilir, sahip olduğunuz veya almayı planladığınız adet için güncel TL karşılığını hesaplama aracıyla anında öğrenebilirsiniz. Denizli'deki kuyumcularda fiyat farkları normaldir; kesin işlem öncesi teyit almanızı öneririz.",
+      "Denizli Cumhuriyet altını fiyatı, üzerinde Mustafa Kemal Atatürk portresi bulunan ve Türkiye Cumhuriyeti Darphanesi tarafından basılan bu tarihi sikkenin güncel piyasa karşılığıdır. Yaklaşık 7,2 gram ağırlığındaki (içinde yaklaşık 6,6 gram has altın bulunan) Cumhuriyet altını, hem yatırım hem koleksiyon değeri taşıması nedeniyle Türkiye'de en çok aranan altın türlerinden biridir. Cumhuriyet altını fiyatı genel olarak gram altın ve ons altın hareketleriyle paralel seyreder; basım kalitesi ve tanınırlığı nedeniyle bazı dönemlerde hafif bir prim oluşabilir. Bu sayfada Cumhuriyet altını alış/satış fiyatını canlı olarak takip edebilir, sahip olduğunuz veya almayı planladığınız adet için güncel TL karşılığını hesaplama aracıyla anında öğrenebilirsiniz. Denizli'deki kuyumcularda fiyat farkları normaldir; kesin işlem öncesi teyit almanızı öneririz.",
     sections: [
       {
         heading: "Cumhuriyet Altını Nedir?",
@@ -309,7 +309,7 @@ export const priceContent: PriceContentEntry[] = [
     intro:
       "Ata Lirası, üzerinde Osmanlı dönemi sultan tasvirleri bulunan, koleksiyoner ve yatırımcılar arasında ayrı bir talebi olan tarihi bir sikke ailesidir. Denizli çeyrek Ata altın fiyatını aşağıda bulabilirsiniz.",
     summary:
-      "Denizli çeyrek Ata altın fiyatı, Osmanlı dönemi sultan tasvirleri taşıyan ve koleksiyonerler arasında ayrı bir talebi olan Ata Lirası serisinin en küçük gramajlı üyesinin güncel karşılığıdır. Çeyrek Ata, yaklaşık 1,75 gram has altın içerir ve çeyrek Cumhuriyet altınıyla benzer bir kullanım alanına sahiptir; temel has altın değeri açısından diğer çeyrek altın türleriyle aynı mantıkla hareket eder, ancak basım yılı ve nadirlik gibi etkenler zaman zaman küçük fiyat farkları yaratabilir. Ata serisi Cumhuriyet altını kadar her kuyumcuda standart stokta bulunmayabilir; almadan önce kuyumcunuzla stok durumunu teyit etmeniz önerilir. Bu sayfadaki çeyrek Ata fiyatı, kaynağın yalnızca tam boy Ata verisi sağlaması nedeniyle tam fiyattan gramaj oranıyla hesaplanır (bkz. Veri Kaynakları); güncel referans olarak kullanılabilir, kesin fiyat için kuyumcuyla görüşün.",
+      "Denizli çeyrek Ata altın fiyatı, Osmanlı dönemi sultan tasvirleri taşıyan ve koleksiyonerler arasında ayrı bir talebi olan Ata Lirası serisinin en küçük gramajlı üyesinin güncel karşılığıdır. Çeyrek Ata, yaklaşık 1,8 gram ağırlığındadır, içinde yaklaşık 1,65 gram has altın bulunur ve çeyrek Cumhuriyet altınıyla benzer bir kullanım alanına sahiptir; temel has altın değeri açısından diğer çeyrek altın türleriyle aynı mantıkla hareket eder, ancak basım yılı ve nadirlik gibi etkenler zaman zaman küçük fiyat farkları yaratabilir. Ata serisi Cumhuriyet altını kadar her kuyumcuda standart stokta bulunmayabilir; almadan önce kuyumcunuzla stok durumunu teyit etmeniz önerilir. Bu sayfadaki çeyrek Ata fiyatı, kaynağın yalnızca tam boy Ata verisi sağlaması nedeniyle tam fiyattan gramaj oranıyla hesaplanır (bkz. Veri Kaynakları); güncel referans olarak kullanılabilir, kesin fiyat için kuyumcuyla görüşün.",
     sections: [
       {
         heading: "Ata Lirası Nedir?",
@@ -341,11 +341,11 @@ export const priceContent: PriceContentEntry[] = [
     intro:
       "Yarım Ata, Ata Lirası serisinin orta gramajlı üyesidir. Denizli yarım Ata altın fiyatını aşağıda canlı olarak takip edebilirsiniz.",
     summary:
-      "Denizli yarım Ata altın fiyatı, Ata Lirası serisinin orta gramajlı üyesinin güncel karşılığıdır. Yaklaşık 3,5 gram has altın içeren yarım Ata, çeyrek Ata'nın iki katı ağırlığındadır ve Osmanlı dönemi tasarımını taşıyan bu sikke hem hediye hem orta ölçekli yatırım amaçlı tercih edilir. Ata Lirası'nın piyasa değeri temelde has altın fiyatına dayanır, ancak basım yılı ve durumuna göre koleksiyoner piyasasında ek bir prim oluşabilir. Ata serisi her kuyumcuda hazır bulunmayabileceğinden, almadan önce stok durumunu teyit etmenizi öneririz. Bu sayfadaki yarım Ata fiyatı, veri kaynağının yalnızca tam boy Ata rakamı sağlaması nedeniyle tam fiyattan gramaj oranıyla (yaklaşık yarısı) hesaplanarak gösterilir — ayrıntı için Veri Kaynakları sayfasına bakabilir, güncel referans olarak kullanabilirsiniz.",
+      "Denizli yarım Ata altın fiyatı, Ata Lirası serisinin orta gramajlı üyesinin güncel karşılığıdır. Yaklaşık 3,6 gram ağırlığındaki (içinde yaklaşık 3,3 gram has altın bulunan) yarım Ata, çeyrek Ata'nın iki katı ağırlığındadır ve Osmanlı dönemi tasarımını taşıyan bu sikke hem hediye hem orta ölçekli yatırım amaçlı tercih edilir. Ata Lirası'nın piyasa değeri temelde has altın fiyatına dayanır, ancak basım yılı ve durumuna göre koleksiyoner piyasasında ek bir prim oluşabilir. Ata serisi her kuyumcuda hazır bulunmayabileceğinden, almadan önce stok durumunu teyit etmenizi öneririz. Bu sayfadaki yarım Ata fiyatı, veri kaynağının yalnızca tam boy Ata rakamı sağlaması nedeniyle tam fiyattan gramaj oranıyla (yaklaşık yarısı) hesaplanarak gösterilir — ayrıntı için Veri Kaynakları sayfasına bakabilir, güncel referans olarak kullanabilirsiniz.",
     sections: [
       {
         heading: "Yarım Ata Kaç Gram?",
-        body: "Yarım Ata, yaklaşık 3,5 gram has altın içerir — çeyrek Ata'nın iki katı. Osmanlı dönemi tasarımını taşıyan bu sikke, hem hediye hem de orta ölçekli yatırım amaçlı tercih edilir.",
+        body: "Yarım Ata yaklaşık 3,6 gram ağırlığındadır ve içinde yaklaşık 3,3 gram has altın bulunur — çeyrek Ata'nın iki katı. Osmanlı dönemi tasarımını taşıyan bu sikke, hem hediye hem de orta ölçekli yatırım amaçlı tercih edilir.",
       },
       {
         heading: "Ata Serisinin Değeri Neye Bağlı?",
@@ -369,11 +369,11 @@ export const priceContent: PriceContentEntry[] = [
     intro:
       "Tam Ata, Ata Lirası serisinin en büyük gramajlı üyesidir. Denizli tam Ata altın fiyatını aşağıda canlı olarak görebilirsiniz.",
     summary:
-      "Denizli tam Ata altın fiyatı, Ata Lirası serisinin en büyük gramajlı üyesinin güncel piyasa karşılığıdır. Yaklaşık 7 gram has altın içeren tam Ata, tam Cumhuriyet altınına yakın bir gramaja sahiptir ve Osmanlı dönemi sultan tasvirleriyle basılan bu seri hem yatırım hem koleksiyon amaçlı yoğun talep görür. Tam Ata ile tam Cumhuriyet altını benzer has değere sahip olsa da tercih genellikle koleksiyon ilgisine veya kuyumcunun elindeki stoğa göre şekillenir. Yüksek gramajı nedeniyle tam Ata, büyük hediyelerde ve toplu yatırımlarda tercih edilir. Bu sayfadaki tam Ata fiyatı, finans.truncgil.com kaynağından doğrudan (türetme olmadan) çekilir ve kaynağında piyasa açıkken yaklaşık 15 dakikada bir güncellenir; alış/satış fiyatını canlı olarak takip edebilir, hesaplama aracıyla güncel TL karşılığını öğrenebilirsiniz.",
+      "Denizli tam Ata altın fiyatı, Ata Lirası serisinin en büyük gramajlı üyesinin güncel piyasa karşılığıdır. Yaklaşık 7,2 gram ağırlığındaki (içinde yaklaşık 6,6 gram has altın bulunan) tam Ata, tam Cumhuriyet altınına yakın bir gramaja sahiptir ve Osmanlı dönemi sultan tasvirleriyle basılan bu seri hem yatırım hem koleksiyon amaçlı yoğun talep görür. Tam Ata ile tam Cumhuriyet altını benzer has değere sahip olsa da tercih genellikle koleksiyon ilgisine veya kuyumcunun elindeki stoğa göre şekillenir. Yüksek gramajı nedeniyle tam Ata, büyük hediyelerde ve toplu yatırımlarda tercih edilir. Bu sayfadaki tam Ata fiyatı, finans.truncgil.com kaynağından doğrudan (türetme olmadan) çekilir ve kaynağında piyasa açıkken yaklaşık 15 dakikada bir güncellenir; alış/satış fiyatını canlı olarak takip edebilir, hesaplama aracıyla güncel TL karşılığını öğrenebilirsiniz.",
     sections: [
       {
         heading: "Tam Ata Kaç Gram?",
-        body: "Tam Ata yaklaşık 7 gram has altın içerir — tam Cumhuriyet Altını'na yakın bir gramaj. Osmanlı dönemi sultan tasvirleriyle basılan bu seri, hem yatırım hem koleksiyon amaçlı talep görür.",
+        body: "Tam Ata yaklaşık 7,2 gram ağırlığındadır ve içinde yaklaşık 6,6 gram has altın bulunur — tam Cumhuriyet Altını'na yakın bir gramaj. Osmanlı dönemi sultan tasvirleriyle basılan bu seri, hem yatırım hem koleksiyon amaçlı talep görür.",
       },
       {
         heading: "Tam Ata mı, Tam Cumhuriyet mi?",
@@ -397,7 +397,7 @@ export const priceContent: PriceContentEntry[] = [
     intro:
       "Reşat Altını, adını Osmanlı padişahı Sultan V. Mehmed Reşad'dan alan, koleksiyonerler arasında özel bir yeri olan tarihi bir sikke serisidir. Denizli çeyrek Reşat altın fiyatını aşağıda bulabilirsiniz.",
     summary:
-      "Denizli çeyrek Reşat altın fiyatı, adını Osmanlı padişahı Sultan V. Mehmed Reşad'dan alan ve koleksiyonerler arasında özel bir yeri olan Reşat Altını serisinin en küçük gramajlı üyesinin güncel karşılığıdır. Çeyrek Reşat yaklaşık 1,75 gram has altın içerir; Ata ve Cumhuriyet altınına benzer has değere dayansa da tasarım ve basım dönemi farklılıkları koleksiyon piyasasında küçük fiyat farkları oluşturabilir. Reşat serisi her kuyumcuda standart stokta olmayabilir; almadan önce kuyumcunuzla temin süresini ve fiyatını teyit etmenizi öneririz. Bu sayfadaki çeyrek Reşat fiyatı, veri kaynağının yalnızca tam boy Reşat rakamı sağlaması nedeniyle tam fiyattan gramaj oranıyla hesaplanarak gösterilir — ayrıntı için Veri Kaynakları sayfasına bakabilir, güncel bir referans olarak kullanabilirsiniz.",
+      "Denizli çeyrek Reşat altın fiyatı, adını Osmanlı padişahı Sultan V. Mehmed Reşad'dan alan ve koleksiyonerler arasında özel bir yeri olan Reşat Altını serisinin en küçük gramajlı üyesinin güncel karşılığıdır. Çeyrek Reşat yaklaşık 1,8 gram ağırlığındadır ve içinde yaklaşık 1,65 gram has altın bulunur; Ata ve Cumhuriyet altınına benzer has değere dayansa da tasarım ve basım dönemi farklılıkları koleksiyon piyasasında küçük fiyat farkları oluşturabilir. Reşat serisi her kuyumcuda standart stokta olmayabilir; almadan önce kuyumcunuzla temin süresini ve fiyatını teyit etmenizi öneririz. Bu sayfadaki çeyrek Reşat fiyatı, veri kaynağının yalnızca tam boy Reşat rakamı sağlaması nedeniyle tam fiyattan gramaj oranıyla hesaplanarak gösterilir — ayrıntı için Veri Kaynakları sayfasına bakabilir, güncel bir referans olarak kullanabilirsiniz.",
     sections: [
       {
         heading: "Reşat Altını Nedir?",
@@ -429,11 +429,11 @@ export const priceContent: PriceContentEntry[] = [
     intro:
       "Yarım Reşat, Reşat Altını serisinin orta gramajlı üyesidir. Denizli yarım Reşat altın fiyatını aşağıda canlı olarak takip edebilirsiniz.",
     summary:
-      "Denizli yarım Reşat altın fiyatı, Reşat Altını serisinin orta gramajlı üyesinin güncel piyasa karşılığıdır. Yaklaşık 3,5 gram has altın içeren yarım Reşat, Osmanlı dönemi tasarımını taşıyan bu sikke ailesinin çeyrek ile tam arasındaki dengeli seçeneğidir ve orta ölçekli hediye/yatırım ihtiyaçları için tercih edilir. Reşat serisinin piyasa değeri temelde has altın fiyatına dayanır; koleksiyon ilgisi zaman zaman ek bir prim oluştursa da günlük fiyat hareketleri büyük ölçüde gram altınla paralel seyreder. Diğer Reşat ürünleri gibi her kuyumcuda hazır bulunmayabilir; kuyumcunuzla stok ve fiyat teyidini önceden yapmanız önerilir. Bu sayfadaki yarım Reşat fiyatı, kaynağın yalnızca tam boy Reşat verisi sağlaması nedeniyle tam fiyattan gramaj oranıyla hesaplanarak gösterilir; ayrıntı için Veri Kaynakları sayfasına bakabilirsiniz.",
+      "Denizli yarım Reşat altın fiyatı, Reşat Altını serisinin orta gramajlı üyesinin güncel piyasa karşılığıdır. Yaklaşık 3,6 gram ağırlığındaki (içinde yaklaşık 3,3 gram has altın bulunan) yarım Reşat, Osmanlı dönemi tasarımını taşıyan bu sikke ailesinin çeyrek ile tam arasındaki dengeli seçeneğidir ve orta ölçekli hediye/yatırım ihtiyaçları için tercih edilir. Reşat serisinin piyasa değeri temelde has altın fiyatına dayanır; koleksiyon ilgisi zaman zaman ek bir prim oluştursa da günlük fiyat hareketleri büyük ölçüde gram altınla paralel seyreder. Diğer Reşat ürünleri gibi her kuyumcuda hazır bulunmayabilir; kuyumcunuzla stok ve fiyat teyidini önceden yapmanız önerilir. Bu sayfadaki yarım Reşat fiyatı, kaynağın yalnızca tam boy Reşat verisi sağlaması nedeniyle tam fiyattan gramaj oranıyla hesaplanarak gösterilir; ayrıntı için Veri Kaynakları sayfasına bakabilirsiniz.",
     sections: [
       {
         heading: "Yarım Reşat Kaç Gram?",
-        body: "Yarım Reşat yaklaşık 3,5 gram has altın içerir. Osmanlı dönemi tasarımını taşıyan bu sikke, orta ölçekli hediye ve yatırım ihtiyaçları için tercih edilir.",
+        body: "Yarım Reşat yaklaşık 3,6 gram ağırlığındadır ve içinde yaklaşık 3,3 gram has altın bulunur. Osmanlı dönemi tasarımını taşıyan bu sikke, orta ölçekli hediye ve yatırım ihtiyaçları için tercih edilir.",
       },
       {
         heading: "Fiyatı Neye Göre Belirlenir?",
@@ -457,11 +457,11 @@ export const priceContent: PriceContentEntry[] = [
     intro:
       "Tam Reşat, Reşat Altını serisinin en büyük gramajlı üyesidir. Denizli tam Reşat altın fiyatını aşağıda canlı olarak görebilirsiniz.",
     summary:
-      "Denizli tam Reşat altın fiyatı, Reşat Altını serisinin en büyük gramajlı ve en yüksek koleksiyon değerine sahip üyesinin güncel karşılığıdır. Yaklaşık 7 gram has altın içeren tam Reşat, Sultan V. Mehmed Reşad dönemi tasarımıyla basılmıştır ve hem yatırım hem koleksiyon amaçlı yüksek talep görür; tarihi tasarımı nedeniyle bazı dönemlerde has altın değerinin üzerinde küçük bir prim oluşabilir. Yüksek gramajı nedeniyle tam Reşat, büyük hediyelerde ve toplu yatırımlarda tercih edilir. Bu sayfadaki tam Reşat fiyatı, finans.truncgil.com kaynağından doğrudan (türetme olmadan) çekilir ve kaynağında piyasa açıkken yaklaşık 15 dakikada bir güncellenir; alış/satış fiyatını canlı olarak takip edebilir, hesaplama aracıyla güncel TL karşılığını öğrenebilirsiniz. Kesin fiyat için kuyumcunuzla görüşmenizi öneririz.",
+      "Denizli tam Reşat altın fiyatı, Reşat Altını serisinin en büyük gramajlı ve en yüksek koleksiyon değerine sahip üyesinin güncel karşılığıdır. Yaklaşık 7,2 gram ağırlığındaki (içinde yaklaşık 6,6 gram has altın bulunan) tam Reşat, Sultan V. Mehmed Reşad dönemi tasarımıyla basılmıştır ve hem yatırım hem koleksiyon amaçlı yüksek talep görür; tarihi tasarımı nedeniyle bazı dönemlerde has altın değerinin üzerinde küçük bir prim oluşabilir. Yüksek gramajı nedeniyle tam Reşat, büyük hediyelerde ve toplu yatırımlarda tercih edilir. Bu sayfadaki tam Reşat fiyatı, finans.truncgil.com kaynağından doğrudan (türetme olmadan) çekilir ve kaynağında piyasa açıkken yaklaşık 15 dakikada bir güncellenir; alış/satış fiyatını canlı olarak takip edebilir, hesaplama aracıyla güncel TL karşılığını öğrenebilirsiniz. Kesin fiyat için kuyumcunuzla görüşmenizi öneririz.",
     sections: [
       {
         heading: "Tam Reşat Kaç Gram?",
-        body: "Tam Reşat yaklaşık 7 gram has altın içerir. Sultan V. Mehmed Reşad dönemi tasarımıyla basılan bu seri, hem yatırım hem koleksiyon amaçlı yüksek talep görür.",
+        body: "Tam Reşat yaklaşık 7,2 gram ağırlığındadır ve içinde yaklaşık 6,6 gram has altın bulunur. Sultan V. Mehmed Reşad dönemi tasarımıyla basılan bu seri, hem yatırım hem koleksiyon amaçlı yüksek talep görür.",
       },
       {
         heading: "Reşat Serisinin Koleksiyon Değeri",
