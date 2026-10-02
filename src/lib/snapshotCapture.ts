@@ -32,25 +32,68 @@ export type CaptureResult =
   | { ok: true; skipped: false; inserted: number; sourceUpdatedAt: string; previous: string | null }
   | { ok: false; error: string; status: number };
 
-export async function captureSnapshot(): Promise<CaptureResult> {
+const TRUNCGIL_URL = "https://finans.truncgil.com/today.json";
+const AZAMI_DENEME = 3;
+const DENEME_ZAMAN_ASIMI_MS = 4000;
+
+const bekle = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+// Truncgil'i, toplam bir zaman bütçesi içinde birkaç kez dener.
+//
+// Neden: kaynak bağlantıları sık sık ilk istekte koparıyor ("other side
+// closed" / "server closed abruptly") ve hemen ardından gelen istek başarılı
+// oluyor. Bu, sunucunun boşta kalan keep-alive bağlantısını kapatıp bizim
+// tarafın o ölü soketi yeniden kullanmaya çalışmasının tipik belirtisi.
+// Ölçüldü (2 Ekim 2026): tek denemede 20 istekten 16'sı başarılı, 3 denemeye
+// kadar 20/20. Önceden tek deneme yapılıyordu; ilk istek koptuğunda o tur
+// tamamen kayboluyor, canlıda veri 4,5 saat 11:30'da takılı kaldı (aynı
+// anda üretimden tetiklenen toplama da "Truncgil kaynağına ulaşılamadı"
+// döndü).
+//
+// Bütçe, çağıran yere göre değişir: ziyaretçinin YANITI beklediği yolda
+// kısa, arka planda daha uzun (bkz. captureIfStale ve api/prices).
+async function truncgilCek(butceMs: number): Promise<Record<string, unknown>> {
+  const bitis = Date.now() + butceMs;
+  let sonHata: unknown = new Error("Zaman bütçesi denemeye yetmedi");
+
+  for (let deneme = 1; deneme <= AZAMI_DENEME; deneme++) {
+    const kalan = bitis - Date.now();
+    if (kalan < 500) break;
+    try {
+      const res = await fetch(TRUNCGIL_URL, {
+        cache: "no-store",
+        signal: AbortSignal.timeout(Math.min(DENEME_ZAMAN_ASIMI_MS, kalan)),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return (await res.json()) as Record<string, unknown>;
+    } catch (err) {
+      sonHata = err;
+      console.warn(`[snapshot] Truncgil denemesi ${deneme}/${AZAMI_DENEME} başarısız:`, err);
+      if (deneme < AZAMI_DENEME) {
+        // Kısa, artan bekleme; bütçeyi aşmayacak şekilde.
+        await bekle(Math.min(300 * deneme, Math.max(0, bitis - Date.now() - 500)));
+      }
+    }
+  }
+  throw sonHata;
+}
+
+// Varsayılan bütçe 9 sn: Vercel'deki varsayılan 10 sn fonksiyon süre
+// sınırının altında kalsın (zamanlanmış görev ve after() yolu bunu kullanır).
+const VARSAYILAN_BUTCE_MS = 9000;
+
+export async function captureSnapshot(
+  { butceMs = VARSAYILAN_BUTCE_MS }: { butceMs?: number } = {},
+): Promise<CaptureResult> {
   if (!hasDatabase) {
     return { ok: false, error: "DATABASE_URL tanımlı değil", status: 500 };
   }
 
   let data: Record<string, unknown>;
   try {
-    // Zaman aşımı şart: bu fonksiyon artık /api/prices'tan YANIT ÖNCESİ de
-    // çağrılabiliyor (bkz. INLINE_CAPTURE_AFTER_MS). Kaynak yanıt vermezse
-    // ziyaretçinin isteği askıda kalmamalı — 4 sn sonra vazgeçip eski
-    // veriyle devam ediyoruz.
-    const res = await fetch("https://finans.truncgil.com/today.json", {
-      cache: "no-store",
-      signal: AbortSignal.timeout(4000),
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    data = (await res.json()) as Record<string, unknown>;
+    data = await truncgilCek(butceMs);
   } catch (err) {
-    console.error("[snapshot] Truncgil çekilemedi:", err);
+    console.error("[snapshot] Truncgil çekilemedi (tüm denemeler):", err);
     return { ok: false, error: "Truncgil kaynağına ulaşılamadı", status: 502 };
   }
 
@@ -100,6 +143,7 @@ let inFlight: Promise<CaptureResult> | null = null;
 
 export async function captureIfStale(
   latestKnownSourceUpdatedAt: string | null | undefined,
+  secenekler: { butceMs?: number } = {},
 ): Promise<CaptureResult> {
   const t = latestKnownSourceUpdatedAt
     ? new Date(latestKnownSourceUpdatedAt).getTime()
@@ -114,7 +158,7 @@ export async function captureIfStale(
   if (inFlight) return inFlight;
 
   lastAttemptAt = Date.now();
-  inFlight = captureSnapshot().finally(() => {
+  inFlight = captureSnapshot(secenekler).finally(() => {
     inFlight = null;
   });
   return inFlight;
