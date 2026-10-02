@@ -36,7 +36,10 @@ export async function GET() {
     // Yanıt CDN'de 30 sn tutulduğu ve captureIfStale kendi soğuma süresini
     // uyguladığı için bu maliyet arka arkaya tekrarlanmıyor.
     try {
-      const sonuc = await captureIfStale(data.sourceUpdatedAt);
+      // Ziyaretçi bu yanıtı bekliyor: yeniden denemeler dahil en fazla
+      // ~6 sn. Kopan bağlantılar anında hata verdiği için başarılı bir
+      // ikinci deneme çoğu zaman 1 sn'nin altında sonuçlanıyor.
+      const sonuc = await captureIfStale(data.sourceUpdatedAt, { butceMs: 6000 });
       if (sonuc.ok && !sonuc.skipped) data = await getPrices();
     } catch (err) {
       // Kaynak ulaşılamıyorsa eski veriyle devam — istek başarısız olmamalı.

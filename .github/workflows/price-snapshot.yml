@@ -45,13 +45,19 @@ jobs:
             echo "SNAPSHOT_URL (variable) veya CRON_SECRET (secret) tanımlı değil." >&2
             exit 1
           fi
-          code=$(curl -sS -o /tmp/snap.json -w "%{http_code}" \
-            -H "Authorization: Bearer $CRON_SECRET" \
-            "$SNAPSHOT_URL")
-          echo "HTTP $code"
-          cat /tmp/snap.json
-          echo
-          case "$code" in
-            2*) exit 0 ;;
-            *)  exit 1 ;;
-          esac
+          # GitHub bu görevi saatlerce aralıkla çalıştırabildiği için tek bir
+          # başarısız tur pahalı: kaynak (Truncgil) kesintiliyse endpoint 502
+          # döner. 3 deneme, aralarında 20 sn.
+          for deneme in 1 2 3; do
+            code=$(curl -sS -o /tmp/snap.json -w "%{http_code}" \
+              -H "Authorization: Bearer $CRON_SECRET" \
+              "$SNAPSHOT_URL" || echo "000")
+            echo "Deneme $deneme: HTTP $code"
+            cat /tmp/snap.json 2>/dev/null
+            echo
+            case "$code" in
+              2*) exit 0 ;;
+            esac
+            [ "$deneme" -lt 3 ] && sleep 20
+          done
+          exit 1
