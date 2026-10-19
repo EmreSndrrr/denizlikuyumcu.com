@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Hakkımızda",
@@ -41,7 +42,7 @@ export default function HakkimizdaPage() {
         periyodik olarak tazelenir ve bağlantı kesildiğinde bu durum açıkça
         belirtilir (bkz. sayfa altındaki güncelleme zamanları). Sorularınız
         veya geri bildirimleriniz için{" "}
-        <a href="/iletisim">İletişim</a> sayfasından bize ulaşabilirsiniz.
+        <Link href="/iletisim">İletişim</Link> sayfasından bize ulaşabilirsiniz.
       </p>
     </LegalPage>
   );

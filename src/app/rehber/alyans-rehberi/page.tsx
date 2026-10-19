@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Alyans Alırken Nelere Dikkat Edilmeli?",
@@ -21,8 +22,8 @@ export default function Page() {
         dayanıklı ve daha ekonomiktir; 18 ayar ise daha parlak bir renk
         tonuna sahiptir ama günlük kullanımda çizilmeye biraz daha
         yatkındır. Güncel{" "}
-        <a href="/altin/14-ayar-altin">14 ayar</a> ve{" "}
-        <a href="/altin/18-ayar-altin">18 ayar altın fiyatlarını</a> canlı
+        <Link href="/altin/14-ayar-altin">14 ayar</Link> ve{" "}
+        <Link href="/altin/18-ayar-altin">18 ayar altın fiyatlarını</Link> canlı
         olarak karşılaştırabilirsiniz.
       </p>
 
@@ -45,7 +46,7 @@ export default function Page() {
         Ayar damgası net olan, faturalı satış yapan ve sorularınızı açıkça
         yanıtlayan bir kuyumcuyla çalışmak, hem ürün kalitesi hem de
         ileride yaşanabilecek tadilat/garanti süreçleri için önemlidir.{" "}
-        <a href="/kuyumcular">Denizli kuyumcuları listemize</a> göz atarak
+        <Link href="/kuyumcular">Denizli kuyumcuları listemize</Link> göz atarak
         size yakın işletmeleri inceleyebilirsiniz.
       </p>
     </GuideArticle>

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
 import alyansImg from "@/images/rehber/alyans.jpg";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Düğünde Hangi Altınlar Takılır? (Denizli)",
   description:
-    "Düğün ve nişanda geline, damada ve çocuklara hangi altınlar takılır? Çeyrek, yarım, tam altın, gram altın, bilezik ve set seçenekleri, yakınlık derecesine göre öneriler ve bütçe ipuçları.",
+    "Düğün ve nişanda geline, damada ve çocuklara hangi altınlar takılır? Çeyrek, yarım, tam altın, bilezik ve set seçenekleri ile bütçe ipuçları.",
   alternates: { canonical: "/rehber/dugunde-hangi-altinlar-takilir" },
   openGraph: { images: [{ url: alyansImg.src, width: 1600, height: 900 }] },
 };
@@ -72,20 +73,20 @@ export default function Page() {
       <h2>Altın türleri ve kullanım amacı</h2>
       <ul>
         <li>
-          <strong><a href="/altin/ceyrek-altin">Çeyrek altın</a>:</strong> En
+          <strong><Link href="/altin/ceyrek-altin">Çeyrek altın</Link>:</strong> En
           pratik hediye; küçük tutarlı, kolay bozdurulur, geleneksel.
         </li>
         <li>
-          <strong><a href="/altin/yarim-altin">Yarım</a> ve{" "}
-          <a href="/altin/tam-altin">tam altın</a>:</strong> Daha yüksek
+          <strong><Link href="/altin/yarim-altin">Yarım</Link> ve{" "}
+          <Link href="/altin/tam-altin">tam altın</Link>:</strong> Daha yüksek
           tutarlı; yakın aile tercih eder.
         </li>
         <li>
-          <strong><a href="/altin/gram-altin">Gram altın</a>:</strong>{" "}
+          <strong><Link href="/altin/gram-altin">Gram altın</Link>:</strong>{" "}
           İstediğiniz tutara göre (1 g, 2,5 g, 5 g) alınabilir; esnek.
         </li>
         <li>
-          <strong><a href="/altin/22-ayar-bilezik">22 ayar bilezik</a> ve
+          <strong><Link href="/altin/22-ayar-bilezik">22 ayar bilezik</Link> ve
           set:</strong> Denizli&apos;de güçlü bir gelenek; hem takı hem
           birikim değeri taşır.
         </li>
@@ -98,9 +99,9 @@ export default function Page() {
       <h2>Bütçe planlaması</h2>
       <p>
         Takı listesini çıkarıp güncel fiyatlarla toplam maliyeti{" "}
-        <a href="/#hesaplama">anasayfadaki hesaplama aracıyla</a> önceden
+        <Link href="/#hesaplama">anasayfadaki hesaplama aracıyla</Link> önceden
         görebilirsiniz. Çeyrek altında{" "}
-        <a href="/rehber/ceyrek-altin-alis-satis-farki">alış-satış makası</a>{" "}
+        <Link href="/rehber/ceyrek-altin-alis-satis-farki">alış-satış makası</Link>{" "}
         olduğunu, yani takılan altını hemen bozdurursanız bir miktar kayıp
         oluşacağını unutmayın.
       </p>
@@ -110,7 +111,7 @@ export default function Page() {
         Şehir merkezinde, özellikle Bayramyeri çevresinde çok sayıda kuyumcu
         bir arada bulunur; bu da model ve fiyat karşılaştırması yapmayı
         kolaylaştırır.{" "}
-        <a href="/kuyumcular">Denizli kuyumcuları listesine</a> göz atabilir,
+        <Link href="/kuyumcular">Denizli kuyumcuları listesine</Link> göz atabilir,
         ayar damgası net ve faturalı satış yapan işletmeleri tercih
         edebilirsiniz.
       </p>

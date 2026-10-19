@@ -43,7 +43,7 @@ export default function IletisimPage() {
       </ul>
       <p>
         Kuyumcunuzu sitede tanıtmak veya reklam alanı satın almak
-        isterseniz <a href="/reklam-ver">Reklam Ver</a> sayfasındaki
+        isterseniz <Link href="/reklam-ver">Reklam Ver</Link> sayfasındaki
         paketlere göz atabilirsiniz.
       </p>
       <p className="text-sm text-muted">

@@ -3,7 +3,7 @@ import Link from "next/link";
 import GuideArticle from "@/components/GuideArticle";
 
 export const metadata: Metadata = {
-  title: "Gümüş Nedir? 925 Ayar Gümüş, Takı ve Yatırım Rehberi",
+  title: "Gümüş Nedir? 925 Ayar Gümüş ve Takı Rehberi",
   description:
     "925 ayar gümüş ne demek, saf gümüşten farkı ne? Gümüş takı nasıl anlaşılır ve temizlenir, gümüş fiyatını ne belirler, altın/gümüş oranı nedir?",
   alternates: { canonical: "/rehber/gumus-rehberi" },

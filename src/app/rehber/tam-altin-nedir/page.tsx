@@ -3,7 +3,7 @@ import Link from "next/link";
 import GuideArticle from "@/components/GuideArticle";
 
 export const metadata: Metadata = {
-  title: "Tam Altın Nedir? Gramajı ve Cumhuriyet Altını Farkı",
+  title: "Tam Altın Nedir? Gramajı ve Cumhuriyet Farkı",
   description:
     "Tam altın kaç gram ve kaç ayar? Tam altın ile Cumhuriyet altını aynı mı, fiyatları neden farklı? Tam altın mı dört çeyrek mi, bozdurma ipuçları.",
   alternates: { canonical: "/rehber/tam-altin-nedir" },

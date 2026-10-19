@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
 import alyansImg from "@/images/rehber/alyans.jpg";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Alyans Ölçüsü Nasıl Belirlenir? Yüzük Ölçü Tablosu",
+  title: "Alyans Ölçüsü Nasıl Belirlenir? Ölçü Tablosu",
   description:
     "Alyans (yüzük) ölçüsü nasıl bulunur? Parmak çevresi ölçme yöntemi, milimetre-numara dönüşüm tablosu, evde ölçüm ipuçları ve sık yapılan hatalar.",
   alternates: { canonical: "/rehber/alyans-olcusu-nasil-belirlenir" },
@@ -101,10 +102,10 @@ export default function Page() {
       <h2>Ayar ve bütçe</h2>
       <p>
         Ölçüyü belirledikten sonra ayar ve gramaj kararı için{" "}
-        <a href="/rehber/alyans-rehberi">alyans alırken nelere dikkat edilmeli</a>{" "}
+        <Link href="/rehber/alyans-rehberi">alyans alırken nelere dikkat edilmeli</Link>{" "}
         rehberine bakabilir, güncel{" "}
-        <a href="/altin/14-ayar-altin">14 ayar</a> ve{" "}
-        <a href="/altin/18-ayar-altin">18 ayar altın fiyatlarını</a>{" "}
+        <Link href="/altin/14-ayar-altin">14 ayar</Link> ve{" "}
+        <Link href="/altin/18-ayar-altin">18 ayar altın fiyatlarını</Link>{" "}
         karşılaştırabilirsiniz.
       </p>
     </GuideArticle>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Gram Altın Fiyatı Nasıl Hesaplanır?",
@@ -31,8 +32,8 @@ export default function Page() {
         piyasasında ons altının dolar cinsinden değeri ve dolar/TL kurunun
         seviyesi. Ons altın sabit kalsa bile dolar TL karşısında değer
         kazanırsa gram altın fiyatı da yükselir. Güncel{" "}
-        <a href="/altin/gram-altin">gram altın fiyatını</a> ve{" "}
-        <a href="/altin/ons-altin">ons altın fiyatını</a> canlı olarak takip
+        <Link href="/altin/gram-altin">gram altın fiyatını</Link> ve{" "}
+        <Link href="/altin/ons-altin">ons altın fiyatını</Link> canlı olarak takip
         edebilirsiniz.
       </p>
 

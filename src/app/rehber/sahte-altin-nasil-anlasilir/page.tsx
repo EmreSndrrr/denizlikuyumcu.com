@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
 import kuyumcuImg from "@/images/rehber/kuyumcu.jpg";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Sahte Altın Nasıl Anlaşılır? 7 Kontrol",
   description:
-    "Sahte altın nasıl anlaşılır? Ayar damgası, mıknatıs testi, renk ve gramaj kontrolü, ses ve asit testi — evde yapılabilecek kontroller ve kuyumcuda kesin test yöntemleri.",
+    "Sahte altın nasıl anlaşılır? Ayar damgası, mıknatıs, renk ve gramaj kontrolü, asit testi — evde yapılacak kontroller ve kuyumcuda kesin test yöntemleri.",
   alternates: { canonical: "/rehber/sahte-altin-nasil-anlasilir" },
   openGraph: { images: [{ url: kuyumcuImg.src, width: 1600, height: 900 }] },
 };
@@ -110,9 +111,9 @@ export default function Page() {
         Ayar damgası net, faturalı satış yapan ve testi sizin önünüzde
         yapmaktan çekinmeyen bir kuyumcudan alışveriş yapmak. Faturanın önemi
         için{" "}
-        <a href="/rehber/altin-alirken-fatura">altın alırken fatura</a>{" "}
+        <Link href="/rehber/altin-alirken-fatura">altın alırken fatura</Link>{" "}
         rehberine,{" "}
-        <a href="/kuyumcular">Denizli kuyumcuları listesine</a> göz atın.
+        <Link href="/kuyumcular">Denizli kuyumcuları listesine</Link> göz atın.
       </p>
     </GuideArticle>
   );

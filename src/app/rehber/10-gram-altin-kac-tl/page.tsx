@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
 import gramAltinImg from "@/images/rehber/gram-altin.jpg";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "10 Gram Altın Kaç TL Eder? Hesaplama",
   description:
-    "10 gram altın kaç TL? Gram altın fiyatı üzerinden 10 gram, 5 gram ve 100 gram altının güncel karşılığını nasıl hesaplayacağınızı ve külçe ile bilezik farkını açıklıyoruz.",
+    "10 gram altın kaç TL? Gram altın fiyatı üzerinden 10, 5 ve 100 gram altının güncel karşılığını ve külçe ile bilezik farkını öğrenin.",
   alternates: { canonical: "/rehber/10-gram-altin-kac-tl" },
   openGraph: { images: [{ url: gramAltinImg.src, width: 1600, height: 900 }] },
 };
@@ -55,9 +56,9 @@ export default function Page() {
         <li>100 gram altın = gram fiyatı × 100</li>
       </ul>
       <p>
-        Güncel <a href="/altin/gram-altin">gram altın fiyatını</a> canlı
+        Güncel <Link href="/altin/gram-altin">gram altın fiyatını</Link> canlı
         görebilir, istediğiniz gramajı{" "}
-        <a href="/#hesaplama">anasayfadaki hesaplama aracına</a> girerek anlık
+        <Link href="/#hesaplama">anasayfadaki hesaplama aracına</Link> girerek anlık
         karşılığını bulabilirsiniz. Aracı, alış ve satış fiyatını ayrı ayrı
         gösterir.
       </p>
@@ -101,7 +102,7 @@ export default function Page() {
       <p>
         Yani &quot;10 gram 14 ayar altın&quot;, 10 gram has altın kadar
         değerli değildir. Ayarlar hakkında ayrıntı için{" "}
-        <a href="/rehber/altin-ayari-nedir">altın ayarı nedir</a> rehberine
+        <Link href="/rehber/altin-ayari-nedir">altın ayarı nedir</Link> rehberine
         bakın.
       </p>
 
@@ -110,9 +111,9 @@ export default function Page() {
         Bir bilezik veya set alıyorsanız fiyat, yalnızca içindeki altının has
         değeri değildir; tasarım ve işçilik de eklenir. 10 gram 22 ayar bir
         bileziğin fiyatını{" "}
-        <a href="/rehber/22-ayar-bilezik-hesaplama">
+        <Link href="/rehber/22-ayar-bilezik-hesaplama">
           22 ayar bilezik hesaplama
-        </a>{" "}
+        </Link>{" "}
         rehberindeki yöntemle çıkarabilirsiniz.
       </p>
     </GuideArticle>

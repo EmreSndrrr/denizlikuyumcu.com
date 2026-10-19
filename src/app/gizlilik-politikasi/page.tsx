@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Gizlilik Politikası",
@@ -17,18 +18,18 @@ export default function GizlilikPolitikasiPage() {
         sistemi yoktur. Çerez tabanlı ziyaretçi istatistiği (Google
         Analytics) yalnızca <strong>açık onay verirseniz</strong> çalışır;
         bunun dışında kişisel veri yalnızca{" "}
-        <a href="/bilgi-talebi">Bilgi Talebi formunu</a> doldurursanız ya da
+        <Link href="/bilgi-talebi">Bilgi Talebi formunu</Link> doldurursanız ya da
         bize doğrudan yazarsanız işlenir.
       </p>
       <h2>Bilgi Talebi formu</h2>
       <p>
-        <a href="/bilgi-talebi">/bilgi-talebi</a> sayfasındaki formu
+        <Link href="/bilgi-talebi">/bilgi-talebi</Link> sayfasındaki formu
         gönderdiğinizde ilettiğiniz ad, telefon, (varsa) e-posta, konu ve
         mesaj; yalnızca talebinize dönüş yapmak amacıyla{" "}
         <strong>e-posta olarak</strong> bize ulaşır. Bu bilgiler bir veri
         tabanında saklanmaz. E-posta iletimi <strong>Resend</strong>{" "}
         altyapısıyla yapılır. Ayrıntı ve haklarınız için{" "}
-        <a href="/kvkk">KVKK Aydınlatma Metni</a>&apos;ne bakın.
+        <Link href="/kvkk">KVKK Aydınlatma Metni</Link>&apos;ne bakın.
       </p>
       <h2>Sunucuya gönderilen diğer veri</h2>
       <p>
@@ -79,7 +80,7 @@ export default function GizlilikPolitikasiPage() {
         <strong>Çerez Tercihleri</strong> bağlantısından istediğiniz zaman
         geri alabilirsiniz. Toplanan veriler Google Ireland Limited
         tarafından işlenir ve yurt dışına aktarılır; ayrıntılı çerez listesi
-        için <a href="/cerez-politikasi">Çerez Politikası</a>&apos;na
+        için <Link href="/cerez-politikasi">Çerez Politikası</Link>&apos;na
         bakabilirsiniz.
       </p>
       <h2>Reklam gösterimi</h2>
@@ -95,15 +96,15 @@ export default function GizlilikPolitikasiPage() {
         Altın/döviz fiyatları finans.truncgil.com üzerinden çekilir; bu
         istek yalnızca sunucumuz ile Truncgil arasında gerçekleşir,
         ziyaretçinin herhangi bir kişisel verisi bu isteğe dahil edilmez
-        (bkz. <a href="/veri-kaynaklari">Veri Kaynakları</a>). Bilgi Talebi
+        (bkz. <Link href="/veri-kaynaklari">Veri Kaynakları</Link>). Bilgi Talebi
         formu gönderimleri e-posta olarak Resend altyapısıyla iletilir. Site{" "}
         <strong>Vercel</strong> üzerinde barındırılır. Onay vermeniz hâlinde{" "}
         <strong>Google</strong> (Analytics) da bu listeye eklenir.
       </p>
       <p>
         Kişisel verilerin işlenmesine ilişkin yasal çerçeve için{" "}
-        <a href="/kvkk">KVKK Aydınlatma Metni</a>&apos;ni, çerezler için{" "}
-        <a href="/cerez-politikasi">Çerez Politikası</a>&apos;nı
+        <Link href="/kvkk">KVKK Aydınlatma Metni</Link>&apos;ni, çerezler için{" "}
+        <Link href="/cerez-politikasi">Çerez Politikası</Link>&apos;nı
         inceleyebilirsiniz.
       </p>
     </LegalPage>

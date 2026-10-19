@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
 import kuyumcuImg from "@/images/rehber/kuyumcu.jpg";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Kuyumcuda Altın Bozdururken Nelere Dikkat Edilmeli?",
+  title: "Altın Bozdururken Nelere Dikkat Edilmeli?",
   description:
-    "Altın bozdururken kayıp yaşamamak için: has altın alış fiyatını sorma, ayar okuması, tartım, fire/işlem kesintisi, fatura ve zamanlama — kuyumcuda adım adım kontrol listesi.",
+    "Altın bozdururken kayıp yaşamamak için has altın alış fiyatını sorma, ayar okuması, tartım, kesinti, fatura ve zamanlama kontrol listesi.",
   alternates: { canonical: "/rehber/kuyumcuda-altin-bozdururken-dikkat" },
   openGraph: { images: [{ url: kuyumcuImg.src, width: 1600, height: 900 }] },
 };
@@ -45,7 +46,7 @@ export default function Page() {
       <ul>
         <li>
           <strong>Güncel fiyatı öğrenin:</strong> O günkü{" "}
-          <a href="/altin/gram-altin">has (gram) altın alış fiyatını</a>{" "}
+          <Link href="/altin/gram-altin">has (gram) altın alış fiyatını</Link>{" "}
           bilerek gidin; teklifleri bu rakama göre değerlendirin.
         </li>
         <li>
@@ -54,9 +55,9 @@ export default function Page() {
         </li>
         <li>
           <strong>Yaklaşık tutarı kendiniz hesaplayın:</strong>{" "}
-          <a href="/rehber/14-ayar-altin-bozdurma-hesabi">
+          <Link href="/rehber/14-ayar-altin-bozdurma-hesabi">
             bozdurma hesabı
-          </a>{" "}
+          </Link>{" "}
           yöntemiyle bir aralık çıkarın.
         </li>
       </ul>
@@ -87,7 +88,7 @@ export default function Page() {
         Aynı ürün için 2-3 kuyumcudan net tutar sormak, en pratik korunma
         yöntemidir. Denizli&apos;de kuyumcular çoğunlukla bir arada
         bulunduğundan bu karşılaştırmayı kısa sürede yapabilirsiniz.{" "}
-        <a href="/kuyumcular">Kuyumcular listemize</a> göz atabilirsiniz.
+        <Link href="/kuyumcular">Kuyumcular listemize</Link> göz atabilirsiniz.
       </p>
 
       <h2>Sık yapılan hatalar</h2>

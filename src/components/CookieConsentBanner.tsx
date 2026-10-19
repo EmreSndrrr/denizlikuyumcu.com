@@ -13,6 +13,7 @@
 
 import { X } from "@phosphor-icons/react/dist/ssr";
 import { useConsent, setConsent } from "@/lib/consent";
+import Link from "next/link";
 
 export default function CookieConsentBanner() {
   const consent = useConsent();
@@ -32,9 +33,9 @@ export default function CookieConsentBanner() {
           seçim yapmazsanız hiçbir izleme çalışmaz. Tema ve favori
           tercihleriniz her hâlükârda yalnızca cihazınızda saklanır.
           Ayrıntı:{" "}
-          <a href="/cerez-politikasi" className="text-brand hover:underline">
+          <Link href="/cerez-politikasi" className="text-brand hover:underline">
             Çerez Politikası
-          </a>
+          </Link>
         </p>
         <div className="flex w-full shrink-0 items-center gap-2 sm:w-auto">
           <button

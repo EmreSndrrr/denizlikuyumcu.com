@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
 import gramAltinImg from "@/images/rehber/gram-altin.jpg";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Gram Altın Bugün Ne Kadar? Güncel Alış-Satış",
   description:
-    "Gram altın bugün ne kadar? Denizli'de güncel gram altın alış ve satış fiyatını canlı görün, fiyatın gün içinde neden değiştiğini ve doğru okumanın yolunu öğrenin.",
+    "Gram altın bugün ne kadar? Denizli'de güncel gram altın alış ve satış fiyatını canlı görün, fiyatın gün içinde neden değiştiğini öğrenin.",
   alternates: { canonical: "/rehber/gram-altin-bugun-ne-kadar" },
   openGraph: { images: [{ url: gramAltinImg.src, width: 1600, height: 900 }] },
 };
@@ -44,8 +45,8 @@ export default function Page() {
       <h2>Güncel gram altın fiyatını canlı takip edin</h2>
       <p>
         Gram altının bugünkü alış ve satış fiyatını{" "}
-        <a href="/altin/gram-altin">gram altın fiyat sayfamızdan</a> ve{" "}
-        <a href="/#altin-fiyatlari">anasayfadaki fiyat tablosundan</a> canlı
+        <Link href="/altin/gram-altin">gram altın fiyat sayfamızdan</Link> ve{" "}
+        <Link href="/#altin-fiyatlari">anasayfadaki fiyat tablosundan</Link> canlı
         olarak görebilirsiniz. Veriler kaynağında piyasa açıkken yaklaşık 15 dakikada bir güncellenir
         ve her bölümde &quot;… itibarıyla&quot; etiketiyle son güncelleme
         zamanı gösterilir. Bu fiyatlar bilgilendirme amaçlıdır; kesin işlem
@@ -55,8 +56,8 @@ export default function Page() {
       <h2>Gram altın fiyatı gün içinde neden değişiyor?</h2>
       <p>
         Türkiye&apos;deki gram altın fiyatı iki değişkene bağlıdır: dünya
-        piyasasındaki <a href="/altin/ons-altin">ons altın</a> fiyatı (dolar
-        cinsinden) ve <a href="/doviz/dolar">dolar/TL kuru</a>. Bu ikisi de
+        piyasasındaki <Link href="/altin/ons-altin">ons altın</Link> fiyatı (dolar
+        cinsinden) ve <Link href="/doviz/dolar">dolar/TL kuru</Link>. Bu ikisi de
         gün boyu hareket ettiği için gram altın da hareket eder. Kaba formül:
       </p>
       <p>
@@ -67,9 +68,9 @@ export default function Page() {
       <p>
         Ons altın sabit kalsa bile dolar yükselirse gram altın artar; tersi de
         geçerlidir. Detaylı anlatım için{" "}
-        <a href="/rehber/gram-altin-hesaplama">
+        <Link href="/rehber/gram-altin-hesaplama">
           gram altın fiyatı nasıl hesaplanır
-        </a>{" "}
+        </Link>{" "}
         rehberimize bakabilirsiniz.
       </p>
 
@@ -94,7 +95,7 @@ export default function Page() {
       <p>
         Belirli bir bütçeyle kaç gram altın alabileceğinizi veya elinizdeki
         gramajın bugünkü karşılığını{" "}
-        <a href="/#hesaplama">anasayfadaki altın hesaplama aracıyla</a> canlı
+        <Link href="/#hesaplama">anasayfadaki altın hesaplama aracıyla</Link> canlı
         fiyatlar üzerinden anında görebilirsiniz.
       </p>
     </GuideArticle>

@@ -9,7 +9,7 @@ import JewelerSalesCta from "@/components/JewelerSalesCta";
 export const metadata: Metadata = {
   title: "Denizli Kuyumcuları — Rehber ve Bölgeler",
   description:
-    "Denizli'de kuyumcular nerede? Bayramyeri ve Delikliçınar çevresi, kuyumcu seçerken dikkat edilecekler (ayar damgası, fatura, tartım, işçilik) ve işletmenizi sitede tanıtma seçenekleri.",
+    "Denizli'de kuyumcular nerede? Bayramyeri ve Delikliçınar çevresi, kuyumcu seçerken dikkat edilecekler ve işletmenizi sitede tanıtma seçenekleri.",
   alternates: { canonical: "/kuyumcular" },
 };
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
 import bilezikImg from "@/images/rehber/bilezik.jpg";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "22 Ayar Bilezik Hesaplama: Formül ve Örnek",
@@ -45,7 +46,7 @@ export default function Page() {
       <ol>
         <li>
           <strong>Has altın değerini bul:</strong> Güncel{" "}
-          <a href="/altin/gram-altin">gram altın (has) alış fiyatı</a> × 0,916
+          <Link href="/altin/gram-altin">gram altın (has) alış fiyatı</Link> × 0,916
           × bileziğin gramı.
         </li>
         <li>
@@ -79,9 +80,9 @@ export default function Page() {
       </p>
       <p>
         Bu rakamları güncel fiyatlarla otomatik görmek için{" "}
-        <a href="/altin/22-ayar-bilezik">22 ayar bilezik fiyat sayfasındaki</a>{" "}
+        <Link href="/altin/22-ayar-bilezik">22 ayar bilezik fiyat sayfasındaki</Link>{" "}
         hesaplama aracını veya{" "}
-        <a href="/#hesaplama">anasayfadaki altın hesaplama aracını</a>{" "}
+        <Link href="/#hesaplama">anasayfadaki altın hesaplama aracını</Link>{" "}
         kullanabilirsiniz.
       </p>
 

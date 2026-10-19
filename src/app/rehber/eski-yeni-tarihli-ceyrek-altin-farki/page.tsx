@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
 import ceyrekAltinImg from "@/images/rehber/ceyrek-altin.jpg";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Eski ve Yeni Tarihli Çeyrek Altın Farkı",
   description:
-    "Eski tarihli çeyrek altın ile yeni tarihli çeyrek altın arasında değer farkı var mı? Has altın içeriği, yıpranma, darphane dışı (ziynet) baskılar ve primli/iskontolu işlem durumları.",
+    "Eski ve yeni tarihli çeyrek altın arasında değer farkı var mı? Has altın içeriği, yıpranma, ziynet baskıları ve primli/iskontolu işlem durumları.",
   alternates: { canonical: "/rehber/eski-yeni-tarihli-ceyrek-altin-farki" },
   openGraph: { images: [{ url: ceyrekAltinImg.src, width: 1600, height: 900 }] },
 };
@@ -46,7 +47,7 @@ export default function Page() {
         Darphane basımı bir çeyrek altının içindeki has altın miktarı,
         basıldığı yıldan bağımsız olarak standarttır. Bu yüzden 1980
         basımı sağlam bir çeyrekle bu yılki bir çeyrek, kuyumcuda çoğunlukla
-        aynı <a href="/altin/ceyrek-altin">çeyrek altın</a> fiyatından işlem
+        aynı <Link href="/altin/ceyrek-altin">çeyrek altın</Link> fiyatından işlem
         görür.
       </p>
 
@@ -87,9 +88,9 @@ export default function Page() {
         <li>
           Alış-satış makasının tarih farkından çok daha belirleyici olduğunu
           unutmayın —{" "}
-          <a href="/rehber/ceyrek-altin-alis-satis-farki">
+          <Link href="/rehber/ceyrek-altin-alis-satis-farki">
             çeyrek altında alış-satış farkı
-          </a>
+          </Link>
           .
         </li>
       </ul>

@@ -3,7 +3,7 @@ import Link from "next/link";
 import GuideArticle from "@/components/GuideArticle";
 
 export const metadata: Metadata = {
-  title: "Kapalıçarşı Altın Fiyatları Nedir? Denizli ile Farkı",
+  title: "Kapalıçarşı Altın Fiyatları ve Denizli Farkı",
   description:
     "Kapalıçarşı altın fiyatları neden referans kabul edilir, nasıl oluşur? Denizli'deki kuyumcu fiyatlarıyla farkın nedenleri ve dikkat edilecekler.",
   alternates: { canonical: "/rehber/kapalicarsi-altin-fiyatlari" },

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
 import kuyumcuImg from "@/images/rehber/kuyumcu.jpg";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "14 Ayar Altın Bozdurma Hesabı Nasıl Yapılır?",
@@ -51,7 +52,7 @@ export default function Page() {
       <p>
         Kuyumcu, bozdurmada &quot;has altın <em>alış</em>&quot; fiyatını
         kullanır (satış değil). Güncel{" "}
-        <a href="/altin/gram-altin">has (gram) altın alış fiyatını</a> buradan
+        <Link href="/altin/gram-altin">has (gram) altın alış fiyatını</Link> buradan
         takip edebilirsiniz. Fire/işlem kesintisi kuyumcudan kuyumcuya değişir
         ve genelde küçük bir yüzdedir.
       </p>
@@ -112,9 +113,9 @@ export default function Page() {
         <li>Faturalı aldıysanız faturayı yanınıza alın.</li>
         <li>
           Ayrıntı:{" "}
-          <a href="/rehber/kuyumcuda-altin-bozdururken-dikkat">
+          <Link href="/rehber/kuyumcuda-altin-bozdururken-dikkat">
             altın bozdururken nelere dikkat edilmeli
-          </a>
+          </Link>
           .
         </li>
       </ul>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Kullanım Koşulları",
@@ -14,7 +15,7 @@ export default function KullanimKosullariPage() {
       <p>
         DenizliKuyumcu.com&apos;u (&quot;site&quot;) kullanarak aşağıdaki
         koşulları kabul etmiş sayılırsınız. Sorularınız için{" "}
-        <a href="/iletisim">İletişim</a> sayfasından bize ulaşabilirsiniz.
+        <Link href="/iletisim">İletişim</Link> sayfasından bize ulaşabilirsiniz.
       </p>
 
       <h2>Sitenin Amacı</h2>
@@ -34,7 +35,7 @@ export default function KullanimKosullariPage() {
         doğabilecek zararlardan site sorumlu tutulamaz. Kesin fiyat için
         her zaman ilgili kuyumcuyla doğrudan iletişime geçilmesi
         önerilir. Ayrıntılı bilgi için{" "}
-        <a href="/yasal-uyari">Yasal Uyarı</a> sayfasına bakabilirsiniz.
+        <Link href="/yasal-uyari">Yasal Uyarı</Link> sayfasına bakabilirsiniz.
       </p>
 
       <h2>Kuyumcu Dizini ve Sponsorlu İçerik</h2>
@@ -67,10 +68,10 @@ export default function KullanimKosullariPage() {
         Bu koşullar, site geliştikçe güncellenebilir. Önemli
         değişikliklerde bu sayfadaki &quot;son güncelleme&quot; tarihi
         değişir. İlgili diğer sayfalar için{" "}
-        <a href="/gizlilik-politikasi">Gizlilik Politikası</a>,{" "}
-        <a href="/kvkk">KVKK Aydınlatma Metni</a>,{" "}
-        <a href="/yasal-uyari">Yasal Uyarı</a> ve{" "}
-        <a href="/cerez-politikasi">Çerez Politikası</a>&apos;nı
+        <Link href="/gizlilik-politikasi">Gizlilik Politikası</Link>,{" "}
+        <Link href="/kvkk">KVKK Aydınlatma Metni</Link>,{" "}
+        <Link href="/yasal-uyari">Yasal Uyarı</Link> ve{" "}
+        <Link href="/cerez-politikasi">Çerez Politikası</Link>&apos;nı
         inceleyebilirsiniz.
       </p>
     </LegalPage>

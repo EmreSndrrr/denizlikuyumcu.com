@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
 import ceyrekAltinImg from "@/images/rehber/ceyrek-altin.jpg";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Çeyrek Altında Alış ve Satış Farkı (Makas)",
   description:
-    "Çeyrek altın alış ve satış fiyatı neden farklı? Makas (spread) nasıl oluşur, neden gram altından geniştir ve alım-satımda bu farkı nasıl azaltırsınız — Denizli için pratik rehber.",
+    "Çeyrek altın alış ve satış fiyatı neden farklı? Makas (spread) nasıl oluşur, neden gram altından geniştir ve farkı nasıl azaltırsınız?",
   alternates: { canonical: "/rehber/ceyrek-altin-alis-satis-farki" },
   openGraph: { images: [{ url: ceyrekAltinImg.src, width: 1600, height: 900 }] },
 };
@@ -54,7 +55,7 @@ export default function Page() {
       </ul>
       <p>
         kalemlerini karşılar. Güncel{" "}
-        <a href="/altin/ceyrek-altin">çeyrek altın alış ve satış fiyatını</a>{" "}
+        <Link href="/altin/ceyrek-altin">çeyrek altın alış ve satış fiyatını</Link>{" "}
         yan yana görebilirsiniz.
       </p>
 

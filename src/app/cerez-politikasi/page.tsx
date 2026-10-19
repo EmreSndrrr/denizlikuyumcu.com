@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Çerez Politikası",
@@ -51,7 +52,7 @@ export default function CerezPolitikasiPage() {
         haliyle saklamaz; yalnızca toplu/anonim sayımlar (sayfa görüntüleme,
         ülke, cihaz türü) üretir. Çerez yazmadığı için onaydan bağımsız
         çalışır. Ayrıntı için{" "}
-        <a href="/gizlilik-politikasi">Gizlilik Politikası</a>&apos;na
+        <Link href="/gizlilik-politikasi">Gizlilik Politikası</Link>&apos;na
         bakabilirsiniz.
       </p>
       <h2>Peki tema tercihim nasıl hatırlanıyor?</h2>
@@ -62,7 +63,7 @@ export default function CerezPolitikasiPage() {
         tutulur. Teknik olarak çerezden farklıdır: sunucumuza otomatik olarak
         gönderilmez, yalnızca sizin cihazınızda kalır ve tarayıcı verilerinizi
         temizlediğinizde silinir. Ayrıntı için{" "}
-        <a href="/gizlilik-politikasi">Gizlilik Politikası</a> sayfasına
+        <Link href="/gizlilik-politikasi">Gizlilik Politikası</Link> sayfasına
         bakabilirsiniz.
       </p>
       <h2>Neden bir çerez tercihi bildirimi görüyorum?</h2>

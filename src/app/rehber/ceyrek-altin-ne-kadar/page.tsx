@@ -5,7 +5,7 @@ import GuideArticle from "@/components/GuideArticle";
 export const metadata: Metadata = {
   title: "Çeyrek Altın Ne Kadar? Fiyatı Nasıl Oluşur?",
   description:
-    "Çeyrek altın bugün ne kadar, fiyatı gram altına göre nasıl hesaplanır? Alış-satış farkı, kuyumcular arası fiyat farkı ve güncel çeyrek altın fiyatını takip etme rehberi.",
+    "Çeyrek altın bugün ne kadar, fiyatı gram altına göre nasıl hesaplanır? Alış-satış farkı ve kuyumcular arası fiyat farkı rehberi.",
   alternates: { canonical: "/rehber/ceyrek-altin-ne-kadar" },
 };
 

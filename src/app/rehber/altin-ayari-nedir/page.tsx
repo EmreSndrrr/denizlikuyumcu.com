@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Altın Ayarı Nedir? 24, 22, 18, 14 Ayar",
@@ -36,21 +37,21 @@ export default function Page() {
           <strong>22 Ayar:</strong> ~%91,6 saf. Türkiye&apos;de bilezik ve
           geleneksel takılarda sık kullanılır; 24 ayara göre daha
           dayanıklıdır. Güncel{" "}
-          <a href="/altin/22-ayar-bilezik">22 ayar bilezik fiyatını</a> canlı
+          <Link href="/altin/22-ayar-bilezik">22 ayar bilezik fiyatını</Link> canlı
           takip edebilirsiniz.
         </li>
         <li>
           <strong>18 Ayar:</strong> %75 saf. Günlük kullanım yüzük, kolye ve
           küpelerde en yaygın tercihlerden biridir; dayanıklılık ve görünüm
           arasında iyi bir denge sunar. Güncel{" "}
-          <a href="/altin/18-ayar-altin">18 ayar altın fiyatını</a> buradan
+          <Link href="/altin/18-ayar-altin">18 ayar altın fiyatını</Link> buradan
           görebilirsiniz.
         </li>
         <li>
           <strong>14 Ayar:</strong> ~%58,5 saf. Daha ekonomik ve daha
           dayanıklıdır; özellikle günlük yoğun kullanılan takılarda tercih
           edilebilir. Güncel{" "}
-          <a href="/altin/14-ayar-altin">14 ayar altın fiyatını</a> buradan
+          <Link href="/altin/14-ayar-altin">14 ayar altın fiyatını</Link> buradan
           görebilirsiniz.
         </li>
       </ul>

@@ -7,7 +7,7 @@ import { adPackages } from "@/lib/adPackages";
 export const metadata: Metadata = {
   title: "Reklam Ver: Kuyumcunuzu Öne Çıkarın",
   description:
-    "DenizliKuyumcu.com üzerinde reklam vererek kuyumcunuzu Denizli'de altın/döviz fiyatı arayan yerel ziyaretçilere ulaştırın. Paketler, nasıl çalışır ve sık sorulanlar.",
+    "DenizliKuyumcu.com'da reklam vererek kuyumcunuzu Denizli'de altın ve döviz fiyatı arayan yerel ziyaretçilere ulaştırın. Paketler ve sık sorulanlar.",
   alternates: { canonical: "/reklam-ver" },
 };
 

@@ -7,7 +7,7 @@ import FaqAccordion from "@/components/FaqAccordion";
 export const metadata: Metadata = {
   title: "Sıkça Sorulan Sorular",
   description:
-    "Gram altın fiyatı, çeyrek altın makası, bilezik ve işçilik hesabı, altın bozdurma, sahte altın, fatura, düğün altınları ve alyans ölçüsü hakkında en çok sorulan sorular ve kısa cevapları.",
+    "Gram altın fiyatı, çeyrek altın makası, bilezik işçiliği, altın bozdurma, sahte altın, fatura, düğün altınları ve alyans ölçüsü hakkında kısa cevaplar.",
   alternates: { canonical: "/sikca-sorulan-sorular" },
 };
 

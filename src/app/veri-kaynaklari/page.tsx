@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Veri Kaynakları",
@@ -37,7 +38,7 @@ export default function VeriKaynaklariPage() {
         <strong>&quot;Veri gecikmeli&quot;</strong> rozetiyle işaretler —
         eski veriyi güncelmiş gibi göstermeyiz. Kesin işlem öncesi her
         zaman ilgili kuyumcuyla doğrudan teyitleşin (bkz.{" "}
-        <a href="/yasal-uyari">Yasal Uyarı</a>).
+        <Link href="/yasal-uyari">Yasal Uyarı</Link>).
       </p>
       <h2>Fiyat grafikleri</h2>
       <p>
@@ -59,7 +60,7 @@ export default function VeriKaynaklariPage() {
       </p>
       <h2>Kuyumcu dizini</h2>
       <p>
-        <a href="/kuyumcular">Kuyumcular</a> sayfasındaki kayıtlar şu an{" "}
+        <Link href="/kuyumcular">Kuyumcular</Link> sayfasındaki kayıtlar şu an{" "}
         <strong>demo/örnek verilerdir</strong> — gerçek, izin alınmış bir
         kuyumcu işletmesine ait değildir. Gerçek kuyumcu bilgisi eklendiğinde
         bu sayfa güncellenecektir.
@@ -67,7 +68,7 @@ export default function VeriKaynaklariPage() {
       <h2>Sorularınız için</h2>
       <p>
         Bir veri kaynağıyla ilgili soru veya düzeltme talebiniz varsa{" "}
-        <a href="/iletisim">İletişim</a> sayfasından bize ulaşabilirsiniz.
+        <Link href="/iletisim">İletişim</Link> sayfasından bize ulaşabilirsiniz.
       </p>
     </LegalPage>
   );

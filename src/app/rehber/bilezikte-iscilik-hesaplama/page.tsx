@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
 import bilezikImg from "@/images/rehber/bilezik.jpg";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Bilezikte İşçilik Nasıl Hesaplanır?",
   description:
-    "Bilezik işçiliği yüzde mi, gram başına sabit tutar mı? El işi ve makine işi modellerde işçilik farkı, işçiliğin fiyata etkisi ve kuyumcuda işçilik pazarlığı ipuçları.",
+    "Bilezik işçiliği yüzde mi, gram başına sabit tutar mı? El işi ve makine işi modellerde işçilik farkı ve kuyumcuda işçilik pazarlığı ipuçları.",
   alternates: { canonical: "/rehber/bilezikte-iscilik-hesaplama" },
   openGraph: { images: [{ url: bilezikImg.src, width: 1600, height: 900 }] },
 };
@@ -45,7 +46,7 @@ export default function Page() {
       <h3>1. Has değerin yüzdesi olarak</h3>
       <p>
         En yaygın yöntem. Önce bileziğin içindeki saf altının değeri bulunur
-        (<a href="/altin/gram-altin">gram altın fiyatı</a> × ayar katsayısı ×
+        (<Link href="/altin/gram-altin">gram altın fiyatı</Link> × ayar katsayısı ×
         gram), sonra bunun üzerine bir yüzde eklenir:
       </p>
       <p>
@@ -100,9 +101,9 @@ export default function Page() {
       </p>
       <p>
         Tam hesap yöntemi için{" "}
-        <a href="/rehber/22-ayar-bilezik-hesaplama">
+        <Link href="/rehber/22-ayar-bilezik-hesaplama">
           22 ayar bilezik hesaplama
-        </a>{" "}
+        </Link>{" "}
         rehberine bakın.
       </p>
 

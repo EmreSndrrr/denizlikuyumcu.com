@@ -6,6 +6,7 @@ import { CheckCircle, WarningCircle } from "@phosphor-icons/react/dist/ssr";
 import { sendInfoRequest, type InfoRequestState } from "@/lib/infoRequest";
 import { KONULAR } from "@/lib/infoRequestConfig";
 import { trackEvent } from "@/lib/analytics";
+import Link from "next/link";
 
 const initialState: InfoRequestState = { ok: false, message: "" };
 
@@ -200,9 +201,9 @@ export default function InfoRequestForm({
             className="mt-0.5 h-4 w-4 shrink-0 rounded border-border text-brand focus-visible:ring-2 focus-visible:ring-brand/30"
           />
           <span>
-            <a href="/kvkk" className="font-medium text-brand hover:underline">
+            <Link href="/kvkk" className="font-medium text-brand hover:underline">
               KVKK Aydınlatma Metni
-            </a>
+            </Link>
             &apos;ni okudum; ad, telefon ve mesaj bilgilerimin yalnızca
             talebime dönüş yapılması amacıyla işlenmesini onaylıyorum.
           </span>
@@ -215,9 +216,9 @@ export default function InfoRequestForm({
       <p className="text-xs text-muted">
         Bilgileriniz veritabanında saklanmaz; yalnızca talebinizi yanıtlamak
         için e-posta olarak iletilir. Ayrıntı:{" "}
-        <a href="/gizlilik-politikasi" className="text-brand hover:underline">
+        <Link href="/gizlilik-politikasi" className="text-brand hover:underline">
           Gizlilik Politikası
-        </a>
+        </Link>
         .
       </p>
     </form>

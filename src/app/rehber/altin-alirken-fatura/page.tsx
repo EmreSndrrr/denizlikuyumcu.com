@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import GuideArticle from "@/components/GuideArticle";
 import kuyumcuImg from "@/images/rehber/kuyumcu.jpg";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Altın Alırken Fatura Alınmalı mı?",
@@ -51,9 +52,9 @@ export default function Page() {
         <li>
           <strong>İşçilik şeffaflığı:</strong> İşçiliğin ayrı kalem yazılması,
           ne kadar altın ne kadar emek ödediğinizi net gösterir. Ayrıntı:{" "}
-          <a href="/rehber/bilezikte-iscilik-hesaplama">
+          <Link href="/rehber/bilezikte-iscilik-hesaplama">
             bilezikte işçilik hesaplama
-          </a>
+          </Link>
           .
         </li>
         <li>
@@ -102,7 +103,7 @@ export default function Page() {
       <p>
         Kuyumcu belge vermekten kaçınıyorsa, alışverişi gözden geçirin. Ayar
         damgası net olan ve faturalı çalışan işletmeleri tercih edin.{" "}
-        <a href="/kuyumcular">Denizli kuyumcuları listemize</a> göz
+        <Link href="/kuyumcular">Denizli kuyumcuları listemize</Link> göz
         atabilirsiniz.
       </p>
     </GuideArticle>

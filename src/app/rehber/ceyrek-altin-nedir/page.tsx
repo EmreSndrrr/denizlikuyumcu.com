@@ -3,7 +3,7 @@ import Link from "next/link";
 import GuideArticle from "@/components/GuideArticle";
 
 export const metadata: Metadata = {
-  title: "Çeyrek Altın Nedir? Gramajı, Ayarı, Has Altın Miktarı",
+  title: "Çeyrek Altın Nedir? Gramajı, Ayarı, Has Miktarı",
   description:
     "Çeyrek altın kaç gram, kaç ayar, içinde ne kadar saf altın var? Yarım ve tam altınla farkı, ziynet ve Ata çeyrek ayrımı, alırken dikkat edilecekler.",
   alternates: { canonical: "/rehber/ceyrek-altin-nedir" },

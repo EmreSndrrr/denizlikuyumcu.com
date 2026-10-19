@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "KVKK Aydınlatma Metni",
@@ -38,7 +39,7 @@ export default function KvkkPage() {
       </p>
       <ul>
         <li>
-          <strong>Bilgi Talebi formu (<a href="/bilgi-talebi">/bilgi-talebi</a>):</strong>{" "}
+          <strong>Bilgi Talebi formu (<Link href="/bilgi-talebi">/bilgi-talebi</Link>):</strong>{" "}
           Formu doldurduğunuzda paylaştığınız <em>ad</em>, <em>telefon
           numarası</em>, (verdiyseniz) <em>e-posta adresi</em>, seçtiğiniz{" "}
           <em>konu</em> ve <em>mesaj metni</em>. Bu veriler bir veri tabanında
@@ -102,16 +103,16 @@ export default function KvkkPage() {
       </p>
       <p>
         Bu haklarınızı kullanmak için{" "}
-        <a href="/iletisim">İletişim</a> sayfasındaki e-posta adresi
+        <Link href="/iletisim">İletişim</Link> sayfasındaki e-posta adresi
         üzerinden veri sorumlusuna (Emre Şandır) ulaşabilirsiniz.
       </p>
       <h2>Uyuşmazlıkların Çözümü</h2>
       <p>
         Bu aydınlatma metninden doğabilecek uyuşmazlıklarda, öncelikle{" "}
-        <a href="/iletisim">İletişim</a> sayfasındaki kanallardan çözüm
+        <Link href="/iletisim">İletişim</Link> sayfasındaki kanallardan çözüm
         aranması rica olunur. Çözülemeyen uyuşmazlıklarda Denizli
         Mahkemeleri ve İcra Daireleri yetkilidir (bkz.{" "}
-        <a href="/kullanim-kosullari">Kullanım Koşulları</a>).
+        <Link href="/kullanim-kosullari">Kullanım Koşulları</Link>).
       </p>
     </LegalPage>
   );
