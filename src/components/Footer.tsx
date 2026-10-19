@@ -77,10 +77,23 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 flex flex-col gap-2 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-muted/70">
-            © {new Date().getFullYear()} DenizliKuyumcu.com — Tüm hakları
-            saklıdır.
-          </p>
+          <div className="flex flex-col gap-1 text-xs text-muted/70">
+            <p>
+              © {new Date().getFullYear()} DenizliKuyumcu.com — Tüm hakları
+              saklıdır.
+            </p>
+            <p>
+              Denizli Web Tasarım Ajansı:{" "}
+              <a
+                href="https://www.ventiajans.com/"
+                target="_blank"
+                rel="noopener"
+                className="font-medium text-muted hover:text-brand hover:underline"
+              >
+                Venti Ajans
+              </a>
+            </p>
+          </div>
           <p className="text-xs text-muted">
             Kuyumcu musunuz?{" "}
             <TrackedLink
