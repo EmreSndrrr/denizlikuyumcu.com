@@ -38,6 +38,7 @@ export default function Page() {
         { href: "/rehber/altin-kuru-nedir", title: "Altın kuru nedir?" },
         { href: "/rehber/altin-fiyatlari-neden-degisir", title: "Altın fiyatları neden değişir?" },
         { href: "/rehber/altin-alirken-fatura", title: "Altın alırken fatura alınmalı mı?" },
+        { href: "/rehber/denizli-altin-borsasi", title: "Denizli altın borsası var mı?" },
       ]}
     >
       <h2>Kapalıçarşı neden altın fiyatında referans?</h2>

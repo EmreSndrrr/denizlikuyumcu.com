@@ -49,6 +49,12 @@ export default function Page() {
         <Link href="/kuyumcular">Denizli kuyumcuları listemize</Link> göz atarak
         size yakın işletmeleri inceleyebilirsiniz.
       </p>
+
+      <p>
+        Nişan töreninde kimin ne taktığını{" "}
+        <Link href="/rehber/nisanda-ne-takilir">nişanda ne takılır</Link>{" "}
+        rehberinde anlattık.
+      </p>
     </GuideArticle>
   );
 }

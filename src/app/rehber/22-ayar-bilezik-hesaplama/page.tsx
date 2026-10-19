@@ -40,6 +40,8 @@ export default function Page() {
         { href: "/rehber/bilezikte-iscilik-hesaplama", title: "Bilezikte işçilik nasıl hesaplanır?" },
         { href: "/rehber/14-ayar-altin-bozdurma-hesabi", title: "14 ayar altın bozdurma hesabı" },
         { href: "/rehber/altin-ayari-nedir", title: "Altın ayarı nedir? 24, 22, 18, 14 ayar" },
+        { href: "/rehber/burma-bilezik", title: "Burma bilezik nedir?" },
+        { href: "/rehber/22-ayar-bilezik-bozdurma", title: "22 ayar bilezik bozdurma hesabı" },
       ]}
     >
       <h2>Adım adım formül</h2>

@@ -13,6 +13,22 @@ const siteUrl = "https://denizlikuyumcu.com";
 // elle güncellenmeli (otomatik değil, bilinçli bir karar).
 const STATIC_CONTENT_LAST_MODIFIED = new Date("2026-09-03");
 
+// 19 Ekim 2026'da yayınlanan yeni rehberler ve içeriği güncellenen
+// düğün rehberi — kendi tarihlerini taşıyorlar, diğer statik sayfaların
+// lastModified değerini kaydırmıyorlar.
+const RECENT_CONTENT_LAST_MODIFIED = new Date("2026-10-19");
+
+const recentContentRoutes = [
+  "/rehber/denizli-altin-borsasi",
+  "/rehber/isciliksiz-bilezik-modelleri",
+  "/rehber/burma-bilezik",
+  "/rehber/14-ayar-22-ayar-altin-farki",
+  "/rehber/22-ayar-bilezik-bozdurma",
+  "/rehber/dugun-taki-seti-secimi",
+  "/rehber/nisanda-ne-takilir",
+  "/rehber/dugunde-hangi-altinlar-takilir",
+];
+
 const staticContentRoutes = [
   "/kuyumcular",
   "/rehber",
@@ -29,7 +45,6 @@ const staticContentRoutes = [
   "/rehber/22-ayar-bilezik-hesaplama",
   "/rehber/14-ayar-altin-bozdurma-hesabi",
   "/rehber/bilezikte-iscilik-hesaplama",
-  "/rehber/dugunde-hangi-altinlar-takilir",
   "/rehber/altin-alirken-fatura",
   "/rehber/sahte-altin-nasil-anlasilir",
   "/rehber/eski-yeni-tarihli-ceyrek-altin-farki",
@@ -82,5 +97,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...homeEntry, ...staticEntries, ...priceEntries];
+  const recentEntries: MetadataRoute.Sitemap = recentContentRoutes.map((path) => ({
+    url: `${siteUrl}${path}`,
+    lastModified: RECENT_CONTENT_LAST_MODIFIED,
+    changeFrequency: "weekly",
+    priority: 0.7,
+  }));
+
+  return [...homeEntry, ...staticEntries, ...recentEntries, ...priceEntries];
 }

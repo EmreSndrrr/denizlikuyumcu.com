@@ -40,6 +40,7 @@ export default function Page() {
         { href: "/rehber/22-ayar-bilezik-hesaplama", title: "22 ayar bilezik hesaplama" },
         { href: "/rehber/altin-alirken-fatura", title: "Altın alırken fatura alınmalı mı?" },
         { href: "/rehber/dugunde-hangi-altinlar-takilir", title: "Düğünde hangi altınlar takılır?" },
+        { href: "/rehber/isciliksiz-bilezik-modelleri", title: "İşçiliksiz bilezik nedir?" },
       ]}
     >
       <h2>İşçilik iki yöntemle hesaplanır</h2>

@@ -65,5 +65,12 @@ export const searchIndex: SearchEntry[] = [
   { label: "Tam Altın Nedir?", href: "/rehber/tam-altin-nedir", group: "Rehber" },
   { label: "Ajda Bilezik Nedir?", href: "/rehber/ajda-bilezik", group: "Rehber" },
   { label: "Gümüş Rehberi: 925 Ayar Gümüş", href: "/rehber/gumus-rehberi", group: "Rehber" },
+  { label: "Denizli Altın Borsası Var mı?", href: "/rehber/denizli-altin-borsasi", group: "Rehber" },
+  { label: "İşçiliksiz Bilezik Nedir?", href: "/rehber/isciliksiz-bilezik-modelleri", group: "Rehber" },
+  { label: "Burma Bilezik Nedir?", href: "/rehber/burma-bilezik", group: "Rehber" },
+  { label: "14 Ayar mı 22 Ayar mı?", href: "/rehber/14-ayar-22-ayar-altin-farki", group: "Rehber" },
+  { label: "22 Ayar Bilezik Bozdurma Hesabı", href: "/rehber/22-ayar-bilezik-bozdurma", group: "Rehber" },
+  { label: "Düğün Takı Seti Nasıl Seçilir?", href: "/rehber/dugun-taki-seti-secimi", group: "Rehber" },
+  { label: "Nişanda Ne Takılır?", href: "/rehber/nisanda-ne-takilir", group: "Rehber" },
   ...priceEntries,
 ];

@@ -63,6 +63,12 @@ export default function Page() {
         görebilir, şüpheniz varsa ayar tespit cihazıyla kontrol talep
         edebilirsiniz.
       </p>
+
+      <p>
+        İki yaygın ayarın karşılaştırması için{" "}
+        <Link href="/rehber/14-ayar-22-ayar-altin-farki">14 ayar mı 22 ayar mı</Link>{" "}
+        rehberine bakabilirsiniz.
+      </p>
     </GuideArticle>
   );
 }

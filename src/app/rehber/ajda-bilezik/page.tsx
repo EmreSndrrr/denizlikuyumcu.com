@@ -41,6 +41,8 @@ export default function Page() {
         { href: "/rehber/22-ayar-bilezik-hesaplama", title: "22 ayar bilezik hesaplama" },
         { href: "/rehber/bilezikte-iscilik-hesaplama", title: "Bilezikte işçilik nasıl hesaplanır?" },
         { href: "/rehber/dugunde-hangi-altinlar-takilir", title: "Düğünde hangi altınlar takılır?" },
+        { href: "/rehber/isciliksiz-bilezik-modelleri", title: "İşçiliksiz bilezik nedir?" },
+        { href: "/rehber/burma-bilezik", title: "Burma bilezik nedir?" },
       ]}
     >
       <h2>Ajda bilezik nedir?</h2>

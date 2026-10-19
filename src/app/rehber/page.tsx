@@ -47,6 +47,12 @@ const groups: {
         title: "Çeyrek Altın Ne Kadar?",
         desc: "Çeyrek fiyatı gram altına göre nasıl hesaplanır?",
       },
+      {
+        category: "Piyasa",
+        href: "/rehber/denizli-altin-borsasi",
+        title: "Denizli Altın Borsası Var mı?",
+        desc: "Serbest piyasa nasıl işler, ekran fiyatı ile vitrin fiyatı neden farklı?",
+      },
     ],
   },
   {
@@ -125,6 +131,24 @@ const groups: {
         title: "Gümüş Rehberi: 925 Ayar Gümüş",
         desc: "925 ayar ne demek, gümüş takı nasıl anlaşılır ve temizlenir.",
       },
+      {
+        category: "Ayar",
+        href: "/rehber/14-ayar-22-ayar-altin-farki",
+        title: "14 Ayar mı 22 Ayar mı?",
+        desc: "Saflık, fiyat, dayanıklılık ve kullanım amacına göre karşılaştırma.",
+      },
+      {
+        category: "Bilezik",
+        href: "/rehber/burma-bilezik",
+        title: "Burma Bilezik Nedir?",
+        desc: "İkili ve üçlü burma, fiyat hesabı ve alırken kontrol listesi.",
+      },
+      {
+        category: "Bilezik",
+        href: "/rehber/isciliksiz-bilezik-modelleri",
+        title: "İşçiliksiz Bilezik Nedir?",
+        desc: "Düşük işçilikli modeller ve bozdururken kaybın nasıl azaldığı.",
+      },
     ],
   },
   {
@@ -142,6 +166,12 @@ const groups: {
         href: "/rehber/14-ayar-altin-bozdurma-hesabi",
         title: "14 Ayar Altın Bozdurma Hesabı",
         desc: "Has oran 0,585, bozdurma formülü ve örnek hesap.",
+      },
+      {
+        category: "Bozdurma",
+        href: "/rehber/22-ayar-bilezik-bozdurma",
+        title: "22 Ayar Bilezik Bozdurma Hesabı",
+        desc: "Hurda altın mantığı, dara ve işçilik kesintileri, örnek hesap.",
       },
       {
         category: "Bozdurma",
@@ -178,6 +208,18 @@ const groups: {
         href: "/rehber/dugunde-hangi-altinlar-takilir",
         title: "Düğünde Hangi Altınlar Takılır?",
         desc: "Yakınlık derecesine göre yaygın tercihler ve bütçe planı.",
+      },
+      {
+        category: "Düğün",
+        href: "/rehber/dugun-taki-seti-secimi",
+        title: "Düğün Takı Seti Nasıl Seçilir?",
+        desc: "14 ayar ve 22 ayar set farkı, bütçe planı, kuyumcuya sorulacaklar.",
+      },
+      {
+        category: "Nişan",
+        href: "/rehber/nisanda-ne-takilir",
+        title: "Nişanda Ne Takılır?",
+        desc: "Kim ne takar, alyans ve nişan seti, nişan bozulursa hediyeler.",
       },
       {
         category: "Alyans",

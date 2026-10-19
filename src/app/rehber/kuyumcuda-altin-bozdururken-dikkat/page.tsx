@@ -40,6 +40,7 @@ export default function Page() {
         { href: "/rehber/14-ayar-altin-bozdurma-hesabi", title: "14 ayar altın bozdurma hesabı" },
         { href: "/rehber/altin-alirken-fatura", title: "Altın alırken fatura alınmalı mı?" },
         { href: "/rehber/ceyrek-altin-alis-satis-farki", title: "Çeyrek altında alış-satış farkı" },
+        { href: "/rehber/22-ayar-bilezik-bozdurma", title: "22 ayar bilezik bozdurma hesabı" },
       ]}
     >
       <h2>Bozdurmadan önce</h2>

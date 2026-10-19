@@ -16,7 +16,8 @@ export default function Page() {
     <GuideArticle
       title="Düğünde Hangi Altınlar Takılır?"
       intro="Düğün altını seçimi hem geleneğe hem bütçeye bağlıdır. Bu rehber, yakınlık derecesine göre yaygın tercihleri ve Denizli'deki adetleri özetler."
-      updated="Eylül 2026"
+      updated="Ekim 2026"
+      dateModified="2026-10-19"
       slug="dugunde-hangi-altinlar-takilir"
       image={{ src: alyansImg, alt: "Mermer yüzey üzerinde iki altın alyans", credit: "Fotoğraf: Pexels" }}
       faq={[
@@ -40,6 +41,8 @@ export default function Page() {
         { href: "/rehber/alyans-rehberi", title: "Alyans alırken nelere dikkat edilmeli?" },
         { href: "/rehber/alyans-olcusu-nasil-belirlenir", title: "Alyans ölçüsü nasıl belirlenir?" },
         { href: "/rehber/ceyrek-altin-alis-satis-farki", title: "Çeyrek altında alış-satış farkı" },
+        { href: "/rehber/dugun-taki-seti-secimi", title: "Düğün takı seti nasıl seçilir?" },
+        { href: "/rehber/nisanda-ne-takilir", title: "Nişanda ne takılır?" },
       ]}
     >
       <h2>Yakınlık derecesine göre yaygın tercihler</h2>
@@ -104,6 +107,35 @@ export default function Page() {
         <Link href="/rehber/ceyrek-altin-alis-satis-farki">alış-satış makası</Link>{" "}
         olduğunu, yani takılan altını hemen bozdurursanız bir miktar kayıp
         oluşacağını unutmayın.
+      </p>
+
+      <h2>Takı töreni nasıl yapılır?</h2>
+      <p>
+        Düğünlerde takı genellikle iki yolla toplanır: davetlilerin sırayla
+        sahneye çıkıp gelin ve damadın üzerine takı iliştirdiği geleneksel
+        takı töreni ya da salonun bir köşesine konulan sandığa veya keseye
+        zarf içinde bırakılan hediyeler. Hangisinin uygulanacağı ailelerin
+        tercihine bağlıdır. Takı anons edilecekse kimin ne taktığını not
+        eden bir takı defteri tutmak, ileride karşılık verirken kolaylık sağlar.
+      </p>
+
+      <h2>Takılan altınlar kime ait olur?</h2>
+      <p>
+        Düğünde takılan takıların hukuken kime ait sayılacağı, takıldığı kişi
+        ve somut olayın koşullarına göre değerlendirilir; genel eğilim takının
+        takıldığı kişiye ait kabul edilmesi yönündedir. Boşanma veya miras gibi
+        durumlarda bu konu uyuşmazlık yaratabildiğinden, takıları kayıt altına
+        almak (defter, fotoğraf, fatura) ve gerekirse bir avukata danışmak
+        faydalıdır. Bu bilgi hukuki danışmanlık değildir.
+      </p>
+
+      <h2>İlgili rehberler</h2>
+      <p>
+        Set seçimi için{" "}
+        <Link href="/rehber/dugun-taki-seti-secimi">düğün takı seti rehberine</Link>,
+        nişan töreni için{" "}
+        <Link href="/rehber/nisanda-ne-takilir">nişanda ne takılır</Link>{" "}
+        rehberine bakabilirsiniz.
       </p>
 
       <h2>Denizli&apos;de alışveriş</h2>

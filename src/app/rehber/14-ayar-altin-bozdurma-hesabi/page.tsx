@@ -40,6 +40,7 @@ export default function Page() {
         { href: "/rehber/kuyumcuda-altin-bozdururken-dikkat", title: "Kuyumcuda altın bozdururken nelere dikkat edilmeli?" },
         { href: "/rehber/22-ayar-bilezik-hesaplama", title: "22 ayar bilezik hesaplama" },
         { href: "/rehber/altin-ayari-nedir", title: "Altın ayarı nedir?" },
+        { href: "/rehber/14-ayar-22-ayar-altin-farki", title: "14 ayar mı 22 ayar mı?" },
       ]}
     >
       <h2>Bozdurma formülü</h2>

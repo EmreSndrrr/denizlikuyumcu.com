@@ -41,6 +41,7 @@ export default function Page() {
         { href: "/rehber/altin-fiyatlari-neden-degisir", title: "Altın fiyatları neden değişir?" },
         { href: "/rehber/kapalicarsi-altin-fiyatlari", title: "Kapalıçarşı altın fiyatları nedir?" },
         { href: "/rehber/ceyrek-altin-alis-satis-farki", title: "Çeyrek altında alış ve satış farkı" },
+        { href: "/rehber/denizli-altin-borsasi", title: "Denizli altın borsası var mı?" },
       ]}
     >
       <h2>Altın kuru ne demek?</h2>
